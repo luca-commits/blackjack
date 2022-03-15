@@ -1,3 +1,3 @@
 # blackjack
 
-Multiplayer Implementation of BlackJack for Software Engineering Course
+Multiplayer implementation of Blackjack for Software Engineering course.
