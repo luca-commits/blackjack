@@ -168,8 +168,8 @@ server_network_manager .. server_response
 together {
 
 class client_request{
-string player_id
-enum RequestType
+player_id: string
+RequestType: enum
 }
 client_request <|-- join_game_request
 client_request <|-- start_game_request
@@ -182,7 +182,7 @@ client_request <|-- insure_request
 
 
 class server_response{
-enum ResponseType
+ResponseType: enum
 }
 server_response <|-up-  answer_rqst_response
 server_response <|-up-  change_gemestate_response
