@@ -1,47 +1,49 @@
 @startuml
+' !theme plain
 !theme vibrant
+
 class Player {
-  int money
-  int bet_size
-  vector<Card> cards
-  void hit()
-  void stand()
-  void take_insurance()
-  void double_down()
-  bool has_insurance
-  int get_points()
-  bool is_broke()
-  bool check_if_over_21()
-  int check_if_less_than_dealer()
-  void win()
-  void lose()
+  money: int
+  bet_size: int
+  cards: vector<Card> 
+  hit(): void
+  stand(): void
+  take_insurance(): void
+  double_down(): void
+  has_insurance: bool
+  get_points(): int
+  is_broke(): bool
+  check_if_over_21(): bool
+  check_if_less_than_dealer(): int
+  win(): void
+  lose(): void
 }
   
 class Card {
-  char color
-  int value
+  color: char
+  value: int
 }
 
 class GameController{
-  int number_players /' needed for logic '/
-  vector<Player> players
-  int turn
-  int round
-  int dealer_points
-  int min_bet
-  void next_turn()
-  void start_round()
-  void check_winner()
-  void start_game() /' '/
-  void end_game()
-  int compute_dealers_points()
-  Shoe shoe
+  int number_players
+  players: vector<Player>
+  turn: int
+  round: int
+  dealer_points: int
+  min_bet: int
+  next_turn(): void
+  start_round(): void
+  check_winner(): void
+  start_game(): void
+  end_game(): void
+  compute_dealers_points(): int
+  shoe: Shoe
 }
 
 class Shoe{
-  vector<Card> cards
-  Card pop_card() 
-  void shuffle_cards()
+  cards: vector<Card> 
+  pop_card(): Card
+  shuffle_cards(): void
 }
 
 Shoe "1" *-- "many" Card 

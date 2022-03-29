@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="488px" preserveAspectRatio="none" style="width:710px;height:488px;background:#FFFFFF;" version="1.1" viewBox="0 0 710 488" width="710px" zoomAndPan="magnify"><defs/><g><!--MD5=[2cb47ba637a0d19583e6199456f6ad0b]
+class Player--><g id="elem_Player"><rect codeLine="4" fill="#F1F1F1" height="276.1563" id="Player" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="237" x="466.5" y="65.295"/><ellipse cx="558.75" cy="81.295" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M561.0938,76.9669 C560.1563,76.5294 559.5625,76.3888 558.6875,76.3888 C556.0625,76.3888 554.0625,78.4669 554.0625,81.1856 L554.0625,82.3106 C554.0625,84.8888 556.1719,86.7794 559.0625,86.7794 C560.2813,86.7794 561.4375,86.4825 562.1875,85.9356 C562.7656,85.5294 563.0938,85.0763 563.0938,84.6856 C563.0938,84.2325 562.7031,83.8419 562.2344,83.8419 C562.0156,83.8419 561.8125,83.92 561.625,84.1075 C561.1719,84.5919 561.1719,84.5919 560.9844,84.6856 C560.5625,84.9513 559.875,85.0763 559.1094,85.0763 C557.0625,85.0763 555.7656,83.9825 555.7656,82.2794 L555.7656,81.1856 C555.7656,79.4044 557.0156,78.0919 558.75,78.0919 C559.3281,78.0919 559.9375,78.2481 560.4063,78.4981 C560.8906,78.7794 561.0625,78.9981 561.1563,79.4044 C561.2188,79.8106 561.25,79.9356 561.3906,80.0606 C561.5313,80.2013 561.7656,80.3106 561.9844,80.3106 C562.25,80.3106 562.5156,80.17 562.6875,79.9513 C562.7969,79.795 562.8281,79.6075 562.8281,79.1856 L562.8281,77.7638 C562.8281,77.3263 562.8125,77.2013 562.7188,77.045 C562.5625,76.7794 562.2813,76.6388 561.9844,76.6388 C561.6875,76.6388 561.4844,76.7325 561.2656,77.045 L561.0938,76.9669 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="44" x="579.25" y="86.1417">Player</text><line style="stroke:#181818;stroke-width:0.5;" x1="467.5" x2="702.5" y1="97.295" y2="97.295"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="472.5" y="114.2901">money: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="472.5" y="130.587">bet_size: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="472.5" y="146.8839">cards: vector&lt;Card&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="472.5" y="163.1807">has_insurance: bool</text><line style="stroke:#181818;stroke-width:0.5;" x1="467.5" x2="702.5" y1="170.4825" y2="170.4825"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="472.5" y="187.4776">hit(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="472.5" y="203.7745">stand(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157" x="472.5" y="220.0714">take_insurance(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="472.5" y="236.3682">double_down(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="472.5" y="252.6651">get_points(): int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="472.5" y="268.962">is_broke(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="174" x="472.5" y="285.2589">check_if_over_21(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="225" x="472.5" y="301.5557">check_if_less_than_dealer(): int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="472.5" y="317.8526">win(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="472.5" y="334.1495">lose(): void</text></g><!--MD5=[5e305716458bbdabbd2d7f572ed2bae2]
+class Card--><g id="elem_Card"><rect codeLine="21" fill="#F1F1F1" height="80.5938" id="Card" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="88" x="307" y="401.295"/><ellipse cx="332.35" cy="417.295" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M334.6938,412.9669 C333.7563,412.5294 333.1625,412.3888 332.2875,412.3888 C329.6625,412.3888 327.6625,414.4669 327.6625,417.1856 L327.6625,418.3106 C327.6625,420.8888 329.7719,422.7794 332.6625,422.7794 C333.8813,422.7794 335.0375,422.4825 335.7875,421.9356 C336.3656,421.5294 336.6938,421.0763 336.6938,420.6856 C336.6938,420.2325 336.3031,419.8419 335.8344,419.8419 C335.6156,419.8419 335.4125,419.92 335.225,420.1075 C334.7719,420.5919 334.7719,420.5919 334.5844,420.6856 C334.1625,420.9513 333.475,421.0763 332.7094,421.0763 C330.6625,421.0763 329.3656,419.9825 329.3656,418.2794 L329.3656,417.1856 C329.3656,415.4044 330.6156,414.0919 332.35,414.0919 C332.9281,414.0919 333.5375,414.2481 334.0063,414.4981 C334.4906,414.7794 334.6625,414.9981 334.7563,415.4044 C334.8188,415.8106 334.85,415.9356 334.9906,416.0606 C335.1313,416.2013 335.3656,416.3106 335.5844,416.3106 C335.85,416.3106 336.1156,416.17 336.2875,415.9513 C336.3969,415.795 336.4281,415.6075 336.4281,415.1856 L336.4281,413.7638 C336.4281,413.3263 336.4125,413.2013 336.3188,413.045 C336.1625,412.7794 335.8813,412.6388 335.5844,412.6388 C335.2875,412.6388 335.0844,412.7325 334.8656,413.045 L334.6938,412.9669 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="348.65" y="422.1417">Card</text><line style="stroke:#181818;stroke-width:0.5;" x1="308" x2="394" y1="433.295" y2="433.295"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="313" y="450.2901">color: char</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="313" y="466.587">value: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="308" x2="394" y1="473.8888" y2="473.8888"/></g><!--MD5=[82d9c97a467af7c0b2c072e754b85475]
+class GameController--><g id="elem_GameController"><rect codeLine="26" fill="#F1F1F1" height="259.8594" id="GameController" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="228" x="7" y="73.295"/><ellipse cx="59.25" cy="89.295" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M61.5938,84.9669 C60.6563,84.5294 60.0625,84.3888 59.1875,84.3888 C56.5625,84.3888 54.5625,86.4669 54.5625,89.1856 L54.5625,90.3106 C54.5625,92.8888 56.6719,94.7794 59.5625,94.7794 C60.7813,94.7794 61.9375,94.4825 62.6875,93.9356 C63.2656,93.5294 63.5938,93.0763 63.5938,92.6856 C63.5938,92.2325 63.2031,91.8419 62.7344,91.8419 C62.5156,91.8419 62.3125,91.92 62.125,92.1075 C61.6719,92.5919 61.6719,92.5919 61.4844,92.6856 C61.0625,92.9513 60.375,93.0763 59.6094,93.0763 C57.5625,93.0763 56.2656,91.9825 56.2656,90.2794 L56.2656,89.1856 C56.2656,87.4044 57.5156,86.0919 59.25,86.0919 C59.8281,86.0919 60.4375,86.2481 60.9063,86.4981 C61.3906,86.7794 61.5625,86.9981 61.6563,87.4044 C61.7188,87.8106 61.75,87.9356 61.8906,88.0606 C62.0313,88.2013 62.2656,88.3106 62.4844,88.3106 C62.75,88.3106 63.0156,88.17 63.1875,87.9513 C63.2969,87.795 63.3281,87.6075 63.3281,87.1856 L63.3281,85.7638 C63.3281,85.3263 63.3125,85.2013 63.2188,85.045 C63.0625,84.7794 62.7813,84.6388 62.4844,84.6388 C62.1875,84.6388 61.9844,84.7325 61.7656,85.045 L61.5938,84.9669 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="79.75" y="94.1417">GameController</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="234" y1="105.295" y2="105.295"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139" x="13" y="122.2901">int number_players</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="174" x="13" y="138.587">players: vector&lt;Player&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="59" x="13" y="154.8839">turn: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="13" y="171.1807">round: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="127" x="13" y="187.4776">dealer_points: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="13" y="203.7745">min_bet: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="13" y="220.0714">shoe: Shoe</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="234" y1="227.3731" y2="227.3731"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="13" y="244.3682">next_turn(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="13" y="260.6651">start_round(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147" x="13" y="276.962">check_winner(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="13" y="293.2589">start_game(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="13" y="309.5557">end_game(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="216" x="13" y="325.8526">compute_dealers_points(): int</text></g><!--MD5=[4a0b0e5e067095d2c0fa89490c99ae55]
+class Shoe--><g id="elem_Shoe"><rect codeLine="42" fill="#F1F1F1" height="96.8906" id="Shoe" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="161" x="270.5" y="154.795"/><ellipse cx="328.75" cy="170.795" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M331.0938,166.4669 C330.1563,166.0294 329.5625,165.8888 328.6875,165.8888 C326.0625,165.8888 324.0625,167.9669 324.0625,170.6856 L324.0625,171.8106 C324.0625,174.3888 326.1719,176.2794 329.0625,176.2794 C330.2813,176.2794 331.4375,175.9825 332.1875,175.4356 C332.7656,175.0294 333.0938,174.5763 333.0938,174.1856 C333.0938,173.7325 332.7031,173.3419 332.2344,173.3419 C332.0156,173.3419 331.8125,173.42 331.625,173.6075 C331.1719,174.0919 331.1719,174.0919 330.9844,174.1856 C330.5625,174.4513 329.875,174.5763 329.1094,174.5763 C327.0625,174.5763 325.7656,173.4825 325.7656,171.7794 L325.7656,170.6856 C325.7656,168.9044 327.0156,167.5919 328.75,167.5919 C329.3281,167.5919 329.9375,167.7481 330.4063,167.9981 C330.8906,168.2794 331.0625,168.4981 331.1563,168.9044 C331.2188,169.3106 331.25,169.4356 331.3906,169.5606 C331.5313,169.7013 331.7656,169.8106 331.9844,169.8106 C332.25,169.8106 332.5156,169.67 332.6875,169.4513 C332.7969,169.295 332.8281,169.1075 332.8281,168.6856 L332.8281,167.2638 C332.8281,166.8263 332.8125,166.7013 332.7188,166.545 C332.5625,166.2794 332.2813,166.1388 331.9844,166.1388 C331.6875,166.1388 331.4844,166.2325 331.2656,166.545 L331.0938,166.4669 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="349.25" y="175.6417">Shoe</text><line style="stroke:#181818;stroke-width:0.5;" x1="271.5" x2="430.5" y1="186.795" y2="186.795"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="276.5" y="203.7901">cards: vector&lt;Card&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="271.5" x2="430.5" y1="211.0919" y2="211.0919"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="276.5" y="228.087">pop_card(): Card</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="276.5" y="244.3839">shuffle_cards(): void</text></g><!--MD5=[8ff05df4553d4cfe79708258018175bf]
+reverse link Shoe to Card--><g id="link_Shoe_Card"><path codeLine="48" d="M351,264.98 C351,307.804 351,363.951 351,401.142 " fill="none" id="Shoe-backto-Card" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="351,251.87,347,257.87,351,263.87,355,257.87,351,251.87" style="stroke:#454645;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="342.4375" y="271.8395">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="37" x="310.9359" y="390.2782">many</text></g><!--MD5=[f40ede64faea468a90eebd7e65bb9c65]
+link GameController to Player--><g id="link_GameController_Player"><path codeLine="51" d="M214.759,73.089 C231.522,57.789 250.196,44.406 270.5,35.295 C335.784,6 366.025,6.429 431.5,35.295 C448.491,42.786 464.417,53.189 479.096,65.182 " fill="none" id="GameController-Player" style="stroke:#454645;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="211.9482" y="62.2027">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="37" x="435.2927" y="54.285">many</text></g><!--MD5=[96aad11f92a0b9f83af2d25cee950a10]
+link GameController to Shoe--><g id="link_GameController_Shoe"><path codeLine="53" d="M235.102,203.295 C246.872,203.295 258.643,203.295 270.414,203.295 " fill="none" id="GameController-Shoe" style="stroke:#454645;stroke-width:1.0;"/></g><!--MD5=[66306380cebb729c7f480eca03ed847d]
+@startuml
+' !theme plain
+!theme vibrant
+
+class Player {
+  money: int
+  bet_size: int
+  cards: vector<Card> 
+  hit(): void
+  stand(): void
+  take_insurance(): void
+  double_down(): void
+  has_insurance: bool
+  get_points(): int
+  is_broke(): bool
+  check_if_over_21(): bool
+  check_if_less_than_dealer(): int
+  win(): void
+  lose(): void
+}
+  
+class Card {
+  color: char
+  value: int
+}
+
+class GameController{
+  int number_players
+  players: vector<Player>
+  turn: int
+  round: int
+  dealer_points: int
+  min_bet: int
+  next_turn(): void
+  start_round(): void
+  check_winner(): void
+  start_game(): void
+  end_game(): void
+  compute_dealers_points(): int
+  shoe: Shoe
+}
+
+class Shoe{
+  cards: vector<Card> 
+  pop_card(): Card
+  shuffle_cards(): void
+}
+
+Shoe "1" *- - "many" Card 
+
+
+GameController "1" - "many" Player 
+
+GameController - Shoe
+@enduml
+
+@startuml
+skinparam BackgroundColor FFFFFF
+skinparam shadowing false
+skinparam RoundCorner 7
+skinparam ArrowColor 454645
+skinparam FontColor 454645
+skinparam SequenceLifeLineBorderColor 696969
+skinparam SequenceGroupHeaderFontColor 454645
+skinparam SequenceGroupFontColor 696969
+skinparam SequenceGroupBorderColor 696969
+skinparam SequenceGroupBorderThickness 1
+
+skinparam sequenceDivider {
+    BorderColor 454645
+    BorderThickness 1
+    FontColor 454645
+}
+
+skinparam participant {
+    BackgroundColor FF6347
+    BorderColor 454645
+    FontColor FFFFFF
+    BorderThickness 1.5
+}
+
+skinparam database {
+    BackgroundColor 00FFFF
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam entity {
+    BackgroundColor FFE552
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam note {
+    BackgroundColor 7FFFD4
+    BorderColor 454645
+    FontColor 454645
+    BorderThickness 1.5
+}
+
+skinparam actor {
+    BackgroundColor 454645
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam boundary {
+    BackgroundColor FFE552
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam control {
+    BackgroundColor FFE552
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam collections {
+    BackgroundColor FF5F42
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam queue {
+    BackgroundColor FF6347
+    BorderColor 454645
+    FontColor FFF
+    BorderThickness 1.5
+}
+
+class Player {
+  money: int
+  bet_size: int
+  cards: vector<Card> 
+  hit(): void
+  stand(): void
+  take_insurance(): void
+  double_down(): void
+  has_insurance: bool
+  get_points(): int
+  is_broke(): bool
+  check_if_over_21(): bool
+  check_if_less_than_dealer(): int
+  win(): void
+  lose(): void
+}
+  
+class Card {
+  color: char
+  value: int
+}
+
+class GameController{
+  int number_players
+  players: vector<Player>
+  turn: int
+  round: int
+  dealer_points: int
+  min_bet: int
+  next_turn(): void
+  start_round(): void
+  check_winner(): void
+  start_game(): void
+  end_game(): void
+  compute_dealers_points(): int
+  shoe: Shoe
+}
+
+class Shoe{
+  cards: vector<Card> 
+  pop_card(): Card
+  shuffle_cards(): void
+}
+
+Shoe "1" *- - "many" Card 
+
+
+GameController "1" - "many" Player 
+
+GameController - Shoe
+@enduml
+
+PlantUML version 1.2022.3beta2(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
