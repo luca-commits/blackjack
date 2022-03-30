@@ -16,8 +16,9 @@ class Player {
   is_broke(): bool
   check_if_over_21(): bool
   check_if_less_than_dealer(): int
-  win(): void
-  lose(): void
+  win_round(): void
+  lose_round(): void
+  player_name: string
 }
   
 class Card {
@@ -25,8 +26,8 @@ class Card {
   value: int
 }
 
-class GameController{
-  int number_players
+class GameState{
+  number_players: int
   players: vector<Player>
   turn: int
   round: int
@@ -35,8 +36,6 @@ class GameController{
   next_turn(): void
   start_round(): void
   check_winner(): void
-  start_game(): void
-  end_game(): void
   compute_dealers_hand(): vector<Card>
   shoe: Shoe
   show_first_card(): void()
@@ -51,7 +50,7 @@ class Shoe{
 Shoe "1" *-- "many" Card 
 
 
-GameController "1" - "many" Player 
+GameState "1" - "many" Player 
 
-GameController - Shoe
+GameState - Shoe
 @enduml
