@@ -1,14 +1,45 @@
 @startuml
-actor Actor #red
+actor Player_1
 ' The only difference between actor
 'and participant is the drawing
-participant Alice
-participant "I have a really\nlong name" as L #99FF99
+participant GameState
+participant Player
 /' You can also declare:
    participant L as "I have a really\nlong name"  #99FF99
   '/
 
-Alice->Actor: Authentication Request
-Actor->Alice: Authentication Response
-Actor->L: Log transaction
+Player_1->GameState: stand
+GameState->GameState: last_hand
+alt last_hand == true
+  GameState->GameState: compute_dealers_hand
+  GameState->GameState: check_winner
+  
+  GameState->Player: send_result
+  alt Player wins round
+    Player->Player: win_round
+  else Player loses round
+    Player->Player: lose_round
+    Player->Player: is_broke
+  end
+  Player->GameState: send_player_state
+
+  GameState->Player_1: send_result
+  alt Player_1 wins round
+    Player_1->Player_1: win_round
+  else Player_1 loses round
+    Player_1->Player_1: lose_round
+    Player_1->Player_1: is_broke
+  end
+
+  Player_1->GameState: send_player_state
+  alt Player_1 is broke
+    GameState->GameState: terminate_player 
+  end
+
+  GameState->GameState: next_round
+
+else 
+  GameState->GameState: next_turn
+  end
+
 @enduml
