@@ -1,0 +1,20 @@
+@startuml
+actor Player as player
+
+player -> GameControl: press 'connect'
+activate GameControl
+
+GameControl -> GameManager: join_game_request\nvia network
+activate GameManager
+
+GameManager -> GameManager: add_player()
+
+group opt [success]
+  group par [to each player in lobby]
+    GameManager -> GameControl: change_gamestate_response\nvia network
+  end
+end
+
+GameManager -> GameControl: answer_req_response\nvia network
+
+GameControl -> player: Show lobby or message
