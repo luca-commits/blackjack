@@ -99,7 +99,7 @@ Class player_manager{
     add_player(): bool
 }
 
-Class game_manager{
+Class game_instance{
     game_state: GameState
     --
     is_started(): bool
@@ -148,12 +148,12 @@ wxFrame --|> GUI_Window
 
 ' ======
 ' this is the same as in example server package but we combined
-' game_instance and game_instance_manager to game_manager
-request_handler .left. game_manager
+' game_instance and game_instance_manager to game_instance
+request_handler .left. game_instance
 request_handler ..> player_manager
 request_handler <.. server_network_manager
-game_manager ..> server_network_manager
-game_manager ..> player_manager
+game_instance ..> server_network_manager
+game_instance ..> player_manager
 
 ' ===========
 

@@ -8,8 +8,8 @@ package BlackJack_application{
     folder client_app {
 
         rectangle General
-        rectangle ServerClientCommunication as Client
-        ' rectangle Client
+        ' rectangle ServerClientCommunication as Client
+        rectangle Client
 
         Client .left.> General
         Client -up-# client_app 
@@ -18,8 +18,8 @@ package BlackJack_application{
 
     folder server_app {
         rectangle General as General_
-        rectangle ServerClientCommunication as Server
-        ' rectangle Server
+        ' rectangle ServerClientCommunication as Server
+        rectangle Server
 
         Server .left.>General_
         Server -down-# server_app
