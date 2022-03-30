@@ -11,6 +11,7 @@ class Player {
   take_insurance(): void
   double_down(): void
   has_insurance: bool
+  has_doubled_down: bool
   get_points(): int
   is_broke(): bool
   check_if_over_21(): bool
@@ -20,7 +21,7 @@ class Player {
 }
   
 class Card {
-  color: char
+  suit: char
   value: int
 }
 
@@ -29,15 +30,16 @@ class GameController{
   players: vector<Player>
   turn: int
   round: int
-  dealer_points: int
+  dealer_hand: vector<Card>
   min_bet: int
   next_turn(): void
   start_round(): void
   check_winner(): void
   start_game(): void
   end_game(): void
-  compute_dealers_points(): int
+  compute_dealers_hand(): vector<Card>
   shoe: Shoe
+  show_first_card(): void()
 }
 
 class Shoe{
