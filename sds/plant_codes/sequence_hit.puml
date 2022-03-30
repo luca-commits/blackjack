@@ -1,42 +1,69 @@
 @startuml
 actor Player_1 as player
 
-player -> GameControl: press 'connect'
+player -> GameControl: press 'hit'
 activate GameControl
 
 GameControl -> ClientNetworkManager: sendRequest()
 activate ClientNetworkManager
 
-ClientNetworkManager -> server_network_manager: join_game_request\nover network
+ClientNetworkManager -> server_network_manager: hit_request\nvia network
 deactivate ClientNetworkManager
+deactivate GameControl
 activate server_network_manager
 
 server_network_manager -> request_handler: handle_request()
 activate request_handler
 
-request_handler -> player_manager: add_player()
+request_handler -> game_instance: hit()
+activate game_instance
+
+game_instance -> player_manager: get_player()
 activate player_manager
 
-player_manager --> request_handler: success
+player_manager --> game_instance: true, Player
 deactivate player_manager
 
-group opt [success == True]
-  request_handler -> game_instance: add_player()
-  activate game_instance
+group opt [it's the player's turn]
+  game_instance -> Player: hit()
+  activate Player
+
+  Player -> Shoe: pop_card()
+  activate Shoe
+
+  Shoe --> Player: card
+  deactivate Shoe
+
+  Player -> Player: push card to cards
+
+  Player --> game_instance
+  deactivate Player
+
+  game_instance -> Player: get_points()
+  activate Player
+
+  Player --> game_instance: points
+  deactivate Player
 
   game_instance -> server_network_manager: broadcast_message()
-  deactivate game_instance
   activate server_network_manager
 
-  group par [for all players in lobby]
+  group par [for all players]
     server_network_manager -> ClientNetworkManager: change_gamestate_response\nvia network
     deactivate server_network_manager
     activate ClientNetworkManager
 
     ClientNetworkManager -> GameControl: updateGameState()
+    activate GameControl
+
+    GameControl -> player: display move
+    deactivate GameControl
     deactivate ClientNetworkManager
   end
 end
+
+game_instance --> request_handler:
+deactivate game_instance
 
 request_handler --> server_network_manager: response
 deactivate request_handler
@@ -46,7 +73,8 @@ deactivate server_network_manager
 activate ClientNetworkManager
 
 ClientNetworkManager -> GameControl: updateGameState()
-deactivate ClientNetworkManager
+activate GameControl
 
-GameControl -> player: show lobby or message
+GameControl -> player: do nothing or show message
+deactivate ClientNetworkManager
 deactivate GameControl
