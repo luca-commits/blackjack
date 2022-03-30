@@ -1,45 +1,59 @@
 @startuml
-actor Player_1
-' The only difference between actor
-'and participant is the drawing
-participant GameState
-participant Player
-/' You can also declare:
-   participant L as "I have a really\nlong name"  #99FF99
-  '/
+actor Bob
+activate GameState
 
-Player_1->GameState: stand
-GameState->GameState: last_hand
-alt last_hand == true
-  GameState->GameState: compute_dealers_hand
-  GameState->GameState: check_winner
-  
-  GameState->Player: send_result
-  alt Player wins round
-    Player->Player: win_round
-  else Player loses round
-    Player->Player: lose_round
-    Player->Player: is_broke
-  end
-  Player->GameState: send_player_state
+Bob -> GameControl: press 'stand'
+activate GameControl
 
-  GameState->Player_1: send_result
-  alt Player_1 wins round
-    Player_1->Player_1: win_round
-  else Player_1 loses round
-    Player_1->Player_1: lose_round
-    Player_1->Player_1: is_broke
-  end
+GameControl -> GameState: stand
+deactivate GameControl
 
-  Player_1->GameState: send_player_state
-  alt Player_1 is broke
-    GameState->GameState: terminate_player 
-  end
+alt opt turn == num_players - 1
+  GameState -> GameState: compute_dealers_hand
 
-  GameState->GameState: next_round
+  GameState -> Player: check_winner
+  activate Player
 
-else 
-  GameState->GameState: next_turn
+  alt Player wins Round
+
+    Player -> GameState: win_round
+
+  else Player loses Round
+
+    Player -> Player: lose_round
+
+    Player -> game_instance: is_broke
+    deactivate Player
+    activate game_instance
+
+    alt Player is broke
+
+      game_instance -> GameControl: try_remove_player
+      activate GameControl
+      GameControl -> Bob: showGameOverMessage
+      deactivate GameControl
+
+    else Player is not broke
+    end
   end
 
-@enduml
+  alt Round = Max_Round - 1
+
+  game_instance -> Bob: showGameOverMessage
+
+  else Not Last Round
+
+  game_instance -> Bob: showNewRoundMessage
+  deactivate game_instance
+
+  Bob -> GameState: press 'continue' \n (through Requesthandler)
+
+  GameState -> GameState: next_round
+
+  end
+
+else Not last turn
+
+  GameState -> GameState: next turn
+
+end
