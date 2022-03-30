@@ -1,0 +1,84 @@
+@startuml
+
+Class server_network_manager{
+    acc: tcp_acceptor
+    player_id_to_address: map
+    address_to_socket: map
+    --
+    listener_loop(): void
+    handle_incoming_message(): void
+    read_message(): void
+    send_message(): void
+    broadcast_message(): void
+    on_player_left(): void
+}
+
+Class player_manager{
+    player_map: map
+    --
+    get_player(): bool
+    add_player(): bool
+}
+
+Class game_instance{
+    game_state: GameState
+    --
+    is_started(): bool  
+    is_finished(): bool
+    start_game(): bool
+    add_player(): bool
+    try_remove_player(): bool
+    hit(): bool
+    stand(): bool
+    split(): bool
+    double_down(): bool
+    insure(): bool
+}
+
+Class request_handler{
+    handle_request: request_response*
+
+}
+
+
+together {
+
+class client_request{
+player_id: string
+RequestType: enum
+}
+client_request <|-- join_game_request
+client_request <|-- start_game_request
+client_request <|-- make_bet_request
+client_request <|-- hit_request
+client_request <|-- stand_request
+client_request <|-- split_request
+client_request <|-- double_down_request
+client_request <|-- insure_request
+
+
+class server_response{
+ResponseType: enum
+}
+server_response <|-down-  answer_rqst_response
+server_response <|-down-  change_gamestate_response
+
+}
+
+server_response .[hidden]. client_request
+
+
+
+request_handler .. game_instance
+request_handler ..> player_manager
+request_handler <.. server_network_manager
+game_instance ..> server_network_manager
+game_instance ..> player_manager
+
+request_handler .right. client_request
+server_network_manager .. server_response
+
+
+@enduml
+
+

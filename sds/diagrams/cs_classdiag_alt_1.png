@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="779px" preserveAspectRatio="none" style="width:1137px;height:779px;background:#FFFFFF;" version="1.1" viewBox="0 0 1137 779" width="1137px" zoomAndPan="magnify"><defs/><g><!--MD5=[7b7f13d36f3b79c727673592c109c23e]
+class BlackJack--><g id="elem_BlackJack"><rect codeLine="6" fill="#F1F1F1" height="64.2969" id="BlackJack" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="105" x="676.8432" y="7"/><ellipse cx="694.0932" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M696.4369,18.6719 C695.4994,18.2344 694.9057,18.0938 694.0307,18.0938 C691.4057,18.0938 689.4057,20.1719 689.4057,22.8906 L689.4057,24.0156 C689.4057,26.5938 691.5151,28.4844 694.4057,28.4844 C695.6244,28.4844 696.7807,28.1875 697.5307,27.6406 C698.1088,27.2344 698.4369,26.7813 698.4369,26.3906 C698.4369,25.9375 698.0463,25.5469 697.5776,25.5469 C697.3588,25.5469 697.1557,25.625 696.9682,25.8125 C696.5151,26.2969 696.5151,26.2969 696.3276,26.3906 C695.9057,26.6563 695.2182,26.7813 694.4526,26.7813 C692.4057,26.7813 691.1088,25.6875 691.1088,23.9844 L691.1088,22.8906 C691.1088,21.1094 692.3588,19.7969 694.0932,19.7969 C694.6713,19.7969 695.2807,19.9531 695.7494,20.2031 C696.2338,20.4844 696.4057,20.7031 696.4994,21.1094 C696.5619,21.5156 696.5932,21.6406 696.7338,21.7656 C696.8744,21.9063 697.1088,22.0156 697.3276,22.0156 C697.5932,22.0156 697.8588,21.875 698.0307,21.6563 C698.1401,21.5 698.1713,21.3125 698.1713,20.8906 L698.1713,19.4688 C698.1713,19.0313 698.1557,18.9063 698.0619,18.75 C697.9057,18.4844 697.6244,18.3438 697.3276,18.3438 C697.0307,18.3438 696.8276,18.4375 696.6088,18.75 L696.4369,18.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="708.5932" y="27.8467">BlackJack</text><line style="stroke:#181818;stroke-width:0.5;" x1="677.8432" x2="780.8432" y1="39" y2="39"/><line style="stroke:#181818;stroke-width:1.0;" x1="677.8432" x2="780.8432" y1="47" y2="47"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="682.8432" y="63.9951">OnInit(): void</text></g><!--MD5=[9eb6544e6aeb41a739650c208e9e5046]
+class GameControl--><g id="elem_GameControl"><rect codeLine="11" fill="#F1F1F1" height="259.8594" id="GameControl" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="238" x="500.3432" y="513"/><ellipse cx="567.0932" cy="529" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M569.437,524.6719 C568.4995,524.2344 567.9057,524.0938 567.0307,524.0938 C564.4057,524.0938 562.4057,526.1719 562.4057,528.8906 L562.4057,530.0156 C562.4057,532.5938 564.5151,534.4844 567.4057,534.4844 C568.6245,534.4844 569.7807,534.1875 570.5307,533.6406 C571.1088,533.2344 571.437,532.7813 571.437,532.3906 C571.437,531.9375 571.0463,531.5469 570.5776,531.5469 C570.3588,531.5469 570.1557,531.625 569.9682,531.8125 C569.5151,532.2969 569.5151,532.2969 569.3276,532.3906 C568.9057,532.6563 568.2182,532.7813 567.4526,532.7813 C565.4057,532.7813 564.1088,531.6875 564.1088,529.9844 L564.1088,528.8906 C564.1088,527.1094 565.3588,525.7969 567.0932,525.7969 C567.6713,525.7969 568.2807,525.9531 568.7495,526.2031 C569.2338,526.4844 569.4057,526.7031 569.4995,527.1094 C569.562,527.5156 569.5932,527.6406 569.7338,527.7656 C569.8745,527.9063 570.1088,528.0156 570.3276,528.0156 C570.5932,528.0156 570.8588,527.875 571.0307,527.6563 C571.1401,527.5 571.1713,527.3125 571.1713,526.8906 L571.1713,525.4688 C571.1713,525.0313 571.1557,524.9063 571.062,524.75 C570.9057,524.4844 570.6245,524.3438 570.3276,524.3438 C570.0307,524.3438 569.8276,524.4375 569.6088,524.75 L569.437,524.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="587.5932" y="533.8467">GameControl</text><line style="stroke:#181818;stroke-width:0.5;" x1="501.3432" x2="737.3432" y1="545" y2="545"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="506.3432" y="561.9951">my_id: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="226" x="506.3432" y="578.292">currentGameState: GameState</text><line style="stroke:#181818;stroke-width:1.0;" x1="501.3432" x2="737.3432" y1="585.5938" y2="585.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="506.3432" y="602.5889">init(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173" x="506.3432" y="618.8857">connectToServer(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="506.3432" y="635.1826">updateGameState(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="506.3432" y="651.4795">startGame(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="506.3432" y="667.7764">hit(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="506.3432" y="684.0732">stand(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="81" x="506.3432" y="700.3701">split(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="506.3432" y="716.667">double_down(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="506.3432" y="732.9639">insure(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="221" x="506.3432" y="749.2607">showNewRoundMessage(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="506.3432" y="765.5576">showGameOverMessage(): void</text></g><!--MD5=[d6f61276bf9879093444a821e862d0ae]
+class GUI_Window--><g id="elem_GUI_Window"><rect codeLine="27" fill="#F1F1F1" height="80.5938" id="GUI_Window" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="171" x="368.8432" y="132"/><ellipse cx="407.2432" cy="148" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M409.587,143.6719 C408.6495,143.2344 408.0557,143.0938 407.1807,143.0938 C404.5557,143.0938 402.5557,145.1719 402.5557,147.8906 L402.5557,149.0156 C402.5557,151.5938 404.6651,153.4844 407.5557,153.4844 C408.7745,153.4844 409.9307,153.1875 410.6807,152.6406 C411.2588,152.2344 411.587,151.7813 411.587,151.3906 C411.587,150.9375 411.1963,150.5469 410.7276,150.5469 C410.5088,150.5469 410.3057,150.625 410.1182,150.8125 C409.6651,151.2969 409.6651,151.2969 409.4776,151.3906 C409.0557,151.6563 408.3682,151.7813 407.6026,151.7813 C405.5557,151.7813 404.2588,150.6875 404.2588,148.9844 L404.2588,147.8906 C404.2588,146.1094 405.5088,144.7969 407.2432,144.7969 C407.8213,144.7969 408.4307,144.9531 408.8995,145.2031 C409.3838,145.4844 409.5557,145.7031 409.6495,146.1094 C409.712,146.5156 409.7432,146.6406 409.8838,146.7656 C410.0245,146.9063 410.2588,147.0156 410.4776,147.0156 C410.7432,147.0156 411.0088,146.875 411.1807,146.6563 C411.2901,146.5 411.3213,146.3125 411.3213,145.8906 L411.3213,144.4688 C411.3213,144.0313 411.3057,143.9063 411.212,143.75 C411.0557,143.4844 410.7745,143.3438 410.4776,143.3438 C410.1807,143.3438 409.9776,143.4375 409.7588,143.75 L409.587,143.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="426.4432" y="152.8467">GUI_Window</text><line style="stroke:#181818;stroke-width:0.5;" x1="369.8432" x2="538.8432" y1="164" y2="164"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="374.8432" y="180.9951">currentPanel: wxPanel</text><line style="stroke:#181818;stroke-width:1.0;" x1="369.8432" x2="538.8432" y1="188.2969" y2="188.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="374.8432" y="205.292">showPanel(): void</text></g><!--MD5=[f6a0528dd9907693989795467ebd9aa6]
+class ConnectionPanel--><g id="elem_ConnectionPanel"><rect codeLine="35" fill="#F1F1F1" height="145.7813" id="ConnectionPanel" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="202" x="164.3432" y="282"/><ellipse cx="200.9432" cy="298" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M203.287,293.6719 C202.3495,293.2344 201.7557,293.0938 200.8807,293.0938 C198.2557,293.0938 196.2557,295.1719 196.2557,297.8906 L196.2557,299.0156 C196.2557,301.5938 198.3651,303.4844 201.2557,303.4844 C202.4745,303.4844 203.6307,303.1875 204.3807,302.6406 C204.9588,302.2344 205.287,301.7813 205.287,301.3906 C205.287,300.9375 204.8963,300.5469 204.4276,300.5469 C204.2088,300.5469 204.0057,300.625 203.8182,300.8125 C203.3651,301.2969 203.3651,301.2969 203.1776,301.3906 C202.7557,301.6563 202.0682,301.7813 201.3026,301.7813 C199.2557,301.7813 197.9588,300.6875 197.9588,298.9844 L197.9588,297.8906 C197.9588,296.1094 199.2088,294.7969 200.9432,294.7969 C201.5213,294.7969 202.1307,294.9531 202.5995,295.2031 C203.0838,295.4844 203.2557,295.7031 203.3495,296.1094 C203.412,296.5156 203.4432,296.6406 203.5838,296.7656 C203.7245,296.9063 203.9588,297.0156 204.1776,297.0156 C204.4432,297.0156 204.7088,296.875 204.8807,296.6563 C204.9901,296.5 205.0213,296.3125 205.0213,295.8906 L205.0213,294.4688 C205.0213,294.0313 205.0057,293.9063 204.912,293.75 C204.7557,293.4844 204.4745,293.3438 204.1776,293.3438 C203.8807,293.3438 203.6776,293.4375 203.4588,293.75 L203.287,293.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="219.7432" y="302.8467">ConnectionPanel</text><line style="stroke:#181818;stroke-width:0.5;" x1="165.3432" x2="365.3432" y1="314" y2="314"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="170.3432" y="330.9951">serverAddress: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="127" x="170.3432" y="347.292">serverPort: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="170.3432" y="363.5889">playerName: string</text><line style="stroke:#181818;stroke-width:1.0;" x1="165.3432" x2="365.3432" y1="370.8906" y2="370.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="170.3432" y="387.8857">getServerAddress(): string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="170.3432" y="404.1826">getServerPort(): string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="170.3432" y="420.4795">getPlayer(): string</text></g><!--MD5=[fe9cacd9df78165d25091142b754d1cc]
+class BetPanel--><g id="elem_BetPanel"><rect codeLine="45" fill="#F1F1F1" height="113.1875" id="BetPanel" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="167" x="647.8432" y="298.5"/><ellipse cx="694.5932" cy="314.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M696.9369,310.1719 C695.9994,309.7344 695.4057,309.5938 694.5307,309.5938 C691.9057,309.5938 689.9057,311.6719 689.9057,314.3906 L689.9057,315.5156 C689.9057,318.0938 692.0151,319.9844 694.9057,319.9844 C696.1244,319.9844 697.2807,319.6875 698.0307,319.1406 C698.6088,318.7344 698.9369,318.2813 698.9369,317.8906 C698.9369,317.4375 698.5463,317.0469 698.0776,317.0469 C697.8588,317.0469 697.6557,317.125 697.4682,317.3125 C697.0151,317.7969 697.0151,317.7969 696.8276,317.8906 C696.4057,318.1563 695.7182,318.2813 694.9526,318.2813 C692.9057,318.2813 691.6088,317.1875 691.6088,315.4844 L691.6088,314.3906 C691.6088,312.6094 692.8588,311.2969 694.5932,311.2969 C695.1713,311.2969 695.7807,311.4531 696.2494,311.7031 C696.7338,311.9844 696.9057,312.2031 696.9994,312.6094 C697.0619,313.0156 697.0932,313.1406 697.2338,313.2656 C697.3744,313.4063 697.6088,313.5156 697.8276,313.5156 C698.0932,313.5156 698.3588,313.375 698.5307,313.1563 C698.6401,313 698.6713,312.8125 698.6713,312.3906 L698.6713,310.9688 C698.6713,310.5313 698.6557,310.4063 698.5619,310.25 C698.4057,309.9844 698.1244,309.8438 697.8276,309.8438 C697.5307,309.8438 697.3276,309.9375 697.1088,310.25 L696.9369,310.1719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="715.0932" y="319.3467">BetPanel</text><line style="stroke:#181818;stroke-width:0.5;" x1="648.8432" x2="813.8432" y1="330.5" y2="330.5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="653.8432" y="347.4951">betSize: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="653.8432" y="363.792">playerMoney: int</text><line style="stroke:#181818;stroke-width:1.0;" x1="648.8432" x2="813.8432" y1="371.0938" y2="371.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="653.8432" y="388.0889">getBetSize(): int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="653.8432" y="404.3857">getPlayerMoney(): int</text></g><!--MD5=[9ab099a923a0735eb9326eff6fc389c3]
+class MainGamePanel--><g id="elem_MainGamePanel"><rect codeLine="53" fill="#F1F1F1" height="162.0781" id="MainGamePanel" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="211" x="401.8432" y="274"/><ellipse cx="446.0932" cy="290" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M448.437,285.6719 C447.4995,285.2344 446.9057,285.0938 446.0307,285.0938 C443.4057,285.0938 441.4057,287.1719 441.4057,289.8906 L441.4057,291.0156 C441.4057,293.5938 443.5151,295.4844 446.4057,295.4844 C447.6245,295.4844 448.7807,295.1875 449.5307,294.6406 C450.1088,294.2344 450.437,293.7813 450.437,293.3906 C450.437,292.9375 450.0463,292.5469 449.5776,292.5469 C449.3588,292.5469 449.1557,292.625 448.9682,292.8125 C448.5151,293.2969 448.5151,293.2969 448.3276,293.3906 C447.9057,293.6563 447.2182,293.7813 446.4526,293.7813 C444.4057,293.7813 443.1088,292.6875 443.1088,290.9844 L443.1088,289.8906 C443.1088,288.1094 444.3588,286.7969 446.0932,286.7969 C446.6713,286.7969 447.2807,286.9531 447.7495,287.2031 C448.2338,287.4844 448.4057,287.7031 448.4995,288.1094 C448.562,288.5156 448.5932,288.6406 448.7338,288.7656 C448.8745,288.9063 449.1088,289.0156 449.3276,289.0156 C449.5932,289.0156 449.8588,288.875 450.0307,288.6563 C450.1401,288.5 450.1713,288.3125 450.1713,287.8906 L450.1713,286.4688 C450.1713,286.0313 450.1557,285.9063 450.062,285.75 C449.9057,285.4844 449.6245,285.3438 449.3276,285.3438 C449.0307,285.3438 448.8276,285.4375 448.6088,285.75 L448.437,285.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="466.5932" y="294.8467">MainGamePanel</text><line style="stroke:#181818;stroke-width:0.5;" x1="402.8432" x2="611.8432" y1="306" y2="306"/><line style="stroke:#181818;stroke-width:1.0;" x1="402.8432" x2="611.8432" y1="314" y2="314"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="199" x="407.8432" y="330.9951">buildGameController(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="407.8432" y="347.292">buildOthers(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="187" x="407.8432" y="363.5889">buildRoundCounter(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="407.8432" y="379.8857">buildMyself(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="407.8432" y="396.1826">buildShoe(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="407.8432" y="412.4795">buildDealer(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="407.8432" y="428.7764"> </text></g><!--MD5=[1b25306f12812b05dae11feefffdaa2f]
+class ClientNetworkManager--><g id="elem_ClientNetworkManager"><rect codeLine="65" fill="#F1F1F1" height="129.4844" id="ClientNetworkManager" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="208" x="921.3432" y="290.5"/><ellipse cx="941.2932" cy="306.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M943.637,302.1719 C942.6995,301.7344 942.1057,301.5938 941.2307,301.5938 C938.6057,301.5938 936.6057,303.6719 936.6057,306.3906 L936.6057,307.5156 C936.6057,310.0938 938.7151,311.9844 941.6057,311.9844 C942.8245,311.9844 943.9807,311.6875 944.7307,311.1406 C945.3088,310.7344 945.637,310.2813 945.637,309.8906 C945.637,309.4375 945.2463,309.0469 944.7776,309.0469 C944.5588,309.0469 944.3557,309.125 944.1682,309.3125 C943.7151,309.7969 943.7151,309.7969 943.5276,309.8906 C943.1057,310.1563 942.4182,310.2813 941.6526,310.2813 C939.6057,310.2813 938.3088,309.1875 938.3088,307.4844 L938.3088,306.3906 C938.3088,304.6094 939.5588,303.2969 941.2932,303.2969 C941.8713,303.2969 942.4807,303.4531 942.9495,303.7031 C943.4338,303.9844 943.6057,304.2031 943.6995,304.6094 C943.762,305.0156 943.7932,305.1406 943.9338,305.2656 C944.0745,305.4063 944.3088,305.5156 944.5276,305.5156 C944.7932,305.5156 945.0588,305.375 945.2307,305.1563 C945.3401,305 945.3713,304.8125 945.3713,304.3906 L945.3713,302.9688 C945.3713,302.5313 945.3557,302.4063 945.262,302.25 C945.1057,301.9844 944.8245,301.8438 944.5276,301.8438 C944.2307,301.8438 944.0276,301.9375 943.8088,302.25 L943.637,302.1719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="956.3932" y="311.3467">ClientNetworkManager</text><line style="stroke:#181818;stroke-width:0.5;" x1="922.3432" x2="1128.3432" y1="322.5" y2="322.5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="927.3432" y="339.4951">is_connected: bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="196" x="927.3432" y="355.792">connection: tcp_connector</text><line style="stroke:#181818;stroke-width:1.0;" x1="922.3432" x2="1128.3432" y1="363.0938" y2="363.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="63" x="927.3432" y="380.0889">init(): int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="927.3432" y="396.3857">sendRequest(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="927.3432" y="412.6826">parseResponse(): void</text></g><!--MD5=[d238399a59a6d37a1120621ab6d2e95a]
+class ResponseListenerThread--><g id="elem_ResponseListenerThread"><rect codeLine="74" fill="#F1F1F1" height="113.1875" id="ResponseListenerThread" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="211" x="919.8432" y="586.5"/><ellipse cx="934.8432" cy="602.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M937.1869,598.1719 C936.2494,597.7344 935.6557,597.5938 934.7807,597.5938 C932.1557,597.5938 930.1557,599.6719 930.1557,602.3906 L930.1557,603.5156 C930.1557,606.0938 932.2651,607.9844 935.1557,607.9844 C936.3744,607.9844 937.5307,607.6875 938.2807,607.1406 C938.8588,606.7344 939.1869,606.2813 939.1869,605.8906 C939.1869,605.4375 938.7963,605.0469 938.3276,605.0469 C938.1088,605.0469 937.9057,605.125 937.7182,605.3125 C937.2651,605.7969 937.2651,605.7969 937.0776,605.8906 C936.6557,606.1563 935.9682,606.2813 935.2026,606.2813 C933.1557,606.2813 931.8588,605.1875 931.8588,603.4844 L931.8588,602.3906 C931.8588,600.6094 933.1088,599.2969 934.8432,599.2969 C935.4213,599.2969 936.0307,599.4531 936.4994,599.7031 C936.9838,599.9844 937.1557,600.2031 937.2494,600.6094 C937.3119,601.0156 937.3432,601.1406 937.4838,601.2656 C937.6244,601.4063 937.8588,601.5156 938.0776,601.5156 C938.3432,601.5156 938.6088,601.375 938.7807,601.1563 C938.8901,601 938.9213,600.8125 938.9213,600.3906 L938.9213,598.9688 C938.9213,598.5313 938.9057,598.4063 938.8119,598.25 C938.6557,597.9844 938.3744,597.8438 938.0776,597.8438 C937.7807,597.8438 937.5776,597.9375 937.3588,598.25 L937.1869,598.1719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="179" x="948.8432" y="607.3467">ResponseListenerThread</text><line style="stroke:#181818;stroke-width:0.5;" x1="920.8432" x2="1129.8432" y1="618.5" y2="618.5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189" x="925.8432" y="635.4951">connector: tcp_connector</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="12" x="925.8432" y="651.792">--</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="925.8432" y="668.0889">outputError: void</text><line style="stroke:#181818;stroke-width:0.5;" x1="920.8432" x2="1129.8432" y1="675.3906" y2="675.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="925.8432" y="692.3857">entry(): void</text></g><!--MD5=[262a51d1dc717e56e9f8caca7c67f5ef]
+class wxPanel--><g id="elem_wxPanel"><rect fill="#F1F1F1" height="48" id="wxPanel" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="90" x="575.3432" y="148.5"/><ellipse cx="590.3432" cy="164.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M592.6869,160.1719 C591.7494,159.7344 591.1557,159.5938 590.2807,159.5938 C587.6557,159.5938 585.6557,161.6719 585.6557,164.3906 L585.6557,165.5156 C585.6557,168.0938 587.7651,169.9844 590.6557,169.9844 C591.8744,169.9844 593.0307,169.6875 593.7807,169.1406 C594.3588,168.7344 594.6869,168.2813 594.6869,167.8906 C594.6869,167.4375 594.2963,167.0469 593.8276,167.0469 C593.6088,167.0469 593.4057,167.125 593.2182,167.3125 C592.7651,167.7969 592.7651,167.7969 592.5776,167.8906 C592.1557,168.1563 591.4682,168.2813 590.7026,168.2813 C588.6557,168.2813 587.3588,167.1875 587.3588,165.4844 L587.3588,164.3906 C587.3588,162.6094 588.6088,161.2969 590.3432,161.2969 C590.9213,161.2969 591.5307,161.4531 591.9994,161.7031 C592.4838,161.9844 592.6557,162.2031 592.7494,162.6094 C592.8119,163.0156 592.8432,163.1406 592.9838,163.2656 C593.1244,163.4063 593.3588,163.5156 593.5776,163.5156 C593.8432,163.5156 594.1088,163.375 594.2807,163.1563 C594.3901,163 594.4213,162.8125 594.4213,162.3906 L594.4213,160.9688 C594.4213,160.5313 594.4057,160.4063 594.3119,160.25 C594.1557,159.9844 593.8744,159.8438 593.5776,159.8438 C593.2807,159.8438 593.0776,159.9375 592.8588,160.25 L592.6869,160.1719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="604.3432" y="169.3467">wxPanel</text><line style="stroke:#181818;stroke-width:0.5;" x1="576.3432" x2="664.3432" y1="180.5" y2="180.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="576.3432" x2="664.3432" y1="188.5" y2="188.5"/></g><!--MD5=[c7264ce4f89b23688712d4e7c0ef5c6f]
+class wxFrame--><g id="elem_wxFrame"><rect fill="#F1F1F1" height="48" id="wxFrame" rx="3.5" ry="3.5" style="stroke:#181818;stroke-width:0.5;" width="96" x="406.3432" y="15"/><ellipse cx="421.3432" cy="31" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M423.687,26.6719 C422.7495,26.2344 422.1557,26.0938 421.2807,26.0938 C418.6557,26.0938 416.6557,28.1719 416.6557,30.8906 L416.6557,32.0156 C416.6557,34.5938 418.7651,36.4844 421.6557,36.4844 C422.8745,36.4844 424.0307,36.1875 424.7807,35.6406 C425.3588,35.2344 425.687,34.7813 425.687,34.3906 C425.687,33.9375 425.2963,33.5469 424.8276,33.5469 C424.6088,33.5469 424.4057,33.625 424.2182,33.8125 C423.7651,34.2969 423.7651,34.2969 423.5776,34.3906 C423.1557,34.6563 422.4682,34.7813 421.7026,34.7813 C419.6557,34.7813 418.3588,33.6875 418.3588,31.9844 L418.3588,30.8906 C418.3588,29.1094 419.6088,27.7969 421.3432,27.7969 C421.9213,27.7969 422.5307,27.9531 422.9995,28.2031 C423.4838,28.4844 423.6557,28.7031 423.7495,29.1094 C423.812,29.5156 423.8432,29.6406 423.9838,29.7656 C424.1245,29.9063 424.3588,30.0156 424.5776,30.0156 C424.8432,30.0156 425.1088,29.875 425.2807,29.6563 C425.3901,29.5 425.4213,29.3125 425.4213,28.8906 L425.4213,27.4688 C425.4213,27.0313 425.4057,26.9063 425.312,26.75 C425.1557,26.4844 424.8745,26.3438 424.5776,26.3438 C424.2807,26.3438 424.0776,26.4375 423.8588,26.75 L423.687,26.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="435.3432" y="35.8467">wxFrame</text><line style="stroke:#181818;stroke-width:0.5;" x1="407.3432" x2="501.3432" y1="47" y2="47"/><line style="stroke:#181818;stroke-width:0.5;" x1="407.3432" x2="501.3432" y1="55" y2="55"/></g><!--MD5=[ce248cda9f7c4ebe0bd962072ac68099]
+link BlackJack to GameControl--><g id="link_BlackJack_GameControl"><path codeLine="84" d="M750.7622,71.054 C794.9122,139.175 887.4602,306.016 832.3432,436 C813.0622,481.469 778.2882,521.805 742.3522,554.464 " fill="none" id="BlackJack-to-GameControl" style="stroke:#454645;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#454645" points="738.4202,558.004,747.7856,554.9563,742.1366,554.6591,742.4338,549.0101,738.4202,558.004" style="stroke:#454645;stroke-width:1.0;"/></g><!--MD5=[5babaa165cb6a9d0fc839b50fc99ac78]
+link BlackJack to GUI_Window--><g id="link_BlackJack_GUI_Window"><path codeLine="85" d="M676.6452,65.199 C638.4982,83.44 586.0632,108.514 541.6982,129.728 " fill="none" id="BlackJack-to-GUI_Window" style="stroke:#454645;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#454645" points="537.1572,131.9,547.0022,131.6251,541.6678,129.7426,543.5503,124.4081,537.1572,131.9" style="stroke:#454645;stroke-width:1.0;"/></g><!--MD5=[c48a1d1149372c2eede02fe5befebff6]
+link GUI_Window to ConnectionPanel--><g id="link_GUI_Window_ConnectionPanel"><path codeLine="87" d="M412.8662,213.111 C392.8562,232.222 368.1562,255.81 344.7292,278.184 " fill="none" id="GUI_Window-to-ConnectionPanel" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="340.9802,281.764,350.2516,278.4411,344.5962,278.3108,344.7265,272.6555,340.9802,281.764" style="stroke:#454645;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="380.6775" y="232.5862">0..1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="323.2445" y="270.9007">0..1</text></g><!--MD5=[b0b774bc17f1ddbe680fb7c21083e3c7]
+link GUI_Window to MainGamePanel--><g id="link_GUI_Window_MainGamePanel"><path codeLine="88" d="M465.9742,213.111 C470.8052,229.566 476.6122,249.342 482.3262,268.803 " fill="none" id="GUI_Window-to-MainGamePanel" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="483.7762,273.742,485.0759,263.9793,482.3662,268.9449,477.4006,266.2352,483.7762,273.742" style="stroke:#454645;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="441.9177" y="232.5862">0..1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="456.6085" y="262.9063">0..1</text></g><!--MD5=[8991600584cfb03964d4239f7bb9345a]
+link GUI_Window to BetPanel--><g id="link_GUI_Window_BetPanel"><path codeLine="89" d="M529.4932,213.131 C561.2712,230.723 598.2752,252.326 630.3432,274 C640.0722,280.576 650.0592,287.82 659.7882,295.18 " fill="none" id="GUI_Window-to-BetPanel" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="663.9412,298.34,659.2008,289.707,659.962,295.3124,654.3566,296.0737,663.9412,298.34" style="stroke:#454645;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="515.163" y="232.6092">0..1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="630.2641" y="287.5841">0..1</text></g><!--MD5=[4ed7ed9cff8df5abd66418194ee265ba]
+link GUI_Window to GameControl--><g id="link_GUI_Window_GameControl"><path codeLine="90" d="M368.4652,182.58 C261.7902,195.835 89.0691,224.46 50.3427,274 C6,330.725 8.9949,377.056 50.3427,436 C148.5092,575.941 351.7412,621.211 486.8302,635.621 " fill="none" id="GUI_Window-to-GameControl" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="500.0932,636.96,494.5253,632.3776,488.1539,635.7547,493.7218,640.3371,500.0932,636.96" style="stroke:#454645;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="94" x="51.3427" y="359.5669">Game Window</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="352.7413" y="179.8918">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="484.1975" y="633.1682">1</text></g><!--MD5=[cae5ddf8643888a8ab5ab53c2d996e13]
+link ConnectionPanel to GameControl--><g id="link_ConnectionPanel_GameControl"><path codeLine="92" d="M364.9212,436.45 C403.7782,467.843 490.9388,538.2619 490.9388,538.2619 " fill="none" id="ConnectionPanel-GameControl" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="500.2732,545.803,498.1197,538.921,490.9388,538.2619,493.0923,545.1439,500.2732,545.803" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="354.6722,428.17,359.1593,436.9373,358.5615,431.3121,364.1867,430.7144,354.6722,428.17" style="stroke:#454645;stroke-width:1.0;"/><line style="stroke:#454645;stroke-width:1.0;" x1="358.5615" x2="364.7837" y1="431.3121" y2="436.3395"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="109" x="422.3432" y="479.0669">connection Panel</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="354.8051" y="447.9425">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="484.389" y="536.1715">1</text></g><!--MD5=[0b7ef76e01b7a95c3b8fef0218a2fc95]
+link MainGamePanel to GameControl--><g id="link_MainGamePanel_GameControl"><path codeLine="93" d="M543.4922,448.311 C550.0482,465.05 564.4124,501.7346 564.4124,501.7346 " fill="none" id="MainGamePanel-GameControl" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="568.7892,512.908,570.3253,505.8624,564.4124,501.7346,562.8764,508.7802,568.7892,512.908" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="538.6902,436.047,538.2469,445.8859,540.5132,440.7028,545.6962,442.9691,538.6902,436.047" style="stroke:#454645;stroke-width:1.0;"/><line style="stroke:#454645;stroke-width:1.0;" x1="540.5132" x2="543.4302" y1="440.7028" y2="448.152"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="114" x="558.3432" y="479.0669">main Game Panel</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="533.2113" y="456.2793">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="557.6353" y="502.0283">1</text></g><!--MD5=[1423a20938ff28bd99c1b28efe9ee614]
+link BetPanel to GameControl--><g id="link_BetPanel_GameControl"><path codeLine="94" d="M704.6742,424.1 C695.6222,447.215 674.2824,501.707 674.2824,501.707 " fill="none" id="BetPanel-GameControl" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="669.9072,512.881,675.8194,508.7524,674.2824,501.707,668.3701,505.8356,669.9072,512.881" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="#454645" points="709.4822,411.823,702.4752,418.7441,707.6585,416.4786,709.9241,421.6619,709.4822,411.823" style="stroke:#454645;stroke-width:1.0;"/><line style="stroke:#454645;stroke-width:1.0;" x1="707.6585" x2="704.7417" y1="416.4786" y2="423.9275"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="698.3304" y="431.7259">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="664.5992" y="501.9997">1</text></g><!--MD5=[c6e276a9525332c02d68114510f4b6c5]
+link ClientNetworkManager to GameControl--><g id="link_ClientNetworkManager_GameControl"><path codeLine="96" d="M965.8682,419.705 C944.3682,441.054 919.2372,464.191 894.3432,483 C845.9412,519.571 788.3612,554.07 738.4272,581.526 " fill="none" id="ClientNetworkManager-GameControl" style="stroke:#454645;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[ffbe659ec8339ae2ca042711bbed79ca]
+link ClientNetworkManager to ResponseListenerThread--><g id="link_ClientNetworkManager_ResponseListenerThread"><path codeLine="97" d="M1025.3452,419.828 C1025.3452,469.711 1025.3452,538.363 1025.3452,586.098 " fill="none" id="ClientNetworkManager-ResponseListenerThread" style="stroke:#454645;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1016.8807" y="440.2375">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="999.8807" y="575.3126">0..1</text></g><!--MD5=[041caaf7b517d1189cdd1f5684633739]
+link wxPanel to MainGamePanel--><g id="link_wxPanel_MainGamePanel"><path codeLine="101" d="M605.8012,196.728 C596.0162,212.358 582.3842,234.132 568.3792,256.504 " fill="none" id="wxPanel-to-MainGamePanel" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="none" points="574.1992,260.4,557.6532,273.637,562.3322,252.971,574.1992,260.4" style="stroke:#454645;stroke-width:1.0;"/></g><!--MD5=[9cd217e5654c20f05f1b8a6d5f2c39da]
+link wxPanel to ConnectionPanel--><g id="link_wxPanel_ConnectionPanel"><path codeLine="102" d="M586.4672,196.651 C577.2502,202.415 567.1092,208.288 557.3432,213 C483.9132,248.426 457.1992,237.409 384.3432,274 C384.2502,274.046 384.1582,274.093 384.0662,274.139 " fill="none" id="wxPanel-to-ConnectionPanel" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="none" points="387.5002,280.241,366.5672,283.533,380.8782,267.906,387.5002,280.241" style="stroke:#454645;stroke-width:1.0;"/></g><!--MD5=[c624fb14a81251094b3f76fff6203d0c]
+link wxPanel to BetPanel--><g id="link_wxPanel_BetPanel"><path codeLine="103" d="M634.6272,196.728 C647.7442,218.059 667.9002,250.834 686.4222,280.954 " fill="none" id="wxPanel-to-BetPanel" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="none" points="692.5602,277.572,697.0742,298.275,680.6352,284.905,692.5602,277.572" style="stroke:#454645;stroke-width:1.0;"/></g><!--MD5=[dc9c5a605338aa50f94d9669271904ee]
+link wxFrame to GUI_Window--><g id="link_wxFrame_GUI_Window"><path codeLine="104" d="M454.3432,63.207 C454.3432,76.753 454.3432,94.52 454.3432,111.736 " fill="none" id="wxFrame-to-GUI_Window" style="stroke:#454645;stroke-width:1.0;"/><polygon fill="none" points="461.3432,111.772,454.3432,131.772,447.3432,111.772,461.3432,111.772" style="stroke:#454645;stroke-width:1.0;"/></g><!--MD5=[7149c5bf24dde3e8aaf49f14ee4ae1b4]
+@startuml
+!theme vibrant
+' !theme plain
+
+' page 2x1
+
+class BlackJack{
+    - -
+    OnInit(): void
+}
+
+class GameControl{
+    my_id: int 
+    currentGameState: GameState
+    - -
+    init(): void
+    connectToServer(): void
+    updateGameState(): void
+    startGame(): void
+    hit(): void
+    stand(): void
+    split(): void
+    double_down(): void
+    insure(): void
+    showNewRoundMessage(): void
+    showGameOverMessage(): void
+}
+class GUI_Window{
+    currentPanel: wxPanel
+    - -
+    showPanel(): void
+}
+
+
+
+class ConnectionPanel{
+    serverAddress: string
+    serverPort: string
+    playerName: string
+    - -
+    getServerAddress(): string
+    getServerPort(): string
+    getPlayer(): string
+}
+
+class BetPanel{
+    betSize: int
+    playerMoney: int
+    - -
+    getBetSize(): int
+    getPlayerMoney(): int
+}
+
+Class MainGamePanel{
+    - -
+    buildGameController(): void
+    buildOthers(): void
+    buildRoundCounter(): void
+    buildMyself(): void
+    buildShoe(): void
+    buildDealer(): void
+
+}
+
+
+Class ClientNetworkManager{
+    is_connected: bool
+    connection: tcp_connector 
+    - -
+    init(): int
+    sendRequest(): void
+    parseResponse(): void 
+}
+
+Class ResponseListenerThread{
+    connector: tcp_connector
+    - - 
+    entry(): void
+    outputError: void
+}
+
+
+
+
+BlackJack ..> GameControl
+BlackJack ..> GUI_Window
+
+GUI_Window "0..1" - -> "0..1" ConnectionPanel
+GUI_Window "0..1" - -> "0..1" MainGamePanel
+GUI_Window "0..1" - -> "0..1" BetPanel
+GUI_Window "1" - -* "1" GameControl : "Game Window"
+
+ConnectionPanel "1" <- -* "1" GameControl :  "connection Panel"
+MainGamePanel "1" <- -* "1" GameControl : "main Game Panel"
+BetPanel "1" <- -* "1" GameControl
+
+ClientNetworkManager .. GameControl
+ClientNetworkManager "1" -down- "0..1" ResponseListenerThread
+
+' ============================
+' Additional
+wxPanel - -|> MainGamePanel
+wxPanel - -|> ConnectionPanel
+wxPanel - -|> BetPanel
+wxFrame - -|> GUI_Window
+@enduml
+
+@startuml
+skinparam BackgroundColor FFFFFF
+skinparam shadowing false
+skinparam RoundCorner 7
+skinparam ArrowColor 454645
+skinparam FontColor 454645
+skinparam SequenceLifeLineBorderColor 696969
+skinparam SequenceGroupHeaderFontColor 454645
+skinparam SequenceGroupFontColor 696969
+skinparam SequenceGroupBorderColor 696969
+skinparam SequenceGroupBorderThickness 1
+
+skinparam sequenceDivider {
+    BorderColor 454645
+    BorderThickness 1
+    FontColor 454645
+}
+
+skinparam participant {
+    BackgroundColor FF6347
+    BorderColor 454645
+    FontColor FFFFFF
+    BorderThickness 1.5
+}
+
+skinparam database {
+    BackgroundColor 00FFFF
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam entity {
+    BackgroundColor FFE552
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam note {
+    BackgroundColor 7FFFD4
+    BorderColor 454645
+    FontColor 454645
+    BorderThickness 1.5
+}
+
+skinparam actor {
+    BackgroundColor 454645
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam boundary {
+    BackgroundColor FFE552
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam control {
+    BackgroundColor FFE552
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam collections {
+    BackgroundColor FF5F42
+    BorderColor 454645
+    FontColor 454645
+}
+
+skinparam queue {
+    BackgroundColor FF6347
+    BorderColor 454645
+    FontColor FFF
+    BorderThickness 1.5
+}
+
+
+class BlackJack{
+    - -
+    OnInit(): void
+}
+
+class GameControl{
+    my_id: int 
+    currentGameState: GameState
+    - -
+    init(): void
+    connectToServer(): void
+    updateGameState(): void
+    startGame(): void
+    hit(): void
+    stand(): void
+    split(): void
+    double_down(): void
+    insure(): void
+    showNewRoundMessage(): void
+    showGameOverMessage(): void
+}
+class GUI_Window{
+    currentPanel: wxPanel
+    - -
+    showPanel(): void
+}
+
+
+
+class ConnectionPanel{
+    serverAddress: string
+    serverPort: string
+    playerName: string
+    - -
+    getServerAddress(): string
+    getServerPort(): string
+    getPlayer(): string
+}
+
+class BetPanel{
+    betSize: int
+    playerMoney: int
+    - -
+    getBetSize(): int
+    getPlayerMoney(): int
+}
+
+Class MainGamePanel{
+    - -
+    buildGameController(): void
+    buildOthers(): void
+    buildRoundCounter(): void
+    buildMyself(): void
+    buildShoe(): void
+    buildDealer(): void
+
+}
+
+
+Class ClientNetworkManager{
+    is_connected: bool
+    connection: tcp_connector 
+    - -
+    init(): int
+    sendRequest(): void
+    parseResponse(): void 
+}
+
+Class ResponseListenerThread{
+    connector: tcp_connector
+    - - 
+    entry(): void
+    outputError: void
+}
+
+
+
+
+BlackJack ..> GameControl
+BlackJack ..> GUI_Window
+
+GUI_Window "0..1" - -> "0..1" ConnectionPanel
+GUI_Window "0..1" - -> "0..1" MainGamePanel
+GUI_Window "0..1" - -> "0..1" BetPanel
+GUI_Window "1" - -* "1" GameControl : "Game Window"
+
+ConnectionPanel "1" <- -* "1" GameControl :  "connection Panel"
+MainGamePanel "1" <- -* "1" GameControl : "main Game Panel"
+BetPanel "1" <- -* "1" GameControl
+
+ClientNetworkManager .. GameControl
+ClientNetworkManager "1" -down- "0..1" ResponseListenerThread
+
+wxPanel - -|> MainGamePanel
+wxPanel - -|> ConnectionPanel
+wxPanel - -|> BetPanel
+wxFrame - -|> GUI_Window
+@enduml
+
+PlantUML version 1.2022.3beta2(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="643px" preserveAspectRatio="none" style="width:320px;height:643px;background:#FFFFFF;" version="1.1" viewBox="0 0 320 643" width="320px" zoomAndPan="magnify"><defs/><g><!--MD5=[54d38f290c99956687a2321d806b1f8b]
+cluster BlackJack_application--><g id="cluster_BlackJack_application"><path d="M8.5,6 L185.5,6 A3.75,3.75 0 0 1 188,8.5 L195,28.2969 L310.5,28.2969 A2.5,2.5 0 0 1 313,30.7969 L313,504.66 A2.5,2.5 0 0 1 310.5,507.16 L8.5,507.16 A2.5,2.5 0 0 1 6,504.66 L6,8.5 A2.5,2.5 0 0 1 8.5,6 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="6" x2="195" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="176" x="10" y="20.9951">BlackJack_application</text></g><!--MD5=[132ed2249eb901e77ec59c09a7c250fb]
+cluster client_app--><g id="cluster_client_app"><path d="M50.5,278.72 L134.5,278.72 A3.75,3.75 0 0 1 137,281.22 L144,301.0169 L268.5,301.0169 A2.5,2.5 0 0 1 271,303.5169 L271,424.94 A2.5,2.5 0 0 1 268.5,427.44 L50.5,427.44 A2.5,2.5 0 0 1 48,424.94 L48,281.22 A2.5,2.5 0 0 1 50.5,278.72 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="48" x2="144" y1="301.0169" y2="301.0169"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="83" x="52" y="293.7151">client_app</text></g><!--MD5=[ffb3e8e944e6894714786b45e1065bd4]
+cluster server_app--><g id="cluster_server_app"><path d="M48.5,65 L136.5,65 A3.75,3.75 0 0 1 139,67.5 L146,87.2969 L270.5,87.2969 A2.5,2.5 0 0 1 273,89.7969 L273,211.22 A2.5,2.5 0 0 1 270.5,213.72 L48.5,213.72 A2.5,2.5 0 0 1 46,211.22 L46,67.5 A2.5,2.5 0 0 1 48.5,65 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="46" x2="146" y1="87.2969" y2="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="87" x="50" y="79.9951">server_app</text></g><!--MD5=[aaeb11a19dee21b66fb6482d17e81079]
+entity General--><g id="elem_General"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="76" x="72" y="367.44"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="82" y="390.4351">General</text></g><!--MD5=[0ba5ee7700168656dc1b457c6fe9fdac]
+entity Client--><g id="elem_Client"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="63" x="183.5" y="367.44"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="43" x="193.5" y="390.4351">Client</text></g><!--MD5=[68df4e91bded5f88b3fbd11263689eee]
+entity General_--><g id="elem_General_"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="76" x="70" y="108"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="80" y="130.9951">General</text></g><!--MD5=[b1435b213846e3ddcd1e6c1cd6b83b9a]
+entity Server--><g id="elem_Server"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="67" x="181.5" y="108"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="191.5" y="130.9951">Server</text></g><!--MD5=[c11b2cac6dc9d048290f971e9c0122dc]
+entity USER1--><g id="elem_USER1"><ellipse cx="215" cy="570.66" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M215,578.66 L215,605.66 M202,586.66 L228,586.66 M215,605.66 L202,620.66 M215,605.66 L228,620.66 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="192" y="635.1551">USER1</text></g><!--MD5=[02b77b9ca0b10c2d59aee87eb3bbdc6f]
+reverse link General to Client--><g id="link_General_Client"><path d="M153.378,385.44 C163.385,385.44 173.393,385.44 183.4,385.44 " fill="none" id="General-backto-Client" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="148.145,385.44,157.145,389.44,153.145,385.44,157.145,381.44,148.145,385.44" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[700f53811b127ec39f058a0eccb4b656]
+reverse link client_app to Client--><g id="link_client_app_Client"><path d="M215,306.497 C215,308.13 215,344.765 215,367.22 " fill="none" id="client_app-backto-Client" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="210" y="301.497"/></g><!--MD5=[9c969038c4909dc6369649feac089c02]
+reverse link General_ to Server--><g id="link_General__Server"><path d="M151.274,126 C161.291,126 171.308,126 181.326,126 " fill="none" id="General_-backto-Server" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="146.035,126,155.035,130,151.035,126,155.035,122,146.035,126" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[dd3cb72f1fec925b043f412c7aff1c23]
+link Server to server_app--><g id="link_Server_server_app"><path d="M215,144.311 C215,166.572 215,202.658 215,204.891 " fill="none" id="Server-to-server_app" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="210" y="199.891"/></g><!--MD5=[710c904eaff26555c717aa8e8a1e5996]
+link server_app to client_app--><g id="link_server_app_client_app"><path d="M215,214.0175 C215,214.1233 215,214.2301 215,214.3378 C215,214.5532 215,214.7723 215,214.995 C215,215.4403 215,215.9001 215,216.3735 C215,218.2673 215,220.3803 215,222.6686 C215,231.8219 215,243.7806 215,255.738 C215,261.7167 215,267.695 215,273.3222 C215,274.729 215,276.1138 215,277.4712 C215,277.8106 215,278.1482 215,278.484 " fill="none" id="server_app-client_app" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="210" y="273.484"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="210" y="209.0175"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="25" x="216" y="250.7869">TCP</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="47" x="168" y="218.4989">:socket</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="47" x="215" y="302.0779">:socket</text></g><!--MD5=[8a041d5e45c56384004c833440fc1187]
+link BlackJack_application to USER1--><g id="link_BlackJack_application_USER1"><path d="M207.8578,507.3046 C207.8354,507.3598 207.8131,507.4152 207.7909,507.4709 C207.7465,507.5823 207.7023,507.6947 207.6584,507.8081 C207.5706,508.035 207.4839,508.2659 207.3982,508.5008 C207.2269,508.9707 207.0598,509.4564 206.897,509.9571 C206.2459,511.9603 205.6632,514.2049 205.1489,516.6402 C203.0918,526.3814 202.1295,539.1738 202.262,551.7696 " fill="none" id="BlackJack_application-USER1" style="stroke:#181818;stroke-width:1.0;"/><path d="M210.9658,558.6983 A9,9 0 0 0 194.0616 559.2877" fill="none" style="stroke:#181818;stroke-width:1.5;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="202.8578" y="502.3046"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="176.4566" y="551.0007">GUI</text></g><!--MD5=[8a041d5e45c56384004c833440fc1187]
+link BlackJack_application to USER1--><g id="link_BlackJack_application_USER1"><path d="M222.5671,507.3156 C222.6681,507.5512 222.7677,507.7915 222.8661,508.0364 C223.2595,509.0159 223.6323,510.0688 223.9846,511.1876 C224.689,513.4252 225.311,515.9259 225.8506,518.6282 C228.009,529.4374 228.8485,543.4719 228.369,556.7897 " fill="none" id="BlackJack_application-USER1-1" style="stroke:#181818;stroke-width:1.0;"/><ellipse cx="228.4047" cy="556.0767" fill="#FFFFFF" rx="6" ry="6" style="stroke:#181818;stroke-width:1.5;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="217.5671" y="502.3156"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="64" x="236.1417" y="551.0007">user input</text></g><!--MD5=[d3bce1fb4b79ffcd20029ef0cc979ac5]
+link Client to BlackJack_application--><g id="link_Client_BlackJack_application"><path d="M205.538,403.45 C199.08,434.537 202.135,497.447 214.701,498.428 " fill="none" id="Client-to-BlackJack_application" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="209.701" y="493.428"/></g><!--MD5=[d3bce1fb4b79ffcd20029ef0cc979ac5]
+link Client to BlackJack_application--><g id="link_Client_BlackJack_application"><path d="M225.019,403.45 C231.856,434.537 228.622,497.447 215.316,498.428 " fill="none" id="Client-to-BlackJack_application-1" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="10" style="stroke:#181818;stroke-width:1.5;" width="10" x="210.316" y="493.428"/></g><!--MD5=[83a6c2b89386d8e9a1e1cb0aa08a3582]
+@startuml
+package BlackJack_application{
+
+         
+    folder client_app {
+
+        rectangle General
+        ' rectangle ServerClientCommunication as Client
+        rectangle Client
+
+        Client .left.> General
+        Client -up-# client_app 
+        
+    }
+
+    folder server_app {
+        rectangle General as General_
+        ' rectangle ServerClientCommunication as Server
+        rectangle Server
+
+        Server .left.>General_
+        Server -down-# server_app
+    }
+
+    client_app ":socket" #-up-# ":socket" server_app : TCP
+    
+
+
+
+}
+
+
+
+    :USER1: "GUI" )-up-# BlackJack_application 
+    BlackJack_application#-up- Client
+    :USER1: "user input" 0-up-# BlackJack_application
+    BlackJack_application #-up- Client
+@enduml
+
+@startuml
+package BlackJack_application{
+
+         
+    folder client_app {
+
+        rectangle General
+        rectangle Client
+
+        Client .left.> General
+        Client -up-# client_app 
+        
+    }
+
+    folder server_app {
+        rectangle General as General_
+        rectangle Server
+
+        Server .left.>General_
+        Server -down-# server_app
+    }
+
+    client_app ":socket" #-up-# ":socket" server_app : TCP
+    
+
+
+
+}
+
+
+
+    :USER1: "GUI" )-up-# BlackJack_application 
+    BlackJack_application#-up- Client
+    :USER1: "user input" 0-up-# BlackJack_application
+    BlackJack_application #-up- Client
+@enduml
+
+PlantUML version 1.2022.3beta2(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
