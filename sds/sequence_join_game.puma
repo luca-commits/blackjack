@@ -16,5 +16,7 @@ group opt [success]
 end
 
 GameManager -> GameControl: answer_req_response\nvia network
+deactivate GameManager
 
 GameControl -> player: Show lobby or message
+deactivate GameControl
