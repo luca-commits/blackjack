@@ -4,19 +4,49 @@ actor Player as player
 player -> GameControl: press 'connect'
 activate GameControl
 
-GameControl -> GameManager: join_game_request\nvia network
-activate GameManager
+GameControl -> ClientNetworkManager: sendRequest()
+activate ClientNetworkManager
 
-GameManager -> GameManager: add_player()
+ClientNetworkManager -> server_network_manager: join_game_request\nover network
+deactivate ClientNetworkManager
+activate server_network_manager
 
-group opt [success]
-  group par [to each player in lobby]
-    GameManager -> GameControl: change_gamestate_response\nvia network
+server_network_manager -> request_handler: handle_request()
+activate request_handler
+
+request_handler -> player_manager: add_player()
+activate player_manager
+
+player_manager --> request_handler: success
+deactivate player_manager
+
+group opt [success == True]
+  request_handler -> game_instance: add_player()
+  activate game_instance
+
+  game_instance -> server_network_manager: broadcast_message()
+  deactivate game_instance
+  activate server_network_manager
+
+  group par [for all players in lobby]
+    server_network_manager -> ClientNetworkManager: change_gamestate_response\nvia network
+    deactivate server_network_manager
+    activate ClientNetworkManager
+
+    ClientNetworkManager -> GameControl: updateGameState()
+    deactivate ClientNetworkManager
   end
 end
 
-GameManager -> GameControl: answer_req_response\nvia network
-deactivate GameManager
+request_handler --> server_network_manager: response
+deactivate request_handler
 
-GameControl -> player: Show lobby or message
+server_network_manager -> ClientNetworkManager: answer_rqst_response\nvia network
+deactivate server_network_manager
+activate ClientNetworkManager
+
+ClientNetworkManager -> GameControl: updateGameState()
+deactivate ClientNetworkManager
+
+GameControl -> player: show lobby or message
 deactivate GameControl
