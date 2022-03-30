@@ -1,0 +1,74 @@
+' this is for a start just a remake of the same diagram of the example"
+
+@startuml "composite_structure"
+
+package BlackJack_application{
+
+         
+    folder client_app {
+
+        rectangle General
+        rectangle ServerClientCommunication as Client
+        ' rectangle Client
+
+        Client .left.> General
+        Client -up-# client_app 
+        
+    }
+
+    folder server_app {
+        rectangle General as General_
+        rectangle ServerClientCommunication as Server
+        ' rectangle Server
+
+        Server .left.>General_
+        Server -down-# server_app
+    }
+
+    client_app ":socket" #-up-# ":socket" server_app : TCP
+    
+
+
+
+}
+
+
+
+    :USER1: "GUI" )-up-# BlackJack_application 
+    BlackJack_application#-up- Client
+    :USER1: "user input" 0-up-# BlackJack_application
+    BlackJack_application #-up- Client
+
+@enduml
+
+
+
+
+
+
+
+
+
+
+' package, folder, frame, node, folder
+
+
+' !theme vibrant
+
+' package STUUFFFF <<Folder>> {
+'     boundary b1
+'     control c1
+'     b1 -(0)- c1
+
+'     component comp1
+'     interface interf1
+'     comp1 #~~( interf1
+
+'     :mode1actor: -0)- fooa1
+'     :mode1actorl: -le0)- foo1l
+
+'     [component1] 0)-(0-(0 [componentC]
+'     () component3 )-0-(0 "foo" [componentC]
+
+'     [aze1] #-->> [aze2]
+' }
