@@ -1,4 +1,3 @@
-
 @startuml
 
 Class server_network_manager{
@@ -42,8 +41,6 @@ Class request_handler{
 }
 
 
-
-'package STUUFFFF <<Folder>> {
 together {
 
 class client_request{
@@ -64,22 +61,14 @@ class server_response{
 ResponseType: enum
 }
 server_response <|-down-  answer_rqst_response
-server_response <|-down-  change_gemestate_response
+server_response <|-down-  change_gamestate_response
 
 }
-server_response .. client_request
+
+server_response .[hidden]. client_request
 
 
 
-' [hidden]
-
-
-' the following is exactly the same as in 
-' the example client package
-' ===============
-
-' this is the same as in example server package but we combined
-' game_instance and game_instance_manager to game_instance
 request_handler .. game_instance
 request_handler ..> player_manager
 request_handler <.. server_network_manager

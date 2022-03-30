@@ -57,6 +57,8 @@ Class MainGamePanel{
     buildOthers(): void
     buildRoundCounter(): void
     buildMyself(): void
+    buildShoe(): void
+    buildDealer(): void
 
 }
 
@@ -85,13 +87,15 @@ BlackJack ..> GUI_Window
 
 GUI_Window "0..1" --> "0..1" ConnectionPanel
 GUI_Window "0..1" --> "0..1" MainGamePanel
+GUI_Window "0..1" --> "0..1" BetPanel
 GUI_Window "1" --* "1" GameControl : "Game Window"
 
 ConnectionPanel "1" <--* "1" GameControl :  "connection Panel"
 MainGamePanel "1" <--* "1" GameControl : "main Game Panel"
+BetPanel "1" <--* "1" GameControl
 
 ClientNetworkManager .. GameControl
-ClientNetworkManager "1" -up- "0..1" ResponseListenerThread
+ClientNetworkManager "1" -down- "0..1" ResponseListenerThread
 
 ' ============================
 ' Additional
