@@ -10,7 +10,7 @@ class BlackJack{
 }
 
 class GameControl{
-    my_id: int 
+    my_id: int
     currentGameState: GameState
     --
     init(): void
@@ -64,16 +64,16 @@ Class MainGamePanel{
 
 Class ClientNetworkManager{
     is_connected: bool
-    connection: tcp_connector 
+    connection: tcp_connector
     --
     init(): int
     sendRequest(): void
-    parseResponse(): void 
+    parseResponse(): void
 }
 
 Class ResponseListenerThread{
     connector: tcp_connector
-    -- 
+    --
     entry(): void
     outputError: void
 }
@@ -102,7 +102,7 @@ Class player_manager{
 Class game_manager{
     game_state: GameState
     --
-    is_started(): bool  
+    is_started(): bool
     is_finished(): bool
     start_game(): bool
     add_player(): bool
@@ -122,7 +122,7 @@ Class request_handler{
 
 ' ===============================
 
-' the following is exactly the same as in 
+' the following is exactly the same as in
 ' the example client package
 
 BlackJack ..> GameControl
@@ -185,7 +185,7 @@ class server_response{
 ResponseType: enum
 }
 server_response <|-up-  answer_rqst_response
-server_response <|-up-  change_gemestate_response
+server_response <|-up-  change_gamestate_response
 
 }
 server_response .down[hidden]. client_request
@@ -213,13 +213,13 @@ server_response .down[hidden]. client_request
 '   --
 '   End of class
 ' }
-' 
+'
 ' left to right direction
 ' foo -left-> dummyLeft
 ' foo -right-> dummyRight
 ' foo -up-> dummyUp
 ' foo -down-> dummyDown
-' ' 
+' '
 ' foo --> bar
 ' foo -[bold]-> bar1
 ' foo -[dashed]-> bar2
