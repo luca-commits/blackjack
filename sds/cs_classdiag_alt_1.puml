@@ -1,0 +1,105 @@
+@startuml "Client&Server_communication"
+!theme vibrant
+' !theme plain
+
+' page 2x1
+
+class BlackJack{
+    --
+    OnInit(): void
+}
+
+class GameControl{
+    my_id: int 
+    currentGameState: GameState
+    --
+    init(): void
+    connectToServer(): void
+    updateGameState(): void
+    startGame(): void
+    hit(): void
+    stand(): void
+    split(): void
+    double_down(): void
+    insure(): void
+    showNewRoundMessage(): void
+    showGameOverMessage(): void
+}
+class GUI_Window{
+    currentPanel: wxPanel
+    --
+    showPanel(): void
+}
+
+
+
+class ConnectionPanel{
+    serverAddress: string
+    serverPort: string
+    playerName: string
+    --
+    getServerAddress(): string
+    getServerPort(): string
+    getPlayer(): string
+}
+
+class BetPanel{
+    betSize: int
+    playerMoney: int
+    --
+    getBetSize(): int
+    getPlayerMoney(): int
+}
+
+Class MainGamePanel{
+    --
+    buildGameController(): void
+    buildOthers(): void
+    buildRoundCounter(): void
+    buildMyself(): void
+
+}
+
+
+Class ClientNetworkManager{
+    is_connected: bool
+    connection: tcp_connector 
+    --
+    init(): int
+    sendRequest(): void
+    parseResponse(): void 
+}
+
+Class ResponseListenerThread{
+    connector: tcp_connector
+    -- 
+    entry(): void
+    outputError: void
+}
+
+
+
+
+BlackJack ..> GameControl
+BlackJack ..> GUI_Window
+
+GUI_Window "0..1" --> "0..1" ConnectionPanel
+GUI_Window "0..1" --> "0..1" MainGamePanel
+GUI_Window "1" --* "1" GameControl : "Game Window"
+
+ConnectionPanel "1" <--* "1" GameControl :  "connection Panel"
+MainGamePanel "1" <--* "1" GameControl : "main Game Panel"
+
+ClientNetworkManager .. GameControl
+ClientNetworkManager "1" -up- "0..1" ResponseListenerThread
+
+' ============================
+' Additional
+wxPanel --|> MainGamePanel
+wxPanel --|> ConnectionPanel
+wxPanel --|> BetPanel
+wxFrame --|> GUI_Window
+
+
+
+@enduml
