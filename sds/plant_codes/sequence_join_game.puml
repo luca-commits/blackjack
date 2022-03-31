@@ -9,6 +9,7 @@ activate ClientNetworkManager
 
 ClientNetworkManager -> server_network_manager: join_game_request\nover network
 deactivate ClientNetworkManager
+deactivate GameControl
 activate server_network_manager
 
 server_network_manager -> request_handler: handle_request()
@@ -29,7 +30,7 @@ group opt [success == True]
   activate server_network_manager
 
   group par [for all players in lobby]
-    server_network_manager -> ClientNetworkManager: change_gamestate_response\nvia network
+    server_network_manager -> ClientNetworkManager: change_gamestate_msg\nvia network
     deactivate server_network_manager
     activate ClientNetworkManager
 
@@ -46,7 +47,8 @@ deactivate server_network_manager
 activate ClientNetworkManager
 
 ClientNetworkManager -> GameControl: updateGameState()
-deactivate ClientNetworkManager
+activate GameControl
 
 GameControl -> player: show lobby or message
 deactivate GameControl
+deactivate ClientNetworkManager

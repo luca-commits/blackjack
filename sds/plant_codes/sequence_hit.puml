@@ -7,7 +7,7 @@ activate GameControl
 GameControl -> ClientNetworkManager: sendRequest()
 activate ClientNetworkManager
 
-ClientNetworkManager -> server_network_manager: hit_request\nvia network
+ClientNetworkManager -> server_network_manager: action_request with\naction_type="hit"\nvia network
 deactivate ClientNetworkManager
 deactivate GameControl
 activate server_network_manager
@@ -34,7 +34,7 @@ group opt [it's the player's turn]
   Shoe --> Player: card
   deactivate Shoe
 
-  Player -> Player: push card to cards
+  Player -> Player: push card\nto cards
 
   Player --> game_instance
   deactivate Player
@@ -49,7 +49,7 @@ group opt [it's the player's turn]
   activate server_network_manager
 
   group par [for all players]
-    server_network_manager -> ClientNetworkManager: change_gamestate_response\nvia network
+    server_network_manager -> ClientNetworkManager: change_gamestate_msg\nvia network
     deactivate server_network_manager
     activate ClientNetworkManager
 
@@ -75,6 +75,6 @@ activate ClientNetworkManager
 ClientNetworkManager -> GameControl: updateGameState()
 activate GameControl
 
-GameControl -> player: do nothing or show message
+GameControl -> player: do nothing or\nshow message
 deactivate ClientNetworkManager
 deactivate GameControl
