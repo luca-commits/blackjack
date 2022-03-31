@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1009px" preserveAspectRatio="none" style="width:1011px;height:1009px;background:#FFFFFF;" version="1.1" viewBox="0 0 1011 1009" width="1011px" zoomAndPan="magnify"><defs/><g><!--MD5=[22bd1b67cb53ad6c9c47d1b608310931]
+class client_request--><g id="elem_client_request"><rect codeLine="44" fill="#F1F1F1" height="80.5938" id="client_request" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="156" x="281.5" y="797"/><ellipse cx="305.95" cy="813" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M308.2938,808.6719 C307.3563,808.2344 306.7625,808.0938 305.8875,808.0938 C303.2625,808.0938 301.2625,810.1719 301.2625,812.8906 L301.2625,814.0156 C301.2625,816.5938 303.3719,818.4844 306.2625,818.4844 C307.4813,818.4844 308.6375,818.1875 309.3875,817.6406 C309.9656,817.2344 310.2938,816.7813 310.2938,816.3906 C310.2938,815.9375 309.9031,815.5469 309.4344,815.5469 C309.2156,815.5469 309.0125,815.625 308.825,815.8125 C308.3719,816.2969 308.3719,816.2969 308.1844,816.3906 C307.7625,816.6563 307.075,816.7813 306.3094,816.7813 C304.2625,816.7813 302.9656,815.6875 302.9656,813.9844 L302.9656,812.8906 C302.9656,811.1094 304.2156,809.7969 305.95,809.7969 C306.5281,809.7969 307.1375,809.9531 307.6063,810.2031 C308.0906,810.4844 308.2625,810.7031 308.3563,811.1094 C308.4188,811.5156 308.45,811.6406 308.5906,811.7656 C308.7313,811.9063 308.9656,812.0156 309.1844,812.0156 C309.45,812.0156 309.7156,811.875 309.8875,811.6563 C309.9969,811.5 310.0281,811.3125 310.0281,810.8906 L310.0281,809.4688 C310.0281,809.0313 310.0125,808.9063 309.9188,808.75 C309.7625,808.4844 309.4813,808.3438 309.1844,808.3438 C308.8875,808.3438 308.6844,808.4375 308.4656,808.75 L308.2938,808.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="322.05" y="817.8467">client_request</text><line style="stroke:#181818;stroke-width:0.5;" x1="282.5" x2="436.5" y1="829" y2="829"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="287.5" y="845.9951">player_id: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="287.5" y="862.292">RequestType: enum</text><line style="stroke:#181818;stroke-width:0.5;" x1="282.5" x2="436.5" y1="869.5938" y2="869.5938"/></g><!--MD5=[00006b40d04256eb58447385d3fb8dab]
+class join_game_request--><g id="elem_join_game_request"><rect fill="#F1F1F1" height="48" id="join_game_request" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="167" x="7" y="946"/><ellipse cx="22" cy="962" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M24.3438,957.6719 C23.4063,957.2344 22.8125,957.0938 21.9375,957.0938 C19.3125,957.0938 17.3125,959.1719 17.3125,961.8906 L17.3125,963.0156 C17.3125,965.5938 19.4219,967.4844 22.3125,967.4844 C23.5313,967.4844 24.6875,967.1875 25.4375,966.6406 C26.0156,966.2344 26.3438,965.7813 26.3438,965.3906 C26.3438,964.9375 25.9531,964.5469 25.4844,964.5469 C25.2656,964.5469 25.0625,964.625 24.875,964.8125 C24.4219,965.2969 24.4219,965.2969 24.2344,965.3906 C23.8125,965.6563 23.125,965.7813 22.3594,965.7813 C20.3125,965.7813 19.0156,964.6875 19.0156,962.9844 L19.0156,961.8906 C19.0156,960.1094 20.2656,958.7969 22,958.7969 C22.5781,958.7969 23.1875,958.9531 23.6563,959.2031 C24.1406,959.4844 24.3125,959.7031 24.4063,960.1094 C24.4688,960.5156 24.5,960.6406 24.6406,960.7656 C24.7813,960.9063 25.0156,961.0156 25.2344,961.0156 C25.5,961.0156 25.7656,960.875 25.9375,960.6563 C26.0469,960.5 26.0781,960.3125 26.0781,959.8906 L26.0781,958.4688 C26.0781,958.0313 26.0625,957.9063 25.9688,957.75 C25.8125,957.4844 25.5313,957.3438 25.2344,957.3438 C24.9375,957.3438 24.7344,957.4375 24.5156,957.75 L24.3438,957.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="36" y="966.8467">join_game_request</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="173" y1="978" y2="978"/><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="173" y1="986" y2="986"/></g><!--MD5=[70335e1947a3fd4c54218fa96d5abede]
+class start_game_request--><g id="elem_start_game_request"><rect fill="#F1F1F1" height="48" id="start_game_request" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="176" x="209.5" y="946"/><ellipse cx="224.5" cy="962" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M226.8438,957.6719 C225.9063,957.2344 225.3125,957.0938 224.4375,957.0938 C221.8125,957.0938 219.8125,959.1719 219.8125,961.8906 L219.8125,963.0156 C219.8125,965.5938 221.9219,967.4844 224.8125,967.4844 C226.0313,967.4844 227.1875,967.1875 227.9375,966.6406 C228.5156,966.2344 228.8438,965.7813 228.8438,965.3906 C228.8438,964.9375 228.4531,964.5469 227.9844,964.5469 C227.7656,964.5469 227.5625,964.625 227.375,964.8125 C226.9219,965.2969 226.9219,965.2969 226.7344,965.3906 C226.3125,965.6563 225.625,965.7813 224.8594,965.7813 C222.8125,965.7813 221.5156,964.6875 221.5156,962.9844 L221.5156,961.8906 C221.5156,960.1094 222.7656,958.7969 224.5,958.7969 C225.0781,958.7969 225.6875,958.9531 226.1563,959.2031 C226.6406,959.4844 226.8125,959.7031 226.9063,960.1094 C226.9688,960.5156 227,960.6406 227.1406,960.7656 C227.2813,960.9063 227.5156,961.0156 227.7344,961.0156 C228,961.0156 228.2656,960.875 228.4375,960.6563 C228.5469,960.5 228.5781,960.3125 228.5781,959.8906 L228.5781,958.4688 C228.5781,958.0313 228.5625,957.9063 228.4688,957.75 C228.3125,957.4844 228.0313,957.3438 227.7344,957.3438 C227.4375,957.3438 227.2344,957.4375 227.0156,957.75 L226.8438,957.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="238.5" y="966.8467">start_game_request</text><line style="stroke:#181818;stroke-width:0.5;" x1="210.5" x2="384.5" y1="978" y2="978"/><line style="stroke:#181818;stroke-width:0.5;" x1="210.5" x2="384.5" y1="986" y2="986"/></g><!--MD5=[b5ad726f7e76edc1788a3bfb6eda2845]
+class make_bet_request--><g id="elem_make_bet_request"><rect fill="#F1F1F1" height="48" id="make_bet_request" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="167" x="421" y="946"/><ellipse cx="436" cy="962" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M438.3438,957.6719 C437.4063,957.2344 436.8125,957.0938 435.9375,957.0938 C433.3125,957.0938 431.3125,959.1719 431.3125,961.8906 L431.3125,963.0156 C431.3125,965.5938 433.4219,967.4844 436.3125,967.4844 C437.5313,967.4844 438.6875,967.1875 439.4375,966.6406 C440.0156,966.2344 440.3438,965.7813 440.3438,965.3906 C440.3438,964.9375 439.9531,964.5469 439.4844,964.5469 C439.2656,964.5469 439.0625,964.625 438.875,964.8125 C438.4219,965.2969 438.4219,965.2969 438.2344,965.3906 C437.8125,965.6563 437.125,965.7813 436.3594,965.7813 C434.3125,965.7813 433.0156,964.6875 433.0156,962.9844 L433.0156,961.8906 C433.0156,960.1094 434.2656,958.7969 436,958.7969 C436.5781,958.7969 437.1875,958.9531 437.6563,959.2031 C438.1406,959.4844 438.3125,959.7031 438.4063,960.1094 C438.4688,960.5156 438.5,960.6406 438.6406,960.7656 C438.7813,960.9063 439.0156,961.0156 439.2344,961.0156 C439.5,961.0156 439.7656,960.875 439.9375,960.6563 C440.0469,960.5 440.0781,960.3125 440.0781,959.8906 L440.0781,958.4688 C440.0781,958.0313 440.0625,957.9063 439.9688,957.75 C439.8125,957.4844 439.5313,957.3438 439.2344,957.3438 C438.9375,957.3438 438.7344,957.4375 438.5156,957.75 L438.3438,957.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="450" y="966.8467">make_bet_request</text><line style="stroke:#181818;stroke-width:0.5;" x1="422" x2="587" y1="978" y2="978"/><line style="stroke:#181818;stroke-width:0.5;" x1="422" x2="587" y1="986" y2="986"/></g><!--MD5=[af10583e2e8219af5501a9b859c12ad3]
+class action_request--><g id="elem_action_request"><rect codeLine="58" fill="#F1F1F1" height="64.2969" id="action_request" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="381" x="623" y="938"/><ellipse cx="755.75" cy="954" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M758.0938,949.6719 C757.1563,949.2344 756.5625,949.0938 755.6875,949.0938 C753.0625,949.0938 751.0625,951.1719 751.0625,953.8906 L751.0625,955.0156 C751.0625,957.5938 753.1719,959.4844 756.0625,959.4844 C757.2813,959.4844 758.4375,959.1875 759.1875,958.6406 C759.7656,958.2344 760.0938,957.7813 760.0938,957.3906 C760.0938,956.9375 759.7031,956.5469 759.2344,956.5469 C759.0156,956.5469 758.8125,956.625 758.625,956.8125 C758.1719,957.2969 758.1719,957.2969 757.9844,957.3906 C757.5625,957.6563 756.875,957.7813 756.1094,957.7813 C754.0625,957.7813 752.7656,956.6875 752.7656,954.9844 L752.7656,953.8906 C752.7656,952.1094 754.0156,950.7969 755.75,950.7969 C756.3281,950.7969 756.9375,950.9531 757.4063,951.2031 C757.8906,951.4844 758.0625,951.7031 758.1563,952.1094 C758.2188,952.5156 758.25,952.6406 758.3906,952.7656 C758.5313,952.9063 758.7656,953.0156 758.9844,953.0156 C759.25,953.0156 759.5156,952.875 759.6875,952.6563 C759.7969,952.5 759.8281,952.3125 759.8281,951.8906 L759.8281,950.4688 C759.8281,950.0313 759.8125,949.9063 759.7188,949.75 C759.5625,949.4844 759.2813,949.3438 758.9844,949.3438 C758.6875,949.3438 758.4844,949.4375 758.2656,949.75 L758.0938,949.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107" x="776.25" y="958.8467">action_request</text><line style="stroke:#181818;stroke-width:0.5;" x1="624" x2="1003" y1="970" y2="970"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="369" x="629" y="986.9951">action_type: enum{hit, stand, split, double, insure}</text><line style="stroke:#181818;stroke-width:0.5;" x1="624" x2="1003" y1="994.2969" y2="994.2969"/></g><!--MD5=[f3998a2a9ecb9e6f502fc9359fb583cc]
+class server_response--><g id="elem_server_response"><rect codeLine="61" fill="#F1F1F1" height="64.2969" id="server_response" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="167" x="481" y="673"/><ellipse cx="503.65" cy="689" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M505.9938,684.6719 C505.0563,684.2344 504.4625,684.0938 503.5875,684.0938 C500.9625,684.0938 498.9625,686.1719 498.9625,688.8906 L498.9625,690.0156 C498.9625,692.5938 501.0719,694.4844 503.9625,694.4844 C505.1813,694.4844 506.3375,694.1875 507.0875,693.6406 C507.6656,693.2344 507.9938,692.7813 507.9938,692.3906 C507.9938,691.9375 507.6031,691.5469 507.1344,691.5469 C506.9156,691.5469 506.7125,691.625 506.525,691.8125 C506.0719,692.2969 506.0719,692.2969 505.8844,692.3906 C505.4625,692.6563 504.775,692.7813 504.0094,692.7813 C501.9625,692.7813 500.6656,691.6875 500.6656,689.9844 L500.6656,688.8906 C500.6656,687.1094 501.9156,685.7969 503.65,685.7969 C504.2281,685.7969 504.8375,685.9531 505.3063,686.2031 C505.7906,686.4844 505.9625,686.7031 506.0563,687.1094 C506.1188,687.5156 506.15,687.6406 506.2906,687.7656 C506.4313,687.9063 506.6656,688.0156 506.8844,688.0156 C507.15,688.0156 507.4156,687.875 507.5875,687.6563 C507.6969,687.5 507.7281,687.3125 507.7281,686.8906 L507.7281,685.4688 C507.7281,685.0313 507.7125,684.9063 507.6188,684.75 C507.4625,684.4844 507.1813,684.3438 506.8844,684.3438 C506.5875,684.3438 506.3844,684.4375 506.1656,684.75 L505.9938,684.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="519.35" y="693.8467">server_response</text><line style="stroke:#181818;stroke-width:0.5;" x1="482" x2="647" y1="705" y2="705"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="487" y="721.9951">ResponseType: enum</text><line style="stroke:#181818;stroke-width:0.5;" x1="482" x2="647" y1="729.2969" y2="729.2969"/></g><!--MD5=[4afc4b65ad9e26196afa89ceb4e8159f]
+class answer_rqst_response--><g id="elem_answer_rqst_response"><rect fill="#F1F1F1" height="48" id="answer_rqst_response" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="191" x="473" y="813.5"/><ellipse cx="488" cy="829.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M490.3438,825.1719 C489.4063,824.7344 488.8125,824.5938 487.9375,824.5938 C485.3125,824.5938 483.3125,826.6719 483.3125,829.3906 L483.3125,830.5156 C483.3125,833.0938 485.4219,834.9844 488.3125,834.9844 C489.5313,834.9844 490.6875,834.6875 491.4375,834.1406 C492.0156,833.7344 492.3438,833.2813 492.3438,832.8906 C492.3438,832.4375 491.9531,832.0469 491.4844,832.0469 C491.2656,832.0469 491.0625,832.125 490.875,832.3125 C490.4219,832.7969 490.4219,832.7969 490.2344,832.8906 C489.8125,833.1563 489.125,833.2813 488.3594,833.2813 C486.3125,833.2813 485.0156,832.1875 485.0156,830.4844 L485.0156,829.3906 C485.0156,827.6094 486.2656,826.2969 488,826.2969 C488.5781,826.2969 489.1875,826.4531 489.6563,826.7031 C490.1406,826.9844 490.3125,827.2031 490.4063,827.6094 C490.4688,828.0156 490.5,828.1406 490.6406,828.2656 C490.7813,828.4063 491.0156,828.5156 491.2344,828.5156 C491.5,828.5156 491.7656,828.375 491.9375,828.1563 C492.0469,828 492.0781,827.8125 492.0781,827.3906 L492.0781,825.9688 C492.0781,825.5313 492.0625,825.4063 491.9688,825.25 C491.8125,824.9844 491.5313,824.8438 491.2344,824.8438 C490.9375,824.8438 490.7344,824.9375 490.5156,825.25 L490.3438,825.1719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="502" y="834.3467">answer_rqst_response</text><line style="stroke:#181818;stroke-width:0.5;" x1="474" x2="663" y1="845.5" y2="845.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="474" x2="663" y1="853.5" y2="853.5"/></g><!--MD5=[00f7b4e6438aa540bf06a483f7f9a374]
+class change_gamestate_response--><g id="elem_change_gamestate_response"><rect fill="#F1F1F1" height="48" id="change_gamestate_response" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="242" x="699.5" y="813.5"/><ellipse cx="714.5" cy="829.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M716.8438,825.1719 C715.9063,824.7344 715.3125,824.5938 714.4375,824.5938 C711.8125,824.5938 709.8125,826.6719 709.8125,829.3906 L709.8125,830.5156 C709.8125,833.0938 711.9219,834.9844 714.8125,834.9844 C716.0313,834.9844 717.1875,834.6875 717.9375,834.1406 C718.5156,833.7344 718.8438,833.2813 718.8438,832.8906 C718.8438,832.4375 718.4531,832.0469 717.9844,832.0469 C717.7656,832.0469 717.5625,832.125 717.375,832.3125 C716.9219,832.7969 716.9219,832.7969 716.7344,832.8906 C716.3125,833.1563 715.625,833.2813 714.8594,833.2813 C712.8125,833.2813 711.5156,832.1875 711.5156,830.4844 L711.5156,829.3906 C711.5156,827.6094 712.7656,826.2969 714.5,826.2969 C715.0781,826.2969 715.6875,826.4531 716.1563,826.7031 C716.6406,826.9844 716.8125,827.2031 716.9063,827.6094 C716.9688,828.0156 717,828.1406 717.1406,828.2656 C717.2813,828.4063 717.5156,828.5156 717.7344,828.5156 C718,828.5156 718.2656,828.375 718.4375,828.1563 C718.5469,828 718.5781,827.8125 718.5781,827.3906 L718.5781,825.9688 C718.5781,825.5313 718.5625,825.4063 718.4688,825.25 C718.3125,824.9844 718.0313,824.8438 717.7344,824.8438 C717.4375,824.8438 717.2344,824.9375 717.0156,825.25 L716.8438,825.1719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="210" x="728.5" y="834.3467">change_gamestate_response</text><line style="stroke:#181818;stroke-width:0.5;" x1="700.5" x2="940.5" y1="845.5" y2="845.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="700.5" x2="940.5" y1="853.5" y2="853.5"/></g><!--MD5=[9b257e8781d420fff5446e2eb49c7c1c]
+class server_network_manager--><g id="elem_server_network_manager"><rect codeLine="1" fill="#F1F1F1" height="194.6719" id="server_network_manager" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="252" x="434.5" y="418"/><ellipse cx="466.6" cy="434" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M468.9438,429.6719 C468.0063,429.2344 467.4125,429.0938 466.5375,429.0938 C463.9125,429.0938 461.9125,431.1719 461.9125,433.8906 L461.9125,435.0156 C461.9125,437.5938 464.0219,439.4844 466.9125,439.4844 C468.1313,439.4844 469.2875,439.1875 470.0375,438.6406 C470.6156,438.2344 470.9438,437.7813 470.9438,437.3906 C470.9438,436.9375 470.5531,436.5469 470.0844,436.5469 C469.8656,436.5469 469.6625,436.625 469.475,436.8125 C469.0219,437.2969 469.0219,437.2969 468.8344,437.3906 C468.4125,437.6563 467.725,437.7813 466.9594,437.7813 C464.9125,437.7813 463.6156,436.6875 463.6156,434.9844 L463.6156,433.8906 C463.6156,432.1094 464.8656,430.7969 466.6,430.7969 C467.1781,430.7969 467.7875,430.9531 468.2563,431.2031 C468.7406,431.4844 468.9125,431.7031 469.0063,432.1094 C469.0688,432.5156 469.1,432.6406 469.2406,432.7656 C469.3813,432.9063 469.6156,433.0156 469.8344,433.0156 C470.1,433.0156 470.3656,432.875 470.5375,432.6563 C470.6469,432.5 470.6781,432.3125 470.6781,431.8906 L470.6781,430.4688 C470.6781,430.0313 470.6625,429.9063 470.5688,429.75 C470.4125,429.4844 470.1313,429.3438 469.8344,429.3438 C469.5375,429.3438 469.3344,429.4375 469.1156,429.75 L468.9438,429.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="484.4" y="438.8467">server_network_manager</text><line style="stroke:#181818;stroke-width:0.5;" x1="435.5" x2="685.5" y1="450" y2="450"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="440.5" y="466.9951">acc: tcp_acceptor</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="191" x="440.5" y="483.292">player_id_to_address: map</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="440.5" y="499.5889">address_to_socket: map</text><line style="stroke:#181818;stroke-width:1.0;" x1="435.5" x2="685.5" y1="506.8906" y2="506.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="440.5" y="523.8857">listener_loop(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="240" x="440.5" y="540.1826">handle_incoming_message(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="151" x="440.5" y="556.4795">read_message(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="440.5" y="572.7764">send_message(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="191" x="440.5" y="589.0732">broadcast_message(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="440.5" y="605.3701">on_player_left(): void</text></g><!--MD5=[734e62549b123ccb989b3a2c32846bc9]
+class player_manager--><g id="elem_player_manager"><rect codeLine="14" fill="#F1F1F1" height="96.8906" id="player_manager" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="147" x="722" y="467"/><ellipse cx="737" cy="483" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M739.3438,478.6719 C738.4063,478.2344 737.8125,478.0938 736.9375,478.0938 C734.3125,478.0938 732.3125,480.1719 732.3125,482.8906 L732.3125,484.0156 C732.3125,486.5938 734.4219,488.4844 737.3125,488.4844 C738.5313,488.4844 739.6875,488.1875 740.4375,487.6406 C741.0156,487.2344 741.3438,486.7813 741.3438,486.3906 C741.3438,485.9375 740.9531,485.5469 740.4844,485.5469 C740.2656,485.5469 740.0625,485.625 739.875,485.8125 C739.4219,486.2969 739.4219,486.2969 739.2344,486.3906 C738.8125,486.6563 738.125,486.7813 737.3594,486.7813 C735.3125,486.7813 734.0156,485.6875 734.0156,483.9844 L734.0156,482.8906 C734.0156,481.1094 735.2656,479.7969 737,479.7969 C737.5781,479.7969 738.1875,479.9531 738.6563,480.2031 C739.1406,480.4844 739.3125,480.7031 739.4063,481.1094 C739.4688,481.5156 739.5,481.6406 739.6406,481.7656 C739.7813,481.9063 740.0156,482.0156 740.2344,482.0156 C740.5,482.0156 740.7656,481.875 740.9375,481.6563 C741.0469,481.5 741.0781,481.3125 741.0781,480.8906 L741.0781,479.4688 C741.0781,479.0313 741.0625,478.9063 740.9688,478.75 C740.8125,478.4844 740.5313,478.3438 740.2344,478.3438 C739.9375,478.3438 739.7344,478.4375 739.5156,478.75 L739.3438,478.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="751" y="487.8467">player_manager</text><line style="stroke:#181818;stroke-width:0.5;" x1="723" x2="868" y1="499" y2="499"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="125" x="728" y="515.9951">player_map: map</text><line style="stroke:#181818;stroke-width:1.0;" x1="723" x2="868" y1="523.2969" y2="523.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="728" y="540.292">get_player(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="728" y="556.5889">add_player(): bool</text></g><!--MD5=[c463bc19fe13ca68cd42d38d7368a899]
+class game_instance--><g id="elem_game_instance"><rect codeLine="21" fill="#F1F1F1" height="227.2656" id="game_instance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="198" x="544.5" y="131"/><ellipse cx="585.6" cy="147" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M587.9438,142.6719 C587.0063,142.2344 586.4125,142.0938 585.5375,142.0938 C582.9125,142.0938 580.9125,144.1719 580.9125,146.8906 L580.9125,148.0156 C580.9125,150.5938 583.0219,152.4844 585.9125,152.4844 C587.1313,152.4844 588.2875,152.1875 589.0375,151.6406 C589.6156,151.2344 589.9438,150.7813 589.9438,150.3906 C589.9438,149.9375 589.5531,149.5469 589.0844,149.5469 C588.8656,149.5469 588.6625,149.625 588.475,149.8125 C588.0219,150.2969 588.0219,150.2969 587.8344,150.3906 C587.4125,150.6563 586.725,150.7813 585.9594,150.7813 C583.9125,150.7813 582.6156,149.6875 582.6156,147.9844 L582.6156,146.8906 C582.6156,145.1094 583.8656,143.7969 585.6,143.7969 C586.1781,143.7969 586.7875,143.9531 587.2563,144.2031 C587.7406,144.4844 587.9125,144.7031 588.0063,145.1094 C588.0688,145.5156 588.1,145.6406 588.2406,145.7656 C588.3813,145.9063 588.6156,146.0156 588.8344,146.0156 C589.1,146.0156 589.3656,145.875 589.5375,145.6563 C589.6469,145.5 589.6781,145.3125 589.6781,144.8906 L589.6781,143.4688 C589.6781,143.0313 589.6625,142.9063 589.5688,142.75 C589.4125,142.4844 589.1313,142.3438 588.8344,142.3438 C588.5375,142.3438 588.3344,142.4375 588.1156,142.75 L587.9438,142.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="605.4" y="151.8467">game_instance</text><line style="stroke:#181818;stroke-width:0.5;" x1="545.5" x2="741.5" y1="163" y2="163"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="550.5" y="179.9951">game_state: GameState</text><line style="stroke:#181818;stroke-width:1.0;" x1="545.5" x2="741.5" y1="187.2969" y2="187.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="550.5" y="204.292">is_started(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="550.5" y="220.5889">is_finished(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="550.5" y="236.8857">start_game(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="550.5" y="253.1826">add_player(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="550.5" y="269.4795">try_remove_player(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="550.5" y="285.7764">hit(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="550.5" y="302.0732">stand(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="550.5" y="318.3701">split(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="550.5" y="334.667">double_down(): bool</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="550.5" y="350.9639">insure(): bool</text></g><!--MD5=[444c12384fa8e4658b09e5ec8a311d8e]
+class request_handler--><g id="elem_request_handler"><rect codeLine="36" fill="#F1F1F1" height="64.2969" id="request_handler" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="266" x="434.5" y="7"/><ellipse cx="505.25" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M507.5938,18.6719 C506.6563,18.2344 506.0625,18.0938 505.1875,18.0938 C502.5625,18.0938 500.5625,20.1719 500.5625,22.8906 L500.5625,24.0156 C500.5625,26.5938 502.6719,28.4844 505.5625,28.4844 C506.7813,28.4844 507.9375,28.1875 508.6875,27.6406 C509.2656,27.2344 509.5938,26.7813 509.5938,26.3906 C509.5938,25.9375 509.2031,25.5469 508.7344,25.5469 C508.5156,25.5469 508.3125,25.625 508.125,25.8125 C507.6719,26.2969 507.6719,26.2969 507.4844,26.3906 C507.0625,26.6563 506.375,26.7813 505.6094,26.7813 C503.5625,26.7813 502.2656,25.6875 502.2656,23.9844 L502.2656,22.8906 C502.2656,21.1094 503.5156,19.7969 505.25,19.7969 C505.8281,19.7969 506.4375,19.9531 506.9063,20.2031 C507.3906,20.4844 507.5625,20.7031 507.6563,21.1094 C507.7188,21.5156 507.75,21.6406 507.8906,21.7656 C508.0313,21.9063 508.2656,22.0156 508.4844,22.0156 C508.75,22.0156 509.0156,21.875 509.1875,21.6563 C509.2969,21.5 509.3281,21.3125 509.3281,20.8906 L509.3281,19.4688 C509.3281,19.0313 509.3125,18.9063 509.2188,18.75 C509.0625,18.4844 508.7813,18.3438 508.4844,18.3438 C508.1875,18.3438 507.9844,18.4375 507.7656,18.75 L507.5938,18.6719 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="525.75" y="27.8467">request_handler</text><line style="stroke:#181818;stroke-width:0.5;" x1="435.5" x2="699.5" y1="39" y2="39"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="254" x="440.5" y="55.9951">handle_request: request_response*</text><line style="stroke:#181818;stroke-width:0.5;" x1="435.5" x2="699.5" y1="63.2969" y2="63.2969"/></g><!--MD5=[702c1279a0ca73c1369464ef20e9ba9b]
+reverse link client_request to join_game_request--><g id="link_client_request_join_game_request"><path codeLine="48" d="M263.199,885.219 C220.689,905.841 172.628,929.157 138.02,945.9465 " fill="none" id="client_request-backto-join_game_request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="260.283,878.853,281.333,876.421,266.394,891.449,260.283,878.853" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a6e166aeea3561c9e496da8c1582cad9]
+reverse link client_request to start_game_request--><g id="link_client_request_start_game_request"><path codeLine="49" d="M332.094,896.185 C323.745,913.758 315.045,932.072 308.457,945.9368 " fill="none" id="client_request-backto-start_game_request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="325.824,893.069,340.73,878.008,338.47,899.077,325.824,893.069" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1025fbc298462c0ba96019c11ddc188c]
+reverse link client_request to make_bet_request--><g id="link_client_request_make_bet_request"><path codeLine="50" d="M418.351,891.465 C439.419,910.427 462.083,930.824 478.874,945.9368 " fill="none" id="client_request-backto-make_bet_request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="413.581,896.591,403.398,878.008,422.947,886.185,413.581,896.591" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0c3b78520dfb77f222e49e565c69c371]
+reverse link client_request to action_request--><g id="link_client_request_action_request"><path codeLine="51" d="M456.741,878.027 C537.452,904.31 610.704,923.304 672.335,937.9899 " fill="none" id="client_request-backto-action_request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="454.54,884.672,437.746,871.751,458.932,871.379,454.54,884.672" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ac4ec1fe6b6e982b6f075afe6e29985c]
+reverse link server_response to answer_rqst_response--><g id="link_server_response_answer_rqst_response"><path codeLine="64" d="M566.071,757.251 C566.665,776.617 567.311,797.709 567.788,813.262 " fill="none" id="server_response-backto-answer_rqst_response" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="559.074,757.463,565.458,737.258,573.068,757.034,559.074,757.463" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c880b4ab840ddcd91e6a86e27e132214]
+reverse link server_response to change_gamestate_response--><g id="link_server_response_change_gamestate_response"><path codeLine="65" d="M643.423,746.232 C686.685,768.286 738.761,794.832 775.2,813.408 " fill="none" id="server_response-backto-change_gamestate_response" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="640.132,752.412,625.493,737.092,646.491,739.939,640.132,752.412" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5fd9800ccbda968a49d61fcd248cfbbf]
+link server_response to client_request--><!--MD5=[db13a6cf1ed298339682ec04aaaf9902]
+link request_handler to game_instance--><g id="link_request_handler_game_instance"><path codeLine="73" d="M579.208,71.351 C585.329,87.74 593.235,108.909 601.396,130.762 " fill="none" id="request_handler-game_instance" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[54c3862c781681611072aa407a36a609]
+link request_handler to player_manager--><g id="link_request_handler_player_manager"><path codeLine="74" d="M682.353,71.052 C712.346,84.651 741.543,103.912 760.5,131 C830.174,230.56 818.555,382.066 805.956,461.567 " fill="none" id="request_handler-to-player_manager" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="805.125,466.699,810.5111,458.4534,805.9236,461.7632,802.6138,457.1757,805.125,466.699" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[76f44e30b63ae6973a3c19a998a282d3]
+reverse link request_handler to server_network_manager--><g id="link_request_handler_server_network_manager"><path codeLine="75" d="M547.633,75.845 C539.689,92.15 531.489,112.012 527.5,131 C507.269,227.299 521.23,339.697 536.742,417.814 " fill="none" id="request_handler-backto-server_network_manager" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="549.862,71.344,542.2818,77.6322,547.6419,75.8241,549.45,81.1842,549.862,71.344" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[772384777002e766b7607b6b7a59080a]
+link game_instance to server_network_manager--><g id="link_game_instance_server_network_manager"><path codeLine="76" d="M608.781,358.022 C603.178,376.182 597.405,394.892 591.886,412.779 " fill="none" id="game_instance-to-server_network_manager" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="590.337,417.8,596.8131,410.3798,591.8114,413.0223,589.1689,408.0207,590.337,417.8" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b0f969e2618988ad04e863eddc65f3e8]
+link game_instance to player_manager--><g id="link_game_instance_player_manager"><path codeLine="77" d="M707.081,358.022 C727.467,394.1 749.079,432.346 765.832,461.996 " fill="none" id="game_instance-to-player_manager" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="768.479,466.679,767.5346,456.8755,766.0196,462.3257,760.5694,460.8106,768.479,466.679" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[eff95888325d11d789b4bec9bcfc1eed]
+link request_handler to client_request--><g id="link_request_handler_client_request"><path codeLine="79" d="M544.279,71.207 C532.395,88.232 518.388,110.058 508.5,131 C397.192,366.74 368.377,685.803 361.5,796.626 " fill="none" id="request_handler-client_request" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[3da6066e4af01b0380276ecb8cfaa25e]
+link server_network_manager to server_response--><g id="link_server_network_manager_server_response"><path codeLine="80" d="M562.564,613.271 C563.027,634.941 563.484,656.395 563.839,672.996 " fill="none" id="server_network_manager-server_response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[adb8ea6fc9f03df36303277650d107c6]
+@startuml
+Class server_network_manager{
+    acc: tcp_acceptor
+    player_id_to_address: map
+    address_to_socket: map
+    - -
+    listener_loop(): void
+    handle_incoming_message(): void
+    read_message(): void
+    send_message(): void
+    broadcast_message(): void
+    on_player_left(): void
+}
+
+Class player_manager{
+    player_map: map
+    - -
+    get_player(): bool
+    add_player(): bool
+}
+
+Class game_instance{
+    game_state: GameState
+    - -
+    is_started(): bool  
+    is_finished(): bool
+    start_game(): bool
+    add_player(): bool
+    try_remove_player(): bool
+    hit(): bool
+    stand(): bool
+    split(): bool
+    double_down(): bool
+    insure(): bool
+}
+
+Class request_handler{
+    handle_request: request_response*
+
+}
+
+
+together {
+
+class client_request{
+player_id: string
+RequestType: enum
+}
+client_request <|- - join_game_request
+client_request <|- - start_game_request
+client_request <|- - make_bet_request
+client_request <|- - action_request
+' client_request <|- - hit_request
+' client_request <|- - stand_request
+' client_request <|- - split_request
+' client_request <|- - double_down_request
+' client_request <|- - insure_request
+
+class action_request{
+    action_type: enum{hit, stand, split, double, insure}
+}
+class server_response{
+ResponseType: enum
+}
+server_response <|-down-  answer_rqst_response
+server_response <|-down-  change_gamestate_response
+
+}
+
+server_response .[hidden]. client_request
+
+
+
+request_handler .. game_instance
+request_handler ..> player_manager
+request_handler <.. server_network_manager
+game_instance ..> server_network_manager
+game_instance ..> player_manager
+
+request_handler .right. client_request
+server_network_manager .. server_response
+@enduml
+
+@startuml
+Class server_network_manager{
+    acc: tcp_acceptor
+    player_id_to_address: map
+    address_to_socket: map
+    - -
+    listener_loop(): void
+    handle_incoming_message(): void
+    read_message(): void
+    send_message(): void
+    broadcast_message(): void
+    on_player_left(): void
+}
+
+Class player_manager{
+    player_map: map
+    - -
+    get_player(): bool
+    add_player(): bool
+}
+
+Class game_instance{
+    game_state: GameState
+    - -
+    is_started(): bool  
+    is_finished(): bool
+    start_game(): bool
+    add_player(): bool
+    try_remove_player(): bool
+    hit(): bool
+    stand(): bool
+    split(): bool
+    double_down(): bool
+    insure(): bool
+}
+
+Class request_handler{
+    handle_request: request_response*
+
+}
+
+
+together {
+
+class client_request{
+player_id: string
+RequestType: enum
+}
+client_request <|- - join_game_request
+client_request <|- - start_game_request
+client_request <|- - make_bet_request
+client_request <|- - action_request
+
+class action_request{
+    action_type: enum{hit, stand, split, double, insure}
+}
+class server_response{
+ResponseType: enum
+}
+server_response <|-down-  answer_rqst_response
+server_response <|-down-  change_gamestate_response
+
+}
+
+server_response .[hidden]. client_request
+
+
+
+request_handler .. game_instance
+request_handler ..> player_manager
+request_handler <.. server_network_manager
+game_instance ..> server_network_manager
+game_instance ..> player_manager
+
+request_handler .right. client_request
+server_network_manager .. server_response
+@enduml
+
+PlantUML version 1.2022.3(Tue Mar 29 16:10:57 UTC 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
