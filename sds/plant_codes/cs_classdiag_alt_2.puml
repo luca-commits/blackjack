@@ -57,14 +57,14 @@ client_request <|-- action_request
 ' client_request <|-- double_down_request
 ' client_request <|-- insure_request
 
-class action_request{
-    action_type: enum{hit, stand, split, double, insure}
-}
+' class action_request{
+'    action_type: enum{hit, stand, split, double, insure}
+'}
 class server_response{
 ResponseType: enum
 }
 server_response <|-down-  answer_rqst_response
-server_response <|-down-  change_gamestate_response
+server_response <|-down-  change_gamestate_msg
 
 }
 
