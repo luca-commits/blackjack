@@ -24,6 +24,7 @@ class Player {
 class Card {
   suit: char
   value: int
+  point_value: int
 }
 
 class GameState{
