@@ -29,12 +29,16 @@ group opt [success == True]
   deactivate game_instance
   activate server_network_manager
 
-  group par [for all players in lobby]
+  group par [for all other players in lobby]
     server_network_manager -> ClientNetworkManager: change_gamestate_msg\nvia network
     deactivate server_network_manager
     activate ClientNetworkManager
 
     ClientNetworkManager -> GameControl: updateGameState()
+    activate GameControl
+
+    GameControl -> player: show updated lobby
+    deactivate GameControl
     deactivate ClientNetworkManager
   end
 end

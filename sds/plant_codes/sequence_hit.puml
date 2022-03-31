@@ -48,7 +48,7 @@ group opt [it's the player's turn]
   game_instance -> server_network_manager: broadcast_message()
   activate server_network_manager
 
-  group par [for all players]
+  group par [for all other players]
     server_network_manager -> ClientNetworkManager: change_gamestate_msg\nvia network
     deactivate server_network_manager
     activate ClientNetworkManager
@@ -75,6 +75,6 @@ activate ClientNetworkManager
 ClientNetworkManager -> GameControl: updateGameState()
 activate GameControl
 
-GameControl -> player: do nothing or\nshow message
+GameControl -> player: display move or\nshow message
 deactivate ClientNetworkManager
 deactivate GameControl
