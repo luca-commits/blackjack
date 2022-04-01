@@ -1,13 +1,13 @@
 @startuml
 actor Player_1 as player
 
-player -> GameControl: press 'hit'
+player -> GameControl: press 'stand'
 activate GameControl
 
 GameControl -> ClientNetworkManager: sendRequest()
 activate ClientNetworkManager
 
-ClientNetworkManager -> server_network_manager: action_request with\naction_type="hit"\nvia network
+ClientNetworkManager -> server_network_manager: action_request with\naction_type="stand"\nvia network
 deactivate ClientNetworkManager
 deactivate GameControl
 activate server_network_manager
@@ -15,40 +15,36 @@ activate server_network_manager
 server_network_manager -> request_handler: handle_request()
 activate request_handler
 
-request_handler -> game_instance: hit()
+request_handler -> game_instance: stand()
 activate game_instance
 
 game_instance -> player_manager: get_player()
 activate player_manager
 
-player_manager --> game_instance: true, Player
+player_manager --> game_instance: player
 deactivate player_manager
 
 group opt [it's the player's turn]
-  game_instance -> Player: hit()
-  activate Player
+  game_instance -> game_instance: next_turn()
 
-  Player -> Shoe: pop_card()
-  activate Shoe
+  group opt [round is over]
+    game_instance -> game_instance: compute_dealers_hand()
 
-  Shoe --> Player: card
-  deactivate Shoe
+    group par [for all players]
+      game_instance -> game_instance: check_winner()
 
-  Player -> Player: push card\nto cards
-
-  Player --> game_instance
-  deactivate Player
-
-  game_instance -> Player: get_points()
-  activate Player
-
-  Player --> game_instance: points
-  deactivate Player
-
-  game_instance -> server_network_manager: broadcast_message()
-  activate server_network_manager
+      alt player wins
+        game_instance -> Player: win_round()
+      else player loses
+        game_instance -> Player: lose_round()
+      end
+    end
+  end
 
   group par [for all other players]
+    game_instance -> server_network_manager: broadcast_message()
+    activate server_network_manager
+
     server_network_manager -> ClientNetworkManager: change_gamestate_msg\nvia network
     deactivate server_network_manager
     activate ClientNetworkManager
@@ -56,13 +52,13 @@ group opt [it's the player's turn]
     ClientNetworkManager -> GameControl: updateGameState()
     activate GameControl
 
-    GameControl -> player: display move
-    deactivate GameControl
+    GameControl -> player: display end of\nround screen
     deactivate ClientNetworkManager
+    deactivate GameControl
   end
 end
 
-game_instance --> request_handler:
+game_instance --> request_handler
 deactivate game_instance
 
 request_handler --> server_network_manager: response
@@ -75,6 +71,6 @@ activate ClientNetworkManager
 ClientNetworkManager -> GameControl: updateGameState()
 activate GameControl
 
-GameControl -> player: display move or\nshow message
-deactivate ClientNetworkManager
+GameControl -> player: display end of\nround screen
 deactivate GameControl
+deactivate ClientNetworkManager

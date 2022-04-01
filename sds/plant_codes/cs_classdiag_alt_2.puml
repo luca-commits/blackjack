@@ -50,18 +50,21 @@ RequestType: enum
 client_request <|-- join_game_request
 client_request <|-- start_game_request
 client_request <|-- make_bet_request
-client_request <|-- hit_request
-client_request <|-- stand_request
-client_request <|-- split_request
-client_request <|-- double_down_request
-client_request <|-- insure_request
+client_request <|-- action_request
+' client_request <|-- hit_request
+' client_request <|-- stand_request
+' client_request <|-- split_request
+' client_request <|-- double_down_request
+' client_request <|-- insure_request
 
-
+' class action_request{
+'    action_type: enum{hit, stand, split, double, insure}
+'}
 class server_response{
 ResponseType: enum
 }
 server_response <|-down-  answer_rqst_response
-server_response <|-down-  change_gamestate_response
+server_response <|-down-  change_gamestate_msg
 
 }
 

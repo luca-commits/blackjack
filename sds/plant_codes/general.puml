@@ -16,7 +16,7 @@ class Player {
   is_broke(): bool
   check_if_over_21(): bool
   check_if_less_than_dealer(): int
-  win_round(): void
+  win_round(): void  
   lose_round(): void
   player_name: string
 }
@@ -24,9 +24,12 @@ class Player {
 class Card {
   suit: char
   value: int
+  point_value: int
 }
 
 class GameState{
+  max_number_players: int, set to 5
+  max_number_rounds: int, set to 100
   number_players: int
   players: vector<Player>
   turn: int
