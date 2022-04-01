@@ -67,7 +67,7 @@ Class ClientNetworkManager{
     is_connected: bool
     connection: tcp_connector 
     --
-    init(): int
+    init(): void
     sendRequest(): void
     parseResponse(): void 
 }
@@ -76,7 +76,7 @@ Class ResponseListenerThread{
     connector: tcp_connector
     -- 
     entry(): void
-    outputError: void
+    outputError(): void
 }
 
 

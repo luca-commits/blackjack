@@ -18,6 +18,7 @@ Class player_manager{
     --
     get_player(): bool
     add_player(): bool
+    remove_player(): bool
 }
 
 Class game_instance{
@@ -36,7 +37,8 @@ Class game_instance{
 }
 
 Class request_handler{
-    handle_request: request_response*
+    --
+    handle_request(): request_response*
 
 }
 
