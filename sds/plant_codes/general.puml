@@ -19,6 +19,7 @@ class Player {
   win_round(): void  
   lose_round(): void
   player_name: string
+  player_id: int
 }
   
 class Card {
