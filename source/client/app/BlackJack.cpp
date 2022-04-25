@@ -1,8 +1,8 @@
-#include "Lama.h"
+#include "BlackJack.hpp"
 
 
 // Application entry point
-bool Lama::OnInit()
+bool BlackJack::OnInit()
 {
     // Allow loading of JPEG  and PNG image files
     wxImage::AddHandler(new wxJPEGHandler());
