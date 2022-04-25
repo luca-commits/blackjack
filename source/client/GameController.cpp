@@ -122,10 +122,6 @@ void GameController::startGame() {
 
 
 
-
-
-
-
 void GameController::hit(){
 // TODO
     
@@ -136,19 +132,16 @@ void GameController::stand(){
 }
 
 void GameController::split(){
-
+//TODO
 }
 
 void GameController::double_down(){
-
+//TODO
 }
 
 void GameController::insure(){
-    
+//TODO
 }
-
-
-
 
 
 
