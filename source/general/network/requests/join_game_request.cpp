@@ -2,7 +2,7 @@
 
 #ifdef BLACKJACK_SERVER //what does this do?
 #include <string>
-#include "../../../server/game_instance_manager.hpp"
+#include "../../../server/game_instance_manager.hpp" //not planned for now ?
 #include "../../../server/player_manager.hpp"
 #include "../../../server/game_instance.hpp"
 #endif
