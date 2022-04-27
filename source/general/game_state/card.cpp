@@ -1,6 +1,6 @@
 #include "card.hpp"
 
-#include "../exceptions/BlackjackException.h"
+#include "../exceptions/BlackjackException.hpp"
 
 card::card(std::string id) : unique_serializable(id) { }
 
