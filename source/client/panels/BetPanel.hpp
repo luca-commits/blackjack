@@ -2,7 +2,7 @@
 #define BETPANEL_HPP
 
 
-class GameController {
+class BetPanel {
 
 public:
   int getBetSize();
