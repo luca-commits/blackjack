@@ -124,7 +124,7 @@ void GameController::updateGameState(game_state* newGameState) {
 void GameController::hit(){
   action_request hit_request = action_request(
       GameController::_currentGameState->get_id(),
-      GameController::_me->get_id(), GamdeController::_me->get_id(), "hit");
+      GameController::_me->get_id(), "hit");
   ClientNetworkManager::send_request(hit_request);
 }
 
@@ -132,14 +132,14 @@ void GameController::stand(){
 // TODO
   action_request hit_request = action_request(
       GameController::_currentGameState->get_id(),
-      GameController::_me->get_id(), GamdeController::_me->get_id(), "stand");
+      GameController::_me->get_id(), "stand");
   ClientNetworkManager::send_request(hit_request);
 }
 
 void GameController::split(){
   action_request hit_request = action_request(
       GameController::_currentGameState->get_id(),
-      GameController::_me->get_id(), GamdeController::_me->get_id(), "split");
+      GameController::_me->get_id(), "split");
   ClientNetworkManager::send_request(hit_request);
 //TODO
 }
@@ -147,7 +147,7 @@ void GameController::split(){
 void GameController::double_down(){
   action_request hit_request = action_request(
       GameController::_currentGameState->get_id(),
-      GameController::_me->get_id(), GamdeController::_me->get_id(), "double_down");
+      GameController::_me->get_id(), "double_down");
   ClientNetworkManager::send_request(hit_request);
 //TODO
 }
@@ -155,7 +155,7 @@ void GameController::double_down(){
 void GameController::insure(){
   action_request hit_request = action_request(
       GameController::_currentGameState->get_id(),
-      GameController::_me->get_id(), GamdeController::_me->get_id(), "insure");
+      GameController::_me->get_id(), "insure");
   ClientNetworkManager::send_request(hit_request);
 //TODO
 }
