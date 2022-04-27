@@ -181,7 +181,7 @@ void GameController::showStatus(const std::string& message) {
 
 void GameController::showNewRoundMessage(game_state* oldGameState, game_state* newGameState) {
     std::string title = "Round Completed";
-    std::string message = "The players gained the following minus points:\n";
+    std::string message = "The players gained/lost the following amounts of money:\n";
     std::string buttonLabel = "Start next round";
 
     // add the point differences of all players to the messages
@@ -217,14 +217,14 @@ void GameController::showGameOverMessage() {
     // sort players by score
     std::vector<player*> players = GameController::_currentGameState->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {
-        return a->get_score() < b->get_score();
+        return a->get_points() < b->get_points();
     });
 
     // list all players
     for(int i = 0; i < players.size(); i++) {
 
         player* playerState = players.at(i);
-        std::string scoreText = std::to_string(playerState->get_score());
+        std::string scoreText = std::to_string(playerState->get_points());
 
         // first entry is the winner
         std::string winnerText = "";
