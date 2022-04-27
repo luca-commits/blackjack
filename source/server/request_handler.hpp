@@ -1,10 +1,9 @@
 #ifndef REQUEST_HANDLER_HPP
 #define REQUEST_HANDLER_HPP
 
-//include the correct responses!!!!!
-#include "../common/network/responses/server_response.h"
-#include "../common/network/requests/client_request.h"
-#include "../common/network/responses/request_response.h"
+#include "../common/network/responses/server_response.hpp"
+#include "../common/network/requests/client_request.hpp"
+#include "../common/network/responses/answer_rqt_response.hpp"
 
 class request_handler {
 public:

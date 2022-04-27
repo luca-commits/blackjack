@@ -6,13 +6,13 @@
 #include "player_manager.hpp"
 #include "game_instance.hpp"
 
-//include the correct requests !!!!
-#include "../common/network/requests/join_game_request.h"
-#include "../common/network/requests/draw_card_request.h"
-#include "../common/network/requests/play_card_request.h"
+#include "../common/network/requests/start_game_request.hpp"
+#include "../common/network/requests/join_game_request.hpp"
+#include "../common/network/requests/action_request.hpp"
+#include "../common/network/requests/make_bet_request.hpp"
 
 
-request_response* request_handler::handle_request(const client_request* const req) {
+answer_rqst_response* request_handler::handle_request(const client_request* const req) {
 
     // Prepare variables that are used by every request type
     player* player;
@@ -22,13 +22,12 @@ request_response* request_handler::handle_request(const client_request* const re
     // Get common properties of requests
     RequestType type = req->get_type();
     std::string req_id = req->get_req_id();
-    std::string game_id = req->get_game_id(); //not needed?
+    std::string game_id = req->get_game_id();
     std::string player_id = req->get_player_id();
 
 
     // Switch behavior according to request type
     switch(type) {
-
         // ##################### JOIN GAME #####################  //
         case RequestType::join_game: {
             
