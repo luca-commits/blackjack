@@ -6,7 +6,7 @@
 //adapt these includes !
 #include "../../../../rapidjson/include/rapidjson/document.h"
 #include "../../serialization/serializable.h"
-#include "../../exceptions/LamaException.h"
+#include "../../exceptions/BlackjackException.hpp"
 #include "../../serialization/uuid_generator.h"
 #include "../../serialization/json_utils.h"
 

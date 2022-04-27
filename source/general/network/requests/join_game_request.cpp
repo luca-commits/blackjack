@@ -38,6 +38,6 @@ join_game_request* join_game_request::from_json(const rapidjson::Value& json) {
     if (json.HasMember("player_name")) {
         return new join_game_request(client_request::extract_base_class_properties(json), json["player_name"].GetString());
     } else {
-        throw LamaException("Could not parse join_game_request from json. player_name is missing.");
+        throw BlackjackException("Could not parse join_game_request from json. player_name is missing.");
     }
 }

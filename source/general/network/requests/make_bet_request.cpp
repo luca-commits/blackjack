@@ -23,7 +23,7 @@ make_bet_request* make_bet_request::from_json(const rapidjson::Value &json) {
     if (json.HasMember("bet") ) {
         return new make_bet_request(props, json["bet"].GetInt());
     } else {
-        throw LamaException("Could not find 'bet' in make_bet_request");
+        throw BlackjackException("Could not find 'bet' in make_bet_request");
     }
 }
 
