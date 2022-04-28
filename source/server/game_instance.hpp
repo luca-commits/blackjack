@@ -5,9 +5,8 @@
 #include <string>
 #include <mutex>
 
-//adapt the includes!!!!
-#include "../common/game_state/player/player.h"
-#include "../common/game_state/game_state.h"
+#include "../general/game_state/player/player.hpp"
+#include "../general/game_state/game_state.hpp"
 
 class game_instance {
 private:
@@ -22,7 +21,7 @@ public:
         }
         _game_state = nullptr;
     }
-    //std::string get_id(); probably not needed in our case?
+    std::string get_id();
 
     game_state* get_game_state();
 
@@ -32,13 +31,11 @@ public:
 
     // game update functions
     bool start_game(player* player, std::string& err);
-    bool add_player(player* new_player, std::string& err);
+    bool try_add_player(player* new_player, std::string& err);
     bool try_remove_player(player* player, std::string& err);
     bool hit(player* player, std::string& err);
     bool stand(player* player, std::string& err);
-    bool split(player* player, std::string& err);
-    bool double_down(player* player, std::string& err);
-    bool insure(player* player, std::string& err);
+    bool make_bet(player* player, const int& bet_size, std::string& err);
 };
 
 #endif

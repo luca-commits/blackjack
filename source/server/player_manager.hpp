@@ -8,14 +8,17 @@
 #include "../general/game_state/player/player.hpp" //adapt this line to where player.hpp will be
 
 class player_manager {
+
 private:
+
     inline static std::shared_mutex _rw_lock;
     static std::unordered_map<std::string, player*> _players_lut;
 
 public:
-    static bool get_player(const std::string& player_id, player*& player_ptr);
-    static bool add_player(std::string name, const std::string& player_id, player*& player_ptr);
+    static bool try_get_player(const std::string& player_id, player*& player_ptr);
+    static bool add_or_get_player(std::string name, const std::string& player_id, player*& player_ptr);
     static bool remove_player(const std::string& player_id, player*& player);
 };
+
 
 #endif

@@ -2,7 +2,7 @@
 
 #include "server_network_manager.hpp"
 //adapt the includes !!!
-#include "../common/network/responses/full_state_response.h"
+#include "../general/network/responses/change_gamestate_msg.hpp"
 
 
 game_instance::game_instance() {
@@ -29,7 +29,8 @@ bool game_instance::is_finished() {
     return _game_state->is_finished();
 }
 
-//all functions below use id, do we want to have this?
+//ALL FUNCTIONS BELOW REQUIRE ADAPTATION !!!
+
 bool game_instance::start_game(player* player, std::string &err) {
     modification_lock.lock();
     if (_game_state->start_game(err)) {
@@ -87,45 +88,6 @@ bool game_instance::hit(player* player, std::string& err) {
 bool game_instance::stand(player* player, std::string& err) {
     modification_lock.lock();
     if (_game_state->stand(player, err)) {
-        // send state update to all other players
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
-        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
-        modification_lock.unlock();
-        return true;
-    }
-    modification_lock.unlock();
-    return false;
-}
-
-bool game_instance::split(player* player, std::string& err) {
-    modification_lock.lock();
-    if (_game_state->split(player, err)) {
-        // send state update to all other players
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
-        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
-        modification_lock.unlock();
-        return true;
-    }
-    modification_lock.unlock();
-    return false;
-}
-
-bool game_instance::double_down(player* player, std::string& err) {
-    modification_lock.lock();
-    if (_game_state->double_down(player, err)) {
-        // send state update to all other players
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
-        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
-        modification_lock.unlock();
-        return true;
-    }
-    modification_lock.unlock();
-    return false;
-}
-
-bool game_instance::insure(player* player, std::string& err) {
-    modification_lock.lock();
-    if (_game_state->insure(player, err)) {
         // send state update to all other players
         full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
         server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
