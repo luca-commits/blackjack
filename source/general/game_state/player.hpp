@@ -14,8 +14,6 @@ private:
     serializable_value<std::string>* _player_name;
     serializable_value<int>* _bet_size;
     serializable_value<int>* _money;
-    serializable_value<bool>* _has_insurance;
-    serializable_value<bool>* _has_doubled_down;
     std::vector<card*> _hand;
     
 
@@ -30,8 +28,6 @@ private:
            serializable_value<std::string>* player_name,
            serializable_value<int>* bet_size,
            serializable_value<int>* money,
-           serializable_value<bool>* has_insurance,
-           serializable_value<bool>* has_doubled_down,
            std::vector<card*> hand);
 
 public:
@@ -50,28 +46,24 @@ public:
     int get_nof_cards() const noexcept;     // return number of cards player has on hand
     int get_bet_size() const noexcept;
     int get_money() const noexcept;
-    bool is_insured() const noexcept;
-    bool is_doubled_down() const noexcept;
     std::vector<card*> get_hand() const noexcept;
     std::string get_player_name() const noexcept;
 
 #ifdef BLACKJACK_SERVER
     // state update functions
-    bool add_card(card* card, std::string& err);
-    void wrap_up_round(std::string& err); //???
-    void setup_round(std::string& err);   //???
+    void add_card(card* card);
+    void wrap_up_round(int dealer_points, std::string& err);
+    void setup_round(std::string& err);
 
-    // I don't know which of those functions we will need in the end, implementing all of them
+    // I don't know which of those functions we will really need
     void hit();
     void stand();
-    void take_insurance();
-    void double_down();
     int get_points();
     bool is_broke();
     bool check_if_over_21();
-    bool check_if_less_than_dealer();
     void won_round();
     void lost_round();
+    void draw_round();
 
 #endif
 

@@ -6,35 +6,26 @@ player::player(std::string name) : unique_serializable() {
     this->_player_name = new serializable_value<std::string>(name);
     this->_bet_size = new serializable_value<int>(0);
     this->_money = new serializable_value<int>(100);                    // they get $100 at the beginning of the game!
-    this->_has_insurance = new serializable_value<bool>(false);
-    this->_has_doubled_down = new serializable_value<bool>(false);
     this->_hand = new std::vector<card*>();
 }
 
 player::player(std::string id, serializable_value<std::string>* name, serializable_value<int>* bet_size, \
-            serializable_value<int>* money, serializable_value<bool>* has_insurance, \
-            serializable_value<bool>* has_doubled_down, std::vector<card*> hand) :
+            serializable_value<int>* money, std::vector<card*> hand) :
         unique_serializable(id),
         _player_name(name),
         _bet_size(bet_size),
         _money(money),
-        _has_insurance(has_insurance),
-        _has_doubled_down(has_doubled_down),
-        _hand(hand);
+        _hand(hand)
 { }
 
 player::~player() {
     if (_player_name != nullptr) {
         delete _hand;
-        delete _has_doubled_down;
-        delete _has_insurance;
         delete _money;
         delete _bet_size;
         delete _player_name;
 
         _hand = nullptr;
-        _has_doubled_down = nullptr;
-        _has_insurance = nullptr;
         _money = nullptr;
         _bet_size = nullptr;
         _player_name = nullptr;
@@ -48,8 +39,6 @@ player::player(std::string id, std::string name) :
     this->_player_name = new serializable_value<std::string>(name);
     this->_bet_size = new serializable_value<int>(0);
     this->_money = new serializable_value<int>(100);                    // they get $100 at the beginning of the game!
-    this->_has_insurance = new serializable_value<bool>(false);
-    this->_has_doubled_down = new serializable_value<bool>(false);
     this->_hand = new std::vector<card*>();
 }
 
@@ -75,18 +64,212 @@ int player::get_money() const noexcept {
     return this->_money->get_value();
 }
 
-bool player::is_insured() const noexcept {
-    return this->_has_insurance->get_value();
-}
-
-bool player::is_doubled_down() const noexcept {
-    return this->_has_doubled_down->get_value();
-}
-
 std::vector<card*> player::get_hand() const noexcept {
     return this->_hand;
 }
 
 std::string get_player_name() const noexcept {
     return this->_player_name->get_value();
+}
+
+#ifdef BLACKJACK_SERVER
+
+void player::add_card(card* card) {
+    _hand.push_back(card);
+}
+
+// should make_bet be already called here ?
+void setup_round(std::string& err) {
+    _bet_size->set_value(0);
+    for (int i = 0; i < _hand.size(); i++) {
+        delete _hand[i];
+    }
+    _hand.clear();
+}
+
+// based on how many points dealer has, chooses to call won_round, lost_round or draw round
+bool wrap_up_round(int dealer_points, std::string& err) {
+    int player_points = this->get_points();
+    if(player_points > dealer_points) {
+        this->won_round();
+    } else if(player_points = dealer_points) {
+        this->draw_round();
+    } else if(player_points < dealer_points) {
+        this->lost_round();
+    } else {
+        err = "Something went wrong during wrapping round for player " + this->player_name;
+    }
+}
+
+// TODO
+void hit() {
+
+}
+
+// TODO
+void stand() {
+
+}
+
+bool make_bet(int bet_size) {
+    if(bet_size > this->get_money()) {
+        // error message that says bet cannot be smaller than holdings --> try other bet
+        return false;
+    } else {
+        int holdings = this->get_money();
+        _bet_size->set_value(bet_size);
+        _money->set_value(holdings - bet_size);
+        return true;
+    }
+}
+
+int get_points() {
+    int point_sum = 0;
+    int ace_counter = 0;
+    for(auto card : _hand) {
+        int value = card->get_value();
+        switch(value):
+            case 1:
+                ace_counter += 1;
+                break;
+            case 2:
+                point_sum += 2;
+                break;
+            case 3:
+                point_sum += 3;
+                break;
+            case 4:
+                point_sum += 4;
+                break;
+            case 5:
+                point_sum += 5;
+                break;
+            case 6:
+                point_sum += 6;
+                break;
+            case 7:
+                point_sum += 7;
+                break;
+            case 8:
+                point_sum += 8;
+                break;
+            case 9:
+                point_sum += 9;
+                break;
+            case 10:
+                point_sum += 10;
+                break;
+            case 11:
+                point_sum += 10;
+                break;
+            case 12:
+                point_sum += 10;
+                break;
+            case 13:
+                point_sum += 10;
+                break;
+            default:
+                // how to return an error form here ?
+                break;
+    }
+
+    if(ace_counter == 1) {
+        if(point_sum + 11 <= 21) {
+            point_sum += 11;
+        } else {
+            point_sum += 1;
+        }
+    } else {
+        if(point_sum + 11 <= 21 - (ace_counter - 1)) {
+            point_sum += 11;
+            point_sum = point_sum + (ace_counter - 1);
+        } else {
+            point_sum += ace_counter;
+        }
+    }
+
+    return point_sum;
+}
+
+bool is_broke() {
+    if(_money->get_value() <= 0)
+        return true;
+    else
+        return false;
+}
+
+bool check_if_over_21() {
+    int points = this->get_points();
+    if(points > 21)
+        return true;
+    else
+        return false;
+}
+
+void won_round() {
+    int winnings = this->get_bet_size();
+    int holdings = this->get_money();
+    _money->set_value(holdings + 2 * winnings);
+    _bet_size->set_value(0);
+}
+
+void lost_round() {
+    _bet_size->set_value(0);
+}
+
+void draw_round() {
+    int winnings = this->get_bet_size();
+    int holdings = this->get_money();
+    _money->set_value(holdings + winnings);
+    _bet_size->set_value(0);
+}
+
+#endif
+
+// TODO
+void player::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const {
+    unique_serializable::write_into_json(json, allocator);
+
+    rapidjson::Value id_val(_id.c_str(), allocator);
+    json.AddMember("id", id_val, allocator);
+
+    rapidjson::Value name_val(rapidjson::kObjectType);
+    _player_name->write_into_json(name_val, allocator);
+    json.AddMember("player_name", name_val, allocator);
+
+    rapidjson::Value bet_size_val(rapidjson::kObjectType);
+    _bet_size->write_into_json(bet_size_val, allocator);
+    json.AddMember("bet_size", bet_size_val, allocator);
+
+    rapidjson::Value money_val(rapidjson::kObjectType);
+    _money->write_into_json(money_val, allocator);
+    json.AddMember("money", money_val, allocator);
+
+    // no idea if this will work
+    rapidjson::Value hand_val(rapidjson::kObjectType);
+    _hand->write_into_json(hand_val, allocator);
+    json.AddMember("hand", vector_utils::serialize_vector(_hand, allocator), allocator);
+}
+
+// TODO
+player *player::from_json(const rapidjson::Value &json) {
+    if (json.HasMember("id")
+        && json.HasMember("player_name")
+        && json.HasMember("bet_size")
+        && json.HasMember("money")
+        && json.HasMember("hand"))
+    {
+        std::vector<card*> deserialized_hand = std::vector<card*>();
+        for (auto &serialized_card : json["hand"].GetArray()) {
+            deserialized_hand.push_back(card::from_json(serialized_card.GetObject()));
+        }
+        return new player(
+                json["id"].GetString(),
+                serializable_value<std::string>::from_json(json["player_name"].GetObject()),
+                serializable_value<int>::from_json(json["bet_size"].GetObject()),
+                serializable_value<int>::from_json(json["money"].GetObject()),
+                deserialized_hand); // will this work ? I have no idea
+    } else {
+        throw BlackjackException("Failed to deserialize player from json. Required json entries were missing.");
+    }
 }
