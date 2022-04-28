@@ -1,7 +1,8 @@
 #include "client_request.hpp"
 #include "join_game_request.hpp"
 #include "start_game_request.hpp"
-#include "action_request.hpp"
+#include "hit_request.hpp"
+#include "stand_request.hpp"
 #include "make_bet_request.hpp"
 
 #include <iostream>
@@ -11,14 +12,16 @@ const std::unordered_map<std::string, RequestType> client_request::_string_to_re
         {"join_game", RequestType::join_game},
         {"start_game", RequestType::start_game},
         {"make_bet", RequestType::make_bet},
-        {"action", RequestType::action}
+        {"hit", RequestType::hit},
+        {"stand", RequestType::stand}
 };
 // for serialization
 const std::unordered_map<RequestType, std::string> client_request::_request_type_to_string = {
         {RequestType::join_game, "join_game"},
         {RequestType::start_game, "start_game"},
         {RequestType::make_bet, "make_bet"},
-        {RequestType::action, "action"}
+        {RequestType::hit, "hit"},
+        {RequestType::stand, "stand"}
 };
 
 // protected constructor. only used by subclasses
@@ -26,7 +29,7 @@ client_request::client_request(client_request::base_class_properties props) :
         _type(props._type),
         _req_id(props._req_id),
         _player_id(props._player_id),
-        _game_id(props._game_id) //needed ?
+        _game_id(props._game_id)
 { }
 
 
@@ -34,13 +37,13 @@ client_request::client_request(client_request::base_class_properties props) :
 client_request::base_class_properties client_request::extract_base_class_properties(const rapidjson::Value& json) {
     if (json.HasMember("player_id") && json.HasMember("game_id") && json.HasMember("req_id")) { //game_id ?
         std::string player_id = json["player_id"].GetString();
-        std::string game_id = json["game_id"].GetString(); //game_id ?
+        std::string game_id = json["game_id"].GetString();
         std::string req_id = json["req_id"].GetString(); //what is this ?
         return create_base_class_properties(
                 client_request::_string_to_request_type.at(json["type"].GetString()),
                 req_id,
                 player_id,
-                game_id //game_id ?
+                game_id
         );
     }
     else
@@ -53,7 +56,7 @@ client_request::base_class_properties client_request::create_base_class_properti
         RequestType type,
         std::string req_id,
         std::string& player_id,
-        std::string& game_id) //game_id ?
+        std::string& game_id)
 {
     client_request::base_class_properties res;
     res._player_id = player_id;
@@ -88,8 +91,11 @@ client_request* client_request::from_json(const rapidjson::Value &json) {
         if (request_type == RequestType::make_bet) {
             return make_bet_request::from_json(json);
         }
-        else if (request_type == RequestType::action) {
-            return action_request::from_json(json);
+        else if (request_type == RequestType::hit) {
+            return hit_request::from_json(json);
+        }
+        else if (request_type == RequestType::stand) {
+            return stand_request::from_json(json);
         }
         else if (request_type == RequestType::join_game) {
             return join_game_request::from_json(json);
@@ -105,5 +111,5 @@ client_request* client_request::from_json(const rapidjson::Value &json) {
 
 
 std::string client_request::to_string() const {
-    return "client_request of type " + client_request::_request_type_to_string.at(_type) + " for playerId " + _player_id + " and gameId " + _game_id; //game_id ?
+    return "client_request of type " + client_request::_request_type_to_string.at(_type) + " for playerId " + _player_id + " and gameId " + _game_id;
 }

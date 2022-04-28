@@ -3,7 +3,6 @@
 
 #include <string>
 #include <unordered_map>
-//adapt these includes !
 #include "../../../../rapidjson/include/rapidjson/document.h"
 #include "../../serialization/serializable.h"
 #include "../../exceptions/BlackjackException.hpp"
@@ -17,7 +16,8 @@ enum RequestType {
     join_game,
     start_game,
     make_bet,
-    action
+    hit,
+    stand
 };
 
 class client_request : public serializable {
@@ -27,13 +27,13 @@ protected:
         RequestType _type;
         std::string _req_id;
         std::string _player_id;
-        std::string _game_id; //probably not needed?
+        std::string _game_id;
     };
 
     RequestType _type;
     std::string _req_id;
     std::string _player_id;
-    std::string _game_id; //probably not needed ?
+    std::string _game_id;
 
     explicit client_request(base_class_properties); // base constructor
     static base_class_properties create_base_class_properties(RequestType type, std::string req_id, std::string& player_id, std::string& game_id); //game_id ?
@@ -51,7 +51,7 @@ public:
 
     [[nodiscard]] RequestType get_type() const { return this->_type; }
     [[nodiscard]] std::string get_req_id() const { return this->_req_id; }
-    [[nodiscard]] std::string get_game_id() const { return this->_game_id; } //game_id ?
+    [[nodiscard]] std::string get_game_id() const { return this->_game_id; }
     [[nodiscard]] std::string get_player_id() const { return this->_player_id; }
 
     // Tries to create the specific client_request from the provided json.
