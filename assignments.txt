@@ -1,0 +1,3 @@
+klappi -> buildOthers
+noe -> buildRoundCounter, buildThisPlayr
+luca -> buildShoe, buildDealer
