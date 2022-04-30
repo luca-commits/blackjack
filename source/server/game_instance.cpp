@@ -13,6 +13,14 @@ game_state *game_instance::get_game_state() {
     return _game_state;
 }
 
+// We will need is_full(), is_started() and is_finished() in game_state
+// although it is NOT in our SDS!s
+
+
+std::string game_instance::get_id() {
+    return _game_state->get_id();
+}
+
 bool game_instance::is_player_allowed_to_play(player *player) {
     return _game_state->is_allowed_to_play_now(player);
 }
@@ -29,13 +37,14 @@ bool game_instance::is_finished() {
     return _game_state->is_finished();
 }
 
-//ALL FUNCTIONS BELOW REQUIRE ADAPTATION !!!
+// ALL FUNCTIONS BELOW REQUIRE ADAPTATION !!! Functions used in
+// if-statements are not in SDS but will probably need to be implemented
 
 bool game_instance::start_game(player* player, std::string &err) {
     modification_lock.lock();
-    if (_game_state->start_game(err)) {
+    if (_game_state->start_game(err)) { // ADAPT THIS LINE!
         // send state update to all other players
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
+        change_gamestate_msg state_update_msg = change_gamestate_msg(this->get_id(), *_game_state);
         server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
         modification_lock.unlock();
         return true;
@@ -46,10 +55,10 @@ bool game_instance::start_game(player* player, std::string &err) {
 
 bool game_instance::add_player(player *new_player, std::string &err) {
     modification_lock.lock();
-    if (_game_state->add_player(new_player, err)) {
+    if (_game_state->add_player(new_player, err)) { // ADAPT THIS LINE!
         new_player->set_game_id(get_id());
         // send state update to all other players
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
+        change_gamestate_msg state_update_msg = change_gamestate_msg(this->get_id(), *_game_state);
         server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), new_player);
         modification_lock.unlock();
         return true;
@@ -60,10 +69,10 @@ bool game_instance::add_player(player *new_player, std::string &err) {
 
 bool game_instance::try_remove_player(player *player, std::string &err) {
     modification_lock.lock();
-    if (_game_state->remove_player(player, err)) {
+    if (_game_state->remove_player(player, err)) { // ADAPT THIS LINE!
         player->set_game_id("");
         // send state update to all other players
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
+        change_gamestate_msg state_update_msg = change_gamestate_msg(this->get_id(), *_game_state);
         server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
         modification_lock.unlock();
         return true;
@@ -74,9 +83,9 @@ bool game_instance::try_remove_player(player *player, std::string &err) {
 
 bool game_instance::hit(player* player, std::string& err) {
     modification_lock.lock();
-    if (_game_state->hit(player, err)) {
+    if (_game_state->hit(player, err)) { // ADAPT THIS LINE!
         // send state update to all other players
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
+        change_gamestate_msg state_update_msg = change_gamestate_msg(this->get_id(), *_game_state);
         server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
         modification_lock.unlock();
         return true;
@@ -87,9 +96,21 @@ bool game_instance::hit(player* player, std::string& err) {
 
 bool game_instance::stand(player* player, std::string& err) {
     modification_lock.lock();
-    if (_game_state->stand(player, err)) {
+    if (_game_state->stand(player, err)) { // ADAPT THIS LINE!
         // send state update to all other players
-        full_state_response state_update_msg = full_state_response(this->get_id(), *_game_state);
+        change_gamestate_msg state_update_msg = change_gamestate_msg(this->get_id(), *_game_state);
+        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
+        modification_lock.unlock();
+        return true;
+    }
+    modification_lock.unlock();
+    return false;
+}
+
+bool game_instance::make_bet(player *player, int bet_size, std::string& err) {
+    modification_lock.lock();
+    if (_game_state->make_bet(player, bet_size, err)) { // ADAPT THIS LINE!
+        change_gamestate_msg state_update_msg = change_gamestate_msg(this->get_id(), *_game_state);
         server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), player);
         modification_lock.unlock();
         return true;

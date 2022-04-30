@@ -226,7 +226,6 @@ void draw_round() {
 
 #endif
 
-// TODO
 void player::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const {
     unique_serializable::write_into_json(json, allocator);
 
@@ -251,7 +250,6 @@ void player::write_into_json(rapidjson::Value& json, rapidjson::Document::Alloca
     json.AddMember("hand", vector_utils::serialize_vector(_hand, allocator), allocator);
 }
 
-// TODO
 player *player::from_json(const rapidjson::Value &json) {
     if (json.HasMember("id")
         && json.HasMember("player_name")
