@@ -15,11 +15,16 @@ public:
 
 private:
 
-    void buildOtherPlayerHand(game_state* gameState, player* otherPlayer, double playerAngle);
-    void buildOtherPlayerLabels(game_state* gameState, player* otherPlayer, double playerAngle, int side);
-    void buildCardPiles(game_state* gameState, player *me);
+    void buildOthers(game_state* gameState, player* otherPlayer, double playerAngle);
+    //void buildGameController();  //change this from sds
+    void buildOtherPlayerLabels(game_state *gameState, player *otherPlayer,
+                                double playerAngle, int side);
+    void buildRoundCounter();
+    void buildCardPiles(game_state *gameState, player *me);
     void buildTurnIndicator(game_state* gameState, player* me);
-    void buildThisPlayer(game_state* gameState, player* me);
+    void buildThisPlayer(game_state* gameState, player* me); //in sds this is build myself
+    void buildShoe();
+    void buildDealer();
 
     wxStaticText* buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold = false);
 
