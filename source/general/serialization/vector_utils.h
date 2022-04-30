@@ -9,7 +9,7 @@
 #include <vector>
 #include "serializable.h"
 #include "unique_serializable.h"
-#include "../../rapidjson/include/rapidjson/document.h"
+#include "../../../rapidjson/include/rapidjson/document.h"
 
 
 namespace vector_utils {

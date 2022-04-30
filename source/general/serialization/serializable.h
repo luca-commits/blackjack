@@ -6,7 +6,7 @@
 #ifndef LAMA_SERIALIZABLE_H
 #define LAMA_SERIALIZABLE_H
 
-#include "../../rapidjson/include/rapidjson/document.h"
+#include "../../../rapidjson/include/rapidjson/document.h"
 
 class serializable {
 public:

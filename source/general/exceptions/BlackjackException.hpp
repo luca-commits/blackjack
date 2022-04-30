@@ -1,3 +1,6 @@
+#ifndef BLACKJACKEXCEPTION_HPP
+#define BLACKJACKEXCEPTION_HPP
+
 #include <string>
 
 class BlackjackException : public std::exception {

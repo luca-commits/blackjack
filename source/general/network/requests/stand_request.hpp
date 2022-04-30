@@ -17,7 +17,7 @@ private:
 public:
     stand_request(std::string game_id, std::string player_id);
     virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
-    static start_game_request* from_json(const rapidjson::Value& json);
+    static stand_request* from_json(const rapidjson::Value& json);
 };
 
 #endif
