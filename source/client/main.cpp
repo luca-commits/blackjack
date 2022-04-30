@@ -20,7 +20,7 @@ K->
 connectionPael
 maingamep
 GUI Window
-:::
+ Client Network Mnager
 
 
 header and skeleton
