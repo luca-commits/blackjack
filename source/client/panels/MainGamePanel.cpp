@@ -56,7 +56,7 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 }
 
 
-void MainGamePanel::buildOtherPlayerHand(game_state* gameState, player* otherPlayer, double playerAngle) {
+void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle) {
 
     // define the ellipse which represents the virtual player circle
     double horizontalRadius = MainGamePanel::otherPlayerHandDistanceFromCenter * 1.4; // 1.4 to horizontally elongate players' circle
