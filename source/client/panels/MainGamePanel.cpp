@@ -90,137 +90,6 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 }
 
 
-void MainGamePanel::buildOtherPlayerLabels(game_state* gameState, player* otherPlayer, double playerAngle, int side) {
-
-    long textAlignment = wxALIGN_CENTER;
-    int labelOffsetX = 0;
-
-    if(side < 0) { // right side
-        textAlignment = wxALIGN_LEFT;
-        labelOffsetX = 85;
-
-    } else if(side > 0) { // left side
-        textAlignment = wxALIGN_RIGHT;
-        labelOffsetX = -85;
-    }
-
-    // define the ellipse which represents the virtual player circle
-    double horizontalRadius = MainGamePanel::otherPlayerLabelDistanceFromCenter * 1.25; // 1.25 to horizontally elongate players' circle (but less than the hands' circle)
-    double verticalRadius = MainGamePanel::otherPlayerLabelDistanceFromCenter;
-
-    // get this player's position on that ellipse
-    wxPoint labelPosition = MainGamePanel::tableCenter;
-    labelPosition += this->getPointOnEllipse(horizontalRadius, verticalRadius, playerAngle);
-    labelPosition += wxSize(labelOffsetX, 0);
-
-    // if game has not yet started, we only have two lines
-    if(!gameState->is_started()) {
-        this->buildStaticText(
-                otherPlayer->get_player_name(),
-                labelPosition + wxSize(-100, -18),
-                wxSize(200, 18),
-                textAlignment,
-                true
-        );
-        this->buildStaticText(
-                "waiting...",
-                labelPosition + wxSize(-100, 0),
-                wxSize(200, 18),
-                textAlignment
-        );
-
-    } else {
-        this->buildStaticText(
-                otherPlayer->get_player_name(),
-                labelPosition + wxSize(-100, -27),
-                wxSize(200, 18),
-                textAlignment,
-                true
-        );
-        this->buildStaticText(
-                std::to_string(otherPlayer->get_score()) + " minus points",
-                labelPosition + wxSize(-100, -9),
-                wxSize(200, 18),
-                textAlignment
-        );
-
-        // Show other player's status label
-        std::string statusText = "waiting...";
-        bool bold = false;
-        if(otherPlayer->has_folded()) {
-            statusText = "Folded!";
-        } else if(otherPlayer == gameState->get_current_player()) {
-            statusText = "their turn";
-            bold = true;
-        }
-        this->buildStaticText(
-                statusText,
-                labelPosition + wxSize(-100, 9),
-                wxSize(200, 18),
-                textAlignment,
-                bold
-        );
-    }
-}
-
-
-void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
-
-    if(gameState->is_started()) {
-
-        // Show discard pile
-        const card* topCard = gameState->get_discard_pile()->get_top_card();
-        if(topCard != nullptr) {
-            std::string cardImage = "assets/lama_" + std::to_string(topCard->get_value()) + ".png";
-
-            wxPoint discardPilePosition = MainGamePanel::tableCenter + MainGamePanel::discardPileOffset;
-
-            ImagePanel* discardPile = new ImagePanel(this, cardImage, wxBITMAP_TYPE_ANY, discardPilePosition, MainGamePanel::cardSize);
-            discardPile->SetToolTip("Discard pile");
-        }
-
-        // Show draw pile
-        wxPoint drawPilePosition = MainGamePanel::tableCenter + MainGamePanel::drawPileOffset;
-
-        ImagePanel* drawPile = new ImagePanel(this, "assets/lama_back.png", wxBITMAP_TYPE_ANY, drawPilePosition, MainGamePanel::cardSize);
-
-        if(gameState->get_current_player() == me && !me->has_folded()) {
-            drawPile->SetToolTip("Draw card");
-            drawPile->SetCursor(wxCursor(wxCURSOR_HAND));
-            drawPile->Bind(wxEVT_LEFT_UP, [](wxMouseEvent& event) {
-                GameController::drawCard();
-            });
-        } else {
-            drawPile->SetToolTip("Draw pile");
-        }
-
-    } else {
-        // if the game did not start yet, show a back side of a card in the center (only for the mood)
-        wxPoint cardPosition = MainGamePanel::tableCenter - (MainGamePanel::cardSize / 2);
-        new ImagePanel(this, "assets/lama_back.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
-    }
-
-}
-
-void MainGamePanel::buildTurnIndicator(game_state *gameState, player *me) {
-    if(gameState->is_started() && gameState->get_current_player() != nullptr) {
-
-        std::string turnIndicatorText = "It's " + gameState->get_current_player()->get_player_name() + "'s turn!";
-        if(gameState->get_current_player() == me) {
-            turnIndicatorText = "It's your turn!";
-        }
-
-        wxPoint turnIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::turnIndicatorOffset;
-
-        this->buildStaticText(
-                turnIndicatorText,
-                turnIndicatorPosition,
-                wxSize(200, 18),
-                wxALIGN_CENTER,
-                true
-        );
-    }
-}
 
 
 void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
@@ -340,6 +209,18 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
     }
 }
 
+
+void buildShoe(){
+  shoeFile = "assets/misc/shoe";
+  wxPoint shoePosition =  MainGamePanel::tableCenter + MainGamePanel::shoeOffset;
+  ImagePanel *shoe = new ImagePanel(this, shoeFile, wxBITMAP_TYPE_ANY,
+                                    shoePosition, scaledCardSize, MainGamePanel::cardSize);
+}
+
+void buildDealer(){
+    
+    
+}
 
 wxStaticText* MainGamePanel::buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold) {
     wxStaticText* staticText = new wxStaticText(this, wxID_ANY, content, position, size, textAlignment);
