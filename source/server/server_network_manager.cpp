@@ -144,7 +144,7 @@ void server_network_manager::handle_incoming_message(const std::string& msg, con
     std::cout << "Received valid request : " << msg << std::endl;
 #endif
     //handle request, get response
-    server_response* res = request_handler::handle_request(req);
+    server_response* res = request_handler::handle_request(req); //implicit conversion super->base
     delete req;
 
     //send response back to client
