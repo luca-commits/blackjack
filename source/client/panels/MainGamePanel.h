@@ -19,7 +19,7 @@ private:
     //void buildGameController();  //change this from sds
     void buildRoundCounter();
     void buildThisPlayer(game_state* gameState, player* me); //in sds this is build myself
-    void buildShoe();
+    void buildShoe(game_state* gameState);
     void buildDealer();
 
     wxStaticText* buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold = false);
@@ -39,11 +39,15 @@ private:
     double const otherPlayerLabelDistanceFromCenter = 275.0;
 
     wxPoint const shoeOffset = wxPoint(-300, -42);
+    wxPoint const dealerOffset = wxPoint(300, -42);
+    wxPoint const rightDealerCardOffset = wxPoint(40, 0);
+    wxPoint const leftDealerCardOffset = wxPoint(-40, 0);
     wxPoint const drawPileOffset = wxPoint(4, -42);
     wxPoint const turnIndicatorOffset = wxPoint(-100, 98);
 
     double const twoPi = 6.28318530718;
 
+    string getPngFileName(int value, int suit);
 };
 
 
