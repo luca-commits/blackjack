@@ -19,6 +19,14 @@ class server_network_manager{
 private:
 
   inline static server_network_manager* _instance;
+  /*
+  Mutex logic:
+  - shared lock can be acquired by multiple threads, only if no exclusive lock is acquired
+  - exclusive lock can be acquired only by a single thread, only if no shared lock is acquired
+  - only read with shared lock acquired, only write with exclusive lock acquired
+  - lock_shared before reading, so no other thread can write while we read
+  - lock before writing, so no other thread can read or write while we write
+  */
   inline static std::shared_mutex _rw_lock;
   inline static sockpp::tcp_acceptor _acc;
 
