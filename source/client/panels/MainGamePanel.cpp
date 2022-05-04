@@ -215,6 +215,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 void MainGamePanel::buildRoundCounter(game_state* gameState){
   if(gameState->is_started() && gameState->get_current_player() != nullptr) {
 
+      // gameState->get_current_player()->get_player_name() is a placeholder, we need a roundnr variable
       std::string roundindicator = "We are in round: " + gameState->get_current_player()->get_player_name();
 
       //wxPoint turnIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::turnIndicatorOffset;

@@ -17,7 +17,7 @@ private:
 
     void buildOthers(game_state* gameState, player* otherPlayer, double playerAngle);
     //void buildGameController();  //change this from sds
-    void buildRoundCounter();
+    void buildRoundCounter(game_state* gameState);
     void buildThisPlayer(game_state* gameState, player* me); //in sds this is build myself
     void buildShoe();
     void buildDealer();
@@ -41,6 +41,7 @@ private:
     wxPoint const shoeOffset = wxPoint(-300, -42);
     wxPoint const drawPileOffset = wxPoint(4, -42);
     wxPoint const turnIndicatorOffset = wxPoint(-100, 98);
+    wxPoint const roundIndicatorOffset = wxPoint(-200,98);
 
     double const twoPi = 6.28318530718;
 
