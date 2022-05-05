@@ -10,7 +10,7 @@ bool BlackJack::OnInit()
 
     // Open main game window
     GameWindow* gameWindow = new GameWindow(
-            "LAMA", // title of window,
+            "BLACKJACK", // title of window,
             wxDefaultPosition, // position of the window
             wxDefaultSize // size of the window
     );
