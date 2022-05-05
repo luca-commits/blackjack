@@ -212,6 +212,44 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
     }
 }
 
+void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
+
+    if(gameState->is_started()) {
+
+        // Show discard pile
+        const card* topCard = gameState->get_discard_pile()->get_top_card();
+        if(topCard != nullptr) {
+            std::string cardImage = "assets/lama_" + std::to_string(topCard->get_value()) + ".png";
+
+            wxPoint discardPilePosition = MainGamePanel::tableCenter + MainGamePanel::discardPileOffset;
+
+            ImagePanel* discardPile = new ImagePanel(this, cardImage, wxBITMAP_TYPE_ANY, discardPilePosition, MainGamePanel::cardSize);
+            discardPile->SetToolTip("Discard pile");
+        }
+
+        // Show draw pile
+        wxPoint drawPilePosition = MainGamePanel::tableCenter + MainGamePanel::drawPileOffset;
+
+        ImagePanel* drawPile = new ImagePanel(this, "assets/lama_back.png", wxBITMAP_TYPE_ANY, drawPilePosition, MainGamePanel::cardSize);
+
+        if(gameState->get_current_player() == me && !me->has_folded()) {
+            drawPile->SetToolTip("Draw card");
+            drawPile->SetCursor(wxCursor(wxCURSOR_HAND));
+            drawPile->Bind(wxEVT_LEFT_UP, [](wxMouseEvent& event) {
+                GameController::drawCard();
+            });
+        } else {
+            drawPile->SetToolTip("Draw pile");
+        }
+
+    } else {
+        // if the game did not start yet, show a back side of a card in the center (only for the mood)
+        wxPoint cardPosition = MainGamePanel::tableCenter - (MainGamePanel::cardSize / 2);
+        new ImagePanel(this, "assets/lama_back.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
+    }
+
+}
+
 void MainGamePanel::buildRoundCounter(game_state* gameState){
   if(gameState->is_started() && gameState->get_current_player() != nullptr) {
 
