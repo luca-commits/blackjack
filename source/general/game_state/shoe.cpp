@@ -83,6 +83,6 @@ shoe *shoe::from_json(const rapidjson::Value &json) {
         }
         return new shoe(json["id"].GetString(), deserialized_cards);
     } else {
-        throw BlackjackException("Could not parse draw_pile from json. 'id' or 'cards' were missing.");
+        throw BlackjackException("Could not parse shoe from json. 'id' or 'cards' were missing.");
     }
 }
