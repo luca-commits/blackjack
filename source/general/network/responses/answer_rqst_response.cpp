@@ -3,7 +3,7 @@
 #include "../../exceptions/BlackjackException.hpp"
 #include "../../game_state/game_state.hpp"
 
-#ifdef LAMA_CLIENT
+#ifdef BLACKJACK_CLIENT
 #include "../../../client/GameController.hpp"     //adapt this if needed!
 #endif
 
@@ -69,7 +69,7 @@ answer_rqst_response *answer_rqst_response::from_json(const rapidjson::Value& js
     }
 }
 
-#ifdef LAMA_CLIENT
+#ifdef BLACKJACK_CLIENT
 
 void answer_rqst_response::Process() const {
     if (_success) {

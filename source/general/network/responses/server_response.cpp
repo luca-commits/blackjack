@@ -1,5 +1,5 @@
 #include "server_response.hpp"
-#include "ranswer_rqst_response.hpp"
+#include "answer_rqst_response.hpp"
 #include "change_gamestate_msg.hpp"
 
 #include "../../exceptions/BlackjackException.hpp"
@@ -12,9 +12,9 @@ const std::unordered_map<std::string, ResponseType> server_response::_string_to_
 };
 // for serialization
 const std::unordered_map<ResponseType, std::string> server_response::_response_type_to_string = {
-        { ResponseType::answer_rqst_response, "req_response"},
+        { ResponseType::req_response, "req_response"},
         { ResponseType::state_diff_msg, "state_diff_msg"},
-        { ResponseType::change_gamestate_msg, "change_gamestate"}
+        { ResponseType::change_gamestate, "change_gamestate"}
 };
 
 server_response::server_response(server_response::base_class_properties params):
