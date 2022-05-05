@@ -3,7 +3,7 @@
 #include "../../exceptions/BlackjackException.hpp"
 #include "../../serialization/json_utils.h"
 
-#ifdef LAMA_CLIENT
+#ifdef BLACKJACK_CLIENT
 #include "../../../client/GameController.hpp"       //adapt if necessary
 #endif
 
@@ -45,7 +45,7 @@ rapidjson::Value* change_gamestate_msg::get_state_json() const {
     return _state_json;
 }
 
-#ifdef LAMA_CLIENT
+#ifdef BLACKJACK_CLIENT
 
 void change_gamestate_msg::Process() const {
     try {

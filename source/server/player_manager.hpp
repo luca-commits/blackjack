@@ -5,7 +5,7 @@
 #include <shared_mutex>
 #include <unordered_map>
 
-#include "../general/game_state/player/player.hpp" //adapt this line to where player.hpp will be
+#include "../general/game_state/player.hpp" //adapt this line to where player.hpp will be
 
 class player_manager {
 

@@ -239,9 +239,27 @@ void buildShoe(){
                                     shoePosition, scaledCardSize, MainGamePanel::cardSize);
 }
 
-void buildDealer(){
-    
-    
+void buildDealer(game_state* gameState){
+
+  std::vector<Card> dealers_cards = gameState->compute_dealers_hand();
+  std::string backside = "assets/png-cards/backside.png";
+  std::string left_frontside = getPngFileName(dealers_cards[0]);
+  std::string right_frontside = getPngFileName(dealers_cards[1]);
+  wxPoints leftDealerCardPosition = MainGamePanel::tableCenter +
+                                    MainGamePanel::dealerOffset +
+                                    MainGamePanel::leftDealerCardOffset;
+  wxPoints rightDealerCardPosition = MainGamePanel::tableCenter +
+                                     MainGamePanel::dealerOffset +
+                                     MainGamePanel::rightDealerCardOffset;
+  if(gameState -> first_part){
+      ImagePanel* leftDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, leftDealerCardPosition, MainGamePanel::cardSize);
+  }
+  else{
+    ImagePanel *leftDealerCard = "assets/lama_" + std::to_string(handCard->get_value()) + ".png"
+        new ImagePanel(this, leftCard, wxBITMAP_TYPE_ANY,
+                       leftDealerCardPosition, MainGamePanel::cardSize);
+  }
+  ImagePanel* rightDealerCard = new ImagePanel(this, rightCard,  wxBITMAP_TYPE_ANY, rightDealerCardPosition, MainGamePanel::cardSize)
 }
 
 wxStaticText* MainGamePanel::buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold) {
@@ -268,4 +286,21 @@ double MainGamePanel::getEdgeLengthOfRotatedSquare(double originalEdgeLength, do
 
 wxPoint MainGamePanel::getPointOnEllipse(double horizontalRadius, double verticalRadius, double angle) {
     return wxPoint((int) (sin(angle) * horizontalRadius), (int) (cos(angle) * verticalRadius));
+}
+
+
+string getPngFileName(int value, int suit){
+
+    std::map<int, std::string> value_map {{11, "jack"}, {12, "queen"}, {1, "ace"}};
+    std::map<int, std::string> suit_map{
+        {0, "spades"}, {1, "clubs"}, {2, "diamonds"}, {3, "hearts"}};
+
+    std::string path = "assets/png-card/";
+
+    if (value <= 10) {
+      return path + std::to_string(value) + "of" + suit_map[suit] + ".png";
+    }
+    else{
+      return path + value_map[value] + "of" + suit_map[suit] + ".png";
+    }
 }

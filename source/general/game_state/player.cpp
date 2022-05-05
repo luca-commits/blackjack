@@ -32,7 +32,7 @@ player::~player() {
     }
 }
 
-#ifdef LAMA_SERVER
+#ifdef BLACKJACK_SERVER
 player::player(std::string id, std::string name) :
         unique_serializable(id)
 {
