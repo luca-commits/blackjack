@@ -7,7 +7,7 @@
 
 class request_handler {
 public:
-    static request_response* handle_request(const client_request* const req);
+    static answer_rqst_response* handle_request(const client_request* const req);
 };
 
 #endif

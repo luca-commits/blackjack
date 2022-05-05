@@ -5,7 +5,7 @@
 #include <string>
 #include <mutex>
 
-#include "../general/game_state/player/player.hpp"
+#include "../general/game_state/player.hpp"
 #include "../general/game_state/game_state.hpp"
 
 class game_instance {

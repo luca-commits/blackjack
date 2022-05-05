@@ -5,6 +5,7 @@
 
 #include "player_manager.hpp"
 #include "game_instance.hpp"
+#include "game_instance_manager.hpp"
 
 #include "../general/network/requests/start_game_request.hpp"
 #include "../general/network/requests/join_game_request.hpp"
@@ -71,7 +72,7 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
         case RequestType::start_game: {
             if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
                 if (game_instance_ptr->start_game(player, err)) {
-                    return new ranswer_rqst_response(game_instance_ptr->get_id(), req_id, true,
+                    return new answer_rqst_response(game_instance_ptr->get_id(), req_id, true,
                                                 game_instance_ptr->get_game_state()->to_json(), err);
                 }
             }
@@ -119,7 +120,7 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
 
         // ##################### UNKNOWN REQUEST ##################### //
         default:
-            return new request_response("", req_id, false, nullptr, "Unknown RequestType " + type);
+            return new answer_rqst_response("", req_id, false, nullptr, "Unknown RequestType " + type);
     }
 }
 

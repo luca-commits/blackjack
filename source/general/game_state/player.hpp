@@ -3,7 +3,7 @@
 
 
 #include <string>
-#include "hand.hpp"
+#include "card.hpp"
 #include "../serialization/uuid_generator.h"
 #include "../../../rapidjson/include/rapidjson/document.h"
 #include "../serialization/unique_serializable.h"
