@@ -129,47 +129,33 @@ int get_points() {
     for(auto card : _hand) {
         int value = card->get_value();
         switch(value):
+            //ace
             case 1:
                 ace_counter += 1;
                 break;
+            //numeric cards
             case 2:
-                point_sum += 2;
-                break;
             case 3:
-                point_sum += 3;
-                break;
             case 4:
-                point_sum += 4;
-                break;
             case 5:
-                point_sum += 5;
-                break;
             case 6:
-                point_sum += 6;
-                break;
             case 7:
-                point_sum += 7;
-                break;
             case 8:
-                point_sum += 8;
-                break;
             case 9:
-                point_sum += 9;
-                break;
             case 10:
-                point_sum += 10;
+                point_sum += value;
                 break;
+            //face cards
             case 11:
-                point_sum += 10;
-                break;
             case 12:
-                point_sum += 10;
-                break;
             case 13:
                 point_sum += 10;
                 break;
             default:
                 // how to return an error form here ?
+                // I'll throw to break the program, this looks un-handleable
+                std::string errstr = "Invalid card with value " + std::to_string(value) + " encountered.";
+                throw BlackjackException(errstr);
                 break;
     }
 
