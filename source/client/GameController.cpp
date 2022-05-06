@@ -1,9 +1,9 @@
 #include "GameController.h"
-#include "../general/network/requests/join_game_request.h"
-#include "../general/network/requests/start_game_request.h"
-#include "../general/network/requests/draw_card_request.h"
-#include "../general/network/requests/fold_request.h"
-#include "../general/network/requests/play_card_request.h"
+#include "../general/network/requests/join_game_request.hpp"
+#include "../general/network/requests/start_game_request.hpp"
+#include "../general/network/requests/hit_request.hpp"
+#include "../general/network/requests/make_bet_request.hpp"
+#include "../general/network/requests/stand_request.hpp"
 #include "network/ClientNetworkManager.h"
 
 

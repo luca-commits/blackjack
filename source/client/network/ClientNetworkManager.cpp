@@ -2,7 +2,7 @@
 
 
 #include "../GameController.h"
-#include "../../general/network/responses/server_response.h"
+#include "../../general/network/responses/server_response.hpp"
 #include <sockpp/exception.h>
 
 
