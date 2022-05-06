@@ -21,6 +21,7 @@ private:
     void buildThisPlayer(game_state* gameState, player* me); //in sds this is build myself
     void buildShoe(game_state* gameState);
     void buildDealer();
+    void buildCardPiles(game_state* gameState, player *me);
 
     wxStaticText* buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold = false);
 

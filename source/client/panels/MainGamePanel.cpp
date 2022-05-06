@@ -133,14 +133,16 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
     } else {
 
-        // show our player's minus points
-        wxStaticText *playerPoints = buildStaticText(
-                std::to_string(me->get_score()) + " minus points",
-                wxDefaultPosition,
-                wxSize(200, 18),
-                wxALIGN_CENTER
-        );
-        innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
+        // // show our player's minus points
+        // wxStaticText *playerPoints = buildStaticText(
+        //         std::to_string(me->get_score()) + " minus points",
+        //         wxDefaultPosition,
+        //         wxSize(200, 18),
+        //         wxALIGN_CENTER
+        // );
+        // innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
+
+        // Show our pla
 
         // if our player folded, we display that as status
         if (me->has_folded()) {
@@ -212,6 +214,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
     }
 }
 
+//This function has to be changed surely TODO
 void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
 
     if(gameState->is_started()) {
@@ -230,7 +233,7 @@ void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
         // Show draw pile
         wxPoint drawPilePosition = MainGamePanel::tableCenter + MainGamePanel::drawPileOffset;
 
-        ImagePanel* drawPile = new ImagePanel(this, "assets/lama_back.png", wxBITMAP_TYPE_ANY, drawPilePosition, MainGamePanel::cardSize);
+        ImagePanel* drawPile = new ImagePanel(this, "assets/png-cards/backside.png", wxBITMAP_TYPE_ANY, drawPilePosition, MainGamePanel::cardSize);
 
         if(gameState->get_current_player() == me && !me->has_folded()) {
             drawPile->SetToolTip("Draw card");
@@ -245,7 +248,7 @@ void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
     } else {
         // if the game did not start yet, show a back side of a card in the center (only for the mood)
         wxPoint cardPosition = MainGamePanel::tableCenter - (MainGamePanel::cardSize / 2);
-        new ImagePanel(this, "assets/lama_back.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
+        new ImagePanel(this, "assets/png-cards/backside.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
     }
 
 }
