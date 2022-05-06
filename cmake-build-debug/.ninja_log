@@ -6,3 +6,7 @@
 3	1328	1651830355326343696	CMakeFiles/Blackjack-client.dir/source/general/game_state/card.cpp.o	40be3a3789c1c726
 3	1637	1651830355634337563	CMakeFiles/Blackjack-client.dir/source/general/network/requests/client_request.cpp.o	69fba5c12eebaf99
 3	1227	1651830564091236217	CMakeFiles/Blackjack-client.dir/source/general/network/requests/join_game_request.cpp.o	a86c9adbf2ff5d4
+5	1160	1651830805533621671	CMakeFiles/Blackjack-client.dir/source/general/network/requests/start_game_request.cpp.o	5d05eb58c98b0ec1
+4	1273	1651830872581440166	CMakeFiles/Blackjack-client.dir/source/general/network/requests/hit_request.cpp.o	327bafe5fb5a7cc5
+3	1674	1651830913321374657	CMakeFiles/Blackjack-client.dir/source/general/network/requests/stand_request.cpp.o	2d75daa514f33d0f
+3	1754	1651830962753336183	CMakeFiles/Blackjack-client.dir/source/general/network/requests/make_bet_request.cpp.o	988c097c150bf769

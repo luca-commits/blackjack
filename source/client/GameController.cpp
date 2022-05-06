@@ -1,9 +1,9 @@
 #include "GameController.h"
-#include "../common/network/requests/join_game_request.h"
-#include "../common/network/requests/start_game_request.h"
-#include "../common/network/requests/draw_card_request.h"
-#include "../common/network/requests/fold_request.h"
-#include "../common/network/requests/play_card_request.h"
+#include "../general/network/requests/join_game_request.h"
+#include "../general/network/requests/start_game_request.h"
+#include "../general/network/requests/draw_card_request.h"
+#include "../general/network/requests/fold_request.h"
+#include "../general/network/requests/play_card_request.h"
 #include "network/ClientNetworkManager.h"
 
 

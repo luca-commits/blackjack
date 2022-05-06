@@ -8,7 +8,7 @@
 #include "../serialization/serializable.h"
 #include "../serialization/unique_serializable.h"
 #include "../serialization/serializable_value.h"
-#include "../game_state/player/player.h"
+#include "../game_state/player.hpp"
 #include "../../../rapidjson/include/rapidjson/document.h"
 
 
