@@ -13,14 +13,14 @@ set(CLIENT_SOURCE_FILES
         source/client/main.cpp
         source/client/app/Blackjack.cpp source/client/app/Blackjack.hpp
         source/client/GameController.cpp source/client/GameController.hpp
-        # UI (CLIENT GUYS PLEASE DO THIS)
+        # UI
         source/client/windows/GameWindow.cpp source/client/windows/GameWindow.h
         source/client/uiElements/ImagePanel.cpp source/client/uiElements/ImagePanel.h
         source/client/panels/ConnectionPanel.cpp source/client/panels/ConnectionPanel.h
         source/client/panels/MainGamePanel.cpp source/client/panels/MainGamePanel.h
         source/client/uiElements/InputField.cpp source/client/uiElements/InputField.h
         source/client/uiElements/ImagePanel.cpp source/client/uiElements/ImagePanel.h
-        # network (CLIENT GUYS PLEASE DO THIS)
+        # network
         source/client/network/ClientNetworkManager.cpp source/client/network/ClientNetworkManager.h
         source/client/network/ResponseListenerThread.cpp source/client/network/ResponseListenerThread.h
         # game state

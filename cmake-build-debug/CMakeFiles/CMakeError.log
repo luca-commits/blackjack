@@ -1,11 +1,11 @@
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
 Change Dir: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/snap/clion/189/bin/ninja/linux/ninja cmTC_6d42d && [1/2] Building C object CMakeFiles/cmTC_6d42d.dir/src.c.o
-[2/2] Linking C executable cmTC_6d42d
-FAILED: cmTC_6d42d 
-: && /usr/bin/cc   CMakeFiles/cmTC_6d42d.dir/src.c.o -o cmTC_6d42d   && :
-/usr/bin/ld: CMakeFiles/cmTC_6d42d.dir/src.c.o: in function `main':
+Run Build Command(s):/snap/clion/189/bin/ninja/linux/ninja cmTC_c9153 && [1/2] Building C object CMakeFiles/cmTC_c9153.dir/src.c.o
+[2/2] Linking C executable cmTC_c9153
+FAILED: cmTC_c9153 
+: && /usr/bin/cc   CMakeFiles/cmTC_c9153.dir/src.c.o -o cmTC_c9153   && :
+/usr/bin/ld: CMakeFiles/cmTC_c9153.dir/src.c.o: in function `main':
 src.c:(.text+0x46): undefined reference to `pthread_create'
 /usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
 /usr/bin/ld: src.c:(.text+0x5e): undefined reference to `pthread_cancel'
