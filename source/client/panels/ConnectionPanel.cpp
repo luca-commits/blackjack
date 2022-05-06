@@ -2,7 +2,7 @@
 
 
 #include "../uiElements/ImagePanel.h"
-#include "../../common/network/default.conf"
+#include "../../general/network/default.conf"
 #include "../GameController.h"
 
 
