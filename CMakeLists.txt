@@ -21,8 +21,8 @@ set(CLIENT_SOURCE_FILES
         source/client/uiElements/InputField.cpp source/client/uiElements/InputField.h
         source/client/uiElements/ImagePanel.cpp source/client/uiElements/ImagePanel.h
         # network (CLIENT GUYS PLEASE DO THIS)
-        source/client/network/ClientNetworkManager.cpp source/client/network/ClientNetworkManager.hpp
-        source/client/network/ResponseListenerThread.cpp source/client/network/ResponseListenerThread.hpp
+        source/client/network/ClientNetworkManager.cpp source/client/network/ClientNetworkManager.h
+        source/client/network/ResponseListenerThread.cpp source/client/network/ResponseListenerThread.h
         # game state
         source/general/game_state/card.cpp source/general/game_state/card.hpp
         source/general/game_state/game_state.cpp source/general/game_state/game_state.hpp

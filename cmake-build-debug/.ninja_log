@@ -1,0 +1,4 @@
+# ninja log v5
+2	2270	1651829848066594628	CMakeFiles/Blackjack-client.dir/source/client/uiElements/InputField.cpp.o	f9777a5c2a30d7f5
+1	2302	1651829848098592465	CMakeFiles/Blackjack-client.dir/source/client/windows/GameWindow.cpp.o	64446d12f1e4d573
+1	2316	1651829848114591383	CMakeFiles/Blackjack-client.dir/source/client/uiElements/ImagePanel.cpp.o	3b66e6322b927206
