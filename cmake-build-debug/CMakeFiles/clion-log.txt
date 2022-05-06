@@ -1,0 +1,93 @@
+/snap/clion/189/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/189/bin/ninja/linux/ninja -G Ninja -S "/home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack" -B "/home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug"
+Not Win32, so probably a Linux
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/blackjack_final_logo.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/Blackjack_logo_elegant.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/jack_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/king_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/8_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/5_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/8_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/9_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/queen_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/4_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/9_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/backside.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/7_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/2_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/7_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/5_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/queen_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/5_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/jack_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/10_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/3_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/king_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/7_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/king_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/10_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/queen_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/9_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/8_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/3_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/jack_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/ace_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/jack_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/8_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/ace_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/ace_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/6_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/6_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/5_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/7_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/ace_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/10_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/3_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/king_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/4_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/9_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/4_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/6_of_spades.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/6_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/2_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/10_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/4_of_clubs.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/2_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/3_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/queen_of_hearts.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-cards/2_of_diamonds.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/shoe.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-chips
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-chips/red.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-chips/blue.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/png-chips/black.png
+-- Up-to-date: /home/noec/Documents/scuola/ETH/FS_22/Software Engineering/git/blackjack/cmake-build-debug/assets/blackjack_logo_kindacringe.JPG
+-- Configuring done
+CMake Error at CMakeLists.txt:85 (add_executable):
+  Cannot find source file:
+
+    source/client/windows/GameWindow.hpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+  .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+
+
+CMake Error at unit-tests/CMakeLists.txt:7 (add_executable):
+  Cannot find source file:
+
+    card.cpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
+  .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
+
+
+CMake Error at CMakeLists.txt:85 (add_executable):
+  No SOURCES given to target: Blackjack-client
+
+
+CMake Error at unit-tests/CMakeLists.txt:7 (add_executable):
+  No SOURCES given to target: Blackjack-tests
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

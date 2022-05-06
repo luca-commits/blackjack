@@ -14,7 +14,7 @@ set(CLIENT_SOURCE_FILES
         source/client/app/Blackjack.cpp source/client/app/Blackjack.hpp
         source/client/GameController.cpp source/client/GameController.hpp
         # UI (CLIENT GUYS PLEASE DO THIS)
-        source/client/windows/GameWindow.cpp source/client/windows/GameWindow.hpp
+        source/client/windows/GameWindow.cpp source/client/windows/GameWindow.h
         source/client/uiElements/ImagePanel.cpp source/client/uiElements/ImagePanel.h
         source/client/panels/ConnectionPanel.cpp source/client/panels/ConnectionPanel.h
         source/client/panels/MainGamePanel.cpp source/client/panels/MainGamePanel.h
@@ -78,7 +78,7 @@ set(SERVER_SOURCE_FILES
         source/general/serialization/serializable_value.h
         source/general/serialization/json_utils.h
         source/general/serialization/uuid_generator.h
-        source/general/serialization/unique_serializable.cpp source/general/serialization/unique_serializable.h source/server/request_handler.h source/server/request_handler.cpp)
+        source/general/serialization/unique_serializable.cpp source/general/serialization/unique_serializable.h source/server/request_handler.hpp source/server/request_handler.cpp)
 
 
 # set source files for client-executable
