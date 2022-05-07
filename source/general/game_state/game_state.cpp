@@ -1,15 +1,15 @@
 //
-// Created by Manuel on 27.01.2021.
+// BLACKJACK
 //
 
-#include "game_state.h"
+#include "game_state.hpp"
 
-#include "../exceptions/LamaException.h"
+#include "../exceptions/BlackjackException.hpp"
 #include "../serialization/vector_utils.h"
 
 
 game_state::game_state() : unique_serializable() {
-    this->_draw_pile = new draw_pile();
+    this->_shoe = new shoe();
     this->_discard_pile = new discard_pile();
     this->_players = std::vector<player*>();
     this->_is_started = new serializable_value<bool>(false);
