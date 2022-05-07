@@ -2,7 +2,7 @@
 
 
 // Application entry point
-bool BlackJack::OnInit()
+bool Blackjack::OnInit()
 {
     // Allow loading of JPEG  and PNG image files
     wxImage::AddHandler(new wxJPEGHandler());

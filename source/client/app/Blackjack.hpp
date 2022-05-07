@@ -14,4 +14,4 @@ public:
 };
 
 
-#endif //LAMAUI_LAMA_H
+#endif //BLACKJACKUI_BLACKJACK_HPP

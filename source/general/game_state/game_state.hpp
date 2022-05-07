@@ -19,7 +19,7 @@ private:
     static const int _min_bet = 1;
 
     std::vector<player*> _players;
-    shoe* shoe;
+    shoe* _shoe;
     std::vector<card*> _dealers_hand;
     serializable_value<bool>* _is_started;
     serializable_value<bool>* _is_finished;
@@ -33,7 +33,7 @@ private:
     // deserialization constructor
     game_state(
             std::string id,
-            shoe* shoe,
+            shoe* _shoe,
             std::vector<player*>& players,
             std::vector<card*>& dealers_hand,
             serializable_value<bool>* is_started,
