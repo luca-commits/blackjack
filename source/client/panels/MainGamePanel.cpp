@@ -144,17 +144,17 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
         // Show our pla
 
-        // if our player folded, we display that as status
+        // if our player already played, we display that as status
         if (me->has_folded()) {
             wxStaticText *playerStatus = buildStaticText(
-                    "Folded!",
+                    "You already played",
                     wxDefaultPosition,
                     wxSize(200, 32),
                     wxALIGN_CENTER
             );
             innerLayout->Add(playerStatus, 0, wxALIGN_CENTER | wxBOTTOM, 8);
 
-        // if we haven't folded yet, and it's our turn, display Fold button
+        // TODO It's our turn, display Hit and Stand button
         } else if (gameState->get_current_player() == me) {
             wxButton *foldButton = new wxButton(this, wxID_ANY, "Fold", wxDefaultPosition, wxSize(80, 32));
             foldButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
