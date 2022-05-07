@@ -9,7 +9,7 @@
 
 
 game_state::game_state() : unique_serializable() {
-    this->_draw_pile = new draw_pile();
+    this->_shoe = new shoe();
     this->_discard_pile = new discard_pile();
     this->_players = std::vector<player*>();
     this->_is_started = new serializable_value<bool>(false);
