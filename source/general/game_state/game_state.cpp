@@ -1,10 +1,10 @@
 //
-// Created by Manuel on 27.01.2021.
+// BLACKJACK
 //
 
-#include "game_state.h"
+#include "game_state.hpp"
 
-#include "../exceptions/LamaException.h"
+#include "../exceptions/BlackjackException.hpp"
 #include "../serialization/vector_utils.h"
 
 
