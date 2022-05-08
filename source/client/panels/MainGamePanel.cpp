@@ -91,99 +91,101 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     handPosition +=     this->getPointOnEllipse(verticalRadius_hand*1.6,  verticalRadius_hand,  playerAngle);
     labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.6, verticalRadius_label, playerAngle);
     betPosition +=      this->getPointOnEllipse(verticalRadius_bet*1.6,   verticalRadius_bet,   playerAngle);
-
     labelPosition += wxSize(labelOffsetX, 0);
 
+    // NAME
+    this->buildStaticText(
+            otherPlayer->get_player_name(),
+            labelPosition + wxSize(-100, -36),
+            wxSize(200, 18),
+            textAlignment,
+            true
+    );
+
+    bool is_broke();
+    bool check_if_over_21();
 
 
-    // add player's HAND IMAGE=================================
-    int numberOfCards = otherPlayer->get_nof_cards();
-    if(numberOfCards > 0) {
-
-        // get new bounds of image, as they increase when image is rotated
-        wxSize boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
-        handPosition -= boundsOfRotatedHand / 2;
-
-        std::string handImage = "assets/png-cards/back" + std::to_string(numberOfCards) + ".png";
-        if(numberOfCards > 8) {
-            handImage = "assets/png-cards/back8.png";
-        }
-        new ImagePanel(this, handImage, wxBITMAP_TYPE_ANY, handPosition, boundsOfRotatedHand, playerAngle);
-
-    } // else if(numberOfCards == 0) { // do nothing??? or }
-
-
-
-    // add player's LABEL IMAGE=================================
-
-    // player attributes getting:
-    // int get_nof_cards() const noexcept;     // return number of cards player has on hand
-    // int get_bet_size() const noexcept;
-    // int get_money() const noexcept;
-    // std::vector<card*> get_hand() const noexcept;
-    // std::string get_player_name() const noexcept;
-
-
-
+    if(!gameState->is_started()){
+        // STATUS
         this->buildStaticText(
-                otherPlayer->get_player_name(),
-                labelPosition + wxSize(-100, -36),
+                "Status: Waiting for Game to start":std::to_string(otherPlayer->get_bet_size()),
+                labelPosition + wxSize(-100, 18),
                 wxSize(200, 18),
-                textAlignment,
-                true
+                textAlignment
         );
+    else if(otherPLayer->is_broke()){
+        // STATUS
+        this->buildStaticText(
+                "Status: LOST GAME",
+                labelPosition + wxSize(-100, 18),
+                wxSize(200, 18),
+                textAlignment
+        );
+    else{
+        // STATUS
+        if(otherPLayer->check_if_over_21()){
+            this->buildStaticText(
+                    "Status: LOST ROUND",
+                    labelPosition + wxSize(-100, 18),
+                    wxSize(200, 18),
+                    textAlignment
+            );
+        }
+        else{
+            this->buildStaticText(
+                    "Status: Playing/Waiting for turn",
+                    labelPosition + wxSize(-100, 18),
+                    wxSize(200, 18),
+                    textAlignment
+            );
+        }
+        // MONEY
         this->buildStaticText(
                 "Money in depot:":std::to_string(otherPlayer->get_money()),
-                labelPosition + wxSize(-100, -18),
+                labelPosition + wxSize(-100, ),
                 wxSize(200, 18),
                 textAlignment
         );
+        // BET
         this->buildStaticText(
                 "Money betted:":std::to_string(otherPlayer->get_bet_size()),
-                labelPosition + wxSize(-100, 0),
+                labelPosition + wxSize(-100, 18),
                 wxSize(200, 18),
                 textAlignment
         );
-        //   this->buildStaticText(
-        //         "Money betted:":std::to_string(otherPlayer->get_bet_size()),
-        //         labelPosition + wxSize(-100, 0),
-        //         wxSize(200, 18),
-        //         textAlignment
-        // );
 
+        // add player's HAND IMAGE=================================
+        int numberOfCards = otherPlayer->get_nof_cards();
 
+        if(numberOfCards > 0) {
 
+            // get new bounds of image, as they increase when image is rotated
+            wxSize boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
+            handPosition -= boundsOfRotatedHand / 2;
 
+            std::string handImage = "assets/png-bcards/back" + std::to_string(numberOfCards) + ".png";
+            if(numberOfCards > 8) {
+                handImage = "assets/png-cards/black8.png";
+            }
+            new ImagePanel(this, handImage, wxBITMAP_TYPE_ANY, handPosition, boundsOfRotatedHand, playerAngle);
 
-        // this->buildStaticText(
-        //         "waiting...",
-        //         labelPosition + wxSize(-100, 0),
-        //         wxSize(200, 18),
-        //         textAlignment
-        // );
-
-    }
-    if(gameState->is_started()){}
- 
-        
-
-        // Show other player's status label
-        std::string statusText = "waiting...";
-        bool bold = false;
-        if(otherPlayer->has_folded()) {
-            statusText = "Folded!";
-        } else if(otherPlayer == gameState->get_current_player()) {
-            statusText = "their turn";
-            bold = true;
         }
-        this->buildStaticText(
-                statusText,
-                labelPosition + wxSize(-100, 9),
-                wxSize(200, 18),
-                textAlignment,
-                bold
-        );
 
+        // add player's BET IMAGE=================================
+        int bet=otherPlayer->get_bet_size();
+
+        if(bet<=10){
+            new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, boundsOfRotatedHand, playerAngle);
+        }
+        else if(bet<=20){
+            new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, boundsOfRotatedHand, playerAngle);
+        }
+        else{
+            new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, boundsOfRotatedHand, playerAngle);
+    
+        }
+    }
 }
 
 
