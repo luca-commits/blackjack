@@ -59,17 +59,44 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 }
 
 
-void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle) {
+
+
+// with closed hands
+void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, int side) {
+
+    long textAlignment = wxALIGN_CENTER;
+    
+    // predefine offsets 
+    int labelOffsetX = 0;
+    if(side < 0) { // right side
+        textAlignment = wxALIGN_LEFT;
+        labelOffsetX = 85;
+
+    } else if(side > 0) { // left side
+        textAlignment = wxALIGN_RIGHT;
+        labelOffsetX = -85;
+    }
 
     // define the ellipse which represents the virtual player circle
-    double horizontalRadius = MainGamePanel::otherPlayerHandDistanceFromCenter * 1.4; // 1.4 to horizontally elongate players' circle
-    double verticalRadius = MainGamePanel::otherPlayerHandDistanceFromCenter;
+    double verticalRadius_hand = MainGamePanel::otherPlayerHandDistanceFromCenter; 
+    double verticalRadius_label = MainGamePanel::otherPlayerLabelDistanceFromCenter;
+    double verticalRadius_bet = MainGamePanel::otherPlayerBetDistanceFromCenter;
 
     // get this player's position on that ellipse
     wxPoint handPosition = MainGamePanel::tableCenter;
-    handPosition += this->getPointOnEllipse(horizontalRadius, verticalRadius, playerAngle);
+    wxPoint labelPosition = MainGamePanel::tableCenter;
+    wxPoint betPosition = MainGamePanel::tableCenter;
 
-    // add image of player's hand
+    // 1.6 to horizontally elongate players' circle?...
+    handPosition +=     this->getPointOnEllipse(verticalRadius_hand*1.6,  verticalRadius_hand,  playerAngle);
+    labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.6, verticalRadius_label, playerAngle);
+    betPosition +=      this->getPointOnEllipse(verticalRadius_bet*1.6,   verticalRadius_bet,   playerAngle);
+
+    labelPosition += wxSize(labelOffsetX, 0);
+
+
+
+    // add player's HAND IMAGE=================================
     int numberOfCards = otherPlayer->get_nof_cards();
     if(numberOfCards > 0) {
 
@@ -77,21 +104,87 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         wxSize boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
         handPosition -= boundsOfRotatedHand / 2;
 
-        std::string handImage = "assets/lama_hand_" + std::to_string(numberOfCards) + ".png";
-        if(numberOfCards > 10) {
-            handImage = "assets/lama_hand_10.png";
+        std::string handImage = "assets/png-cards/back" + std::to_string(numberOfCards) + ".png";
+        if(numberOfCards > 8) {
+            handImage = "assets/png-cards/back8.png";
         }
         new ImagePanel(this, handImage, wxBITMAP_TYPE_ANY, handPosition, boundsOfRotatedHand, playerAngle);
 
-    } else if(numberOfCards == 0) {
+    } // else if(numberOfCards == 0) { // do nothing??? or }
 
-        wxSize nonRotatedSize = wxSize((int) MainGamePanel::otherPlayerHandSize, (int) MainGamePanel::otherPlayerHandSize);
-        handPosition -= nonRotatedSize / 2;
 
-        new ImagePanel(this, "assets/lama_hand_0.png", wxBITMAP_TYPE_ANY, handPosition, nonRotatedSize);
+
+    // add player's LABEL IMAGE=================================
+
+    // player attributes getting:
+    // int get_nof_cards() const noexcept;     // return number of cards player has on hand
+    // int get_bet_size() const noexcept;
+    // int get_money() const noexcept;
+    // std::vector<card*> get_hand() const noexcept;
+    // std::string get_player_name() const noexcept;
+
+
+
+        this->buildStaticText(
+                otherPlayer->get_player_name(),
+                labelPosition + wxSize(-100, -36),
+                wxSize(200, 18),
+                textAlignment,
+                true
+        );
+        this->buildStaticText(
+                "Money in depot:":std::to_string(otherPlayer->get_money()),
+                labelPosition + wxSize(-100, -18),
+                wxSize(200, 18),
+                textAlignment
+        );
+        this->buildStaticText(
+                "Money betted:":std::to_string(otherPlayer->get_bet_size()),
+                labelPosition + wxSize(-100, 0),
+                wxSize(200, 18),
+                textAlignment
+        );
+        //   this->buildStaticText(
+        //         "Money betted:":std::to_string(otherPlayer->get_bet_size()),
+        //         labelPosition + wxSize(-100, 0),
+        //         wxSize(200, 18),
+        //         textAlignment
+        // );
+
+
+
+
+
+        // this->buildStaticText(
+        //         "waiting...",
+        //         labelPosition + wxSize(-100, 0),
+        //         wxSize(200, 18),
+        //         textAlignment
+        // );
+
     }
-}
+    if(gameState->is_started()){}
+ 
+        
 
+        // Show other player's status label
+        std::string statusText = "waiting...";
+        bool bold = false;
+        if(otherPlayer->has_folded()) {
+            statusText = "Folded!";
+        } else if(otherPlayer == gameState->get_current_player()) {
+            statusText = "their turn";
+            bold = true;
+        }
+        this->buildStaticText(
+                statusText,
+                labelPosition + wxSize(-100, 9),
+                wxSize(200, 18),
+                textAlignment,
+                bold
+        );
+
+}
 
 
 
