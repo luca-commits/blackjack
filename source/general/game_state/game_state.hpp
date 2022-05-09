@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "../../rapidjson/include/rapidjson/document.h"
+#include "../../../rapidjson/include/rapidjson/document.h"
 #include "player.hpp"
 #include "shoe.hpp"
 #include "../serialization/serializable.h"
@@ -33,8 +33,8 @@ private:
     // deserialization constructor
     game_state(
             std::string id,
-            shoe* _shoe,
             std::vector<player*>& players,
+            shoe* _shoe,
             std::vector<card*>& dealers_hand,
             serializable_value<bool>* is_started,
             serializable_value<bool>* is_finished,
