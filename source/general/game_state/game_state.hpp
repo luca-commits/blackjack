@@ -38,8 +38,8 @@ private:
             std::vector<card*>& dealers_hand,
             serializable_value<bool>* is_started,
             serializable_value<bool>* is_finished,
-            serializable_value<int>* current_player_idx,
             serializable_value<int>* round_number,
+            serializable_value<int>* current_player_idx,
             serializable_value<int>* starting_player_idx);
 
     // returns the index of 'player' in the '_players' vector

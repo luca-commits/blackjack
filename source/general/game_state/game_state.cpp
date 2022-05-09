@@ -31,8 +31,8 @@ game_state::game_state(std::string id) : unique_serializable(id) {
 //TODO: rearrange stuff so its the same order as the declaration of the member variables in both this and the hpp file
 game_state::game_state(std::string id, std::vector<player*>& players, shoe* shoe,
                        std::vector<card*>& dealers_hand, serializable_value<bool>* is_started,
-                       serializable_value<bool>* is_finished, serializable_value<int>* current_player_idx,
-                       serializable_value<int>* round_number, serializable_value<int>* starting_player_idx))
+                       serializable_value<bool>* is_finished, serializable_value<int>* round_number,
+                       serializable_value<int>* current_player_idx, serializable_value<int>* starting_player_idx)
         : unique_serializable(id),
           _players(players),
           _shoe(shoe),
@@ -48,7 +48,7 @@ game_state::game_state(std::string id, std::vector<player*>& players, shoe* shoe
 game_state::~game_state() {
     if (_is_started != nullptr) {//de ce facem asta?
         delete _shoe;
-        delete _dealers_hand;
+        delete _dealers_hand; //TODO: implement destructor for card ig
         delete _is_started;
         delete _is_finished;
         delete _round_number;
@@ -88,11 +88,7 @@ bool game_state::is_player_in_game(player* player) const {
 
 bool game_state::is_allowed_to_play_now(player* player) const {
     auto it = std::find(_players.begin(), _players.end(), player);
-    return it == _players[_current_player_idx->get_value()];
-}
-
-int game_state::get_round_number() const {
-    return _round_number;
+    return *it == _players[_current_player_idx->get_value()];
 }
 
 std::vector<player*>& game_state::get_players() {
@@ -100,11 +96,11 @@ std::vector<player*>& game_state::get_players() {
 }
 
 int game_state::get_round_number() const {
-    return _round_number;
+    return _round_number->get_value();
 }
 
 int game_state::get_player_index(player* player) const {
-    return _current_player_idx;
+    return _current_player_idx->get_value();
 }
 
 shoe* game_state::get_shoe() const {
@@ -112,7 +108,7 @@ shoe* game_state::get_shoe() const {
 }
 
 player* game_state::get_current_player() const {
-    return _players[_current_player_idx];
+    return _players[_current_player_idx->get_value()];
 }
 #ifdef BLACKJACK_SERVER
 
