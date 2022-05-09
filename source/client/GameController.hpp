@@ -4,7 +4,7 @@
 #include "windows/GameWindow.h"
 #include "panels/ConnectionPanel.h"
 #include "panels/MainGamePanel.h"
-#include "network/ResponseListenerThread.h"
+#include "network/ResponseListenerThread.hpp"
 #include "../general/game_state/game_state.hpp"
 
 
