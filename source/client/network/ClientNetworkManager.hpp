@@ -1,9 +1,9 @@
-#ifndef LAMA_CLIENTNETWORKMANAGER_H
-#define LAMA_CLIENTNETWORKMANAGER_H
+#ifndef LAMA_CLIENTNETWORKMANAGER_HPP
+#define LAMA_CLIENTNETWORKMANAGER_HPP
 
 
 #include <string>
-#include "ResponseListenerThread.h"
+#include "ResponseListenerThread.hpp"
 #include "../../general/network/requests/client_request.hpp"
 
 
@@ -28,4 +28,4 @@ private:
 };
 
 
-#endif //LAMA_CLIENTNETWORKMANAGER_H
+#endif

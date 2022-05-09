@@ -1,4 +1,4 @@
-#include "ClientNetworkManager.h"
+#include "ClientNetworkManager.hpp"
 
 
 #include "../GameController.h"

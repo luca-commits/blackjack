@@ -1,10 +1,10 @@
-#include "ResponseListenerThread.h"
+#include "ResponseListenerThread.hpp"
 
 
 #include <iostream>
 #include <string>
-#include "../GameController.h"
-#include "ClientNetworkManager.h"
+#include "../GameController.hpp"
+#include "ClientNetworkManager.hpp"
 
 
 ResponseListenerThread::ResponseListenerThread(sockpp::tcp_connector* connection) {
