@@ -1,7 +1,7 @@
 #include "ClientNetworkManager.hpp"
 
 
-#include "../GameController.h"
+#include "../GameController.hpp"
 #include "../../general/network/responses/server_response.hpp"
 #include <sockpp/exception.h>
 
