@@ -20,7 +20,7 @@ private:
 
     std::vector<player*> _players;
     shoe* _shoe;
-    std::vector<card*> _dealers_hand;
+    player* _dealers_hand;
     serializable_value<bool>* _is_started;
     serializable_value<bool>* _is_finished;
     serializable_value<int>* _round_number;
@@ -71,8 +71,8 @@ public:
     bool make_bet(player* player, int bet_size, std::string& err);
 
     // functions from our SDS
-    std::vector<card*> compute_dealers_hand(); // does hardcoded actions for dealer
-    bool check_winner(player* player, std::string& err); // checks if player beat the dealer
+    int compute_dealers_hand(); // does hardcoded actions for dealer
+    void check_winner(); // checks if player beat the dealer
 
     // end of round functions
     void update_current_player(std::string& err);

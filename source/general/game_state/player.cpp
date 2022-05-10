@@ -111,7 +111,7 @@ void stand() {
 
 }
 
-bool make_bet(int bet_size) {
+bool player::make_bet(int bet_size) {
     if(bet_size > this->get_money()) {
         // error message that says bet cannot be smaller than holdings --> try other bet
         return false;
@@ -123,6 +123,7 @@ bool make_bet(int bet_size) {
     }
 }
 
+//alternative: keep track in a member variable while drawing
 int get_points() {
     int point_sum = 0;
     int ace_counter = 0;

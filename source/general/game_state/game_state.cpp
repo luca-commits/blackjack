@@ -11,7 +11,7 @@
 game_state::game_state() : unique_serializable() {
     this->_players = std::vector<player*>();
     this->_shoe = new shoe();
-    this->_dealers_hand = std::vector<card*>();
+    this->_dealers_hand = new player("Dealer");
     this->_is_started = new serializable_value<bool>(false);
     this->_is_finished = new serializable_value<bool>(false);
     this->_round_number = new serializable_value<int>(0);
@@ -28,7 +28,6 @@ game_state::game_state(std::string id) : unique_serializable(id) {
     this->_starting_player_idx = new serializable_value<int>(0);
 }
 
-//TODO: rearrange stuff so its the same order as the declaration of the member variables in both this and the hpp file
 game_state::game_state(std::string id, std::vector<player*>& players, shoe* shoe,
                        std::vector<card*>& dealers_hand, serializable_value<bool>* is_started,
                        serializable_value<bool>* is_finished, serializable_value<int>* round_number,
@@ -110,27 +109,155 @@ shoe* game_state::get_shoe() const {
 player* game_state::get_current_player() const {
     return _players[_current_player_idx->get_value()];
 }
+
+
 #ifdef BLACKJACK_SERVER
 
 // server-side state update functions (same as in LAMA)
-    void setup_round(std::string& err);   // server side initialization (start_round in our SDS)
-    bool remove_player(player* player, std::string& err);
-    bool add_player(player* player, std::string& err);
-    bool start_game(std::string& err);
-    bool hit(player* player, std::string& err);
-    bool stand(player* player, std::string& err);
-    bool make_bet(player* player, int bet_size, std::string& err);
+void game_state::setup_round(std::string& err) {  // server side initialization (start_round in our SDS)
 
-    // functions from our SDS
-    std::vector<card*> compute_dealers_hand(); // does hardcoded actions for dealer
-    bool check_winner(player* player, std::string& err); // checks if player beat the dealer
+    //update round number
+    _round_number->set_value(_round_number->get_value() + 1);
 
-    // end of round functions
-    void update_current_player(std::string& err);
-    void wrap_up_round(std::string& err);
+    //setup players
+    for (int i = 0; i < _players.size(); i++) {
+        _players[i]->setup_round(err);
+        card* drawn_card = nullptr;
+        _shoe->draw_card(_players[i], err);
+        _shoe->draw_card(_players[i], err);
+    }
+
+    //initialize the dealer
+    _shoe->draw_card(_dealers_hand, err);
+    _shoe->draw_card(_dealers_hand, err);
+
+}
+
+//would be better with a linked list for _players
+bool game_state::remove_player(player* player, std::string& err) {
+    auto idx_it = std::find(_players.begin(), _players.end(), player);
+    int idx = idx_it - _players.begin();
+    if (idx_it != _players.end()) {
+        if (idx < _current_player_idx->get_value()) {
+            // reduce current_player_idx if the player who left had a lower index
+            _current_player_idx->set_value(_current_player_idx->get_value() - 1);
+        }
+        _players.erase(idx_it);
+        return true;
+    } else {
+        err = "Could not leave game, as the requested player was not found in that game.";
+        return false;
+    }
+}
+
+bool game_state::add_player(player* player, std::string& err) {
+    if (_is_started->get_value()) {
+        err = "Could not join game, because the requested game is already started.";
+        return false;
+    }
+    if (_is_finished->get_value()) {
+        err = "Could not join game, because the requested game is already finished.";
+        return false;
+    }
+    if (_players.size() >= _max_nof_players) {
+        err = "Could not join game, because the max number of players is already reached.";
+        return false;
+    }
+    if (std::find(_players.begin(), _players.end(), player) != _players.end()) {
+        err = "Could not join game, because this player is already subscribed to this game.";
+        return false;
+    }
+
+    _players.push_back(player);
+    return true;
+}
+
+bool game_state::start_game(std::string& err) {
+    if (_players.size() < _min_nof_players) {
+        err = "You need at least " + std::to_string(_min_nof_players) + " players to start the game.";
+        return false;
+    }
+
+    if (!_is_started->get_value()) {
+        this->setup_round(err);
+        this->_is_started->set_value(true);
+        return true;
+    } else {
+        err = "Could not start game, as the game was already started";
+        return false;
+    }
+}
+
+//TODO: check if legal turn (player asking for hit without being allowed to)
+bool game_state::hit(player* player, std::string& err) {
+    if(player->get_points() < 21) {
+        player->hit();
+        return true;
+    }
+    else {
+        err = "Could not hit since the player already has 21 points or more.";
+        return false;
+    }
+}
+
+bool game_state::stand(player* player, std::string& err) {
+    if(player->get_points() < 21) {
+        player->stand();
+        return true;
+    }
+    else {
+        err = "Could not stand since the player is already standing."; //ig
+        return false;
+    }
+}
+
+//TODO: other cases to take into account?
+bool game_state::make_bet(player* player, int bet_size, std::string& err) {
+    if(!player->is_broke()) {
+        player->make_bet(bet_size);
+    } else {
+        err = "Player cannot make a bet because they are broke.";
+        return false;
+    }
+}
+
+// functions from our SDS
+//TODO: check if any other actions
+int game_state::compute_dealers_hand() { // does hardcoded actions for dealer
+    while(_dealers_hand->get_points() <= 16) {
+        _dealers_hand->hit();
+    }
+    return _dealers_hand->get_points();
+}
+
+void game_state::check_winner() { // checks if player beat the dealer
+    int dealer = compute_dealers_hand();
+    for(auto player : _players) {
+        int pts = player->get_points();
+        if (pts > 21 || pts < dealer) {
+            player->lost_round();
+        } else if (pts == dealer) {
+            player->draw_round();
+        }  else {
+            player->won_round();
+        }
+    }
+}
+
+// end of round functions
+void game_state::update_current_player(std::string& err) {
+    if(_current_player_idx->get_value() + 1 >= _players.size()) {
+        wrap_up_round(err);
+    } else {
+        ++_current_player_idx;
+    }
+}
+
+//TODO: don't forget the dealer (while loop)
+void game_state::wrap_up_round(std::string& err);
 #endif
 
 
 // Serializable interface
-static game_state* from_json(const rapidjson::Value& json);
-virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
+static game_state* game_state::from_json(const rapidjson::Value& json);
+virtual void game_state::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;

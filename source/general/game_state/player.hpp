@@ -58,9 +58,10 @@ public:
     // I don't know which of those functions we will really need
     void hit();
     void stand();
+    bool make_bet(int bet_size);
     int get_points();
     bool is_broke();
-    bool check_if_over_21();
+    bool check_if_over_21();//don't think we need this
     void won_round();
     void lost_round();
     void draw_round();
