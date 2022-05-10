@@ -6,28 +6,32 @@ player::player(std::string name) : unique_serializable() {
     this->_player_name = new serializable_value<std::string>(name);
     this->_bet_size = new serializable_value<int>(0);
     this->_money = new serializable_value<int>(100);                    // they get $100 at the beginning of the game!
+    this->_finished_turn = new serializable_value<bool>(false);
     this->_hand = new std::vector<card*>();
 }
 
 player::player(std::string id, serializable_value<std::string>* name, serializable_value<int>* bet_size, \
-            serializable_value<int>* money, std::vector<card*> hand) :
+            serializable_value<int>* money, serializable_value<bool>* finished_turn, std::vector<card*> hand) :
         unique_serializable(id),
         _player_name(name),
         _bet_size(bet_size),
         _money(money),
+        _finished_turn(finished_turn),
         _hand(hand)
 { }
 
 player::~player() {
     if (_player_name != nullptr) {
         delete _hand;
-        delete _money;
         delete _bet_size;
+        delete _money;
+        delete _finished_turn;
         delete _player_name;
 
         _hand = nullptr;
-        _money = nullptr;
         _bet_size = nullptr;
+        _money = nullptr;
+        _finished_turn = nullptr;
         _player_name = nullptr;
     }
 }
@@ -39,6 +43,7 @@ player::player(std::string id, std::string name) :
     this->_player_name = new serializable_value<std::string>(name);
     this->_bet_size = new serializable_value<int>(0);
     this->_money = new serializable_value<int>(100);                    // they get $100 at the beginning of the game!
+    this->_finished_turn = new serializable_value<bool>(false);
     this->_hand = new std::vector<card*>();
 }
 
@@ -64,6 +69,10 @@ int player::get_money() const noexcept {
     return this->_money->get_value();
 }
 
+bool player::has_finished_turn() const noexcept {
+    return this->_finished_turn->get_value();
+}
+
 std::vector<card*> player::get_hand() const noexcept {
     return this->_hand;
 }
@@ -81,6 +90,7 @@ void player::add_card(card* card) {
 // should make_bet be already called here ?
 void setup_round(std::string& err) {
     _bet_size->set_value(0);
+    _finished_turn->set_value(false);
     for (int i = 0; i < _hand.size(); i++) {
         delete _hand[i];
     }
@@ -98,35 +108,58 @@ bool wrap_up_round(int dealer_points, std::string& err) {
         this->lost_round();
     } else {
         err = "Something went wrong during wrapping round for player " + this->player_name;
-    }
-}
-
-// TODO
-void hit() {
-
-}
-
-// TODO
-void stand() {
-
-}
-
-bool player::make_bet(int bet_size) {
-    if(bet_size > this->get_money()) {
-        // error message that says bet cannot be smaller than holdings --> try other bet
         return false;
-    } else {
-        int holdings = this->get_money();
-        _bet_size->set_value(bet_size);
-        _money->set_value(holdings - bet_size);
-        return true;
     }
+    return true;
+}
+
+// possibly not needed?
+bool player::hit(card *card, std::string &err) {
+    if (this->has_finished_turn()) {
+        err = "Player " + this->player_name + " has already finished his turn and cannot hit.";
+        return false
+    } 
+
+    this->add_card(card);
+    return true;
+}
+
+// possibly not needed?
+bool player::stand(std::string &err) {
+    if (this->has_finished_turn()) {
+        err = "Player " + this->player_name + " has already finished his turn and cannot stand.";
+        return false
+    } 
+
+    _finished_turn->set_value(true);
+    return true;
+}
+
+// possibly not needed?
+bool player::make_bet(int bet_size, std::string &err) {
+    // add check if player already has a bet to throw error?
+    if(bet_size > this->get_money()) {
+        err = "bet_size is bigger than amount of money the player " + this->player_name + " has.";
+        return false;
+    } else if (bet_size <= 0) {
+        err = "Player " + this->player_name + " tried to place a negative (or no) bet.";
+        return false;
+    } else if (this->has_finished_turn()) {
+        err = "Player " + this->player_name + " has already finished his turn and cannot make bets.";
+        return false
+    }
+        
+    int holdings = this->get_money();
+    _bet_size->set_value(bet_size);
+    _money->set_value(holdings - bet_size);
+    return true;
 }
 
 //alternative: keep track in a member variable while drawing
-int get_points() {
+int player::get_points(std::string &err) {
     int point_sum = 0;
     int ace_counter = 0;
+
     for(auto card : _hand) {
         int value = card->get_value();
         switch(value):
@@ -136,27 +169,46 @@ int get_points() {
                 break;
             //numeric cards
             case 2:
+                point_sum += 2;
+                break;
             case 3:
+                point_sum += 3;
+                break;
             case 4:
+                point_sum += 4;
+                break;
             case 5:
+                point_sum += 5;
+                break;
             case 6:
+                point_sum += 6;
+                break;
             case 7:
+                point_sum += 7;
+                break;
             case 8:
+                point_sum += 8;
+                break;
             case 9:
+                point_sum += 8;
+                break;
             case 10:
-                point_sum += value;
+                point_sum += 10;
                 break;
             //face cards
             case 11:
+                point_sum += 10;
+                break;
             case 12:
+                point_sum += 10;
+                break;
             case 13:
                 point_sum += 10;
                 break;
             default:
-                // how to return an error form here ?
-                // I'll throw to break the program, this looks un-handleable
+                // throws error
                 std::string errstr = "Invalid card with value " + std::to_string(value) + " encountered.";
-                throw BlackjackException(errstr);
+                err = errstr;
                 break;
     }
 
@@ -168,8 +220,7 @@ int get_points() {
         }
     } else {
         if(point_sum + 11 <= 21 - (ace_counter - 1)) {
-            point_sum += 11;
-            point_sum = point_sum + (ace_counter - 1);
+            point_sum = point_sum + 11 + (ace_counter - 1);
         } else {
             point_sum += ace_counter;
         }
@@ -178,14 +229,14 @@ int get_points() {
     return point_sum;
 }
 
-bool is_broke() {
+bool player::is_broke() {
     if(_money->get_value() <= 0)
         return true;
     else
         return false;
 }
 
-bool check_if_over_21() {
+bool player::is_over_21() {
     int points = this->get_points();
     if(points > 21)
         return true;
@@ -193,18 +244,18 @@ bool check_if_over_21() {
         return false;
 }
 
-void won_round() {
+void player::won_round() {
     int winnings = this->get_bet_size();
     int holdings = this->get_money();
     _money->set_value(holdings + 2 * winnings);
     _bet_size->set_value(0);
 }
 
-void lost_round() {
+void player::lost_round() {
     _bet_size->set_value(0);
 }
 
-void draw_round() {
+void player::draw_round() {
     int winnings = this->get_bet_size();
     int holdings = this->get_money();
     _money->set_value(holdings + winnings);
@@ -231,6 +282,10 @@ void player::write_into_json(rapidjson::Value& json, rapidjson::Document::Alloca
     _money->write_into_json(money_val, allocator);
     json.AddMember("money", money_val, allocator);
 
+    rapidjson::Value finished_val(rapidjson::kObjectType);
+    _finished_turn->write_into_json(finished_val, allocator);
+    json.AddMember("finished_turn", finished_val, allocator);
+
     // no idea if this will work
     rapidjson::Value hand_val(rapidjson::kObjectType);
     _hand->write_into_json(hand_val, allocator);
@@ -242,6 +297,7 @@ player *player::from_json(const rapidjson::Value &json) {
         && json.HasMember("player_name")
         && json.HasMember("bet_size")
         && json.HasMember("money")
+        && json.HasMember("finished_turn")
         && json.HasMember("hand"))
     {
         std::vector<card*> deserialized_hand = std::vector<card*>();
@@ -253,6 +309,7 @@ player *player::from_json(const rapidjson::Value &json) {
                 serializable_value<std::string>::from_json(json["player_name"].GetObject()),
                 serializable_value<int>::from_json(json["bet_size"].GetObject()),
                 serializable_value<int>::from_json(json["money"].GetObject()),
+                serializable_value<bool>::from_json(json["finished_turn"].GetObject()),
                 deserialized_hand); // will this work ? I have no idea
     } else {
         throw BlackjackException("Failed to deserialize player from json. Required json entries were missing.");

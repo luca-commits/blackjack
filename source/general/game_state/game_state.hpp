@@ -25,7 +25,7 @@ private:
     serializable_value<bool>* _is_finished;
     serializable_value<int>* _round_number;
     serializable_value<int>* _current_player_idx;
-    serializable_value<int>* _starting_player_idx;
+    serializable_value<int>* _starting_player_idx; // very possible this variable is NOT needed
 
     // from_diff constructor
     game_state(std::string id);
@@ -71,7 +71,7 @@ public:
     bool make_bet(player* player, int bet_size, std::string& err);
 
     // functions from our SDS
-    int compute_dealers_hand(); // does hardcoded actions for dealer
+    int compute_dealers_hand(std::string& err); // does hardcoded actions for dealer
     void check_winner(); // checks if player beat the dealer
 
     // end of round functions

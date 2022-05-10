@@ -21,6 +21,8 @@ game_state::game_state() : unique_serializable() {
 
 game_state::game_state(std::string id) : unique_serializable(id) {
     this->_players = std::vector<player*>();
+    this->_shoe = new shoe();
+    this->_dealers_hand = std::vector<card*>();
     this->_is_started = new serializable_value<bool>(false);
     this->_is_finished = new serializable_value<bool>(false);
     this->_round_number = new serializable_value<int>(0);
@@ -47,7 +49,7 @@ game_state::game_state(std::string id, std::vector<player*>& players, shoe* shoe
 game_state::~game_state() {
     if (_is_started != nullptr) {//de ce facem asta?
         delete _shoe;
-        delete _dealers_hand; //TODO: implement destructor for card ig
+        delete _dealers_hand;
         delete _is_started;
         delete _is_finished;
         delete _round_number;
@@ -190,8 +192,21 @@ bool game_state::start_game(std::string& err) {
 
 //TODO: check if legal turn (player asking for hit without being allowed to)
 bool game_state::hit(player* player, std::string& err) {
+    if (!is_player_in_game(player)) {
+        err = "Server refused to perform hit. Player is not part of the game.";
+        return false;
+    }
+    if (!is_allowed_to_play_now(player)) {
+        err = "It's not this players turn yet.";
+        return false;
+    }
+    if (_is_finished->get_value()) {
+        err = "Could not hit, because the requested game is already finished.";
+        return false;
+    }
+
     if(player->get_points() < 21) {
-        player->hit();
+        player->hit(_shoe->draw_card(player, err));
         return true;
     }
     else {
@@ -223,9 +238,9 @@ bool game_state::make_bet(player* player, int bet_size, std::string& err) {
 
 // functions from our SDS
 //TODO: check if any other actions
-int game_state::compute_dealers_hand() { // does hardcoded actions for dealer
+int game_state::compute_dealers_hand(std::string& err) { // does hardcoded actions for dealer
     while(_dealers_hand->get_points() <= 16) {
-        _dealers_hand->hit();
+        _dealers_hand->hit(_shoe->draw_card(_dealers_hand, err));
     }
     return _dealers_hand->get_points();
 }
@@ -259,5 +274,5 @@ void game_state::wrap_up_round(std::string& err);
 
 
 // Serializable interface
-static game_state* game_state::from_json(const rapidjson::Value& json);
-virtual void game_state::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
+game_state* game_state::from_json(const rapidjson::Value& json);
+void game_state::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
