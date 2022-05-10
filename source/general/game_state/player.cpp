@@ -113,6 +113,7 @@ bool wrap_up_round(int dealer_points, std::string& err) {
     return true;
 }
 
+// possibly not needed?
 bool player::hit(card *card, std::string &err) {
     if (this->has_finished_turn()) {
         err = "Player " + this->player_name + " has already finished his turn and cannot hit.";
@@ -123,6 +124,7 @@ bool player::hit(card *card, std::string &err) {
     return true;
 }
 
+// possibly not needed?
 bool player::stand(std::string &err) {
     if (this->has_finished_turn()) {
         err = "Player " + this->player_name + " has already finished his turn and cannot stand.";
@@ -133,6 +135,7 @@ bool player::stand(std::string &err) {
     return true;
 }
 
+// possibly not needed?
 bool player::make_bet(int bet_size, std::string &err) {
     // add check if player already has a bet to throw error?
     if(bet_size > this->get_money()) {

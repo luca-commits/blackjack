@@ -21,6 +21,8 @@ game_state::game_state() : unique_serializable() {
 
 game_state::game_state(std::string id) : unique_serializable(id) {
     this->_players = std::vector<player*>();
+    this->_shoe = new shoe();
+    this->_dealers_hand = std::vector<card*>();
     this->_is_started = new serializable_value<bool>(false);
     this->_is_finished = new serializable_value<bool>(false);
     this->_round_number = new serializable_value<int>(0);
@@ -48,7 +50,7 @@ game_state::game_state(std::string id, std::vector<player*>& players, shoe* shoe
 game_state::~game_state() {
     if (_is_started != nullptr) {//de ce facem asta?
         delete _shoe;
-        delete _dealers_hand; //TODO: implement destructor for card ig
+        delete _dealers_hand;
         delete _is_started;
         delete _is_finished;
         delete _round_number;
@@ -112,25 +114,68 @@ player* game_state::get_current_player() const {
 }
 #ifdef BLACKJACK_SERVER
 
-// server-side state update functions (same as in LAMA)
-    void setup_round(std::string& err);   // server side initialization (start_round in our SDS)
-    bool remove_player(player* player, std::string& err);
-    bool add_player(player* player, std::string& err);
-    bool start_game(std::string& err);
-    bool hit(player* player, std::string& err);
-    bool stand(player* player, std::string& err);
-    bool make_bet(player* player, int bet_size, std::string& err);
+void game_state::setup_round(std::string& err) {
 
-    // functions from our SDS
-    std::vector<card*> compute_dealers_hand(); // does hardcoded actions for dealer
-    bool check_winner(player* player, std::string& err); // checks if player beat the dealer
+}
 
-    // end of round functions
-    void update_current_player(std::string& err);
-    void wrap_up_round(std::string& err);
+bool game_state::remove_player(player* player, std::string& err) {
+
+}
+
+bool game_state::add_player(player* player, std::string& err) {
+
+}
+
+bool game_state::start_game(std::string& err) {
+
+}
+
+bool game_state::hit(player* player, std::string& err) {
+    if (!is_player_in_game(player)) {
+        err = "Server refused to perform hit. Player is not part of the game.";
+        return false;
+    }
+    if (!is_allowed_to_play_now(player)) {
+        err = "It's not this players turn yet.";
+        return false;
+    }
+    if (_is_finished->get_value()) {
+        err = "Could not hit, because the requested game is already finished.";
+        return false;
+    }
+    
+
+}
+
+bool game_state::stand(player* player, std::string& err) {
+
+}
+
+bool game_state::make_bet(player* player, int bet_size, std::string& err) {
+
+}
+
+
+std::vector<card*> game_state::compute_dealers_hand() {
+
+}
+
+bool game_state::check_winner(player* player, std::string& err) {
+
+}
+
+
+void game_state::update_current_player(std::string& err) {
+
+}
+
+void game_state::wrap_up_round(std::string& err) {
+
+}
+
 #endif
 
 
 // Serializable interface
-static game_state* from_json(const rapidjson::Value& json);
-virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
+game_state* game_state::from_json(const rapidjson::Value& json);
+void game_state::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
