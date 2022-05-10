@@ -25,7 +25,7 @@ private:
     serializable_value<bool>* _is_finished;
     serializable_value<int>* _round_number;
     serializable_value<int>* _current_player_idx;
-    serializable_value<int>* _starting_player_idx;
+    serializable_value<int>* _starting_player_idx; // very possible this variable is NOT needed
 
     // from_diff constructor
     game_state(std::string id);

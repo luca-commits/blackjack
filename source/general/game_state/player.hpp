@@ -14,6 +14,7 @@ private:
     serializable_value<std::string>* _player_name;
     serializable_value<int>* _bet_size;
     serializable_value<int>* _money;
+    serializable_value<bool>* _finished_turn;
     std::vector<card*> _hand;
     
 
@@ -28,6 +29,7 @@ private:
            serializable_value<std::string>* player_name,
            serializable_value<int>* bet_size,
            serializable_value<int>* money,
+           serializable_value<bool>* finished_turn,
            std::vector<card*> hand);
 
 public:
@@ -46,6 +48,7 @@ public:
     int get_nof_cards() const noexcept;     // return number of cards player has on hand
     int get_bet_size() const noexcept;
     int get_money() const noexcept;
+    bool has_finished_turn() const noexcept;
     std::vector<card*> get_hand() const noexcept;
     std::string get_player_name() const noexcept;
 
@@ -55,12 +58,15 @@ public:
     void wrap_up_round(int dealer_points, std::string& err);
     void setup_round(std::string& err);
 
-    // I don't know which of those functions we will really need
-    void hit();
-    void stand();
-    int get_points();
+    // player actions
+    bool hit(card *card, std::string &err);
+    bool stand(std::string &err);
+    bool make_bet(int bet_size, std::string &err);
+    // helper functions for game_state
+    int get_points(std::string &err);
     bool is_broke();
     bool check_if_over_21();
+    // helper functions to calculate winnings
     void won_round();
     void lost_round();
     void draw_round();
