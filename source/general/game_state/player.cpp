@@ -123,7 +123,6 @@ bool player::hit(card *card, std::string &err) {
     return true;
 }
 
-// TODO
 bool player::stand(std::string &err) {
     if (this->has_finished_turn()) {
         err = "Player " + this->player_name + " has already finished his turn and cannot stand.";
@@ -135,7 +134,7 @@ bool player::stand(std::string &err) {
 }
 
 bool player::make_bet(int bet_size, std::string &err) {
-    // add check if player already has a bet to throw error or if he is already done with his turn?
+    // add check if player already has a bet to throw error?
     if(bet_size > this->get_money()) {
         err = "bet_size is bigger than amount of money the player " + this->player_name + " has.";
         return false;
@@ -233,7 +232,7 @@ bool player::is_broke() {
         return false;
 }
 
-bool player::check_if_over_21() {
+bool player::is_over_21() {
     int points = this->get_points();
     if(points > 21)
         return true;

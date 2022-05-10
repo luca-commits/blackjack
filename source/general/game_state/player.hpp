@@ -65,7 +65,7 @@ public:
     // helper functions for game_state
     int get_points(std::string &err);
     bool is_broke();
-    bool check_if_over_21();
+    bool is_over_21();
     // helper functions to calculate winnings
     void won_round();
     void lost_round();
