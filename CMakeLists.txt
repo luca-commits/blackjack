@@ -14,17 +14,19 @@ set(CLIENT_SOURCE_FILES
         source/client/app/Blackjack.cpp source/client/app/Blackjack.hpp
         source/client/GameController.cpp source/client/GameController.hpp
         # UI
-        source/client/windows/GameWindow.cpp source/client/windows/GameWindow.h
-        source/client/uiElements/ImagePanel.cpp source/client/uiElements/ImagePanel.h
-        source/client/panels/ConnectionPanel.cpp source/client/panels/ConnectionPanel.h
-        source/client/panels/MainGamePanel.cpp source/client/panels/MainGamePanel.h
-        source/client/uiElements/InputField.cpp source/client/uiElements/InputField.h
-        source/client/uiElements/ImagePanel.cpp source/client/uiElements/ImagePanel.h
+        source/client/windows/GameWindow.cpp source/client/windows/GameWindow.hpp
+        source/client/uiElements/ImagePanel.cpp source/client/uiElements/ImagePanel.hpp
+        source/client/panels/ConnectionPanel.cpp source/client/panels/ConnectionPanel.hpp
+        source/client/panels/MainGamePanel.cpp source/client/panels/MainGamePanel.hpp
+        source/client/panels/BetPanel.cpp source/client/panels/BetPanel.hpp
+        source/client/uiElements/InputField.cpp source/client/uiElements/InputField.hpp
+        source/client/uiElements/ImagePanel.cpp source/client/uiElements/ImagePanel.hpp
         # network
-        source/client/network/ClientNetworkManager.cpp source/client/network/ClientNetworkManager.h
-        source/client/network/ResponseListenerThread.cpp source/client/network/ResponseListenerThread.h
+        source/client/network/ClientNetworkManager.cpp source/client/network/ClientNetworkManager.hpp
+        source/client/network/ResponseListenerThread.cpp source/client/network/ResponseListenerThread.hpp
         # game state
         source/general/game_state/card.cpp source/general/game_state/card.hpp
+        source/general/game_state/hand.cpp source/general/game_state/hand.hpp
         source/general/game_state/game_state.cpp source/general/game_state/game_state.hpp
         source/general/game_state/player.cpp source/general/game_state/player.hpp
         source/general/game_state/shoe.cpp source/general/game_state/shoe.hpp
@@ -57,6 +59,7 @@ set(SERVER_SOURCE_FILES
         source/server/server_network_manager.cpp source/server/server_network_manager.hpp
         # game state
         source/general/game_state/card.cpp source/general/game_state/card.hpp
+        source/general/game_state/hand.cpp source/general/game_state/hand.hpp
         source/general/game_state/game_state.cpp source/general/game_state/game_state.hpp
         source/general/game_state/player.cpp source/general/game_state/player.hpp
         source/general/game_state/shoe.cpp source/general/game_state/shoe.hpp
@@ -78,7 +81,8 @@ set(SERVER_SOURCE_FILES
         source/general/serialization/serializable_value.h
         source/general/serialization/json_utils.h
         source/general/serialization/uuid_generator.h
-        source/general/serialization/unique_serializable.cpp source/general/serialization/unique_serializable.h source/server/request_handler.hpp source/server/request_handler.cpp)
+        source/general/serialization/unique_serializable.cpp source/general/serialization/unique_serializable.h 
+        source/server/request_handler.hpp source/server/request_handler.cpp)
 
 
 # set source files for client-executable
