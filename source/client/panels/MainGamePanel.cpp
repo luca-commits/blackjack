@@ -102,8 +102,8 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
             true
     );
 
-    bool is_broke();
-    bool check_if_over_21();
+//    bool is_broke();
+//    bool check_if_over_21();
 
 
     if(!gameState->is_started()){
@@ -114,7 +114,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
                 wxSize(200, 18),
                 textAlignment
         );
-    else if(otherPLayer->is_broke()){
+    else if(otherPLayer->get_hand()->is_broke()){
         // STATUS
         this->buildStaticText(
                 "Status: LOST GAME",
@@ -124,7 +124,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         );
     else{
         // STATUS
-        if(otherPLayer->check_if_over_21()){
+        if(otherPLayer->get_hand()->check_if_over_21()){
             this->buildStaticText(
                     "Status: LOST ROUND",
                     labelPosition + wxSize(-100, 18),
