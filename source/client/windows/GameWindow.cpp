@@ -1,4 +1,4 @@
-#include "GameWindow.h"
+#include "GameWindow.hpp"
 
 
 GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& size) : wxFrame(nullptr, wxID_ANY, title, pos, size)

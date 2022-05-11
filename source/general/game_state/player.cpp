@@ -57,10 +57,6 @@ void player::set_game_id(std::string game_id) {
 #endif
 
 
-int player::get_nof_cards() const noexcept {
-    return _hand.size();
-}
-
 int player::get_bet_size() const noexcept {
     return this->_bet_size->get_value();
 }
@@ -202,7 +198,7 @@ void player::write_into_json(rapidjson::Value& json, rapidjson::Document::Alloca
     json.AddMember("finished_turn", finished_val, allocator);
 
     rapidjson::Value hand_val(rapidjson::kObjectType);
-    _hand->write_into_json(hand_val, allocator);
+    _player_hand->write_into_json(hand_val, allocator);
     json.AddMember("player_hand", hand_val, allocator);
 }
 
@@ -220,7 +216,7 @@ player *player::from_json(const rapidjson::Value &json) {
                 serializable_value<int>::from_json(json["bet_size"].GetObject()),
                 serializable_value<int>::from_json(json["money"].GetObject()),
                 serializable_value<bool>::from_json(json["finished_turn"].GetObject()),
-                hand::from_json(json["hand"].GetObject()));
+                hand::from_json(json["player_hand"].GetObject()));
     } else {
         throw BlackjackException("Failed to deserialize player from json. Required json entries were missing.");
     }

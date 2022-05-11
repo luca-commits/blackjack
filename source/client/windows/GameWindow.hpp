@@ -1,7 +1,7 @@
-#ifndef LAMAUI_GAMEWINDOW_H
-#define LAMAUI_GAMEWINDOW_H
+#ifndef BLACKJACKUI_GAMEWINDOW_HPP
+#define BLACKJACKUI_GAMEWINDOW_HPP
 
-#include "../panels/ConnectionPanel.h"
+#include "../panels/ConnectionPanel.hpp"
 
 
 class GameWindow : public wxFrame
@@ -20,5 +20,4 @@ private:
 
 };
 
-
-#endif //LAMAUI_GAMEWINDOW_H
+#endif

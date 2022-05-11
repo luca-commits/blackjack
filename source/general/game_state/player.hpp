@@ -22,7 +22,7 @@ private:
     hand* _player_hand;
     
 
-#ifdef BLACKJACK_SERVER                 // is this macro needed?
+#ifdef BLACKJACK_SERVER                  // is this macro needed?
     std::string _game_id;
 #endif
 
@@ -57,7 +57,7 @@ public:
 
 #ifdef BLACKJACK_SERVER
     // state update functions
-    void add_card(card* card, std::string& err);
+    bool add_card(card* card, std::string& err);
     void wrap_up_round(int dealer_points, std::string& err);
     void setup_round(std::string& err);
 
