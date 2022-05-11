@@ -1,6 +1,6 @@
 #include "hand.hpp"
 
-#include "../exceptions/LamaException.h"
+#include "../exceptions/BlackjackException.hpp"
 #include "../serialization/vector_utils.h"
 
 
@@ -55,7 +55,7 @@ int hand::get_points(std::string &err) {
 
     for(auto card : _cards) {
         int value = card->get_value();
-        switch(value):
+        switch(value) {
             //ace
             case 1:
                 ace_counter += 1;
@@ -104,6 +104,7 @@ int hand::get_points(std::string &err) {
                 err = errstr;
                 return 0;
                 break;
+        }
     }
 
     if(ace_counter == 1) {
@@ -125,7 +126,7 @@ int hand::get_points(std::string &err) {
 
 
 bool hand::is_over_21(std::string &err) {
-    int points = this->get_points(std::string &err);
+    int points = this->get_points(err);
     if(points > 21)
         return true;
     else
@@ -145,6 +146,6 @@ hand *hand::from_json(const rapidjson::Value &json) {
         }
         return new hand(json["id"].GetString(), deserialized_cards);
     } else {
-        throw LamaException("Could not parse hand from json. 'cards' were missing.");
+        throw BlackjackException("Could not parse hand from json. 'cards' were missing.");
     }
 }
