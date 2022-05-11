@@ -236,6 +236,7 @@ bool player::is_broke() {
         return false;
 }
 
+//this does not seem to be used at all
 bool player::is_over_21() {
     int points = this->get_points();
     if(points > 21)

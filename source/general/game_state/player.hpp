@@ -52,6 +52,7 @@ public:
     std::vector<card*> get_hand() const noexcept;
     std::string get_player_name() const noexcept;
 
+#define BLACKJACK_SERVER
 #ifdef BLACKJACK_SERVER
     // state update functions
     void add_card(card* card);
