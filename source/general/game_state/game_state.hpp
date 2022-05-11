@@ -72,7 +72,7 @@ public:
 
     // functions from our SDS
     int compute_dealers_hand(std::string& err); // does hardcoded actions for dealer
-    void check_winner(); // checks if player beat the dealer
+    void check_winner(std::string& err); // checks if player beat the dealer
 
     // end of round functions
     void update_current_player(std::string& err);

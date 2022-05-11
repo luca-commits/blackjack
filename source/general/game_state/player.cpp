@@ -77,7 +77,7 @@ std::vector<card*> player::get_hand() const noexcept {
     return this->_hand;
 }
 
-std::string get_player_name() const noexcept {
+std::string player::get_player_name() const noexcept {
     return this->_player_name->get_value();
 }
 
@@ -88,7 +88,7 @@ void player::add_card(card* card) {
 }
 
 // should make_bet be already called here ?
-void setup_round(std::string& err) {
+void player::setup_round(std::string& err) {
     _bet_size->set_value(0);
     _finished_turn->set_value(false);
     for (int i = 0; i < _hand.size(); i++) {
@@ -97,9 +97,9 @@ void setup_round(std::string& err) {
     _hand.clear();
 }
 
-// based on how many points dealer has, chooses to call won_round, lost_round or draw round
-bool wrap_up_round(int dealer_points, std::string& err) {
-    int player_points = this->get_points();
+// based on how many points the dealer has, chooses to call won_round, lost_round or draw round
+void player::wrap_up_round(int dealer_points, std::string& err) {
+    int player_points = this->get_points(err);
     if(player_points > dealer_points) {
         this->won_round();
     } else if(player_points = dealer_points) {
@@ -107,18 +107,16 @@ bool wrap_up_round(int dealer_points, std::string& err) {
     } else if(player_points < dealer_points) {
         this->lost_round();
     } else {
-        err = "Something went wrong during wrapping round for player " + this->player_name;
-        return false;
+        err = "Something went wrong during wrapping round for player " + this->_player_name->get_value();
     }
-    return true;
 }
 
 /*
 // possibly not needed?
 bool player::hit(card *card, std::string &err) {
     if (this->has_finished_turn()) {
-        err = "Player " + this->player_name + " has already finished his turn and cannot hit.";
-        return false
+        err = "Player " + this->_player_name->get_value() + " has already finished his turn and cannot hit.";
+        return false;
     } 
 
     this->add_card(card);
@@ -128,7 +126,7 @@ bool player::hit(card *card, std::string &err) {
 // possibly not needed?
 bool player::stand(std::string &err) {
     if (this->has_finished_turn()) {
-        err = "Player " + this->player_name + " has already finished his turn and cannot stand.";
+        err = "Player " + this->_player_name->get_value() + " has already finished his turn and cannot stand.";
         return false
     } 
 
@@ -143,10 +141,10 @@ bool player::make_bet(int bet_size, std::string &err) {
         err = "bet_size is bigger than amount of money the player " + this->player_name + " has.";
         return false;
     } else if (bet_size <= 0) {
-        err = "Player " + this->player_name + " tried to place a negative (or no) bet.";
+        err = "Player " + this->_player_name->get_value() + " tried to place a negative (or no) bet.";
         return false;
     } else if (this->has_finished_turn()) {
-        err = "Player " + this->player_name + " has already finished his turn and cannot make bets.";
+        err = "Player " + this->_player_name->get_value() + " has already finished his turn and cannot make bets.";
         return false
     }
         
