@@ -112,7 +112,6 @@ player* game_state::get_current_player() const {
     return _players[_current_player_idx->get_value()];
 }
 
-
 #ifdef BLACKJACK_SERVER
 
 // server-side state update functions (same as in LAMA)
@@ -239,16 +238,16 @@ bool game_state::make_bet(player* player, int bet_size, std::string& err) {
 // functions from our SDS
 //TODO: check if any other actions
 int game_state::compute_dealers_hand(std::string& err) { // does hardcoded actions for dealer
-    while(_dealers_hand->get_points() <= 16) {
-        _dealers_hand->hit(_shoe->draw_card(_dealers_hand, err));
+    while(_dealers_hand->get_points(err) <= 16) {
+        _dealers_hand->hit(_shoe->draw_card(_dealers_hand, err), err);
     }
-    return _dealers_hand->get_points();
+    return _dealers_hand->get_points(err);
 }
 
-void game_state::check_winner() { // checks if player beat the dealer
-    int dealer = compute_dealers_hand();
+void game_state::check_winner(std::string& err) { // checks if player beat the dealer
+    int dealer = compute_dealers_hand(err);
     for(auto player : _players) {
-        int pts = player->get_points();
+        int pts = player->get_points(err);
         if (pts > 21 || pts < dealer) {
             player->lost_round();
         } else if (pts == dealer) {
@@ -268,8 +267,28 @@ void game_state::update_current_player(std::string& err) {
     }
 }
 
-//TODO: don't forget the dealer (while loop)
-void game_state::wrap_up_round(std::string& err);
+//look at where Auswertung of the winners of the round and stuff
+void game_state::wrap_up_round(std::string& err) {
+    bool is_game_over = false;
+    int dealer_points = _dealers_hand->get_points(err);
+    for(int i = 0; i < _players.size(); i++) {
+        _players[i]->wrap_up_round(dealer_points, err);
+    }
+
+    if (_round_number->get_value() >= _max_nof_rounds) {
+        // The game ends when the first player reaches 40 points
+        is_game_over = true;
+    }
+
+    if (is_game_over) {
+        this->_is_finished->set_value(true);
+    } else {
+        // decide which player starts in the next round
+        _starting_player_idx->set_value(0);
+        // start next round
+        setup_round(err);
+    }
+}
 #endif
 
 
