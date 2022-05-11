@@ -34,7 +34,7 @@ std::vector<card*>::iterator hand::get_card_iterator() {
 }
 
 
-#ifdef LAMA_SERVER
+#ifdef BLACKJACK_SERVER
 void hand::setup_round(std::string &err) {
     // remove all cards (if any) and clear it
     for (int i = 0; i < _cards.size(); i++) {
