@@ -26,7 +26,7 @@ public:
     int get_nof_cards() const;
     const std::vector<card*> get_cards() const;
 
-#ifdef LAMA_SERVER
+#ifdef BLACKJACK_SERVER
 // state update functions
     void setup_round(std::string& err);
     bool add_card(card* card, std::string& err);

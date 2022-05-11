@@ -10,6 +10,9 @@
 #include "../serialization/unique_serializable.h"
 #include "../serialization/serializable_value.h"
 
+//TODO: flag access function for finished turn
+//TODO: hit implemented in game_state, also set flag if over 21
+
 class player : public unique_serializable {
 private:
     serializable_value<std::string>* _player_name;

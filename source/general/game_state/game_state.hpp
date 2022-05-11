@@ -10,6 +10,14 @@
 #include "../serialization/serializable_value.h"
 #include "../serialization/unique_serializable.h"
 
+//TODO: check if legal turn for standing and everything
+//TODO: maybe make compute_dealers_hand not return an int
+//TODO: check_winner not needed
+//TODO: update current player after every stand and hit that goes over 21
+//TODO: make bets before ppl play
+//TODO: see that draw_card only takes a card from shoe and then puts it in the player's hand
+
+
 class game_state : public unique_serializable {
 private:
 
@@ -20,7 +28,7 @@ private:
 
     std::vector<player*> _players;
     shoe* _shoe;
-    player* _dealers_hand;
+    player* _dealers_hand; //TODO:let it be a hand
     serializable_value<bool>* _is_started;
     serializable_value<bool>* _is_finished;
     serializable_value<int>* _round_number;
