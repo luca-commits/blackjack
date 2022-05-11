@@ -33,7 +33,7 @@ public:
     // pile functions
     void shuffle();
     bool is_empty() const noexcept;
-    void fresh_shuffle();
+    void setup_round(std::string &err);
     card* draw_card(player* player, std::string& err);
 
     // serialization

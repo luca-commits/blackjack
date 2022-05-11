@@ -36,7 +36,7 @@ bool shoe::is_empty() const noexcept  {
     return _cards.empty();
 }
 
-void shoe::fresh_shuffle() {
+void shoe::setup_round(std::string &err) {
     // remove all cards
     for (int i = 0; i < _cards.size(); i++) {
         delete _cards[i];
