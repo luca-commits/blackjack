@@ -59,11 +59,12 @@ void shoe::setup_round(std::string &err) {
 card* shoe::draw_card(player* player, std::string& err)  {
     if (!_cards.empty()) {
         card* drawn_card = _cards.back();
-        player->add_card(drawn_card);
+        player->add_card(drawn_card, err);
         _cards.pop_back();
         return drawn_card;
     } else {
         err = "Could not draw card because draw pile is empty.";
+        return nullptr;
     }
 }
 
