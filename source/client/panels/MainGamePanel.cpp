@@ -38,15 +38,15 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
         double playerAngle = (double) i * anglePerPlayer;
         int side = (2 * i) - numberOfPlayers; // side < 0 => right, side == 0 => center, side > 0 => left
 
-        this->buildOtherPlayerHand(gameState, otherPlayer, playerAngle);
-        this->buildOtherPlayerLabels(gameState, otherPlayer, playerAngle, side);
+        this->buildOthers(gameState, otherPlayer, playerAngle, side);
+      //  this->buildOtherPlayerLabels(gameState, otherPlayer, playerAngle, side);
     }
 
     // show both card piles at the center
     this->buildCardPiles(gameState, me);
 
-    // show turn indicator below card piles
-    this->buildTurnIndicator(gameState, me);
+//    // show turn indicator below card piles
+//    this->buildTurnIndicator(gameState, me);
 
     // show our own player
     this->buildThisPlayer(gameState, me);
@@ -376,7 +376,6 @@ void buildShoe(){
 }
 
 void buildDealer(game_state* gameState){
-
   std::vector<Card> dealers_cards = gameState->compute_dealers_hand();
   std::string backside = "assets/png-cards/backside.png";
   std::string left_frontside = getPngFileName(dealers_cards[0]);

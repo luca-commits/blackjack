@@ -15,7 +15,7 @@ public:
 
 private:
 
-    void buildOthers(game_state* gameState, player* otherPlayer, double playerAngle);
+    void buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, side);
     //void buildGameController();  //change this from sds
     void buildRoundCounter(game_state* gameState);
     void buildThisPlayer(game_state* gameState, player* me); //in sds this is build myself
