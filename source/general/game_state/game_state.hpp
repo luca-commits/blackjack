@@ -60,6 +60,7 @@ public:
     shoe* get_shoe() const;
     player* get_current_player() const;
 
+
 #ifdef BLACKJACK_SERVER
     // server-side state update functions (same as in LAMA)
     void setup_round(std::string& err);   // server side initialization (start_round in our SDS)
