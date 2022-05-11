@@ -244,7 +244,6 @@ bool game_state::make_bet(player* player, int bet_size, std::string& err) {
 //TODO: check if any other actions
 //TODO: maybe if dealer is player than after we are done hitting for him set _finished_turn to true?
 int game_state::compute_dealers_hand(std::string& err) { // does hardcoded actions for dealer
-<<<<<<< HEAD
     while(_dealers_hand->get_points() <= 16) {
         _dealers_hand->hit(_shoe->draw_card(_dealers_hand, err)); // just like for hit, this is wrong, look at what draw_card does
     }
@@ -255,7 +254,6 @@ int game_state::compute_dealers_hand(std::string& err) { // does hardcoded actio
 // maybe just get rid of this function and in wrap_up_round of game_state call wrap_up_round for each player?
 void game_state::check_winner() { // checks if player beat the dealer
     int dealer = compute_dealers_hand();
-=======
     while(_dealers_hand->get_points(err) <= 16) {
         _dealers_hand->hit(_shoe->draw_card(_dealers_hand, err), err);
     }
@@ -264,7 +262,6 @@ void game_state::check_winner() { // checks if player beat the dealer
 
 void game_state::check_winner(std::string& err) { // checks if player beat the dealer
     int dealer = compute_dealers_hand(err);
->>>>>>> 4aa9f9097326d4ad97b354d619f4fd95a735f475
     for(auto player : _players) {
         int pts = player->get_points(err);
         if (pts > 21 || pts < dealer) {
