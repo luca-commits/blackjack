@@ -100,6 +100,7 @@ int game_state::get_round_number() const {
     return _round_number->get_value();
 }
 
+// emmm pretty sure this is not correct (look at LAMA)
 int game_state::get_player_index(player* player) const {
     return _current_player_idx->get_value();
 }
@@ -117,6 +118,9 @@ player* game_state::get_current_player() const {
 
 // server-side state update functions (same as in LAMA)
 void game_state::setup_round(std::string& err) {  // server side initialization (start_round in our SDS)
+
+    // TODO: implement some sort of shoe setup (done)
+    _shoe->setup_round(err);
 
     //update round number
     _round_number->set_value(_round_number->get_value() + 1);
@@ -191,6 +195,7 @@ bool game_state::start_game(std::string& err) {
 }
 
 //TODO: check if legal turn (player asking for hit without being allowed to)
+//TODO: if after hit you are over 21, automatically end turn (set _finished_turn to true) and call update_current_player!
 bool game_state::hit(player* player, std::string& err) {
     if (!is_player_in_game(player)) {
         err = "Server refused to perform hit. Player is not part of the game.";
@@ -206,22 +211,22 @@ bool game_state::hit(player* player, std::string& err) {
     }
 
     if(player->get_points() < 21) {
-        player->hit(_shoe->draw_card(player, err));
+        player->hit(_shoe->draw_card(player, err)); //this is wrong for sure (look at what draw_card does)
         return true;
-    }
-    else {
+    } else {
         err = "Could not hit since the player already has 21 points or more.";
         return false;
     }
 }
 
+//TODO: this should check and set the _finished_turn flag of player and call update_current_player!
 bool game_state::stand(player* player, std::string& err) {
     if(player->get_points() < 21) {
-        player->stand();
+        player->stand(err);
         return true;
     }
     else {
-        err = "Could not stand since the player is already standing."; //ig
+        err = "Could not stand since the player already finished his turn.";
         return false;
     }
 }
@@ -229,7 +234,7 @@ bool game_state::stand(player* player, std::string& err) {
 //TODO: other cases to take into account?
 bool game_state::make_bet(player* player, int bet_size, std::string& err) {
     if(!player->is_broke()) {
-        player->make_bet(bet_size);
+        player->make_bet(bet_size, err);
     } else {
         err = "Player cannot make a bet because they are broke.";
         return false;
@@ -238,13 +243,16 @@ bool game_state::make_bet(player* player, int bet_size, std::string& err) {
 
 // functions from our SDS
 //TODO: check if any other actions
+//TODO: maybe if dealer is player than after we are done hitting for him set _finished_turn to true?
 int game_state::compute_dealers_hand(std::string& err) { // does hardcoded actions for dealer
     while(_dealers_hand->get_points() <= 16) {
-        _dealers_hand->hit(_shoe->draw_card(_dealers_hand, err));
+        _dealers_hand->hit(_shoe->draw_card(_dealers_hand, err)); // just like for hit, this is wrong, look at what draw_card does
     }
-    return _dealers_hand->get_points();
+    return _dealers_hand->get_points(); // I would not make this an int but return the hand itself but whatever you say
 }
 
+// wrap_up_round of player does the same thing, 
+// maybe just get rid of this function and in wrap_up_round of game_state call wrap_up_round for each player?
 void game_state::check_winner() { // checks if player beat the dealer
     int dealer = compute_dealers_hand();
     for(auto player : _players) {
