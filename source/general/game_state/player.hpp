@@ -58,10 +58,12 @@ public:
     void wrap_up_round(int dealer_points, std::string& err);
     void setup_round(std::string& err);
 
-    // player actions
+    /*
+    // player actions (probably not needed)
     bool hit(card *card, std::string &err);
     bool stand(std::string &err);
     bool make_bet(int bet_size, std::string &err);
+    */
     // helper functions for game_state
     int get_points(std::string &err);
     bool is_broke();

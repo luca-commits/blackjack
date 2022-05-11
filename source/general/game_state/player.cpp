@@ -113,6 +113,7 @@ bool wrap_up_round(int dealer_points, std::string& err) {
     return true;
 }
 
+/*
 // possibly not needed?
 bool player::hit(card *card, std::string &err) {
     if (this->has_finished_turn()) {
@@ -154,6 +155,7 @@ bool player::make_bet(int bet_size, std::string &err) {
     _money->set_value(holdings - bet_size);
     return true;
 }
+*/
 
 //alternative: keep track in a member variable while drawing
 int player::get_points(std::string &err) {
