@@ -52,7 +52,7 @@ bool game_instance::start_game(player* player, std::string &err) {
     return false;
 }
 
-bool game_instance::add_player(player *new_player, std::string &err) {
+bool game_instance::try_add_player(player *new_player, std::string &err) {
     modification_lock.lock();
     if (_game_state->add_player(new_player, err)) { // ADAPT THIS LINE!
         new_player->set_game_id(get_id());
@@ -106,7 +106,7 @@ bool game_instance::stand(player* player, std::string& err) {
     return false;
 }
 
-bool game_instance::make_bet(player *player, int bet_size, std::string& err) {
+bool game_instance::make_bet(player *player, const int& bet_size, std::string& err) {
     modification_lock.lock();
     if (_game_state->make_bet(player, bet_size, err)) { // ADAPT THIS LINE!
         change_gamestate_msg state_update_msg = change_gamestate_msg(this->get_id(), *_game_state);
