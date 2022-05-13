@@ -1,16 +1,17 @@
 #ifndef BETPANEL_HPP
 #define BETPANEL_HPP
 
+#include <wx/wx.h>
+#include "../GameController.hpp"
+#include "../../general/game_state/game_state.hpp"
 
 class BetPanel {
-
 public:
-  int getBetSize();
-  int getPlayerMoney();
+    BetPanel(wxWindow* parent, game_state* gameState, player* me);
+    wxString getBetSize();
 
 private:
-  int betSize;
-  int playerMoney;
+    InputField* _betSizeField;
 };
 
-#endif //BETPANEL_HPP
+#endif

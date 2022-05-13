@@ -83,7 +83,7 @@ void GameController::connectToServer() {
 
 }
 
-
+// THIS HAS TO BE EDITTED FOR SURE
 void GameController::updateGameState(game_state* newGameState) {
 
     // the existing game state is now old
