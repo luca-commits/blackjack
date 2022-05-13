@@ -122,6 +122,8 @@ void game_state::setup_round(std::string& err) {  // server side initialization 
     //setup players
     for (auto player : _players) {
         player->setup_round(err);
+        //TODO: how do we get the instream for the amount of the bet
+        player->make_bet(0, err);
         _shoe->draw_card(player->get_hand(), err);
         _shoe->draw_card(player->get_hand(), err);
     }
@@ -247,6 +249,7 @@ bool game_state::stand(player* player, std::string& err) {
 bool game_state::make_bet(player* player, int bet_size, std::string& err) {
     if(!player->is_broke()) {
         player->make_bet(bet_size, err);
+        return true;
     } else {
         err = "Player cannot make a bet because they are broke.";
         return false;
@@ -288,5 +291,67 @@ void game_state::wrap_up_round(std::string& err) {
 
 
 // Serializable interface
-game_state* game_state::from_json(const rapidjson::Value& json);
-void game_state::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
+game_state* game_state::from_json(const rapidjson::Value& json) {
+    if (json.HasMember("id")
+        && json.HasMember("players")
+        && json.HasMember("shoe")
+        && json.HasMember("dealers_hand")
+        && json.HasMember("is_started")
+        && json.HasMember("is_finished")
+        && json.HasMember("round_number")
+        && json.HasMember("current_player_idx")
+        && json.HasMember("starting_player_idx"))
+    {
+        std::vector<player*> deserialized_players;
+        for (auto &serialized_player : json["players"].GetArray()) {
+            deserialized_players.push_back(player::from_json(serialized_player.GetObject()));
+        }
+
+        return new game_state(json["id"].GetString(),
+                              deserialized_players,
+                              shoe::from_json(json["shoe"].GetObject()),
+                              hand::from_json(json["dealers_hand"].GetObject()),
+                              serializable_value<bool>::from_json(json["is_started"].GetObject()),
+                              serializable_value<bool>::from_json(json["is_finished"].GetObject()),
+                              serializable_value<int>::from_json(json["round_number"].GetObject()),
+                              serializable_value<int>::from_json(json["current_player_idx"].GetObject()),
+                              serializable_value<int>::from_json(json["starting_player_idx"].GetObject()));
+
+
+    } else {
+        throw BlackjackException("Failed to deserialize game_state. Required entries were missing.");
+    }
+}
+void game_state::write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const {
+    unique_serializable::write_into_json(json, allocator);
+
+    rapidjson::Value is_started_val(rapidjson::kObjectType);
+    _is_started->write_into_json(is_started_val, allocator);
+    json.AddMember("is_started", is_started_val, allocator);
+
+    rapidjson::Value is_finished_val(rapidjson::kObjectType);
+    _is_finished->write_into_json(is_finished_val, allocator);
+    json.AddMember("is_finished", is_finished_val, allocator);
+
+    rapidjson::Value round_number_val(rapidjson::kObjectType);
+    _round_number->write_into_json(round_number_val, allocator);
+    json.AddMember("round_number", round_number_val, allocator);
+
+    rapidjson::Value current_player_idx_val(rapidjson::kObjectType);
+    _current_player_idx->write_into_json(current_player_idx_val, allocator);
+    json.AddMember("current_player_idx", current_player_idx_val, allocator);
+
+    rapidjson::Value starting_player_idx_val(rapidjson::kObjectType);
+    _starting_player_idx->write_into_json(starting_player_idx_val, allocator);
+    json.AddMember("starting_player_idx", starting_player_idx_val, allocator);
+
+    rapidjson::Value shoe_val(rapidjson::kObjectType);
+    _shoe->write_into_json(shoe_val, allocator);
+    json.AddMember("shoe", shoe_val, allocator);
+
+    rapidjson::Value dealers_hand_val(rapidjson::kObjectType);
+    _dealers_hand->write_into_json(dealers_hand_val, allocator);
+    json.AddMember("dealers_hand", dealers_hand_val, allocator);
+
+    json.AddMember("players", vector_utils::serialize_vector(_players, allocator), allocator);
+}

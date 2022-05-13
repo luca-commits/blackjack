@@ -12,7 +12,6 @@
 
 //TODO: check if legal turn for standing and everything
 //TODO: make bets before ppl play
-//TODO: see that draw_card only takes a card from shoe and then puts it in the player's hand
 
 
 class game_state : public unique_serializable {
