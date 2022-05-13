@@ -77,11 +77,12 @@ std::string player::get_player_name() const noexcept {
     return this->_player_name->get_value();
 }
 
-#ifdef BLACKJACK_SERVER
-
-bool player::add_card(card* card, std::string& err) {
-    return _player_hand->add_card(card, err);
+//are we sure we need those
+void player::set_finished_turn() {
+    this->_finished_turn->set_value(true);
 }
+
+#ifdef BLACKJACK_SERVER
 
 // should make_bet be already called here ?
 void player::setup_round(std::string& err) {
@@ -104,55 +105,30 @@ void player::wrap_up_round(int dealer_points, std::string& err) {
     }
 }
 
-/*
-// possibly not needed?
-bool player::hit(card *card, std::string &err) {
-    if (this->has_finished_turn()) {
-        err = "Player " + this->_player_name->get_value() + " has already finished his turn and cannot hit.";
-        return false;
-    } 
-
-    this->add_card(card);
-    return true;
-}
 
 // possibly not needed?
-bool player::stand(std::string &err) {
-    if (this->has_finished_turn()) {
-        err = "Player " + this->_player_name->get_value() + " has already finished his turn and cannot stand.";
-        return false
-    } 
-
-    _finished_turn->set_value(true);
-    return true;
-}
-
-// possibly not needed?
+// TODO: add check if player already has a bet to throw error?
 bool player::make_bet(int bet_size, std::string &err) {
-    // add check if player already has a bet to throw error?
     if(bet_size > this->get_money()) {
-        err = "bet_size is bigger than amount of money the player " + this->player_name + " has.";
+        err = "bet_size is bigger than amount of money the player " + this->_player_name->get_value() + " has.";
         return false;
     } else if (bet_size <= 0) {
+        //TODO: why do we not do this with an unsigned int then
         err = "Player " + this->_player_name->get_value() + " tried to place a negative (or no) bet.";
         return false;
     } else if (this->has_finished_turn()) {
         err = "Player " + this->_player_name->get_value() + " has already finished his turn and cannot make bets.";
-        return false
+        return false;
     }
-        
-    int holdings = this->get_money();
+
     _bet_size->set_value(bet_size);
-    _money->set_value(holdings - bet_size);
+    _money->set_value(this->get_money() - bet_size);
     return true;
 }
-*/
+
 
 bool player::is_broke() {
-    if(_money->get_value() <= 0)
-        return true;
-    else
-        return false;
+    return _money->get_value() <= 0;
 }
 
 void player::won_round() {
