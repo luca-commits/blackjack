@@ -241,6 +241,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
         //         wxSize(200, 18),
         //         wxALIGN_CENTER
         // );
+
         // innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
 
         // Show our pla
@@ -344,36 +345,46 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
 //}
 
 void MainGamePanel::buildDealer(game_state* gameState){
-  wxPoint offset(80, 0);
-  std::vector<card> dealers_cards = gameState->compute_dealers_hand();
-  std::vector<wxPoint> offsets(dealers_cards.size());
-  for(unsigned i = 0; i < dealers_cards.size(); ++i){
-    offsets[i] = i * offset;
-  }
-  std::string backside = "assets/png-cards/backside.png";
-  std::string left_frontside = getPngFileName(dealers_cards[0].get_value(), dealers_cards[0].get_suit());
-  std::string right_frontside = getPngFileName(dealers_cards[1].get_value(), dealers_cards[1].get_suit());
+    // Setup two nested box sizers, in order to align our player's UI to the bottom center
+    wxBoxSizer* outerLayout = new wxBoxSizer(wxHORIZONTAL);
+    this->SetSizer(outerLayout);
+    wxBoxSizer* innerLayout = new wxBoxSizer(wxVERTICAL);
+    outerLayout->Add(innerLayout, 1, wxALIGN_CENTER);
 
-  std::vector<std::string> dealer_cards_file_names(dealers_cards.size());
-  std::transform(dealers_cards.begin(), dealers_cards.end(),
-                 dealer_cards_file_names.begin(), [this](card c) -> std::string {
-                   return this->getPngFileName(c.get_value(), c.get_suit());
-                 });
-  std::vector<ImagePanel*> dealer_card_image_panel(dealers_cards.size());
+    wxPoint offset(80, 0);
+    std::vector<card> dealers_cards = gameState->compute_dealers_hand();
+    std::vector<wxPoint> offsets(dealers_cards.size());
+    for(unsigned i = 0; i < dealers_cards.size(); ++i){
+        offsets[i] = i * offset;
+    }
+    std::string backside = "assets/png-cards/backside.png";
+    std::string left_frontside = getPngFileName(dealers_cards[0].get_value(), dealers_cards[0].get_suit());
+    std::string right_frontside = getPngFileName(dealers_cards[1].get_value(), dealers_cards[1].get_suit());
 
-  bool first_part = 0;
+    std::vector<std::string> dealer_cards_file_names(dealers_cards.size());
+    std::transform(dealers_cards.begin(), dealers_cards.end(),
+                    dealer_cards_file_names.begin(), [this](card c) -> std::string {
+                    return this->getPngFileName(c.get_value(), c.get_suit());
+                    });
 
-  if(gameState -> first_part){
-      wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
-      wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
-      ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightCardPosition, MainGamePanel::cardSize);
-      ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0].get_value(), dealers_cards[0].get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
-  }
-  else{
-     for(unsigned i = 0; i < dealers_cards.size(); ++i){
-         dealer_card_image_panel[i] = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
-     }
-  }
+    bool first_part = 0;
+
+    wxBoxSizer *handLayout = new wxBoxSizer(wxHORIZONTAL);
+    innerLayout->Add(handLayout, 0, wxALIGN_CENTER);
+
+
+    if(first_part){
+        wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
+        wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
+        ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightCardPosition, MainGamePanel::cardSize);
+        ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0].get_value(), dealers_cards[0].get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
+    }
+    else{
+        for(unsigned i = 0; i < dealers_cards.size(); ++i){
+            ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
+            handLayout->Add(ImagePanel, 0, wxLEFT | wxRIGHT, 4);
+        }
+    }
 }
 
 wxStaticText* MainGamePanel::buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold) {
