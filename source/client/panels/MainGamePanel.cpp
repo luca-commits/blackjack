@@ -44,8 +44,6 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
       //  this->buildOtherPlayerLabels(gameState, otherPlayer, playerAngle, side);
     }
 
-    // show both card piles at the center
-    this->buildCardPiles(gameState, me);
 
 //    // show turn indicator below card piles
 //    this->buildTurnIndicator(gameState, me);
@@ -127,6 +125,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
                 wxSize(200, 18),
                 textAlignment
         );
+    }
     else{
         // STATUS
         if(otherPlayer->get_hand()->is_over_21(err)){
@@ -163,10 +162,12 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         // add player's HAND IMAGE=================================
         int numberOfCards = otherPlayer->get_nof_cards();
 
+        wxSize boundsOfRotatedHand;
+
         if(numberOfCards > 0) {
+            boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
 
             // get new bounds of image, as they increase when image is rotated
-            wxSize boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
             handPosition -= boundsOfRotatedHand / 2;
 
             std::string handImage = "assets/png-bcards/back" + std::to_string(numberOfCards) + ".png";
@@ -314,44 +315,6 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
     }
 }
 
-//This function has to be changed surely TODO
-void MainGamePanel::buildCardPiles(game_state* gameState, player *me) {
-
-    if(gameState->is_started()) {
-
-        // Show discard pile
-        const card* topCard = gameState->get_discard_pile()->get_top_card();
-        if(topCard != nullptr) {
-            std::string cardImage = "assets/lama_" + std::to_string(topCard->get_value()) + ".png";
-
-            wxPoint discardPilePosition = MainGamePanel::tableCenter + MainGamePanel::discardPileOffset;
-
-            ImagePanel* discardPile = new ImagePanel(this, cardImage, wxBITMAP_TYPE_ANY, discardPilePosition, MainGamePanel::cardSize);
-            discardPile->SetToolTip("Discard pile");
-        }
-
-        // Show draw pile
-        wxPoint drawPilePosition = MainGamePanel::tableCenter + MainGamePanel::drawPileOffset;
-
-        ImagePanel* drawPile = new ImagePanel(this, "assets/png-cards/backside.png", wxBITMAP_TYPE_ANY, drawPilePosition, MainGamePanel::cardSize);
-
-        if(gameState->get_current_player() == me && !me->has_folded()) {
-            drawPile->SetToolTip("Draw card");
-            drawPile->SetCursor(wxCursor(wxCURSOR_HAND));
-            drawPile->Bind(wxEVT_LEFT_UP, [](wxMouseEvent& event) {
-                GameController::drawCard();
-            });
-        } else {
-            drawPile->SetToolTip("Draw pile");
-        }
-
-    } else {
-        // if the game did not start yet, show a back side of a card in the center (only for the mood)
-        wxPoint cardPosition = MainGamePanel::tableCenter - (MainGamePanel::cardSize / 2);
-        new ImagePanel(this, "assets/png-cards/backside.png", wxBITMAP_TYPE_ANY, cardPosition, MainGamePanel::cardSize);
-    }
-
-}
 
 void MainGamePanel::buildRoundCounter(game_state* gameState){
   if(gameState->is_started() && gameState->get_current_player() != nullptr) {
@@ -381,7 +344,7 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
 //}
 
 void MainGamePanel::buildDealer(game_state* gameState){
-  wxPoint offset = (80, 0);
+  wxPoint offset(80, 0);
   std::vector<card> dealers_cards = gameState->compute_dealers_hand();
   std::vector<wxPoint> offsets(dealers_cards.size());
   for(unsigned i = 0; i < dealers_cards.size(); ++i){
