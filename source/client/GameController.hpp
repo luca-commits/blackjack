@@ -33,7 +33,7 @@ private:
     static MainGamePanel* _mainGamePanel;
     static BetPanel* _betPanel;
 
-    static player* _my_id;
+    static player* _me;
     static game_state* _current_game_state;
 
 };
