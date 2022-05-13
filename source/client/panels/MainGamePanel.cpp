@@ -127,6 +127,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
                 wxSize(200, 18),
                 textAlignment
         );
+    }
     else{
         // STATUS
         if(otherPlayer->get_hand()->is_over_21(err)){
@@ -163,10 +164,12 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         // add player's HAND IMAGE=================================
         int numberOfCards = otherPlayer->get_nof_cards();
 
+        wxSize boundsOfRotatedHand;
+
         if(numberOfCards > 0) {
+            boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
 
             // get new bounds of image, as they increase when image is rotated
-            wxSize boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
             handPosition -= boundsOfRotatedHand / 2;
 
             std::string handImage = "assets/png-bcards/back" + std::to_string(numberOfCards) + ".png";
@@ -381,7 +384,7 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
 //}
 
 void MainGamePanel::buildDealer(game_state* gameState){
-  wxPoint offset = (80, 0);
+  wxPoint offset(80, 0);
   std::vector<card> dealers_cards = gameState->compute_dealers_hand();
   std::vector<wxPoint> offsets(dealers_cards.size());
   for(unsigned i = 0; i < dealers_cards.size(); ++i){
