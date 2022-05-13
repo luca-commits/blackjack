@@ -1,7 +1,7 @@
 #ifndef BLACKJACKUI_GAMECONTROLLER_HPP
 #define BLACKJACKUI_GAMECONTROLLER_HPP
 
-// these .h extentions will need to be changed to .hpp probably
+#include <string>
 #include "windows/GameWindow.hpp"
 #include "panels/ConnectionPanel.hpp"
 #include "panels/MainGamePanel.hpp"
@@ -16,6 +16,7 @@ public:
     static void init(GameWindow* gameWindow);
 
     static void connectToServer();
+    static void makeBet();
     static void updateGameState(game_state* newGameState);
     static void startGame();
     static void hit();

@@ -83,6 +83,27 @@ void GameController::connectToServer() {
 
 }
 
+void GameController::makeBet() {
+    wxString inputPlayerBet = GameController::_betPanel->getBetSize().Trim();
+
+    if(inputPlayerBet.IsEmpty()) {
+        GameController::showError("Input error", "Please enter your bet");
+        return;
+    }
+
+    std::string bet_string = inputPlayerBet.ToStdString();
+    int bet_int = std::stoi(bet_string);
+
+    // check to make sure this in a logical integer (recovery if not ?)
+    if(bet_int < game_state::_min_bet && bet_int > 4096) {
+        GameController::showError("Input error", "Invalid value given as bet");
+        return;
+    }
+
+    make_bet_request request = make_bet_request(GameController::_me->get_id(), GameController::_me->get_player_name(), bet_int);
+    ClientNetworkManager::sendRequest(request);
+}
+
 // THIS HAS TO BE EDITTED FOR SURE
 void GameController::updateGameState(game_state* newGameState) {
 
