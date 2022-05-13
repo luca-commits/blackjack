@@ -2,7 +2,7 @@
 #define TEST_CONNECTIONPANEL_H
 
 #include <wx/wx.h>
-#include "../uiElements/InputField.h"
+#include "../uiElements/InputField.hpp"
 
 
 class ConnectionPanel : public wxPanel {

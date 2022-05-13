@@ -2,9 +2,9 @@
 #define BLACKJACKUI_GAMECONTROLLER_HPP
 
 // these .h extentions will need to be changed to .hpp probably
-#include "windows/GameWindow.h"
-#include "panels/ConnectionPanel.h"
-#include "panels/MainGamePanel.h"
+#include "windows/GameWindow.hpp"
+#include "panels/ConnectionPanel.hpp"
+#include "panels/MainGamePanel.hpp"
 #include "panels/BetPanel.hpp"
 #include "network/ResponseListenerThread.hpp"
 #include "../general/game_state/game_state.hpp"

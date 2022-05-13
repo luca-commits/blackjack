@@ -1,9 +1,11 @@
 #include "BetPanel.hpp"
 
-void BetPanel::getBetSize(){
+int BetPanel::getBetSize(){
   //TODO
+  return 0;
 }
 
-void BetPanel::getPlayerMoney(){
+int BetPanel::getPlayerMoney(){
   //TODO
+  return 0;
 }

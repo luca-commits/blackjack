@@ -1,9 +1,9 @@
-#include "ConnectionPanel.h"
+#include "ConnectionPanel.hpp"
 
 
-#include "../uiElements/ImagePanel.h"
+#include "../uiElements/ImagePanel.hpp"
 #include "../../general/network/default.conf"
-#include "../GameController.h"
+#include "../GameController.hpp"
 
 
 ConnectionPanel::ConnectionPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY) {
