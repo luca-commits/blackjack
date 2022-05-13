@@ -53,72 +53,23 @@ int hand::get_points(std::string &err) {
     int point_sum = 0;
     int ace_counter = 0;
 
-    for(auto card : _cards) {
+    for (auto card : _cards) {
         int value = card->get_value();
-        switch(value) {
-            //ace
-            case 1:
-                ace_counter += 1;
-                break;
-            //numeric cards
-            case 2:
-                point_sum += 2;
-                break;
-            case 3:
-                point_sum += 3;
-                break;
-            case 4:
-                point_sum += 4;
-                break;
-            case 5:
-                point_sum += 5;
-                break;
-            case 6:
-                point_sum += 6;
-                break;
-            case 7:
-                point_sum += 7;
-                break;
-            case 8:
-                point_sum += 8;
-                break;
-            case 9:
-                point_sum += 8;
-                break;
-            case 10:
-                point_sum += 10;
-                break;
-            //face cards
-            case 11:
-                point_sum += 10;
-                break;
-            case 12:
-                point_sum += 10;
-                break;
-            case 13:
-                point_sum += 10;
-                break;
-            default:
-                // throws error
-                std::string errstr = "Invalid card with value " + std::to_string(value) + " encountered.";
-                err = errstr;
-                return 0;
-                break;
+        if (value == 1) {
+            ++ace_counter;
+        } else if (2 <= value && value <= 13) {
+            point_sum += std::min(value, 10);
+        } else {
+            // throws error
+            err = "Invalid card with value " + std::to_string(value) + " encountered.";
+            return 0;
         }
     }
 
-    if(ace_counter == 1) {
-        if(point_sum + 11 <= 21) {
-            point_sum += 11;
-        } else {
-            point_sum += 1;
-        }
+    if (point_sum + 11 <= 21 - (ace_counter - 1)) {
+        point_sum += 11 + (ace_counter - 1);
     } else {
-        if(point_sum + 11 <= 21 - (ace_counter - 1)) {
-            point_sum = point_sum + 11 + (ace_counter - 1);
-        } else {
-            point_sum += ace_counter;
-        }
+        point_sum += ace_counter;
     }
 
     return point_sum;

@@ -54,19 +54,17 @@ public:
     bool has_finished_turn() const noexcept;
     hand* get_hand() const noexcept;
     std::string get_player_name() const noexcept;
+    void set_finished_turn();
 
+
+#define BLACKJACK_SERVER
 #ifdef BLACKJACK_SERVER
     // state update functions
-    bool add_card(card* card, std::string& err);
     void wrap_up_round(int dealer_points, std::string& err);
     void setup_round(std::string& err);
 
-    /*
     // player actions (probably not needed)
-    bool hit(card *card, std::string &err);
-    bool stand(std::string &err);
     bool make_bet(int bet_size, std::string &err);
-    */
 
     // helper functions for game_state
     bool is_broke();

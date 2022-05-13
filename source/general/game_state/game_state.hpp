@@ -11,9 +11,6 @@
 #include "../serialization/unique_serializable.h"
 
 //TODO: check if legal turn for standing and everything
-//TODO: maybe make compute_dealers_hand not return an int
-//TODO: check_winner not needed
-//TODO: update current player after every stand and hit that goes over 21
 //TODO: make bets before ppl play
 //TODO: see that draw_card only takes a card from shoe and then puts it in the player's hand
 
@@ -28,7 +25,7 @@ private:
 
     std::vector<player*> _players;
     shoe* _shoe;
-    player* _dealers_hand; //TODO:let it be a hand
+    hand* _dealers_hand;
     serializable_value<bool>* _is_started;
     serializable_value<bool>* _is_finished;
     serializable_value<int>* _round_number;
@@ -43,7 +40,7 @@ private:
             std::string id,
             std::vector<player*>& players,
             shoe* _shoe,
-            std::vector<card*>& dealers_hand,
+            hand* dealers_hand,
             serializable_value<bool>* is_started,
             serializable_value<bool>* is_finished,
             serializable_value<int>* round_number,
@@ -69,6 +66,7 @@ public:
     player* get_current_player() const;
 
 
+#define BLACKJACK_SERVER
 #ifdef BLACKJACK_SERVER
     // server-side state update functions (same as in LAMA)
     void setup_round(std::string& err);   // server side initialization (start_round in our SDS)
@@ -81,10 +79,10 @@ public:
 
     // functions from our SDS
     int compute_dealers_hand(std::string& err); // does hardcoded actions for dealer
-    void check_winner(std::string& err); // checks if player beat the dealer
+
+    void update_current_player(std::string& err);
 
     // end of round functions
-    void update_current_player(std::string& err);
     void wrap_up_round(std::string& err);
 #endif
 
