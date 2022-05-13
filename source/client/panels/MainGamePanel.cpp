@@ -1,6 +1,8 @@
 #include "MainGamePanel.hpp"
-#include "../uiElements/ImagePanel.h"
-#include "../GameController.h"
+#include "../uiElements/ImagePanel.hpp"
+#include "../GameController.hpp"
+
+#include <map>
 
 
 MainGamePanel::MainGamePanel(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(960, 680)) {
@@ -64,13 +66,15 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 // with closed hands
 void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, int side) {
 
-    long textAlignment = wxALIGN_CENTER;
-    
-    // predefine offsets 
-    int labelOffsetX = 0;
-    if(side < 0) { // right side
-        textAlignment = wxALIGN_LEFT;
-        labelOffsetX = 85;
+  std::string err;
+
+  long textAlignment = wxALIGN_CENTER;
+
+  // predefine offsets
+  int labelOffsetX = 0;
+  if (side < 0) { // right side
+    textAlignment = wxALIGN_LEFT;
+    labelOffsetX = 85;
 
     } else if(side > 0) { // left side
         textAlignment = wxALIGN_RIGHT;
@@ -106,15 +110,16 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 //    bool check_if_over_21();
 
 
-    if(!gameState->is_started()){
+    if(!gameState->is_started()) {
         // STATUS
         this->buildStaticText(
-                "Status: Waiting for Game to start":std::to_string(otherPlayer->get_bet_size()),
+                "Status: Waiting for Game to start" + std::to_string(otherPlayer->get_bet_size()),
                 labelPosition + wxSize(-100, 18),
                 wxSize(200, 18),
                 textAlignment
         );
-    else if(otherPLayer->get_hand()->is_broke()){
+    }
+    else if(otherPlayer->is_broke()){
         // STATUS
         this->buildStaticText(
                 "Status: LOST GAME",
@@ -124,7 +129,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         );
     else{
         // STATUS
-        if(otherPLayer->get_hand()->check_if_over_21()){
+        if(otherPlayer->get_hand()->is_over_21(err)){
             this->buildStaticText(
                     "Status: LOST ROUND",
                     labelPosition + wxSize(-100, 18),
@@ -142,14 +147,14 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         }
         // MONEY
         this->buildStaticText(
-                "Money in depot:":std::to_string(otherPlayer->get_money()),
-                labelPosition + wxSize(-100, ),
+                "Money in depot:" + std::to_string(otherPlayer->get_money()),
+                labelPosition + wxSize(-100, 0),
                 wxSize(200, 18),
                 textAlignment
         );
         // BET
         this->buildStaticText(
-                "Money betted:":std::to_string(otherPlayer->get_bet_size()),
+                "Money betted:" + std::to_string(otherPlayer->get_bet_size()),
                 labelPosition + wxSize(-100, 18),
                 wxSize(200, 18),
                 textAlignment
@@ -375,18 +380,22 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
 //                                    shoePosition, scaledCardSize, MainGamePanel::cardSize);
 //}
 
-void buildDealer(game_state* gameState){
+void MainGamePanel::buildDealer(game_state* gameState){
+  wxPoint offset = (80, 0);
   std::vector<card> dealers_cards = gameState->compute_dealers_hand();
-  std::vector<wxPoint> offsets(dealers_cards.size())
+  std::vector<wxPoint> offsets(dealers_cards.size());
   for(unsigned i = 0; i < dealers_cards.size(); ++i){
-    offsets[i] = i * 80;
+    offsets[i] = i * offset;
   }
   std::string backside = "assets/png-cards/backside.png";
-  std::string left_frontside = getPngFileName(dealers_cards[0]);
-  std::string right_frontside = getPngFileName(dealers_cards[1]);
+  std::string left_frontside = getPngFileName(dealers_cards[0].get_value(), dealers_cards[0].get_suit());
+  std::string right_frontside = getPngFileName(dealers_cards[1].get_value(), dealers_cards[1].get_suit());
 
-  std::vector<std::string> dealer_cards_file_names(dealers_cards.size())
-  std::transform(dealers_cards.begin(), dealers_cards.end(),dealer_cards_file_names.begin(), getPngFileName);
+  std::vector<std::string> dealer_cards_file_names(dealers_cards.size());
+  std::transform(dealers_cards.begin(), dealers_cards.end(),
+                 dealer_cards_file_names.begin(), [this](card c) -> std::string {
+                   return this->getPngFileName(c.get_value(), c.get_suit());
+                 });
   std::vector<ImagePanel*> dealer_card_image_panel(dealers_cards.size());
 
   bool first_part = 0;
@@ -394,12 +403,12 @@ void buildDealer(game_state* gameState){
   if(gameState -> first_part){
       wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
       wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
-      ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightDealerCardPosition, MainGamePanel::cardSize);
-      ImagePanel* leftDealerCard = new ImagePanel(this, dealers_cards[0], wxBITMAP_TYPE_ANY, leftDealerCardPosition, MainGamePanel::cardSize);
+      ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightCardPosition, MainGamePanel::cardSize);
+      ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0].get_value(), dealers_cards[0].get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
   }
   else{
      for(unsigned i = 0; i < dealers_cards.size(); ++i){
-         dealer_card_image_panel[i] = new ImagePanel(this, dealers_cards[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
+         dealer_card_image_panel[i] = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
      }
   }
 }

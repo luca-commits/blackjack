@@ -15,12 +15,12 @@ public:
 
 private:
 
-    void buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, side);
+    void buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, int side);
     //void buildGameController();  //change this from sds
     void buildRoundCounter(game_state* gameState);
     void buildThisPlayer(game_state* gameState, player* me); //in sds this is build myself
     void buildShoe(game_state* gameState);
-    void buildDealer();
+    void buildDealer(game_state*);
     void buildCardPiles(game_state* gameState, player *me);
 
     wxStaticText* buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold = false);
@@ -55,7 +55,7 @@ private:
 
     double const twoPi = 6.28318530718;
 
-    string getPngFileName(int value, int suit);
+    std::string getPngFileName(int value, int suit);
 };
 
 

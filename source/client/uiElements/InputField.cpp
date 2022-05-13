@@ -1,4 +1,4 @@
-#include "InputField.h"
+#include "InputField.hpp"
 
 
 InputField::InputField(wxWindow* parent, const wxString& labelText, int labelWidth, const wxString& fieldValue, int fieldWidth)

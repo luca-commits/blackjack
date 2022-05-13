@@ -1,4 +1,4 @@
-#include "ImagePanel.h"
+#include "ImagePanel.hpp"
 
 
 ImagePanel::ImagePanel(wxWindow* parent, wxString file, wxBitmapType format, wxPoint position, wxSize size, double rotation) :

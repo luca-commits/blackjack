@@ -2,8 +2,8 @@
 #define BLACKJACKUI_BLACKJACK_HPP
 
 #include <wx/wx.h>
-#include "../windows/GameWindow.h"
-#include "../GameController.h"
+#include "../windows/GameWindow.hpp"
+#include "../GameController.hpp"
 
 
 // Main app class
