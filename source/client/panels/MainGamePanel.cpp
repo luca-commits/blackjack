@@ -1,4 +1,4 @@
-#include "MainGamePanel.h"
+#include "MainGamePanel.hpp"
 #include "../uiElements/ImagePanel.h"
 #include "../GameController.h"
 
@@ -368,33 +368,40 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
 }
 
 
-void buildShoe(){
-  shoeFile = "assets/misc/shoe";
-  wxPoint shoePosition =  MainGamePanel::tableCenter + MainGamePanel::shoeOffset;
-  ImagePanel *shoe = new ImagePanel(this, shoeFile, wxBITMAP_TYPE_ANY,
-                                    shoePosition, scaledCardSize, MainGamePanel::cardSize);
-}
+//void buildShoe(){
+//  shoeFile = "assets/misc/shoe";
+//  wxPoint shoePosition =  MainGamePanel::tableCenter + MainGamePanel::shoeOffset;
+//  ImagePanel *shoe = new ImagePanel(this, shoeFile, wxBITMAP_TYPE_ANY,
+//                                    shoePosition, scaledCardSize, MainGamePanel::cardSize);
+//}
 
 void buildDealer(game_state* gameState){
-  std::vector<Card> dealers_cards = gameState->compute_dealers_hand();
+  std::vector<card> dealers_cards = gameState->compute_dealers_hand();
+  std::vector<wxPoint> offsets(dealers_cards.size())
+  for(unsigned i = 0; i < dealers_cards.size(); ++i){
+    offsets[i] = i * 80;
+  }
   std::string backside = "assets/png-cards/backside.png";
   std::string left_frontside = getPngFileName(dealers_cards[0]);
   std::string right_frontside = getPngFileName(dealers_cards[1]);
-  wxPoints leftDealerCardPosition = MainGamePanel::tableCenter +
-                                    MainGamePanel::dealerOffset +
-                                    MainGamePanel::leftDealerCardOffset;
-  wxPoints rightDealerCardPosition = MainGamePanel::tableCenter +
-                                     MainGamePanel::dealerOffset +
-                                     MainGamePanel::rightDealerCardOffset;
+
+  std::vector<std::string> dealer_cards_file_names(dealers_cards.size())
+  std::transform(dealers_cards.begin(), dealers_cards.end(),dealer_cards_file_names.begin(), getPngFileName);
+  std::vector<ImagePanel*> dealer_card_image_panel(dealers_cards.size());
+
+  bool first_part = 0;
+
   if(gameState -> first_part){
-      ImagePanel* leftDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, leftDealerCardPosition, MainGamePanel::cardSize);
+      wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
+      wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
+      ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightDealerCardPosition, MainGamePanel::cardSize);
+      ImagePanel* leftDealerCard = new ImagePanel(this, dealers_cards[0], wxBITMAP_TYPE_ANY, leftDealerCardPosition, MainGamePanel::cardSize);
   }
   else{
-    ImagePanel *leftDealerCard = "assets/lama_" + std::to_string(handCard->get_value()) + ".png"
-        new ImagePanel(this, leftCard, wxBITMAP_TYPE_ANY,
-                       leftDealerCardPosition, MainGamePanel::cardSize);
+     for(unsigned i = 0; i < dealers_cards.size(); ++i){
+         dealer_card_image_panel[i] = new ImagePanel(this, dealers_cards[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
+     }
   }
-  ImagePanel* rightDealerCard = new ImagePanel(this, rightCard,  wxBITMAP_TYPE_ANY, rightDealerCardPosition, MainGamePanel::cardSize)
 }
 
 wxStaticText* MainGamePanel::buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold) {
@@ -424,7 +431,7 @@ wxPoint MainGamePanel::getPointOnEllipse(double horizontalRadius, double vertica
 }
 
 
-string getPngFileName(int value, int suit){
+std::string getPngFileName(int value, int suit){
 
     std::map<int, std::string> value_map {{11, "jack"}, {12, "queen"}, {1, "ace"}};
     std::map<int, std::string> suit_map{

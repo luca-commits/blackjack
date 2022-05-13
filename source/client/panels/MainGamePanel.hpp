@@ -43,13 +43,15 @@ private:
     double const otherPlayerLabelDistanceFromCenter = 300.0;
 
     wxPoint const shoeOffset = wxPoint(-300, -42);
-    wxPoint const dealerOffset = wxPoint(300, -42);
-    wxPoint const rightDealerCardOffset = wxPoint(40, 0);
-    wxPoint const leftDealerCardOffset = wxPoint(-40, 0);
+    wxPoint const dealerOffset = wxPoint(-600, -42);
     wxPoint const drawPileOffset = wxPoint(4, -42);
     wxPoint const turnIndicatorOffset = wxPoint(-100, 98);
     // PERADD 
     wxPoint const roundIndicatorOffset = wxPoint(-300,98);
+
+    wxPoint const leftDealerCardOffset = wxPoint(-80, 0);
+    wxPoint const rightDealerCardOffset = wxPoint(80, 0);
+
 
     double const twoPi = 6.28318530718;
 
