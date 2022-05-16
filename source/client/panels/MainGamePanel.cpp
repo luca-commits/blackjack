@@ -234,30 +234,28 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
     } else {
 
-        // // show our player's minus points
-        // wxStaticText *playerPoints = buildStaticText(
-        //         std::to_string(me->get_score()) + " minus points",
-        //         wxDefaultPosition,
-        //         wxSize(200, 18),
-        //         wxALIGN_CENTER
-        // );
+        // TODO show how much money the player has left
+        wxStaticText *playerPoints = buildStaticText(
+                "You currently have " + std::to_string(me->get_money()) + "$",
+                wxDefaultPosition,
+                wxSize(200, 18),
+                wxALIGN_CENTER
+        );
 
-        // innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
-
-        // Show our pla
+        innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
 
         // if our player already played, we display that as status
-        /* TODO from has_folded make has_played
-        if (me->has_folded()) {
+        // TODO from has_folded make has_played
+        if (me->has_finished_turn()) {
             wxStaticText *playerStatus = buildStaticText(
-                    "You already played",
+                    "You finished your turn",
                     wxDefaultPosition,
                     wxSize(200, 32),
                     wxALIGN_CENTER
             );
             innerLayout->Add(playerStatus, 0, wxALIGN_CENTER | wxBOTTOM, 8);
             }
-            */
+           
         // TODO It's our turn, display Hit and Stand button
         if (gameState->get_current_player() == me) {
             wxButton *hitButton = new wxButton(this, wxID_ANY, "Hit", wxDefaultPosition, wxSize(80, 32));
@@ -302,11 +300,12 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
                 scaledCardSize = wxSize(scaledCardWidth, scaledCardHeight);
             }
 
-            // Show all cards
+            // Show all cards of this player
             for (int i = 0; i < me->get_hand()->get_cards().size(); i++) {
 
                 card *handCard = me->get_hand()->get_cards().at(i);
-                std::string cardFile = "assets/lama_" + std::to_string(handCard->get_value()) + ".png";
+
+                std::string cardFile = getPngFileName(handCard->get_value(), handCard->get_suit());
 
                 ImagePanel *cardButton = new ImagePanel(this, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
             }
