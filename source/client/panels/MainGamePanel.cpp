@@ -247,7 +247,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
         // Show our pla
 
         // if our player already played, we display that as status
-        /*
+        /* TODO from has_folded make has_played
         if (me->has_folded()) {
             wxStaticText *playerStatus = buildStaticText(
                     "You already played",
@@ -309,18 +309,9 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
                 std::string cardFile = "assets/lama_" + std::to_string(handCard->get_value()) + ".png";
 
                 ImagePanel *cardButton = new ImagePanel(this, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
-
-                if (gameState->get_current_player() == me && !me->has_finished_turn()) {
-                    cardButton->SetToolTip("Play card");
-                    cardButton->SetCursor(wxCursor(wxCURSOR_HAND));
-                    cardButton->Bind(wxEVT_LEFT_UP, [handCard](wxMouseEvent& event) {
-                        GameController::playCard(handCard);
-                    });
-                }
-                handLayout->Add(cardButton, 0, wxLEFT | wxRIGHT, 4);
             }
         }
-    }
+    }   
 }
 
 
