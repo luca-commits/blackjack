@@ -44,10 +44,6 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
       //  this->buildOtherPlayerLabels(gameState, otherPlayer, playerAngle, side);
     }
 
-
-//    // show turn indicator below card piles
-//    this->buildTurnIndicator(gameState, me);
-
     // show our own player
     this->buildThisPlayer(gameState, me);
 
@@ -107,6 +103,10 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 //    bool is_broke();
 //    bool check_if_over_21();
 
+    // before there there was an is_broke() call in the "Status: LOST CAME call" but
+    // since it didn't work I replaced it with a local calculation
+    // TODO is_broke() should probably not be calculated here but in player.cpp
+    bool player_is_broke = otherPlayer->get_money() < gameState->_min_bet;
 
     if(!gameState->is_started()) {
         // STATUS
@@ -117,7 +117,8 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
                 textAlignment
         );
     }
-    else if(otherPlayer->is_broke()){
+
+    else if(player_is_broke){
         // STATUS
         this->buildStaticText(
                 "Status: LOST GAME",

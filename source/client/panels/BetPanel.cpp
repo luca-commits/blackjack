@@ -35,7 +35,7 @@ BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) {
         this,
         "Your bet:",
         100,
-        wxString::Format("%i", game_state::_min_bet),
+        wxString::Format("%i", game_state::_min_bet),//TODO does this not take our input as minimal bet?
         240
     );
     verticalLayout->Add(this->_betSizeField, 0, wxTOP | wxLEFT | wxRIGHT, 10);
