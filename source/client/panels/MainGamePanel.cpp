@@ -235,15 +235,15 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
     } else {
 
-        // TODO show how much money the player has left
-        wxStaticText *playerPoints = buildStaticText(
-                "You currently have " + std::to_string(me->get_money()) + "$",
-                wxDefaultPosition,
-                wxSize(200, 18),
-                wxALIGN_CENTER
-        );
+        // This is taken care of in the betpanel
+        // wxStaticText *playerPoints = buildStaticText(
+        //         "You currently have " + std::to_string(me->get_money()) + "$",
+        //         wxDefaultPosition,
+        //         wxSize(200, 18),
+        //         wxALIGN_CENTER
+        // );
 
-        innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
+        // innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
 
         // if our player already played, we display that as status
         // TODO from has_folded make has_played
@@ -305,9 +305,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
             for (int i = 0; i < me->get_hand()->get_cards().size(); i++) {
 
                 card *handCard = me->get_hand()->get_cards().at(i);
-
                 std::string cardFile = getPngFileName(handCard->get_value(), handCard->get_suit());
-
                 ImagePanel *cardButton = new ImagePanel(this, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
             }
         }
