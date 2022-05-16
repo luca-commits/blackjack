@@ -244,7 +244,7 @@ bool game_state::stand(player* player, std::string& err) {
     }
 }
 
-//TODO:makes bets for everyone before the people actually start the round
+//TODO: makes bets for everyone before the people actually start the round
 //TODO: other cases to take into account?
 bool game_state::make_bet(player* player, int bet_size, std::string& err) {
     if(!player->is_broke()) {

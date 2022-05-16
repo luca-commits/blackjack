@@ -15,13 +15,14 @@
 
 
 class game_state : public unique_serializable {
-private:
+public:
 
     static const int _max_nof_rounds = 100;
     static const int _max_nof_players = 5;
     static const int _min_nof_players = 2;
     static const int _min_bet = 1;
-
+    
+private:
     std::vector<player*> _players;
     shoe* _shoe;
     hand* _dealers_hand;
