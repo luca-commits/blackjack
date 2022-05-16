@@ -367,7 +367,7 @@ void MainGamePanel::buildDealer(game_state* gameState){
                     return this->getPngFileName(c.get_value(), c.get_suit());
                     });
 
-    bool first_part = 0;
+    bool first_part = gameState-> everyone_finished();
 
     wxBoxSizer *handLayout = new wxBoxSizer(wxHORIZONTAL);
     innerLayout->Add(handLayout, 0, wxALIGN_CENTER);
