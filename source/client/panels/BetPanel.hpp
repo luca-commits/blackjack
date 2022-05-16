@@ -5,7 +5,7 @@
 #include "../GameController.hpp"
 #include "../../general/game_state/game_state.hpp"
 
-class BetPanel {
+class BetPanel : public wxPanel {
 public:
     BetPanel(wxWindow* parent, game_state* gameState, player* me);
     wxString getBetSize();

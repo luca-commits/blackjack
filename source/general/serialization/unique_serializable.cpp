@@ -6,7 +6,7 @@
 #include "unique_serializable.h"
 
 #include "uuid_generator.h"
-#include "../exceptions/LamaException.h"
+#include "../exceptions/BlackjackException.hpp"
 
 
 unique_serializable::unique_serializable()

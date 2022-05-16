@@ -12,17 +12,17 @@
 
 //TODO: check if legal turn for standing and everything
 //TODO: make bets before ppl play
-//TODO: see that draw_card only takes a card from shoe and then puts it in the player's hand
 
 
 class game_state : public unique_serializable {
-private:
+public:
 
     static const int _max_nof_rounds = 100;
     static const int _max_nof_players = 5;
     static const int _min_nof_players = 2;
     static const int _min_bet = 1;
-
+    
+private:
     std::vector<player*> _players;
     shoe* _shoe;
     hand* _dealers_hand;
@@ -64,6 +64,9 @@ public:
 
     shoe* get_shoe() const;
     player* get_current_player() const;
+    // functions to check state of round
+    bool everyone_finished() const;
+    bool round_begin() const;
 
 
 #define BLACKJACK_SERVER

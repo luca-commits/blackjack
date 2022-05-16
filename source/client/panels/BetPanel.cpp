@@ -22,13 +22,13 @@ BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) {
     // show players money
     int money = me->get_money();
     std::string money_string = std::to_string(money);
-    wxStaticText* playerMoney = buildStaticText(
+    wxStaticText* buildPlayerMoney = buildStaticText(
         "Your money: $" + money_string,
         wxDefaultPosition,
         wxSize(200, 18),
         wxALIGN_CENTER
     );
-    verticalLayout->Add(playerPoints, 0, wxTOP | wxLEFT | wxRIGHT, 10);
+    verticalLayout->Add(buildPlayerMoney, 0, wxTOP | wxLEFT | wxRIGHT, 10);
 
     // bet input
     this->_betSizeField = new InputField(

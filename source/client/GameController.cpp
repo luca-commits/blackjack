@@ -13,7 +13,7 @@ MainGamePanel* GameController::_mainGamePanel = nullptr;
 BetPanel* GameController::_betPanel = nullptr;
 
 player* GameController::_me = nullptr;
-game_state* GameController::_currentGameState = nullptr;
+game_state* GameController::_current_game_state = nullptr;
 
 
 void GameController::init(GameWindow* gameWindow) {
@@ -23,7 +23,7 @@ void GameController::init(GameWindow* gameWindow) {
     // Set up main panels
     GameController::_connectionPanel = new ConnectionPanel(gameWindow);
     GameController::_mainGamePanel = new MainGamePanel(gameWindow);
-    GameController::_betPanel = new BetPanel(gameWindow);
+    GameController::_betPanel = new BetPanel(gameWindow, GameController::_current_game_state, GameController::_me);
 
     // Hide all panels
     GameController::_connectionPanel->Show(false);
@@ -83,14 +83,36 @@ void GameController::connectToServer() {
 
 }
 
+void GameController::makeBet() {
+    wxString inputPlayerBet = GameController::_betPanel->getBetSize().Trim();
+
+    // recovery?
+    if(inputPlayerBet.IsEmpty()) {
+        GameController::showError("Input error", "Please enter your bet");
+        return;
+    }
+
+    std::string bet_string = inputPlayerBet.ToStdString();
+    int bet_int = std::stoi(bet_string);
+
+    // check to make sure this in a logical integer (recovery if not ?)
+    if(bet_int < game_state::_min_bet && bet_int > 4096) {
+        GameController::showError("Input error", "Invalid value given as bet");
+        return;
+    }
+
+    make_bet_request request = make_bet_request(GameController::_me->get_id(), GameController::_me->get_player_name(), bet_int);
+    ClientNetworkManager::sendRequest(request);
+}
+
 // THIS HAS TO BE EDITTED FOR SURE
 void GameController::updateGameState(game_state* newGameState) {
 
     // the existing game state is now old
-    game_state* oldGameState = GameController::_currentGameState;
+    game_state* oldGameState = GameController::_current_game_state;
 
     // save the new game state as our current game state
-    GameController::_currentGameState = newGameState;
+    GameController::_current_game_state = newGameState;
 
     if(oldGameState != nullptr) {
 
@@ -104,7 +126,7 @@ void GameController::updateGameState(game_state* newGameState) {
     }
 
     // edit this to trigger when player is bankrupt
-    if(GameController::_currentGameState->is_finished()) {
+    if(GameController::_current_game_state->is_finished()) {
         GameController::showGameOverMessage();
     }
 
@@ -112,12 +134,12 @@ void GameController::updateGameState(game_state* newGameState) {
     GameController::_gameWindow->showPanel(GameController::_betPanel);
 
     // command the main game panel to rebuild itself, based on the new game state
-    GameController::_mainGamePanel->buildGameState(GameController::_currentGameState, GameController::_me);
+    GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
 }
 
 
 void GameController::startGame() {
-    start_game_request request = start_game_request(GameController::_currentGameState->get_id(), GameController::_me->get_id());
+    start_game_request request = start_game_request(GameController::_current_game_state->get_id(), GameController::_me->get_id());
     ClientNetworkManager::sendRequest(request);
 }
 
@@ -185,7 +207,7 @@ void GameController::showGameOverMessage() {
     std::string buttonLabel = "Close Game";
 
     // sort players by money  
-    std::vector<player*> players = GameController::_currentGameState->get_players();
+    std::vector<player*> players = GameController::_current_game_state->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {
         return a->get_money() < b->get_money();
     });
@@ -210,7 +232,7 @@ void GameController::showGameOverMessage() {
                 winnerText = "     You won!!!";
             }
         }
-        message += "\n" + playerName + ":     " + scoreText + winnerText;
+        message += "\n" + playerName + ":     " + moneyText + winnerText;
     }
 
     wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
