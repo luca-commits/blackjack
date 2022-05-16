@@ -350,14 +350,20 @@ void MainGamePanel::buildDealer(game_state* gameState){
     outerLayout->Add(innerLayout, 1, wxALIGN_CENTER);
 
     wxPoint offset(80, 0);
-    std::vector<card> dealers_cards = gameState->compute_dealers_hand();
+
+    // TODO the call in the line below was compute_dealers_hand()
+    // which should return the hand the dealer will have in the end
+    // but get_dealers_hand returns only the current hand of the dealer
+    hand* hand_dealers_hand = gameState->get_dealers_hand();
+    std::vector<card*> dealers_cards = hand_dealers_hand->get_cards();
+
     std::vector<wxPoint> offsets(dealers_cards.size());
     for(unsigned i = 0; i < dealers_cards.size(); ++i){
         offsets[i] = i * offset;
     }
     std::string backside = "assets/png-cards/backside.png";
-    std::string left_frontside = getPngFileName(dealers_cards[0].get_value(), dealers_cards[0].get_suit());
-    std::string right_frontside = getPngFileName(dealers_cards[1].get_value(), dealers_cards[1].get_suit());
+    std::string left_frontside = getPngFileName(dealers_cards[0]->get_value(), dealers_cards[0]->get_suit());
+    std::string right_frontside = getPngFileName(dealers_cards[1]->get_value(), dealers_cards[1]->get_suit());
 
     std::vector<std::string> dealer_cards_file_names(dealers_cards.size());
     std::transform(dealers_cards.begin(), dealers_cards.end(),
@@ -375,7 +381,7 @@ void MainGamePanel::buildDealer(game_state* gameState){
         wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
         wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
         ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightCardPosition, MainGamePanel::cardSize);
-        ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0].get_value(), dealers_cards[0].get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
+        ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0]->get_value(), dealers_cards[0]->get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
     }
     else{
         for(unsigned i = 0; i < dealers_cards.size(); ++i){
