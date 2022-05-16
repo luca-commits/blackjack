@@ -109,6 +109,24 @@ player* game_state::get_current_player() const {
     return _players[_current_player_idx->get_value()];
 }
 
+bool game_state::everyone_finished() const {
+    unsigned int s = _players.size();
+    for(unsigned int i = 0; i < s; ++i) {
+        if(!(_players[i]->has_finished_turn()))
+            return false;
+    }
+    return true;
+}
+
+bool game_state::round_begin() const {
+    unsigned int s = _players.size();
+    for(unsigned int i = 0; i < s; ++i) {
+        if(!(_players[i]->get_bet_size() == 0))
+            return false;
+    }
+    return true;
+}
+
 #ifdef BLACKJACK_SERVER
 
 // server-side state update functions (same as in LAMA)
@@ -123,7 +141,7 @@ void game_state::setup_round(std::string& err) {  // server side initialization 
     for (auto player : _players) {
         player->setup_round(err);
         //TODO: how do we get the instream for the amount of the bet
-        player->make_bet(0, err);
+        // I think we do not need to do anything because make_bet request will call make_bet for each player!
         _shoe->draw_card(player->get_hand(), err);
         _shoe->draw_card(player->get_hand(), err);
     }
@@ -206,6 +224,10 @@ bool game_state::hit(player* player, std::string& err) {
 
     if(player->get_hand()->get_points(err) < 21) {
         _shoe->draw_card(player->get_hand(), err);
+        if(player->get_hand()->get_points(err) >= 21) {
+            player->set_finished_turn();
+            update_current_player(err);
+        }
         return true;
     } else {
         err = "Could not hit since the player already has 21 points or more.";
@@ -228,19 +250,14 @@ bool game_state::stand(player* player, std::string& err) {
         err = "Could not stand, because the requested game is already finished.";
         return false;
     }
-    if(player->get_hand()->get_points(err) < 21) {
-        if (player->has_finished_turn()) {
-            err = "Player " + player->get_player_name() + " has already finished their turn.";
-            return false;
-        } else {
-            player->set_finished_turn();
-            update_current_player(err);
-            return true;
-        }
-    }
-    else {
-        err = "Could not stand since the player already finished his turn.";
+    if (player->has_finished_turn()) {
+        err = "Player " + player->get_player_name() + " has already finished their turn.";
         return false;
+    }
+    if(player->get_hand()->get_points(err) < 21) {
+        player->set_finished_turn();
+        update_current_player(err);
+        return true;
     }
 }
 
@@ -269,7 +286,7 @@ void game_state::update_current_player(std::string& err) {
 void game_state::wrap_up_round(std::string& err) {
     //hardcoded dealer action
     while(_dealers_hand->get_points(err) <= 16) {
-        _shoe->draw_card(_dealers_hand, err); // just like for hit, this is wrong, look at what draw_card does
+        _shoe->draw_card(_dealers_hand, err);
     }
 
     int dealer_points = _dealers_hand->get_points(err);

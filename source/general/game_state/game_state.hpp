@@ -64,6 +64,9 @@ public:
 
     shoe* get_shoe() const;
     player* get_current_player() const;
+    // functions to check state of round
+    bool everyone_finished() const;
+    bool round_begin() const;
 
 
 #define BLACKJACK_SERVER
