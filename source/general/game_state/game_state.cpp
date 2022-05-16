@@ -109,6 +109,10 @@ player* game_state::get_current_player() const {
     return _players[_current_player_idx->get_value()];
 }
 
+hand* game_state::get_dealers_hand() const {
+    return _dealers_hand;
+}
+
 bool game_state::everyone_finished() const {
     unsigned int s = _players.size();
     for(unsigned int i = 0; i < s; ++i) {

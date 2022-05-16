@@ -56,8 +56,6 @@ public:
     std::string get_player_name() const noexcept;
     void set_finished_turn();
 
-
-#define BLACKJACK_SERVER
 #ifdef BLACKJACK_SERVER
     // state update functions
     void wrap_up_round(int dealer_points, std::string& err);

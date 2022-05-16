@@ -39,7 +39,7 @@ private:
     game_state(
             std::string id,
             std::vector<player*>& players,
-            shoe* _shoe,
+            shoe* shoe,
             hand* dealers_hand,
             serializable_value<bool>* is_started,
             serializable_value<bool>* is_finished,
@@ -64,12 +64,12 @@ public:
 
     shoe* get_shoe() const;
     player* get_current_player() const;
+    hand* get_dealers_hand() const;
     // functions to check state of round
     bool everyone_finished() const;
     bool round_begin() const;
 
 
-#define BLACKJACK_SERVER
 #ifdef BLACKJACK_SERVER
     // server-side state update functions (same as in LAMA)
     void setup_round(std::string& err);   // server side initialization (start_round in our SDS)
