@@ -53,3 +53,13 @@ BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) {
 wxString BetPanel::getBetSize() {
     return this->_betSizeField->getValue();
 }
+
+wxStaticText* BetPanel::buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold) {
+    wxStaticText* staticText = new wxStaticText(this, wxID_ANY, content, position, size, textAlignment);
+    if(bold) {
+        wxFont font = staticText->GetFont();
+        font.SetWeight(wxFONTWEIGHT_BOLD);
+        staticText->SetFont(font);
+    }
+    return staticText;
+}

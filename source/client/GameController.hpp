@@ -9,6 +9,7 @@
 #include "network/ResponseListenerThread.hpp"
 #include "../general/game_state/game_state.hpp"
 
+class BetPanel; // forward declaration   
 
 class GameController {
 

@@ -12,6 +12,8 @@ public:
 
 private:
     InputField* _betSizeField;
+    wxStaticText* buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold = false);
+
 };
 
 #endif
