@@ -3,7 +3,7 @@
 BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) {
     // update myself ? (maybe not needed)
     std::vector<player*> players = gameState->get_players();
-    std::vector<Player*>::iterator it = std::find_if(players.begin(), players.end(), [me](const Player* x) {
+    std::vector<player*>::iterator it = std::find_if(players.begin(), players.end(), [me](const player* x) {
         return x->get_id() == me->get_id();
     });
     if (it < players.end()) {
@@ -42,8 +42,8 @@ BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) {
 
     // button to confirm
     wxButton* makeBetButton = new wxButton(this, wxID_ANY, "Make bet", wxDefaultPosition, wxSize(100, 40));
-    connectButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
-        GameController::makeBet(); // THIS FUNCTION HAS TO BE IMPLEMENTED !!!
+    makeBetButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
+        GameController::makeBet();
     });
     verticalLayout->Add(makeBetButton, 0, wxALIGN_RIGHT | wxALL, 10);
 
