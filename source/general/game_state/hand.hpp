@@ -26,11 +26,9 @@ public:
     int get_nof_cards() const;
     const std::vector<card*> get_cards() const;
 
-#ifdef BLACKJACK_SERVER
 // state update functions
     void setup_round(std::string& err);
     bool add_card(card* card, std::string& err);
-#endif
 
     int get_points(std::string &err);
     bool is_over_21(std::string &err);

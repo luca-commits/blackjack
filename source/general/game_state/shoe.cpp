@@ -56,10 +56,10 @@ void shoe::setup_round(std::string &err) {
     this->shuffle();
 }
 
-card* shoe::draw_card(hand* hand, std::string& err)  {
+card* shoe::draw_card(hand* h, std::string& err)  {
     if (!_cards.empty()) {
         card* drawn_card = _cards.back();
-        hand->add_card(drawn_card, err);
+        bool check = h->add_card(drawn_card, err);
         _cards.pop_back();
         return drawn_card;
     } else {

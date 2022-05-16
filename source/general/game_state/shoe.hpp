@@ -35,7 +35,7 @@ public:
     void shuffle();
     bool is_empty() const noexcept;
     void setup_round(std::string &err);
-    card* draw_card(hand* hand, std::string& err);
+    card* draw_card(hand* h, std::string& err);
 
     // serialization
     virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;

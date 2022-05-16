@@ -33,8 +33,6 @@ std::vector<card*>::iterator hand::get_card_iterator() {
     return _cards.begin();
 }
 
-
-#ifdef BLACKJACK_SERVER
 void hand::setup_round(std::string &err) {
     // remove all cards (if any) and clear it
     for (int i = 0; i < _cards.size(); i++) {
@@ -47,7 +45,6 @@ bool hand::add_card(card* new_card, std::string &err) {
     _cards.push_back(new_card);
     return true;
 }
-#endif
 
 int hand::get_points(std::string &err) {
     int point_sum = 0;
