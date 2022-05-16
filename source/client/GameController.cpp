@@ -95,7 +95,7 @@ void GameController::makeBet() {
     std::string bet_string = inputPlayerBet.ToStdString();
     int bet_int = std::stoi(bet_string);
 
-    // check to make sure this in a logical integer (recovery if not ?)
+    // check to make sure this in a logical integer + ADD RECOVERY (SHOW BET PANEL AGAIN)
     if(bet_int < game_state::_min_bet && bet_int > 4096) {
         GameController::showError("Input error", "Invalid value given as bet");
         return;
@@ -130,8 +130,12 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showGameOverMessage();
     }
 
-    // HERE WE SHOULD PROBABLY SHOW BET PANEL INSTEAD OF MAIN PANEL SO THAT PLAYERS CAN MAKE THEIR BETS
-    GameController::_gameWindow->showPanel(GameController::_betPanel);
+    if(_me->get_bet_size() == 0) {
+        GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
+        GameController::_gameWindow->showPanel(GameController::_betPanel);
+    }
+
+    GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
 
     // command the main game panel to rebuild itself, based on the new game state
     GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);

@@ -160,7 +160,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         );
 
         // add player's HAND IMAGE=================================
-        int numberOfCards = otherPlayer->get_nof_cards();
+        int numberOfCards = otherPlayer->get_hand()->get_nof_cards();
 
         wxSize boundsOfRotatedHand;
 
@@ -247,6 +247,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
         // Show our pla
 
         // if our player already played, we display that as status
+        /*
         if (me->has_folded()) {
             wxStaticText *playerStatus = buildStaticText(
                     "You already played",
@@ -255,15 +256,21 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
                     wxALIGN_CENTER
             );
             innerLayout->Add(playerStatus, 0, wxALIGN_CENTER | wxBOTTOM, 8);
-
+            }
+            */
         // TODO It's our turn, display Hit and Stand button
-        } else if (gameState->get_current_player() == me) {
-            wxButton *foldButton = new wxButton(this, wxID_ANY, "Fold", wxDefaultPosition, wxSize(80, 32));
-            foldButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
-                GameController::fold();
+        if (gameState->get_current_player() == me) {
+            wxButton *hitButton = new wxButton(this, wxID_ANY, "Hit", wxDefaultPosition, wxSize(80, 32));
+            hitButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
+                GameController::hit();
             });
-            innerLayout->Add(foldButton, 0, wxALIGN_CENTER | wxBOTTOM, 8);
+            innerLayout->Add(hitButton, 0, wxALIGN_CENTER | wxBOTTOM, 8);
 
+            wxButton *standButton = new wxButton(this, wxID_ANY, "Stand", wxDefaultPosition, wxSize(80, 32));
+            standButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
+                GameController::stand();
+            });
+            innerLayout->Add(standButton, 0, wxALIGN_CENTER | wxBOTTOM, 8);
         // if it's not our turn, display "waiting..."
         } else {
             wxStaticText *playerStatus = buildStaticText(
@@ -276,7 +283,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
         }
 
         // display our player's hand, if we have cards
-        int numberOfCards = me->get_nof_cards();
+        int numberOfCards = me->get_hand()->get_nof_cards();
         if (numberOfCards > 0) {
 
             // create horizontal layout for the individual hand cards of our player
@@ -303,7 +310,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
                 ImagePanel *cardButton = new ImagePanel(this, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
 
-                if (gameState->get_current_player() == me && !me->has_folded()) {
+                if (gameState->get_current_player() == me && !me->has_finished_turn()) {
                     cardButton->SetToolTip("Play card");
                     cardButton->SetCursor(wxCursor(wxCURSOR_HAND));
                     cardButton->Bind(wxEVT_LEFT_UP, [handCard](wxMouseEvent& event) {

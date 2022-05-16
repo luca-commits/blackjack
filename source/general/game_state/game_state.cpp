@@ -47,7 +47,7 @@ game_state::game_state(std::string id, std::vector<player*>& players, shoe* shoe
 
 //they also didn't delete the players vector... not sure why (also the only one that was not created with new in the default constructor)
 game_state::~game_state() {
-    if (_is_started != nullptr) {//de ce facem asta?
+    if (_is_started != nullptr) {
         delete _shoe;
         delete _dealers_hand;
         delete _is_started;
