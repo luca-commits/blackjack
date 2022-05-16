@@ -367,8 +367,8 @@ void MainGamePanel::buildDealer(game_state* gameState){
 
     std::vector<std::string> dealer_cards_file_names(dealers_cards.size());
     std::transform(dealers_cards.begin(), dealers_cards.end(),
-                    dealer_cards_file_names.begin(), [this](card c) -> std::string {
-                    return this->getPngFileName(c.get_value(), c.get_suit());
+                    dealer_cards_file_names.begin(), [this](card* c) -> std::string {
+                    return this->getPngFileName(c->get_value(), c->get_suit());
                     });
 
     bool first_part = gameState-> everyone_finished();
@@ -386,7 +386,7 @@ void MainGamePanel::buildDealer(game_state* gameState){
     else{
         for(unsigned i = 0; i < dealers_cards.size(); ++i){
             ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
-            handLayout->Add(ImagePanel, 0, wxLEFT | wxRIGHT, 4);
+            handLayout->Add(image_panel, 0, wxLEFT | wxRIGHT, 4);
         }
     }
 }
