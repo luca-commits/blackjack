@@ -96,7 +96,7 @@ void player::wrap_up_round(int dealer_points, std::string& err) {
     int player_points = _player_hand->get_points(err);
     if(player_points > dealer_points) {
         this->won_round();
-    } else if(player_points = dealer_points) {
+    } else if(player_points == dealer_points) {
         this->draw_round();
     } else if(player_points < dealer_points) {
         this->lost_round();
