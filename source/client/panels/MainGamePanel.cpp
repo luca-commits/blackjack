@@ -84,7 +84,6 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     wxPoint labelPosition = MainGamePanel::tableCenter;
     wxPoint betPosition = MainGamePanel::tableCenter;
 
-    // 1.6 to horizontally elongate players' circle?...  1.4
     handPosition  +=    this->getPointOnEllipse(verticalRadius_hand*1.2,  verticalRadius_hand,  playerAngle);
     labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.2, verticalRadius_label, playerAngle);
     betPosition   +=    this->getPointOnEllipse(verticalRadius_bet*1.2,   verticalRadius_bet,   playerAngle);
@@ -426,12 +425,12 @@ std::string MainGamePanel::getPngFileName(int value, int suit){
     std::map<int, std::string> suit_map{
         {0, "spades"}, {1, "clubs"}, {2, "diamonds"}, {3, "hearts"}};
 
-    std::string path = "assets/png-card/";
+    std::string path = "assets/png-cards/";
 
     if (value <= 10) {
-      return path + std::to_string(value) + "of" + suit_map[suit] + ".png";
+      return path + std::to_string(value) + "_of_" + suit_map[suit] + ".png";
     }
     else{
-      return path + value_map[value] + "of" + suit_map[suit] + ".png";
+      return path + value_map[value] + "_of_" + suit_map[suit] + ".png";
     }
 }
