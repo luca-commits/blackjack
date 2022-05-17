@@ -246,22 +246,26 @@ bool game_state::stand(player* player, std::string& err) {
         err = "Server refused to perform stand. Player is not part of the game.";
         return false;
     }
-    if (!is_allowed_to_play_now(player)) {
+    else if (!is_allowed_to_play_now(player)) {
         err = "It's not this player's turn yet.";
         return false;
     }
-    if (_is_finished->get_value()) {
+    else if (_is_finished->get_value()) {
         err = "Could not stand, because the requested game is already finished.";
         return false;
     }
-    if (player->has_finished_turn()) {
+    else if (player->has_finished_turn()) {
         err = "Player " + player->get_player_name() + " has already finished their turn.";
         return false;
     }
-    if(player->get_hand()->get_points(err) < 21) {
+    else if(player->get_hand()->get_points(err) < 21) {
         player->set_finished_turn();
         update_current_player(err);
         return true;
+    }
+    else{
+      err = "Could not stand, unknown error.";
+      return false;
     }
 }
 
