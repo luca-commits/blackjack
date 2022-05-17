@@ -4,11 +4,12 @@
 #include <wx/wx.h>
 #include "../GameController.hpp"
 #include "../../general/game_state/game_state.hpp"
+#include "../uiElements/ImagePanel.hpp"
 
 class BetPanel : public wxPanel {
 public:
     BetPanel(wxWindow* parent);
-    BetPanel(wxWindow* parent, game_state* gameState, player* me);
+    void makeBet(game_state* gameState, player* me);
     wxString getBetSize();
 
 private:
