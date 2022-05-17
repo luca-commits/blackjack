@@ -66,7 +66,7 @@ server_response *server_response::from_json(const rapidjson::Value& json) {
         else if (response_type == ResponseType::change_gamestate) {
             return change_gamestate_msg::from_json(json);                   //not sure if correct
         } else {
-            throw BlackjackException("Encountered unknown ServerResponse type " + response_type);   //should response_type not be string?
+            throw BlackjackException("Encountered unknown ServerResponse type " + type);   //should response_type not be string?
         }
     }
     throw BlackjackException("Could not determine type of ClientRequest");
