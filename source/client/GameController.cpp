@@ -130,7 +130,7 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showGameOverMessage();
     }
 
-    if(_me->get_bet_size() == 0) {
+    if(_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
         GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
     }
