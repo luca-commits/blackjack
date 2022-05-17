@@ -7,6 +7,7 @@
 
 class BetPanel : public wxPanel {
 public:
+    BetPanel(wxWindow* parent);
     BetPanel(wxWindow* parent, game_state* gameState, player* me);
     wxString getBetSize();
 

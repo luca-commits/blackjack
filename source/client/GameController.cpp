@@ -23,7 +23,7 @@ void GameController::init(GameWindow* gameWindow) {
     // Set up main panels
     GameController::_connectionPanel = new ConnectionPanel(gameWindow);
     GameController::_mainGamePanel = new MainGamePanel(gameWindow);
-    GameController::_betPanel = new BetPanel(gameWindow, GameController::_current_game_state, GameController::_me);
+    GameController::_betPanel = new BetPanel(gameWindow);
 
     // Hide all panels
     GameController::_connectionPanel->Show(false);

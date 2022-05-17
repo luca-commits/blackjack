@@ -1,5 +1,7 @@
 #include "BetPanel.hpp"
 
+BetPanel::BetPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(960, 680)) {}
+
 BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) {
     // update myself ? (maybe not needed)
     std::vector<player*> players = gameState->get_players();
