@@ -4,8 +4,8 @@
 
 
 #include "gtest/gtest.h"
-#include "../src/common/exceptions/LamaException.h"
-#include "../src/common/game_state/cards/card.h"
+#include "../src/common/exceptions/LamaException.hpp"
+#include "../src/common/game_state/cards/card.hpp"
 #include "../src/common/serialization/json_utils.h"
 
 
@@ -58,4 +58,3 @@ TEST(CardTest, SerializationException) {
     json.Parse("not json");
     EXPECT_THROW(card::from_json(json), LamaException);
 }
-

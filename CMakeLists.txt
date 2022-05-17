@@ -131,5 +131,5 @@ add_library(Blackjack-lib ${SERVER_SOURCE_FILES})
 # set compile directives for server-library
 target_compile_definitions(Blackjack-lib PRIVATE BLACKJACK_SERVER=1 RAPIDJSON_HAS_STDSTRING=1)
 
-add_subdirectory(googletest)
-add_subdirectory(unit-tests)
+#add_subdirectory(googletest)
+#add_subdirectory(unit-tests)

@@ -2,7 +2,7 @@
 // TODO this whole code is just copied it has to be changed
 
 #include "gtest/gtest.h"
-#include "../src/common/game_state/player/hand.h"
+#include "../src/common/game_state/player/hand.hpp"
 
 
 /* A test fixture allows to reuse the same configuration of objects for all
@@ -260,4 +260,3 @@ TEST_F(HandTest, CountManyCardsWithDuplicates) {
     player_hand.add_card(cards[7][0], err);
     EXPECT_EQ(6, player_hand.get_nof_cards());
 }
-
