@@ -57,23 +57,22 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 
 
 
-// with closed hands
+// with open hands
 void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, int side) {
 
-  std::string err;
-
-  long textAlignment = wxALIGN_CENTER;
-
-  // predefine offsets
-  int labelOffsetX = 0;
-  if (side < 0) { // right side
-    textAlignment = wxALIGN_LEFT;
-    labelOffsetX = 85;
-
+      
+    //   IDONTKNOWMAN
+    std::string err;//deugging helper...
+    long textAlignment = wxALIGN_CENTER;
+    int labelOffsetX = 0;
+    if (side < 0) { // right side
+        textAlignment = wxALIGN_LEFT;
+        labelOffsetX = 85;
     } else if(side > 0) { // left side
         textAlignment = wxALIGN_RIGHT;
-        labelOffsetX = -85;
+        labelOffsetX = -65;
     }
+
 
     // define the ellipse which represents the virtual player circle
     double verticalRadius_hand = MainGamePanel::otherPlayerHandDistanceFromCenter; 
@@ -85,11 +84,12 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     wxPoint labelPosition = MainGamePanel::tableCenter;
     wxPoint betPosition = MainGamePanel::tableCenter;
 
-    // 1.6 to horizontally elongate players' circle?...
-    handPosition +=     this->getPointOnEllipse(verticalRadius_hand*1.6,  verticalRadius_hand,  playerAngle);
-    labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.6, verticalRadius_label, playerAngle);
-    betPosition +=      this->getPointOnEllipse(verticalRadius_bet*1.6,   verticalRadius_bet,   playerAngle);
+    // 1.6 to horizontally elongate players' circle?...  1.4
+    handPosition  +=    this->getPointOnEllipse(verticalRadius_hand*1.2,  verticalRadius_hand,  playerAngle);
+    labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.2, verticalRadius_label, playerAngle);
+    betPosition   +=    this->getPointOnEllipse(verticalRadius_bet*1.2,   verticalRadius_bet,   playerAngle);
     labelPosition += wxSize(labelOffsetX, 0);
+  
 
     // NAME
     this->buildStaticText(
@@ -100,29 +100,22 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
             true
     );
 
-//    bool is_broke();
-//    bool check_if_over_21();
 
-    // before there there was an is_broke() call in the "Status: LOST CAME call" but
-    // since it didn't work I replaced it with a local calculation
-    // TODO is_broke() should probably not be calculated here but in player.cpp
     bool player_is_broke = otherPlayer->get_money() < gameState->_min_bet;
-
     if(!gameState->is_started()) {
         // STATUS
         this->buildStaticText(
-                "Status: Waiting for Game to start" + std::to_string(otherPlayer->get_bet_size()),
-                labelPosition + wxSize(-100, 18),
+                "waiting for game to start...",
+                labelPosition + wxSize(-100, -18),
                 wxSize(200, 18),
                 textAlignment
         );
     }
-
     else if(player_is_broke){
         // STATUS
         this->buildStaticText(
                 "Status: LOST GAME",
-                labelPosition + wxSize(-100, 18),
+                labelPosition + wxSize(-100, -18),
                 wxSize(200, 18),
                 textAlignment
         );
@@ -132,15 +125,25 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         if(otherPlayer->get_hand()->is_over_21(err)){
             this->buildStaticText(
                     "Status: LOST ROUND",
-                    labelPosition + wxSize(-100, 18),
+                    labelPosition + wxSize(-100, -18),
                     wxSize(200, 18),
                     textAlignment
             );
         }
-        else{
+        else if(gameState->get_current_player() == otherPlayer)
+        {
             this->buildStaticText(
-                    "Status: Playing/Waiting for turn",
-                    labelPosition + wxSize(-100, 18),
+                    "Status: Playing",
+                    labelPosition + wxSize(-100, -18),
+                    wxSize(200, 18),
+                    textAlignment
+            );
+        }
+        else
+        {
+            this->buildStaticText(
+                    "Status: Waiting for turn",
+                    labelPosition + wxSize(-100, -18),
                     wxSize(200, 18),
                     textAlignment
             );
@@ -160,39 +163,40 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
                 textAlignment
         );
 
-        // add player's HAND IMAGE=================================
+
+        // ========= add player's HAND IMAGE=================================
+
         int numberOfCards = otherPlayer->get_hand()->get_nof_cards();
+        std::string cardImage;
+        wxSize boundsOfRotatedHand =  this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
+        wxSize weirdSize(80, 80);
+        double cAngle = playerAngle + MainGamePanel::twoPi/4;
+        int cDist = MainGamePanel::otherPlayerHandSize;
+        wxSize card_dist((int)(sin(cAngle)*cDist), (int)(cos(cAngle) * cDist));
+        handPosition -= 2*card_dist;
 
-        wxSize boundsOfRotatedHand;
 
-        if(numberOfCards > 0) {
-            boundsOfRotatedHand = this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
-
-            // get new bounds of image, as they increase when image is rotated
-            handPosition -= boundsOfRotatedHand / 2;
-
-            std::string handImage = "assets/png-bcards/back" + std::to_string(numberOfCards) + ".png";
-            if(numberOfCards > 8) {
-                handImage = "assets/png-cards/black8.png";
-            }
-            new ImagePanel(this, handImage, wxBITMAP_TYPE_ANY, handPosition, boundsOfRotatedHand, playerAngle);
-
+        for(int i = 0; i<numberOfCards;++i){
+            card *handCard = otherPlayer->get_hand()->get_cards().at(i);
+            cardImage = getPngFileName(handCard->get_value(), handCard->get_suit());
+            new ImagePanel(this, cardImage, wxBITMAP_TYPE_ANY, handPosition, weirdSize, playerAngle);
+            handPosition += card_dist*0.85;
         }
 
-        // add player's BET IMAGE=================================
+        // add player's BET IMAGE================================= refine??
         int bet=otherPlayer->get_bet_size();
 
         if(bet<=10){
-            new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, boundsOfRotatedHand, playerAngle);
+            new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, weirdSize, playerAngle);
         }
         else if(bet<=20){
-            new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, boundsOfRotatedHand, playerAngle);
+            new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, weirdSize, playerAngle);
         }
         else{
-            new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, boundsOfRotatedHand, playerAngle);
+            new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, weirdSize, playerAngle);
     
         }
-    }
+    } 
 }
 
 

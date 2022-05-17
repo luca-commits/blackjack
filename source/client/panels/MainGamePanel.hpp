@@ -37,10 +37,10 @@ private:
 
 
     double const otherPlayerHandSize = 160.0; // smaller?
-    
-    double const otherPlayerBetDistanceFromCenter = 130.0;
-    double const otherPlayerHandDistanceFromCenter = 200.0;
-    double const otherPlayerLabelDistanceFromCenter = 300.0;
+
+    double const otherPlayerBetDistanceFromCenter = 120.0;
+    double const otherPlayerHandDistanceFromCenter = 180.0;
+    double const otherPlayerLabelDistanceFromCenter = 260.0;
 
     wxPoint const shoeOffset = wxPoint(-300, -42);
     wxPoint const dealerOffset = wxPoint(-600, -42);
