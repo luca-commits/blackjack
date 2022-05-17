@@ -34,7 +34,7 @@ answer_rqst_response::~answer_rqst_response() {
 
 void answer_rqst_response::write_into_json(rapidjson::Value &json,
                                        rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator> &allocator) const {
-    answer_rqst_response::write_into_json(json, allocator);
+    server_response::write_into_json(json, allocator);
 
     rapidjson::Value err_val(_err.c_str(), allocator);
     json.AddMember("err", err_val, allocator);
