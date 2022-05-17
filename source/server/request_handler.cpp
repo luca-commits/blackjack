@@ -120,7 +120,7 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
 
         // ##################### UNKNOWN REQUEST ##################### //
         default:
-            return new answer_rqst_response("", req_id, false, nullptr, "Unknown RequestType " + type);
+            return new answer_rqst_response("", req_id, false, nullptr, "Unknown RequestType " + std::to_string(type)); //That's the best I can come up with
     }
 }
 
