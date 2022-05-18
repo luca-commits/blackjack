@@ -172,14 +172,14 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         double cAngle = playerAngle + MainGamePanel::twoPi/4;
         int cDist = MainGamePanel::otherPlayerHandSize;
         wxSize card_dist((int)(sin(cAngle)*cDist), (int)(cos(cAngle) * cDist));
-        handPosition -= 2*card_dist;
+        handPosition -= card_dist;
 
 
         for(int i = 0; i<numberOfCards;++i){
             card *handCard = otherPlayer->get_hand()->get_cards().at(i);
             cardImage = getPngFileName(handCard->get_value(), handCard->get_suit());
             new ImagePanel(this, cardImage, wxBITMAP_TYPE_ANY, handPosition, weirdSize, playerAngle);
-            handPosition += card_dist*0.85;
+            handPosition += card_dist*0.4;
         }
 
         // add player's BET IMAGE================================= refine??
