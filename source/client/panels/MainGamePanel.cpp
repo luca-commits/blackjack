@@ -174,7 +174,9 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         double cAngle = playerAngle + MainGamePanel::twoPi/4;
         int cDist = MainGamePanel::otherPlayerHandSize;
         wxSize card_dist((int)(sin(cAngle)*cDist), (int)(cos(cAngle) * cDist));
+        wxSize bet_dist = 0.15*card_dist;
         handPosition -= 0.5*card_dist;
+        betPosition -= 3* bet_dist;
 
 
         for(int i = 0; i<numberOfCards;++i){
@@ -187,18 +189,34 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 
         // add player's BET IMAGE================================= refine??
         int bet=otherPlayer->get_bet_size();
-        
         wxSize chipSize(25, 25);
-        if(bet<=10){
-            new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
-        }
-        else if(bet<=20){
-            new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
-        }
-        else{
+
+        while(bet>=10){
             new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
-    
+            betPosition += bet_dist;
+            bet -=10;
         }
+        while(bet>=5){
+            new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
+            betPosition += bet_dist;
+            bet -= 5;
+        }
+        while(bet>=1){
+            new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
+            betPosition += bet_dist;
+            --bet;
+        }
+
+
+        // if(bet<=5){
+        //     new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
+        // }
+        // else if(bet<=10){
+        //     new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
+        // }
+        // else{
+        //     new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
+        // }
     } 
 }
 
