@@ -101,8 +101,11 @@ void GameController::makeBet() {
         return;
     }
 
-    make_bet_request request = make_bet_request(GameController::_me->get_id(), GameController::_me->get_player_name(), bet_int);
+    make_bet_request request = make_bet_request(GameController::_me->get_id(), GameController::_me->get_id(), bet_int);
     ClientNetworkManager::sendRequest(request);
+    // show MainPanel after done with betting
+    GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
+    GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
 }
 
 // THIS HAS TO BE EDITTED FOR SURE
@@ -133,16 +136,11 @@ void GameController::updateGameState(game_state* newGameState) {
     if(_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
         GameController::_betPanel->makeBet(GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
-        // the below loop is supposed to wait with program execution until player actually inputs his bet
-        // in BetPanel so that MainGamePanel in line 141 is not shown straight away. However for some unknown
-        // fucking reason, BetPanel is never shown although line 135 executes
-        while(_me->get_bet_size() == 0) {}
-    }
-
-    GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
-
+    } else {
+        GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
     // command the main game panel to rebuild itself, based on the new game state
-    GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
+        GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
+    }
 }
 
 
