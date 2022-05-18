@@ -61,16 +61,16 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, int side) {
 
       
-    //   IDONTKNOWMAN
+    //IDONTKNOWMAN
     std::string err;//deugging helper...
     long textAlignment = wxALIGN_CENTER;
     int labelOffsetX = 0;
     if (side < 0) { // right side
         textAlignment = wxALIGN_LEFT;
-        labelOffsetX = 85;
+        labelOffsetX = 65;
     } else if(side > 0) { // left side
         textAlignment = wxALIGN_RIGHT;
-        labelOffsetX = -65;
+        labelOffsetX = -10;
     }
 
 
@@ -84,9 +84,9 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     wxPoint labelPosition = MainGamePanel::tableCenter;
     wxPoint betPosition = MainGamePanel::tableCenter;
 
-    handPosition  +=    this->getPointOnEllipse(verticalRadius_hand*1.2,  verticalRadius_hand,  playerAngle);
-    labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.2, verticalRadius_label, playerAngle);
-    betPosition   +=    this->getPointOnEllipse(verticalRadius_bet*1.2,   verticalRadius_bet,   playerAngle);
+    handPosition  +=    this->getPointOnEllipse(verticalRadius_hand*1.4,  verticalRadius_hand,  playerAngle);
+    labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.4, verticalRadius_label, playerAngle);
+    betPosition   +=    this->getPointOnEllipse(verticalRadius_bet*1.4,   verticalRadius_bet,   playerAngle);
     labelPosition += wxSize(labelOffsetX, 0);
   
 
@@ -100,7 +100,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     );
 
 
-    bool player_is_broke = otherPlayer->get_money() < gameState->_min_bet;
+    bool player_is_broke = otherPlayer->get_money()+otherPlayer->get_bet_size() < gameState->_min_bet;
     if(!gameState->is_started()) {
         // STATUS
         this->buildStaticText(
@@ -167,32 +167,34 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 
         int numberOfCards = otherPlayer->get_hand()->get_nof_cards();
         std::string cardImage;
-        wxSize boundsOfRotatedHand =  this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
-        wxSize weirdSize(80, 80);
+        wxSize weirdSize(70, 70);
+        // weirdSize =  boundsOfRotatedHand;
         double cAngle = playerAngle + MainGamePanel::twoPi/4;
         int cDist = MainGamePanel::otherPlayerHandSize;
         wxSize card_dist((int)(sin(cAngle)*cDist), (int)(cos(cAngle) * cDist));
-        handPosition -= card_dist;
+        handPosition -= 0.5*card_dist;
 
 
         for(int i = 0; i<numberOfCards;++i){
+        // wxSize boundsOfRotatedHand =  this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
             card *handCard = otherPlayer->get_hand()->get_cards().at(i);
             cardImage = getPngFileName(handCard->get_value(), handCard->get_suit());
             new ImagePanel(this, cardImage, wxBITMAP_TYPE_ANY, handPosition, weirdSize, playerAngle);
-            handPosition += card_dist*0.4;
+            handPosition += card_dist*0.65;
         }
 
         // add player's BET IMAGE================================= refine??
         int bet=otherPlayer->get_bet_size();
-
+        
+        wxSize chipSize(25, 25);
         if(bet<=10){
-            new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, weirdSize, playerAngle);
+            new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
         }
         else if(bet<=20){
-            new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, weirdSize, playerAngle);
+            new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
         }
         else{
-            new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, weirdSize, playerAngle);
+            new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
     
         }
     } 

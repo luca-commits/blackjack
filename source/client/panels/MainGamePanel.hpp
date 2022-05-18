@@ -38,7 +38,7 @@ private:
 
     double const otherPlayerHandSize = 160.0; // smaller?
 
-    double const otherPlayerBetDistanceFromCenter = 120.0;
+    double const otherPlayerBetDistanceFromCenter = 110.0;
     double const otherPlayerHandDistanceFromCenter = 180.0;
     double const otherPlayerLabelDistanceFromCenter = 260.0;
 
