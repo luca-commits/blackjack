@@ -427,7 +427,7 @@ std::string MainGamePanel::getPngFileName(int value, int suit){
 
     std::string path = "assets/png-cards/";
 
-    if (value <= 10) {
+    if (value > 1 && value <= 10) {
       return path + std::to_string(value) + "_of_" + suit_map[suit] + ".png";
     }
     else{
