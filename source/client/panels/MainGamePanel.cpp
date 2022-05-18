@@ -421,7 +421,7 @@ wxPoint MainGamePanel::getPointOnEllipse(double horizontalRadius, double vertica
 
 std::string MainGamePanel::getPngFileName(int value, int suit){
 
-    std::map<int, std::string> value_map {{11, "jack"}, {12, "queen"}, {1, "ace"}};
+    std::map<int, std::string> value_map {{11, "jack"}, {12, "queen"}, {1, "ace"}, {10, "king"}};
     std::map<int, std::string> suit_map{
         {0, "spades"}, {1, "clubs"}, {2, "diamonds"}, {3, "hearts"}};
 
