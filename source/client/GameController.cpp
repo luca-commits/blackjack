@@ -5,7 +5,6 @@
 #include "../general/network/requests/make_bet_request.hpp"
 #include "../general/network/requests/stand_request.hpp"
 #include "network/ClientNetworkManager.hpp"
-#include <iostream>
 
 // initialize static members
 GameWindow* GameController::_gameWindow = nullptr;
@@ -102,7 +101,7 @@ void GameController::makeBet() {
         return;
     }
 
-    make_bet_request request = make_bet_request(GameController::_me->get_id(), GameController::_me->get_id(), bet_int);
+    make_bet_request request = make_bet_request(GameController::_current_game_state->get_id(), GameController::_me->get_id(), bet_int);
     ClientNetworkManager::sendRequest(request);
     // show MainPanel
     GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
@@ -125,7 +124,6 @@ void GameController::updateGameState(game_state* newGameState) {
     });
     if (it < players.end()) {
         GameController::_me = *it;
-        std::cout << "Player updated" << std::endl;
     } else {
         GameController::showError("Game state error", "Could not find this player among players of server game.");
         return;
@@ -147,7 +145,6 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showGameOverMessage();
     }
 
-    std::cout << _me->get_bet_size() << std::endl;
     if(_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
         GameController::_betPanel->makeBet(GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
