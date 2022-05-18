@@ -5,6 +5,7 @@
 #include "../general/network/requests/make_bet_request.hpp"
 #include "../general/network/requests/stand_request.hpp"
 #include "network/ClientNetworkManager.hpp"
+#include <iostream>
 
 // initialize static members
 GameWindow* GameController::_gameWindow = nullptr;
@@ -103,7 +104,7 @@ void GameController::makeBet() {
 
     make_bet_request request = make_bet_request(GameController::_me->get_id(), GameController::_me->get_id(), bet_int);
     ClientNetworkManager::sendRequest(request);
-    // show MainPanel after done with betting
+    // show MainPanel
     GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
     GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
 }
@@ -116,6 +117,19 @@ void GameController::updateGameState(game_state* newGameState) {
 
     // save the new game state as our current game state
     GameController::_current_game_state = newGameState;
+    
+    // update myself
+    std::vector<player*> players = newGameState->get_players();
+    std::vector<player*>::iterator it = std::find_if(players.begin(), players.end(), [](const player* x) {
+        return x->get_id() == GameController::_me->get_id();
+    });
+    if (it < players.end()) {
+        GameController::_me = *it;
+        std::cout << "Player updated" << std::endl;
+    } else {
+        GameController::showError("Game state error", "Could not find this player among players of server game.");
+        return;
+    }
 
     if(oldGameState != nullptr) {
 
@@ -133,6 +147,7 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showGameOverMessage();
     }
 
+    std::cout << _me->get_bet_size() << std::endl;
     if(_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
         GameController::_betPanel->makeBet(GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
