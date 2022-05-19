@@ -308,7 +308,16 @@ void game_state::wrap_up_round(std::string& err) {
         player->wrap_up_round(dealer_points, err);
     }
 
-    if (_round_number->get_value() >= _max_nof_rounds) {
+    //Check if we end on too many broke players
+    int num_broke_players = 0;
+    for(auto player : _players){
+      if(player->is_broke()){
+        ++num_broke_players;
+      }
+    }
+    bool finish_on_broke = (num_broke_players > _players.size()-2);
+
+    if (_round_number->get_value() >= _max_nof_rounds || finish_on_broke) {
         this->_is_finished->set_value(true);
     } else {
         // decide which player starts in the next round
