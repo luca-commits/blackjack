@@ -374,6 +374,10 @@ void MainGamePanel::buildDealer(game_state* gameState){
 
     wxPoint offset(80, 0);
 
+    // Here we draw the 2 cards for the dealer
+    gameState->add_card_to_dealer();
+    gameState->add_card_to_dealer();
+
     // TODO the call in the line below was compute_dealers_hand()
     // which should return the hand the dealer will have in the end
     // but get_dealers_hand returns only the current hand of the dealer

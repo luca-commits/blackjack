@@ -68,6 +68,7 @@ public:
     // functions to check state of round
     bool everyone_finished() const;
     bool round_begin() const;
+    void add_card_to_dealer();
 
 
 #ifdef BLACKJACK_SERVER

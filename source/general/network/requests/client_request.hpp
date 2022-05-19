@@ -17,7 +17,7 @@ enum RequestType {
     start_game,
     make_bet,
     hit,
-    stand,
+    stand
 };
 
 class client_request : public serializable {
