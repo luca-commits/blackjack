@@ -374,10 +374,6 @@ void MainGamePanel::buildDealer(game_state* gameState){
 
     wxPoint offset(80, 0);
 
-    // Here we draw the 2 cards for the dealer
-    gameState->add_card_to_dealer();
-    gameState->add_card_to_dealer();
-
     // TODO the call in the line below was compute_dealers_hand()
     // which should return the hand the dealer will have in the end
     // but get_dealers_hand returns only the current hand of the dealer
@@ -389,8 +385,8 @@ void MainGamePanel::buildDealer(game_state* gameState){
         offsets[i] = i * offset;
     }
     std::string backside = "assets/png-cards/backside.png";
-    std::string left_frontside = getPngFileName(dealers_cards[0]->get_value(), dealers_cards[0]->get_suit());
-    std::string right_frontside = getPngFileName(dealers_cards[1]->get_value(), dealers_cards[1]->get_suit());
+    std::string left_frontside = getPngFileName(dealers_cards.at(0)->get_value(), dealers_cards.at(0)->get_suit());
+    std::string right_frontside = getPngFileName(dealers_cards.at(1)->get_value(), dealers_cards.at(1)->get_suit());
 
     std::vector<std::string> dealer_cards_file_names(dealers_cards.size());
     std::transform(dealers_cards.begin(), dealers_cards.end(),

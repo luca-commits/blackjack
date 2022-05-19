@@ -131,11 +131,6 @@ bool game_state::round_begin() const {
     return true;
 }
 
-void game_state::add_card_to_dealer(){
-    std::string err = "couldn't add card to dealer";
-    card* drawn_card = _shoe->draw_card(_dealers_hand, err);
-}
-
 #ifdef BLACKJACK_SERVER
 
 // server-side state update functions (same as in LAMA)

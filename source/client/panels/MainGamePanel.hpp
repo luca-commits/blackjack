@@ -54,7 +54,6 @@ private:
 
 
     double const twoPi = 6.28318530718;
-
     std::string getPngFileName(int value, int suit);
 };
 
