@@ -151,14 +151,14 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         }
         // MONEY
         this->buildStaticText(
-                "Money in depot:" + std::to_string(otherPlayer->get_money()),
+                "Money:" + std::to_string(otherPlayer->get_money()) + "$",
                 labelPosition + wxSize(-100, 0),
                 wxSize(200, 18),
                 textAlignment
         );
         // BET
         this->buildStaticText(
-                "Money betted:" + std::to_string(otherPlayer->get_bet_size()),
+                "Bet:" + std::to_string(otherPlayer->get_bet_size()) + "$",
                 labelPosition + wxSize(-100, 18),
                 wxSize(200, 18),
                 textAlignment
@@ -260,15 +260,21 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
     } else {
 
-        // This is taken care of in the betpanel
-        // wxStaticText *playerPoints = buildStaticText(
-        //         "You currently have " + std::to_string(me->get_money()) + "$",
-        //         wxDefaultPosition,
-        //         wxSize(200, 18),
-        //         wxALIGN_CENTER
-        // );
+        wxStaticText *playerMoney = buildStaticText(
+                 "You currently have " + std::to_string(me->get_money()) + "$",
+                 wxDefaultPosition,
+                 wxSize(200, 18),
+                 wxALIGN_CENTER
+                );
 
-        // innerLayout->Add(playerPoints, 0, wxALIGN_CENTER | wxBOTTOM, 8);
+        wxStaticText *playerBet = buildStaticText(
+                 "Your current bet is " + std::to_string(me->get_bet_size()) + "$",
+                 wxDefaultPosition,
+                 wxSize(200, 18),
+                 wxALIGN_CENTER
+                );
+
+        innerLayout->Add(playerMoney, 0, wxALIGN_CENTER | wxBOTTOM, 8);
 
         // if our player already played, we display that as status
         // TODO from has_folded make has_played
@@ -280,7 +286,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
                     wxALIGN_CENTER
             );
             innerLayout->Add(playerStatus, 0, wxALIGN_CENTER | wxBOTTOM, 8);
-            }
+        }
            
         // TODO It's our turn, display Hit and Stand button
         if (gameState->get_current_player() == me) {
@@ -331,7 +337,8 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
                 card *handCard = me->get_hand()->get_cards().at(i);
                 std::string cardFile = getPngFileName(handCard->get_value(), handCard->get_suit());
-                ImagePanel *cardButton = new ImagePanel(this, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
+                ImagePanel *cardPanel = new ImagePanel(this, cardFile, wxBITMAP_TYPE_ANY, wxDefaultPosition, scaledCardSize);
+                handLayout->Add(cardPanel, 0, wxLEFT | wxRIGHT, 4);
             }
         }
     }   
