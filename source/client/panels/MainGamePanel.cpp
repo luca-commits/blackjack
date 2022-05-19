@@ -194,29 +194,15 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         if(bet>=10){
             new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
-            //bet -=10;
         }
         if(bet>=5 && bet < 10){
             new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
-            //bet -= 5;
         }
         if(bet>=1 && bet < 5){
             new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
-            //--bet;
         }
-
-
-        // if(bet<=5){
-        //     new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
-        // }
-        // else if(bet<=10){
-        //     new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
-        // }
-        // else{
-        //     new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
-        // }
     } 
 }
 
@@ -276,6 +262,26 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
         innerLayout->Add(playerMoney, 0, wxALIGN_CENTER | wxBOTTOM, 8);
         innerLayout->Add(playerBet, 0, wxALIGN_CENTER | wxBOTTOM, 8);
+
+
+        //Display chip according to the betsize of the player
+        int bet=me->get_bet_size();
+        wxSize chipSize(25, 25);
+
+        wxPoint chipPosition = MainGamePanel::tableCenter + MainGamePanel::chipOffset;
+
+        if(bet>=10){
+            new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
+            //betPosition += bet_dist;
+        }
+        if(bet>=5 && bet < 10){
+            new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
+            //betPosition += bet_dist;
+        }
+        if(bet>=1 && bet < 5){
+            new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
+            //betPosition += bet_dist;
+        }
 
         // if our player already played, we display that as status
         // TODO from has_folded make has_played
@@ -342,14 +348,13 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
                 handLayout->Add(cardPanel, 0, wxLEFT | wxRIGHT, 4);
             }
         }
-    }   
+    }
 }
 
 
 void MainGamePanel::buildRoundCounter(game_state* gameState){
   if(gameState->is_started() && gameState->get_current_player() != nullptr) {
 
-      // gameState->get_current_player()->get_player_name() is a placeholder, we need a roundnr variable
       std::string roundindicator = "We are in round: " + std::to_string(gameState->get_round_number());
 
       //wxPoint turnIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::turnIndicatorOffset;

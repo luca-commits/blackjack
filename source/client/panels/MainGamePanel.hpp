@@ -48,6 +48,7 @@ private:
     wxPoint const turnIndicatorOffset = wxPoint(-100, 98);
     // PERADD 
     wxPoint const roundIndicatorOffset = wxPoint(-300,98);
+    wxPoint const chipOffset = wxPoint(60,220);
 
     wxPoint const leftDealerCardOffset = wxPoint(-80, 0);
     wxPoint const rightDealerCardOffset = wxPoint(80, 0);
