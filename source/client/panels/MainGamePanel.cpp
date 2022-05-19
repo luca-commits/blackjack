@@ -191,20 +191,20 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         int bet=otherPlayer->get_bet_size();
         wxSize chipSize(25, 25);
 
-        while(bet>=10){
+        if(bet>=10){
             new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
-            bet -=10;
+            //bet -=10;
         }
-        while(bet>=5){
+        if(bet>=5 && bet < 10){
             new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
-            bet -= 5;
+            //bet -= 5;
         }
-        while(bet>=1){
+        if(bet>=1 && bet < 5){
             new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
-            --bet;
+            //--bet;
         }
 
 
