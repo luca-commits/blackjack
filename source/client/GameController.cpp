@@ -146,7 +146,7 @@ void GameController::updateGameState(game_state* newGameState) {
     }
 
     if(_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
-        GameController::_betPanel->makeBet(GameController::_current_game_state, GameController::_me);
+        GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
     } else {
         GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
@@ -191,7 +191,7 @@ void GameController::showStatus(const std::string& message) {
 
 void GameController::showNewRoundMessage(game_state* oldGameState, game_state* newGameState) {
     std::string title = "Round Completed";
-    std::string message = "The players have following ammounts of money:\n";
+    std::string message = "The players have won following amounts of money:\n";
     std::string buttonLabel = "Start next round";
 
     // add the point differences of all players to the messages
