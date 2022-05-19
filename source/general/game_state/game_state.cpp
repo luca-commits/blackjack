@@ -6,7 +6,6 @@
 
 #include "../exceptions/BlackjackException.hpp"
 #include "../serialization/vector_utils.h"
-#include <iostream>
 
 
 game_state::game_state() : unique_serializable() {
@@ -46,7 +45,6 @@ game_state::game_state(std::string id, std::vector<player*>& players, shoe* shoe
           _starting_player_idx(starting_player_idx)
 { }
 
-//they also didn't delete the players vector... not sure why (also the only one that was not created with new in the default constructor)
 game_state::~game_state() {
     if (_is_started != nullptr) {
         delete _shoe;
@@ -141,8 +139,8 @@ bool game_state::round_begin() const {
 
 #ifdef BLACKJACK_SERVER
 
-// server-side state update functions (same as in LAMA)
-void game_state::setup_round(std::string& err) {  // server side initialization (start_round in our SDS)
+// server-side state update functions
+void game_state::setup_round(std::string& err) {
 
     _shoe->setup_round(err);
 
@@ -153,8 +151,6 @@ void game_state::setup_round(std::string& err) {  // server side initialization 
     //setup players
     for (auto player : _players) {
         player->setup_round(err);
-        //TODO: how do we get the instream for the amount of the bet
-        // I think we do not need to do anything because make_bet request will call make_bet for each player!
         _shoe->draw_card(player->get_hand(), err);
         _shoe->draw_card(player->get_hand(), err);
     }
@@ -267,9 +263,7 @@ bool game_state::stand(player* player, std::string& err) {
     }
     else if(player->get_hand()->get_points(err) <= 21) {
         player->set_finished_turn();
-        std::cout << std::endl << "idx before update: " << _current_player_idx->get_value() << std::endl;
         update_current_player(err);
-        std::cout << std::endl << "idx after update: " << _current_player_idx->get_value() << std::endl;
         return true;
     }
     else{
@@ -373,7 +367,6 @@ void game_state::write_into_json(rapidjson::Value& json, rapidjson::Document::Al
     _round_number->write_into_json(round_number_val, allocator);
     json.AddMember("round_number", round_number_val, allocator);
 
-    std::cout << std::endl << "idx: " << _current_player_idx->get_value() << std::endl;
     rapidjson::Value current_player_idx_val(rapidjson::kObjectType);
     _current_player_idx->write_into_json(current_player_idx_val, allocator);
     json.AddMember("current_player_idx", current_player_idx_val, allocator);
