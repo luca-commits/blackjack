@@ -5,8 +5,6 @@ It uses [wxWidgets](https://www.wxwidgets.org/) for the GUI, [sockpp](https://gi
 
 <img src="./assets/final_logo.png" alt="Blackjack-logo" width="200"/>
 
-[comment]: <> (![Blackjack-logo](./assets/final_logo.png?raw=true))
-
 This project is based upon a template project for the students of the course Software Engineering. The template can be found [here](https://gitlab.ethz.ch/hraymond/cse-lama-example-project)
 
 ## 1. Compile instructions
@@ -65,7 +63,6 @@ The client renders the GUI that is presented to the player, whereas the server i
 ### 4.2 Network Interface
 Everything that is passed between client and server are objects of type `client_request` and `server_response`. Since the underlying network protocol works with TCP, these `client_request` and `server_response` objects are transformed into a **[JSON](https://wiki.selfhtml.org/wiki/JSON) string**, which can then be sent over the network. The receiving end reads the JSON string and constructs an object of type `client_request` resp. `server_response` that reflects the exact parameters that are specified in the JSON string. This process is known as **serialization** (object to string) and **deserialization** (string to object). If you want to read more about serialization, [read me on Wikipedia](https://en.wikipedia.org/wiki/Serialization).
 
-[comment]: <> (![client-server-diagram](./docs/img/client-server-diagram.png?raw=true))
 
 #### 4.2.1 Serialization & Deserialization of messages
 Both, the `client_request` and `server_response` base classes, implement the abstract class `serializable` with its `write_into_json(...)` function. It allows to serialize the object instance into a JSON string. Additionally, they have a static function `from_json(...)`, which allows creating an object instance from a JSON string.
