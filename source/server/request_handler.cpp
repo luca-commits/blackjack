@@ -34,7 +34,12 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
         case RequestType::join_game: {
             std::string player_name = ((join_game_request *) req)->get_player_name();
 
-            // Create new player or get existing one with that name
+            //Check if name is already taken
+            if(player_manager::does_name_conflict(player_name, player_id)){
+              err = "Name " + player_name + " is already taken";
+              return new answer_rqst_response("", req_id, false, nullptr, err);
+            }
+            // Create new player or get existing one with that id
             player_manager::add_or_get_player(player_name, player_id, player);
 
             if (game_id.empty()) {
