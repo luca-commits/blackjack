@@ -84,7 +84,6 @@ void player::set_finished_turn() {
 
 #ifdef BLACKJACK_SERVER
 
-// should make_bet be already called here ?
 void player::setup_round(std::string& err) {
     _bet_size->set_value(0);
     _finished_turn->set_value(false);
@@ -94,7 +93,7 @@ void player::setup_round(std::string& err) {
 // based on how many points the dealer has, chooses to call won_round, lost_round or draw round
 void player::wrap_up_round(int dealer_points, std::string& err) {
     int player_points = _player_hand->get_points(err);
-    if(player_points > 21 || (player_points < dealer_points && dealer <= 21){
+    if(player_points > 21 || (player_points < dealer_points && dealer <= 21)){
         this->lost_round();
         return;
     } 
@@ -111,14 +110,12 @@ void player::wrap_up_round(int dealer_points, std::string& err) {
 }
 
 
-// possibly not needed?
 // TODO: add check if player already has a bet to throw error?
 bool player::make_bet(int bet_size, std::string &err) {
     if(bet_size > this->get_money()) {
         err = "bet_size is bigger than amount of money the player " + this->_player_name->get_value() + " has.";
         return false;
     } else if (bet_size <= 0) {
-        //TODO: why do we not do this with an unsigned int then
         err = "Player " + this->_player_name->get_value() + " tried to place a negative (or no) bet.";
         return false;
     } else if (this->has_finished_turn()) {
