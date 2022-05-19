@@ -146,8 +146,9 @@ void game_state::setup_round(std::string& err) {  // server side initialization 
 
     _shoe->setup_round(err);
 
-    //update round number
+    //update round number and set current player to starting player
     _round_number->set_value(_round_number->get_value() + 1);
+    _current_player_idx->set_value(_starting_player_idx->get_value());
 
     //setup players
     for (auto player : _players) {
@@ -243,8 +244,6 @@ bool game_state::hit(player* player, std::string& err) {
         return true;
     } else {
         err = "Could not hit since the player already has 21 points or more.";
-        player->set_finished_turn();
-        update_current_player(err);
         return false;
     }
 }
@@ -266,7 +265,7 @@ bool game_state::stand(player* player, std::string& err) {
         err = "Player " + player->get_player_name() + " has already finished their turn.";
         return false;
     }
-    else if(player->get_hand()->get_points(err) < 21) {
+    else if(player->get_hand()->get_points(err) <= 21) {
         player->set_finished_turn();
         std::cout << std::endl << "idx before update: " << _current_player_idx->get_value() << std::endl;
         update_current_player(err);
@@ -295,7 +294,6 @@ bool game_state::make_bet(player* player, int bet_size, std::string& err) {
 void game_state::update_current_player(std::string& err) {
     int current_player_idx = _current_player_idx->get_value();
     if(current_player_idx + 1 >= _players.size()) {
-        // SET CURRENT PLAYER TO 0 AGAIN!
         wrap_up_round(err);
     } else {
         ++current_player_idx;
