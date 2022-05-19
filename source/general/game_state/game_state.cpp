@@ -6,6 +6,7 @@
 
 #include "../exceptions/BlackjackException.hpp"
 #include "../serialization/vector_utils.h"
+#include <iostream>
 
 
 game_state::game_state() : unique_serializable() {
@@ -81,12 +82,11 @@ bool game_state::is_finished() const {
 }
 
 bool game_state::is_player_in_game(player* player) const {
-    return std::find(_players.begin(), _players.end(), player) != _players.end();
+    return std::find(_players.begin(), _players.end(), player) < _players.end();
 }
 
 bool game_state::is_allowed_to_play_now(player* player) const {
-    auto it = std::find(_players.begin(), _players.end(), player);
-    return *it == _players[_current_player_idx->get_value()];
+    return player == get_current_player() && !player->has_finished_turn();
 }
 
 std::vector<player*>& game_state::get_players() {
@@ -98,7 +98,12 @@ int game_state::get_round_number() const {
 }
 
 int game_state::get_player_index(player* player) const {
-    return _current_player_idx->get_value();
+    auto it = std::find(_players.begin(), _players.end(), player);
+    if (it == _players.end()) {
+        return -1;
+    } else {
+        return it - _players.begin();
+    }
 }
 
 shoe* game_state::get_shoe() const {
@@ -106,6 +111,9 @@ shoe* game_state::get_shoe() const {
 }
 
 player* game_state::get_current_player() const {
+    if(_current_player_idx == nullptr || _players.size() == 0) {
+        return nullptr;
+    }
     return _players[_current_player_idx->get_value()];
 }
 
@@ -260,7 +268,9 @@ bool game_state::stand(player* player, std::string& err) {
     }
     else if(player->get_hand()->get_points(err) < 21) {
         player->set_finished_turn();
+        std::cout << std::endl << "idx before update: " << _current_player_idx->get_value() << std::endl;
         update_current_player(err);
+        std::cout << std::endl << "idx after update: " << _current_player_idx->get_value() << std::endl;
         return true;
     }
     else{
@@ -283,10 +293,13 @@ bool game_state::make_bet(player* player, int bet_size, std::string& err) {
 
 // functions from our SDS
 void game_state::update_current_player(std::string& err) {
-    if(_current_player_idx->get_value() + 1 >= _players.size()) {
+    int current_player_idx = _current_player_idx->get_value();
+    if(current_player_idx + 1 >= _players.size()) {
+        // SET CURRENT PLAYER TO 0 AGAIN!
         wrap_up_round(err);
     } else {
-        ++_current_player_idx;
+        ++current_player_idx;
+        _current_player_idx->set_value(current_player_idx);
     }
 }
 
@@ -362,6 +375,7 @@ void game_state::write_into_json(rapidjson::Value& json, rapidjson::Document::Al
     _round_number->write_into_json(round_number_val, allocator);
     json.AddMember("round_number", round_number_val, allocator);
 
+    std::cout << std::endl << "idx: " << _current_player_idx->get_value() << std::endl;
     rapidjson::Value current_player_idx_val(rapidjson::kObjectType);
     _current_player_idx->write_into_json(current_player_idx_val, allocator);
     json.AddMember("current_player_idx", current_player_idx_val, allocator);

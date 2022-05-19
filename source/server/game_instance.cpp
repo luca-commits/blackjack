@@ -12,10 +12,6 @@ game_state *game_instance::get_game_state() {
     return _game_state;
 }
 
-// We will need is_full(), is_started() and is_finished() in game_state
-// although it is NOT in our SDS!s
-
-
 std::string game_instance::get_id() {
     return _game_state->get_id();
 }
@@ -35,9 +31,6 @@ bool game_instance::is_started() {
 bool game_instance::is_finished() {
     return _game_state->is_finished();
 }
-
-// ALL FUNCTIONS BELOW REQUIRE ADAPTATION !!! Functions used in
-// if-statements are not in SDS but will probably need to be implemented
 
 bool game_instance::start_game(player* player, std::string &err) {
     modification_lock.lock();

@@ -50,7 +50,7 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
     // show the number of rounds
     this->buildRoundCounter(gameState);
 
-    this ->buildDealer(gameState);
+    //this ->buildDealer(gameState);
 
     // update layout
     this->Layout();
