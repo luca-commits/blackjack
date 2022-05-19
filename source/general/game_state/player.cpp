@@ -94,12 +94,17 @@ void player::setup_round(std::string& err) {
 // based on how many points the dealer has, chooses to call won_round, lost_round or draw round
 void player::wrap_up_round(int dealer_points, std::string& err) {
     int player_points = _player_hand->get_points(err);
-    if(player_points > 21 || player_points < dealer_points){
+    if(player_points > 21 || (player_points < dealer_points && dealer <= 21){
         this->lost_round();
-    } else if(player_points > dealer_points) {
+        return;
+    } 
+    if(player_points > dealer_points || dealer_points > 21) {
         this->won_round();
-    } else if(player_points == dealer_points) {
+        return;
+    } 
+    if(player_points == dealer_points) {
         this->draw_round();
+        return;
     } else {
         err = "Something went wrong during wrapping round for player " + this->_player_name->get_value();
     }
