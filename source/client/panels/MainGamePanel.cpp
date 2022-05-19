@@ -275,6 +275,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
                 );
 
         innerLayout->Add(playerMoney, 0, wxALIGN_CENTER | wxBOTTOM, 8);
+        innerLayout->Add(playerBet, 0, wxALIGN_CENTER | wxBOTTOM, 8);
 
         // if our player already played, we display that as status
         // TODO from has_folded make has_played
@@ -349,7 +350,7 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
   if(gameState->is_started() && gameState->get_current_player() != nullptr) {
 
       // gameState->get_current_player()->get_player_name() is a placeholder, we need a roundnr variable
-      std::string roundindicator = "We are in round: " + gameState->get_current_player()->get_player_name();
+      std::string roundindicator = "We are in round: " + std::to_string(gameState->get_round_number());
 
       //wxPoint turnIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::turnIndicatorOffset;
       wxPoint roundIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::roundIndicatorOffset;
