@@ -116,7 +116,7 @@ void GameController::updateGameState(game_state* newGameState) {
 
     // save the new game state as our current game state
     GameController::_current_game_state = newGameState;
-    
+
     // update myself
     std::vector<player*> players = newGameState->get_players();
     std::vector<player*>::iterator it = std::find_if(players.begin(), players.end(), [](const player* x) {
@@ -224,10 +224,10 @@ void GameController::showGameOverMessage() {
     std::string message = "Final score:\n";
     std::string buttonLabel = "Close Game";
 
-    // sort players by money  
+    // sort players by money
     std::vector<player*> players = GameController::_current_game_state->get_players();
     std::sort(players.begin(), players.end(), [](const player* a, const player* b) -> bool {
-        return a->get_money() < b->get_money();
+        return a->get_money() > b->get_money();
     });
 
     // list all players
