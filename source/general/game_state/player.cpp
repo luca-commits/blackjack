@@ -96,11 +96,11 @@ void player::wrap_up_round(int dealer_points, std::string& err) {
     if(player_points > 21 || (player_points < dealer_points && dealer_points <= 21)){
         this->lost_round();
         return;
-    } 
+    }
     if(player_points > dealer_points || dealer_points > 21) {
         this->won_round();
         return;
-    } 
+    }
     if(player_points == dealer_points) {
         this->draw_round();
         return;
@@ -137,18 +137,18 @@ void player::won_round() {
     int winnings = this->get_bet_size();
     int holdings = this->get_money();
     _money->set_value(holdings + 2 * winnings);
-    _bet_size->set_value(0);
+    //_bet_size->set_value(0);
 }
 
 void player::lost_round() {
-    _bet_size->set_value(0);
+    //_bet_size->set_value(0);
 }
 
 void player::draw_round() {
     int winnings = this->get_bet_size();
     int holdings = this->get_money();
     _money->set_value(holdings + winnings);
-    _bet_size->set_value(0);
+    //_bet_size->set_value(0);
 }
 
 #endif
