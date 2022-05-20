@@ -63,13 +63,16 @@ int hand::get_points(std::string &err) {
         }
     }
 
-    if (point_sum + 11 <= 21 - (ace_counter - 1)) {
-        point_sum += 11 + (ace_counter - 1);
-    } else {
-        point_sum += ace_counter;
+    int result = 0;
+    //This assumes either all aces count 11 or all aces count 1
+    if (point_sum + 11*ace_counter <= 21){
+      result = point_sum + 11*ace_counter;
+    }
+    else{
+      result = point_sum + ace_counter;
     }
 
-    return point_sum;
+    return result;
 }
 
 
