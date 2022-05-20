@@ -128,7 +128,7 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showError("Game state error", "Could not find this player among players of server game.");
         return;
     }
-
+/*
     if(oldGameState != nullptr) {
 
         // check if a new round started, and display message accordingly
@@ -139,7 +139,7 @@ void GameController::updateGameState(game_state* newGameState) {
         // delete the old game state, we don't need it anymore
         delete oldGameState;
     }
-
+*/
     // edit this to trigger when player is bankrupt
     if(GameController::_current_game_state->is_finished()) {
         GameController::showGameOverMessage();
@@ -153,6 +153,18 @@ void GameController::updateGameState(game_state* newGameState) {
     // command the main game panel to rebuild itself, based on the new game state
         GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
     }
+
+    if(oldGameState != nullptr) {
+
+        // check if a new round started, and display message accordingly
+        if(oldGameState->get_round_number() > 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
+            GameController::showNewRoundMessage(oldGameState, newGameState);
+        }
+
+        // delete the old game state, we don't need it anymore
+        delete oldGameState;
+    }
+
 }
 
 
