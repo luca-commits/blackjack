@@ -272,14 +272,10 @@ bool game_state::stand(player* player, std::string& err) {
         err = "Player " + player->get_player_name() + " has already finished their turn.";
         return false;
     }
-    else if(player->get_hand()->get_points(err) < 21) {
+    else{
         player->set_finished_turn();
         update_current_player(err);
         return true;
-    }
-    else{
-      err = "Could not stand, unknown error.";
-      return false;
     }
 }
 
