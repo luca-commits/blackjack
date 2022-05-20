@@ -230,6 +230,10 @@ bool game_state::hit(player* player, std::string& err) {
         err = "Could not hit, because the requested game is already finished.";
         return false;
     }
+    if (player->has_finished_turn()) {
+        err = "Player " + player->get_player_name() + " has already finished their turn.";
+        return false;
+    }
 
     if(player->get_hand()->get_points(err) < 21) {
         _shoe->draw_card(player->get_hand(), err);
@@ -261,7 +265,7 @@ bool game_state::stand(player* player, std::string& err) {
         err = "Player " + player->get_player_name() + " has already finished their turn.";
         return false;
     }
-    else if(player->get_hand()->get_points(err) <= 21) {
+    else if(player->get_hand()->get_points(err) < 21) {
         player->set_finished_turn();
         update_current_player(err);
         return true;
