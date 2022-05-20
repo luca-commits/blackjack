@@ -429,6 +429,10 @@ void MainGamePanel::buildDealer(game_state* gameState){
             ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0]->get_value(), dealers_cards[0]->get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
         }
         else{
+            std::string err = "Problems drawing cards for dealer in the end";
+            while(gameState->get_dealers_hand()->get_points(err)<= 16){
+                gameState->get_shoe()->draw_card(gameState->get_dealers_hand(), err);;
+            }
             for(unsigned i = 0; i < dealers_cards.size(); ++i){
                 ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
                 handLayout->Add(image_panel, 0, wxLEFT | wxRIGHT, 4);
