@@ -70,7 +70,6 @@ public:
     bool round_begin() const;
     void add_card_to_dealer();
 
-
 #ifdef BLACKJACK_SERVER
     // server-side state update functions (same as in LAMA)
     void setup_round(std::string& err);   // server side initialization (start_round in our SDS)
@@ -81,13 +80,13 @@ public:
     bool stand(player* player, std::string& err);
     bool make_bet(player* player, int bet_size, std::string& err);
 
-    // functions from our SDS
-    int compute_dealers_hand(std::string& err); // does hardcoded actions for dealer
-
     void update_current_player(std::string& err);
 
     // end of round functions
     void wrap_up_round(std::string& err);
+
+    // functions from our SDS
+    // void compute_dealers_hand(); // does hardcoded actions for dealer
 
     //Flag that setup needs to be called
     bool needs_setup = false;

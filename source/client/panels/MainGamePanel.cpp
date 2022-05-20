@@ -400,7 +400,6 @@ void MainGamePanel::buildDealer(game_state* gameState){
         }
         std::string backside = "assets/png-cards/backside.png";
         std::string left_frontside = getPngFileName(dealers_cards.at(0)->get_value(), dealers_cards.at(0)->get_suit());
-        std::string right_frontside = getPngFileName(dealers_cards.at(1)->get_value(), dealers_cards.at(1)->get_suit());
 
         std::vector<std::string> dealer_cards_file_names(dealers_cards.size());
         std::transform(dealers_cards.begin(), dealers_cards.end(),

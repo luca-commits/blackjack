@@ -137,6 +137,7 @@ bool game_state::round_begin() const {
     return true;
 }
 
+
 #ifdef BLACKJACK_SERVER
 
 // server-side state update functions
@@ -337,6 +338,14 @@ void game_state::wrap_up_round(std::string& err) {
         //Flag that setup is required, so game_instance can perform it
         needs_setup = true;
     }
+// void game_state::compute_dealers_hand() {
+//     std::string err = "Problems drawing cards for dealer in the end";
+//     while(this->get_dealers_hand()->get_points(err)<= 16){
+//         this->get_shoe()->draw_card(this->get_dealers_hand(), err);
+//     }
+// }
+
+
 }
 #endif
 
