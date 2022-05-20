@@ -4,6 +4,9 @@
 
 #include <map>
 
+#include <chrono>
+#include <thread>
+
 
 MainGamePanel::MainGamePanel(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(960, 680)) {
 }
@@ -191,17 +194,20 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         int bet=otherPlayer->get_bet_size();
         wxSize chipSize(25, 25);
 
-        if(bet>=10){
+        while(bet>=10){
             new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
+            bet -= 10;
         }
-        if(bet>=5 && bet < 10){
+        while(bet>=5){
             new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
+            bet -= 5;
         }
-        if(bet>=1 && bet < 5){
+        while(bet>=1){
             new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
+            bet -= 1;
         }
     } 
 }
@@ -269,18 +275,22 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
         wxSize chipSize(25, 25);
 
         wxPoint chipPosition = MainGamePanel::tableCenter + MainGamePanel::chipOffset;
+        const wxPoint chipdispl = wxPoint(20,0);
 
-        if(bet>=10){
+        while(bet>=10){
             new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
-            //betPosition += bet_dist;
+            chipPosition += chipdispl;
+            bet -= 10;
         }
-        if(bet>=5 && bet < 10){
+        while(bet>=5){
             new ImagePanel(this, "assets/png-chips/red.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
-            //betPosition += bet_dist;
+            chipPosition += chipdispl;
+            bet -= 5;
         }
-        if(bet>=1 && bet < 5){
+        while(bet>=1){
             new ImagePanel(this, "assets/png-chips/blue.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
-            //betPosition += bet_dist;
+            chipPosition += chipdispl;
+            bet -= 1;
         }
 
         // if our player already played, we display that as status
@@ -388,9 +398,6 @@ void MainGamePanel::buildDealer(game_state* gameState){
 
         wxPoint offset(80, 0);
 
-        // TODO the call in the line below was compute_dealers_hand()
-        // which should return the hand the dealer will have in the end
-        // but get_dealers_hand returns only the current hand of the dealer
         hand* dealers_hand = gameState->get_dealers_hand();
         std::vector<card*> dealers_cards = dealers_hand->get_cards();
 
@@ -432,6 +439,7 @@ void MainGamePanel::buildDealer(game_state* gameState){
                 ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
                 handLayout->Add(image_panel, 0, wxLEFT | wxRIGHT, 4);
             }
+            std::this_thread::sleep_for(std::chrono::seconds{2});
         }
     }
 }
