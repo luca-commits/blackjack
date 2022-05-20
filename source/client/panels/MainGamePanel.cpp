@@ -439,7 +439,14 @@ void MainGamePanel::buildDealer(game_state* gameState){
                 ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
                 handLayout->Add(image_panel, 0, wxLEFT | wxRIGHT, 4);
             }
-            std::this_thread::sleep_for(std::chrono::seconds{2});
+            this->buildStaticText(
+                "Test Text========================================================",
+                wxPoint(10,10),
+                wxSize(200, 18),
+                wxALIGN_CENTER,
+                true
+        );
+        //std::this_thread::sleep_for(std::chrono::seconds{10});
         }
     }
 }

@@ -5,6 +5,8 @@
 #include "../general/network/requests/make_bet_request.hpp"
 #include "../general/network/requests/stand_request.hpp"
 #include "network/ClientNetworkManager.hpp"
+#include <chrono>
+#include <thread>
 
 // initialize static members
 GameWindow* GameController::_gameWindow = nullptr;
@@ -158,7 +160,9 @@ void GameController::updateGameState(game_state* newGameState) {
 
         // check if a new round started, and display message accordingly
         if(oldGameState->get_round_number() > 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
+            //std::this_thread::sleep_for(std::chrono::seconds{10});
             GameController::showNewRoundMessage(oldGameState, newGameState);
+            //std::this_thread::sleep_for(std::chrono::seconds{10});
         }
 
         // delete the old game state, we don't need it anymore
@@ -224,10 +228,13 @@ void GameController::showNewRoundMessage(game_state* oldGameState, game_state* n
         }
         message += "\n" + playerName + ":     " + moneyText;
     }
-
+    //std::this_thread::sleep_for(std::chrono::seconds{10});
     wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
+    //std::this_thread::sleep_for(std::chrono::seconds{10});
     dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
+    //std::this_thread::sleep_for(std::chrono::seconds{10});
     dialogBox.ShowModal();
+    //std::this_thread::sleep_for(std::chrono::seconds{10});
 }
 
 
