@@ -8,6 +8,7 @@
 class request_handler {
 public:
     static answer_rqst_response* handle_request(const client_request* const req);
+    static bool perform_setup_if_needed(const client_request* const req);
 };
 
 #endif

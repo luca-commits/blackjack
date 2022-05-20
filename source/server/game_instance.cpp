@@ -110,3 +110,17 @@ bool game_instance::make_bet(player *player, const int& bet_size, std::string& e
     modification_lock.unlock();
     return false;
 }
+
+bool game_instance::perform_setup_if_needed(std::string& err){
+    if(_game_state->needs_setup){
+        modification_lock.lock();
+        _game_state->setup_round(err);
+        change_gamestate_msg state_update_msg = change_gamestate_msg(this->get_id(), *_game_state);
+        server_network_manager::broadcast_message(state_update_msg, _game_state->get_players(), nullptr);
+        modification_lock.unlock();
+        return true;
+    }
+    else{
+        return false;
+    }
+}

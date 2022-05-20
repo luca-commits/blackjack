@@ -129,4 +129,17 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
     }
 }
 
+bool request_handler::perform_setup_if_needed(const client_request* const req){
+    //Could potentially do something meaningful with err before returning
+    player* player;
+    game_instance* game_instance_ptr = nullptr;
+    std::string player_id = req->get_player_id();
+    std::string err;
+
+    //TODO: This should probably be error-checked
+    game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err);
+
+    return game_instance_ptr->perform_setup_if_needed(err);
+}
+
 #endif

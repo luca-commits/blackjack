@@ -145,7 +145,6 @@ void server_network_manager::handle_incoming_message(const std::string& msg, con
 #endif
     //handle request, get response
     server_response* res = request_handler::handle_request(req); //implicit conversion super->base
-    delete req;
 
     //send response back to client
     rapidjson::Document* res_json = res->to_json();
@@ -158,6 +157,10 @@ void server_network_manager::handle_incoming_message(const std::string& msg, con
 #endif
 
     send_message(res_msg, peer_address.to_string());
+
+    //setup new round in game_state if necessary
+    request_handler::perform_setup_if_needed(req);
+    delete req;
   }
   catch(const std::exception& e){
     std::cerr << "Failed to execute client request. Content was\n" << msg << std::endl;

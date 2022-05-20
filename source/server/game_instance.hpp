@@ -36,6 +36,7 @@ public:
     bool hit(player* player, std::string& err);
     bool stand(player* player, std::string& err);
     bool make_bet(player* player, const int& bet_size, std::string& err);
+    bool perform_setup_if_needed(std::string& err);
 };
 
 #endif
