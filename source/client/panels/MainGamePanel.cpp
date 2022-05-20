@@ -50,7 +50,7 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
     // show the number of rounds
     this->buildRoundCounter(gameState);
 
-    //this ->buildDealer(gameState);
+    this->buildDealer(gameState);
 
     // update layout
     this->Layout();
@@ -381,10 +381,10 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
 void MainGamePanel::buildDealer(game_state* gameState){
     if(gameState->is_started()) {
         // Setup two nested box sizers, in order to align our player's UI to the bottom center
-        wxBoxSizer* outerLayout = new wxBoxSizer(wxHORIZONTAL);
-        this->SetSizer(outerLayout);
-        wxBoxSizer* innerLayout = new wxBoxSizer(wxVERTICAL);
-        outerLayout->Add(innerLayout, 1, wxALIGN_CENTER);
+        // wxBoxSizer* outerLayout = new wxBoxSizer(wxHORIZONTAL);
+        // this->SetSizer(outerLayout);
+        wxBoxSizer* handLayout = new wxBoxSizer(wxVERTICAL);
+        // outerLayout->Add(innerLayout, 1, wxALIGN_CENTER);
 
         wxPoint offset(80, 0);
 
@@ -408,11 +408,19 @@ void MainGamePanel::buildDealer(game_state* gameState){
                         return this->getPngFileName(c->get_value(), c->get_suit());
                         });
 
-        bool first_part = gameState-> everyone_finished();
+      std::string dealerindicator = "Dealer";
 
-        wxBoxSizer *handLayout = new wxBoxSizer(wxHORIZONTAL);
-        innerLayout->Add(handLayout, 0, wxALIGN_CENTER);
+      wxPoint dealerIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset + MainGamePanel::dealerIndicatorOffset;
 
+      this->buildStaticText(
+              dealerindicator,
+              dealerIndicatorPosition,
+              wxSize(200, 18),
+              wxALIGN_CENTER,
+              true
+      );
+
+      bool first_part = !gameState-> everyone_finished();
 
         if(first_part){
             wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
