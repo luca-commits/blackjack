@@ -2,13 +2,13 @@
 #define SHOE_HPP
 
 #include "card.hpp"
+#include "player.hpp"
 #include <vector>
 #include <string>
 #include <algorithm>
 #include "../serialization/serializable.h"
 #include "../serialization/unique_serializable.h"
 #include "../serialization/serializable_value.h"
-#include "../game_state/player.hpp"
 #include "../../../rapidjson/include/rapidjson/document.h"
 
 //TODO: get rid of player in draw card, you just draw a card from the shoe, then you add it to a
