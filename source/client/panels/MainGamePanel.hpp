@@ -53,7 +53,7 @@ private:
     wxPoint const leftDealerCardOffset = wxPoint(-480, 200);
     wxPoint const rightDealerCardOffset = wxPoint(-400, 200);
 
-    wxPoint const dealerIndicatorOffset = wxPoint(-40, -40);
+    wxPoint const dealerIndicatorOffset = wxPoint(0, -40);
 
 
     double const twoPi = 6.28318530718;
