@@ -55,6 +55,8 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 
     this->buildDealer(gameState);
 
+    if(gameState->everyone_finished()) std::this_thread::sleep_for(std::chrono::seconds{3});
+
     // update layout
     this->Layout();
 }
@@ -426,27 +428,19 @@ void MainGamePanel::buildDealer(game_state* gameState){
               true
       );
 
-      bool first_part = !gameState-> everyone_finished();
-
+        bool first_part = !gameState-> everyone_finished();
+        wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
         if(first_part){
-            wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
             wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
             ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightCardPosition, MainGamePanel::cardSize);
             ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0]->get_value(), dealers_cards[0]->get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
         }
         else{
             for(unsigned i = 0; i < dealers_cards.size(); ++i){
-                ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
+                ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, leftCardPosition + offsets[i], MainGamePanel::cardSize);
                 handLayout->Add(image_panel, 0, wxLEFT | wxRIGHT, 4);
             }
-            this->buildStaticText(
-                "Test Text========================================================",
-                wxPoint(10,10),
-                wxSize(200, 18),
-                wxALIGN_CENTER,
-                true
-        );
-        //std::this_thread::sleep_for(std::chrono::seconds{10});
+        // std::this_thread::sleep_for(std::chrono::seconds{3});
         }
     }
 }
