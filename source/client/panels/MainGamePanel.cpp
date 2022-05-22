@@ -53,9 +53,8 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
     // show the number of rounds
     this->buildRoundCounter(gameState);
 
+    // show cards of dealer
     this->buildDealer(gameState);
-
-    if(gameState->everyone_finished()) std::this_thread::sleep_for(std::chrono::seconds{3});
 
     // update layout
     this->Layout();
