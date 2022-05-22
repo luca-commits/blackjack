@@ -259,12 +259,22 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
                  wxALIGN_CENTER
                 );
 
-        wxStaticText *playerBet = buildStaticText(
+        wxStaticText *playerBet;
+        if(gameState->everyone_finished()) {
+            playerBet = buildStaticText(
+                 "Your bet was " + std::to_string(me->get_bet_size()) + "$",
+                 wxDefaultPosition,
+                 wxSize(200, 18),
+                 wxALIGN_CENTER
+                );
+        } else {
+            playerBet = buildStaticText(
                  "Your current bet is " + std::to_string(me->get_bet_size()) + "$",
                  wxDefaultPosition,
                  wxSize(200, 18),
                  wxALIGN_CENTER
                 );
+        }
 
         innerLayout->Add(playerMoney, 0, wxALIGN_CENTER | wxBOTTOM, 8);
         innerLayout->Add(playerBet, 0, wxALIGN_CENTER | wxBOTTOM, 8);
@@ -306,7 +316,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
         }
            
         // TODO It's our turn, display Hit and Stand button
-        if (gameState->get_current_player() == me) {
+        if (gameState->get_current_player() == me && !gameState->everyone_finished()) {
             wxButton *hitButton = new wxButton(this, wxID_ANY, "Hit", wxDefaultPosition, wxSize(80, 32));
             hitButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
                 GameController::hit();
@@ -414,39 +424,35 @@ void MainGamePanel::buildDealer(game_state* gameState){
                         return this->getPngFileName(c->get_value(), c->get_suit());
                         });
 
-      std::string dealerindicator = "Dealer";
+        std::string dealerindicator = "Dealer";
 
-      wxPoint dealerIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset + MainGamePanel::dealerIndicatorOffset;
+        wxPoint dealerIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset + MainGamePanel::dealerIndicatorOffset;
 
-      this->buildStaticText(
-              dealerindicator,
-              dealerIndicatorPosition,
-              wxSize(200, 18),
-              wxALIGN_CENTER,
-              true
-      );
+        this->buildStaticText(
+                dealerindicator,
+                dealerIndicatorPosition,
+                wxSize(200, 18),
+                wxALIGN_CENTER,
+                true
+        );
 
-      bool first_part = !gameState-> everyone_finished();
+        bool first_part = !gameState->everyone_finished();
 
         if(first_part){
             wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
             wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
             ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightCardPosition, MainGamePanel::cardSize);
             ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0]->get_value(), dealers_cards[0]->get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
-        }
-        else{
+        } else {
             for(unsigned i = 0; i < dealers_cards.size(); ++i){
                 ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, offsets[i], MainGamePanel::cardSize);
                 handLayout->Add(image_panel, 0, wxLEFT | wxRIGHT, 4);
             }
-            this->buildStaticText(
-                "Test Text========================================================",
-                wxPoint(10,10),
-                wxSize(200, 18),
-                wxALIGN_CENTER,
-                true
-        );
-        //std::this_thread::sleep_for(std::chrono::seconds{10});
+            wxButton* continueButton = new wxButton(this, wxID_ANY, "Continue", wxDefaultPosition, wxSize(100, 40));
+            continueButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
+                GameController::continue_to_bet_panel();
+            });
+            handLayout->Add(continueButton, 0, wxALIGN_RIGHT | wxALL, 10);
         }
     }
 }

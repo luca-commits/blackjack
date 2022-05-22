@@ -18,6 +18,7 @@ public:
 
     static void connectToServer();
     static void makeBet();
+    static void continue_to_bet_panel();
     static void updateGameState(game_state* newGameState);
     static void startGame();
     static void hit();
@@ -37,6 +38,7 @@ private:
 
     static player* _me;
     static game_state* _current_game_state;
+    static game_state* _previous_game_state;
 
 };
 

@@ -145,12 +145,9 @@ void game_state::setup_round(std::string& err) {
 
     _shoe->setup_round(err);
 
-    //update round number and set current player to starting player
-    //round number update now happens in wrap_up_round if the game is not finished
-    if(_round_number->get_value() == 0){ //in the first round we need to do this
-        _round_number->set_value(_round_number->get_value() + 1);
-    }
     _current_player_idx->set_value(_starting_player_idx->get_value());
+
+    _round_number->set_value(_round_number->get_value() + 1);
 
     //setup players
     for (auto player : _players) {
@@ -163,6 +160,11 @@ void game_state::setup_round(std::string& err) {
     _dealers_hand->setup_round(err);
     _shoe->draw_card(_dealers_hand, err);
     _shoe->draw_card(_dealers_hand, err);
+
+    // calculate dealers hand straight away
+    while(_dealers_hand->get_points(err) <= 16) {
+        _shoe->draw_card(_dealers_hand, err);
+    }
 
     //Setup no longer needed
     needs_setup = false;
@@ -305,9 +307,6 @@ void game_state::update_current_player(std::string& err) {
 // end of round functions
 void game_state::wrap_up_round(std::string& err) {
     //hardcoded dealer action
-    while(_dealers_hand->get_points(err) <= 16) {
-        _shoe->draw_card(_dealers_hand, err);
-    }
 
     int dealer_points = _dealers_hand->get_points(err);
 
@@ -322,15 +321,13 @@ void game_state::wrap_up_round(std::string& err) {
         ++num_broke_players;
       }
     }
-    bool finish_on_broke = (num_broke_players > _players.size()-2);
+    bool finish_on_broke = (num_broke_players > _players.size() - 2);
 
     if (_round_number->get_value() >= _max_nof_rounds || finish_on_broke) {
         this->_is_finished->set_value(true);
     } else {
         // decide which player starts in the next round
         _starting_player_idx->set_value(0);
-        //Increment round counter (moved here from setup for end-of-round detection in client)
-        _round_number->set_value(_round_number->get_value() + 1);
         //Flag that setup is required, so game_instance can perform it
         needs_setup = true;
     }

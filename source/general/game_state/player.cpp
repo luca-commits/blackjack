@@ -130,7 +130,7 @@ bool player::make_bet(int bet_size, std::string &err) {
 
 
 bool player::is_broke() {
-    return _money->get_value() + _bet_size->get_value() <= 0;
+    return _money->get_value() <= 0;
 }
 
 void player::won_round() {

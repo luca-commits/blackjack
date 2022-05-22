@@ -7,6 +7,7 @@
 #include "network/ClientNetworkManager.hpp"
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 // initialize static members
 GameWindow* GameController::_gameWindow = nullptr;
@@ -16,6 +17,7 @@ BetPanel* GameController::_betPanel = nullptr;
 
 player* GameController::_me = nullptr;
 game_state* GameController::_current_game_state = nullptr;
+game_state* GameController::_previous_game_state = nullptr;
 
 
 void GameController::init(GameWindow* gameWindow) {
@@ -110,11 +112,20 @@ void GameController::makeBet() {
     GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
 }
 
+void GameController::continue_to_bet_panel() {
+    //GameController::showNewRoundMessage(GameController::_previous_game_state, GameController::_current_game_state);
+    if(GameController::_current_game_state->is_finished()) {
+        GameController::showGameOverMessage();
+    }
+    GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
+    GameController::_gameWindow->showPanel(GameController::_betPanel);
+}
+
 // THIS HAS TO BE EDITTED FOR SURE
 void GameController::updateGameState(game_state* newGameState) {
 
     // the existing game state is now old
-    game_state* oldGameState = GameController::_current_game_state;
+    GameController::_previous_game_state = GameController::_current_game_state;
 
     // save the new game state as our current game state
     GameController::_current_game_state = newGameState;
@@ -130,23 +141,14 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showError("Game state error", "Could not find this player among players of server game.");
         return;
     }
-/*
-    if(oldGameState != nullptr) {
 
-        // check if a new round started, and display message accordingly
-        if(oldGameState->get_round_number() > 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
-            GameController::showNewRoundMessage(oldGameState, newGameState);
-        }
-
-        // delete the old game state, we don't need it anymore
-        delete oldGameState;
-    }
-*/
+    //previously
+    /*
     // edit this to trigger when player is bankrupt
     if(GameController::_current_game_state->is_finished()) {
         GameController::showGameOverMessage();
     }
-
+    
     if(_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
         GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
@@ -168,7 +170,21 @@ void GameController::updateGameState(game_state* newGameState) {
         // delete the old game state, we don't need it anymore
         delete oldGameState;
     }
+    */
 
+    // now
+
+    if (GameController::_previous_game_state != nullptr && (GameController::_previous_game_state->everyone_finished() && newGameState->round_begin())) {
+        GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
+        GameController::_mainGamePanel->buildGameState(GameController::_previous_game_state, GameController::_me);
+    } else if (_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
+        GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
+        GameController::_gameWindow->showPanel(GameController::_betPanel);
+    } else {
+        GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
+        // command the main game panel to rebuild itself, based on the new game state
+        GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
+    }
 }
 
 
