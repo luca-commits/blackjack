@@ -47,13 +47,13 @@ private:
     wxPoint const drawPileOffset = wxPoint(4, -42);
     wxPoint const turnIndicatorOffset = wxPoint(-100, 98);
     // PERADD 
-    wxPoint const roundIndicatorOffset = wxPoint(0,0);
-    wxPoint const chipOffset = wxPoint(60,220);
+    wxPoint const roundIndicatorOffset = wxPoint(-480,-220);
+    wxPoint const chipOffset = wxPoint(60,205);
 
     wxPoint const leftDealerCardOffset = wxPoint(-480, 200);
     wxPoint const rightDealerCardOffset = wxPoint(-400, 200);
 
-    wxPoint const dealerIndicatorOffset = wxPoint(-40, -40);
+    wxPoint const dealerIndicatorOffset = wxPoint(0, -40);
 
 
     double const twoPi = 6.28318530718;
