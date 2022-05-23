@@ -71,12 +71,15 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     std::string err;//deugging helper...
     long textAlignment = wxALIGN_CENTER;
     int labelOffsetX = 0;
+    int betOffsetX = 0;
     if (side < 0) { // right side
         textAlignment = wxALIGN_LEFT;
-        labelOffsetX = 65;
+        labelOffsetX = 70;
+        betOffsetX = 20;
     } else if(side > 0) { // left side
         textAlignment = wxALIGN_RIGHT;
         labelOffsetX = -10;
+        betOffsetX = 40;
     }
 
 
@@ -90,9 +93,9 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     wxPoint labelPosition = MainGamePanel::tableCenter;
     wxPoint betPosition = MainGamePanel::tableCenter;
 
-    handPosition  +=    this->getPointOnEllipse(verticalRadius_hand*1.4,  verticalRadius_hand,  playerAngle);
+    handPosition  +=    this->getPointOnEllipse(verticalRadius_hand*1.3,  verticalRadius_hand,  playerAngle);
     labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.4, verticalRadius_label, playerAngle);
-    betPosition   +=    this->getPointOnEllipse(verticalRadius_bet*1.4,   verticalRadius_bet,   playerAngle);
+    betPosition   +=    this->getPointOnEllipse(verticalRadius_bet*1.9,   verticalRadius_bet,   playerAngle);
     labelPosition += wxSize(labelOffsetX, 0);
   
 
@@ -173,14 +176,14 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 
         int numberOfCards = otherPlayer->get_hand()->get_nof_cards();
         std::string cardImage;
-        wxSize weirdSize(80, 100);
+        wxSize weirdSize(90, 90);
         // weirdSize =  boundsOfRotatedHand;
         double cAngle = playerAngle + MainGamePanel::twoPi/4;
         int cDist = MainGamePanel::otherPlayerHandSize;
         wxSize card_dist((int)(sin(cAngle)*cDist), (int)(cos(cAngle) * cDist));
         wxSize bet_dist = 0.15*card_dist;
-        handPosition -= 0.5*card_dist;
-        betPosition -= 3* bet_dist;
+        handPosition -= 0.5*card_dist + 1.5*wxSize(betOffsetX, 0);
+        betPosition -= 4* bet_dist + wxSize(betOffsetX, 0);
 
 
         for(int i = 0; i<numberOfCards;++i){
