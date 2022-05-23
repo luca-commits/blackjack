@@ -195,6 +195,16 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         int bet=otherPlayer->get_bet_size();
         wxSize chipSize(25, 25);
 
+        while(bet>=100){
+            new ImagePanel(this, "assets/png-chips/gold.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
+            betPosition += bet_dist;
+            bet -= 100;
+        }
+        while(bet>=25){
+            new ImagePanel(this, "assets/png-chips/green.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
+            betPosition += bet_dist;
+            bet -= 25;
+        }
         while(bet>=10){
             new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
             betPosition += bet_dist;
@@ -288,6 +298,16 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
         wxPoint chipPosition = MainGamePanel::tableCenter + MainGamePanel::chipOffset;
         const wxPoint chipdispl = wxPoint(20,0);
 
+        while(bet>=100){
+            new ImagePanel(this, "assets/png-chips/gold.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
+            chipPosition += chipdispl;
+            bet -= 100;
+        }
+        while(bet>=25){
+            new ImagePanel(this, "assets/png-chips/green.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
+            chipPosition += chipdispl;
+            bet -= 25;
+        }
         while(bet>=10){
             new ImagePanel(this, "assets/png-chips/black.png", wxBITMAP_TYPE_ANY, chipPosition, chipSize, wxALIGN_CENTER);
             chipPosition += chipdispl;
