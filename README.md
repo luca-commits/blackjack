@@ -1,7 +1,8 @@
 # Blackjack
 
 This is a C++ implementation of a simplified version of Blackjack. The implementation features a client/server architecture for multiplayer scenarios.
-It uses [wxWidgets](https://www.wxwidgets.org/) for the GUI, [sockpp](https://github.com/fpagliughi/sockpp) for the network interface, [rapidjson](https://rapidjson.org/md_doc_tutorial.html) for object serialization, and [googletest](https://github.com/google/googletest) for the unit tests. 
+It uses [wxWidgets](https://www.wxwidgets.org/) for the GUI, [sockpp](https://github.com/fpagliughi/sockpp) for the network interface, [rapidjson](https://rapidjson.org/md_doc_tutorial.html) for object serialization, and [googletest](https://github.com/google/googletest) for the unit tests.
+In our version each player has to decide for a bet, the amount has to be at least a certain unit, in our case 1$. After the player places his bet he receives 2 cards. He then can decide to hit (drawing another card) or stand (finishing his turn). At the end of the turn the hand of the dealer is displayed. If the player has more than 21 points he loses his bet. If his points are closer to 21 than the dealer or the dealer busts and the player not, the player wins his bet. The bets are payed out 2:1. The value of the cards are the corresponding numerical values for numerals, 10 for figures and 1 or 11 for aces. The dealer is automatic and he draws cards until he has at least 16 points or more then he stands.
 
 <img src="./assets/final_logo.png" alt="Blackjack-logo" width="200"/>
 
@@ -42,7 +43,15 @@ Execute the following commands in a console:
 2. Run server `./Blackjack-server`
 3. In new consoles run as many clients as you want players `./Blackjack-client`
 
-## 3. Code Documentation
+## 3. Run the Unit Tests
+1. CLion should automatically create a Google Test configuration Blackjack-tests which will run all tests. See [Google Test run/debug configuration﻿](https://www.jetbrains.com/help/clion/creating-google-test-run-debug-configuration-for-test.html#gtest-config) for more information.
+2. From the list on the main toolbar, select the configuration Lama-tests.
+3. Click ![run](https://resources.jetbrains.com/help/img/idea/2021.1/artwork.studio.icons.shell.toolbar.run.svg) or press `Shift+F10`.
+   
+You can run individual tests or test suites by opening the corresponding file in the **/unit-tests** folder and clicking ![run](https://resources.jetbrains.com/help/img/idea/2021.1/artwork.studio.icons.shell.toolbar.run.svg) next to the test method or class. For more information on testing in CLion read the [documentation](https://www.jetbrains.com/help/clion/performing-tests.html).
+
+
+## 4. Code Documentation
 The code for the game can be found in **/source**, where it is separated into following folders:
 - **/client** contains only code that is used on the client side (e.g. UI, sending messages)
 - **/general** contains code that is shared between server and client.
@@ -54,17 +63,19 @@ The code for the game can be found in **/source**, where it is separated into fo
 
 The **/asset** folder stores all the images that are being used to render the GUI.
 
-### 4.1 Overview
+The **/unit-tests** folder contains all unit tests, which validate the correct behaviour of the functions written in the source code of the game. 
+
+### 5.1 Overview
 
 First off, this project consists of a **server** and a **client**, each with their own main.cpp file. 
 
 The client renders the GUI that is presented to the player, whereas the server is a console application without a user interface. Every action a player performs in the client application (for example trying to draw a card) is sent as a formatted message to the server application, which processes the request.
 
-### 4.2 Network Interface
+### 5.2 Network Interface
 Everything that is passed between client and server are objects of type `client_request` and `server_response`. Since the underlying network protocol works with TCP, these `client_request` and `server_response` objects are transformed into a **[JSON](https://wiki.selfhtml.org/wiki/JSON) string**, which can then be sent over the network. The receiving end reads the JSON string and constructs an object of type `client_request` resp. `server_response` that reflects the exact parameters that are specified in the JSON string. This process is known as **serialization** (object to string) and **deserialization** (string to object). If you want to read more about serialization, [read me on Wikipedia](https://en.wikipedia.org/wiki/Serialization).
 
 
-#### 4.2.1 Serialization & Deserialization of messages
+#### 5.2.1 Serialization & Deserialization of messages
 Both, the `client_request` and `server_response` base classes, implement the abstract class `serializable` with its `write_into_json(...)` function. It allows to serialize the object instance into a JSON string. Additionally, they have a static function `from_json(...)`, which allows creating an object instance from a JSON string.
 
 ```cpp
@@ -153,7 +164,7 @@ if (json.HasMember("type") && json["type"].IsString()) {
 
 There are plenty of examples of subclasses in the network/requests folder, where you can see how the serialization/deserialization scheme works.
 
-#### 4.2.2 Sending messages
+#### 5.2.2 Sending messages
 #### Client -> Server:
 The static class `ClientNetworkManager` on the client side invokes its `sendRequest(const client_request& request)` function with the `client_request` that you want to send. The server's response will arrive as an object of type `request_response` and the `ClientNetworkManager` will invoke the `Process()` function of that `request_response` object automatically.
 
@@ -181,7 +192,7 @@ bool game_instance::start_game(player* player, std::string &err) {
 }
 ```
 
-#### 4.2.3 Debugging Messages
+#### 5.2.3 Debugging Messages
 
 By default, the server (specifically, the server_network_manager) will print every valid message that it receives to the console. In order for this to work in your project as well, you have to make sure that your CMake file contains a line, where the preprocessor variable PRINT_NETWORK_MESSAGES is defined for your server executable. 
 
@@ -209,7 +220,7 @@ std::cout << json_utils::to_string(req_json) << std::endl;
 ```
 
 
-### 4.3 Game State
+### 5.3 Game State
 
 The `game_state` class stores all parameters that are required to represent the game on the client (resp. server) side. In order to synchronize this `game_state` among all players, the `game_state` can also be **serialized** and **deserialized**. If a `client_request` was successfully executed on the server, then the `request_response` that is sent back to the client contains a serialized version of the updated `game_state`. All other players receive the updated `game_state` at the same time through a `full_state_response`.
 
@@ -264,11 +275,11 @@ The `game_state` inherits from `unique_serializable`, which essentially requires
 On the client side, the new `game_state` is then passed to the `updateGameState(game_state*)` function of the `GameController` class, which performs a redraw of the GUI.
 
 
-### 4.4 GUI with wxWidgets
+### 5.4 GUI with wxWidgets
 
 The GUI of the project was built using the cross-platform GUI library [wxWidgets](https://www.wxwidgets.org/). In order to build a project using wxWidget elements, you will first need to install wxWidgets on your system (see Section 1.1 above). 
 
-#### 4.4.1 Structure & Important Classes
+#### 5.4.1 Structure & Important Classes
 
 Here is a list of the most important elements of our GUI. This is just meant as an overview, you will need to look up their correct usage in wxWidget's [documentation](https://docs.wxwidgets.org/3.0/index.html).
 
@@ -286,19 +297,19 @@ Here is a list of the most important elements of our GUI. This is just meant as 
     * __`wxMessageBox()`__: You can use this function to display a small pop-up window with text in front of the your current main window. This is useful to display error or status messages.
 
 
-#### 4.4.2 Events
+#### 5.4.2 Events
 
 Like in most GUI environments, objects in wxWidgets trigger __events__ when they are interacted with by the user. For instance, a button will trigger a `wxEVT_BUTTON` event when clicked. Similarly, a panel will trigger a `wxEVT_LEFT_UP` event when clicked. There are many other events that can be triggered - for example when a keyboard key is pressed, when a window is resized, or when the cursor moves over an element.
 
 In order to make the GUI interactive, we must specify the effect of an event. The easiest way is to __bind__ an event to a lambda function. A lambda function is an unnamed function that can be used as an r-value.
 
-#### 4.4.3 Positioning
+#### 5.4.3 Positioning
 
 There are two ways to position elements (panels, button, etc.) within a parent element (window, panel): 
 * __Using sizers__: In this approach, you will only need to provide an element's size, but not its position. You can then add that element to a sizer, which will then determine the element's position based on the sizer's predefined behavior. The most common sizer is `wxBoxSizer`, which allows you to position a set of elements one after the other, vertically or horizontally. You can also allow sizers to change the size of elements depending on the available space. This means you can have your GUI adapt to the size of the user's window and/or screen.
 * __Using absolute positioning__: In this approach, you need to provide a position (as `wxPoint`) for each element. This position refers to the offset of the top-left corner of this element from the top-left corner of its parent. Using absolute positioning gives you much more control over the layout of your GUI. However, it is also much more work, as you will need to calculate the position for every single element. This is especially difficult if you want to adapt to changing window sizes.
 
-#### 4.4.4 Classes for reuse
+#### 5.4.4 Classes for reuse
 
 This project provides two classes that can be reused without changing anything:
 
