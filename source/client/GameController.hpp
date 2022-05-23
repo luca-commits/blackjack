@@ -31,14 +31,16 @@ public:
     static void showGameOverMessage();
 
 private:
-    static GameWindow* _gameWindow;
-    static ConnectionPanel* _connectionPanel;
-    static MainGamePanel* _mainGamePanel;
-    static BetPanel* _betPanel;
+  static bool _is_number(const wxString s);
 
-    static player* _me;
-    static game_state* _current_game_state;
-    static game_state* _previous_game_state;
+  static GameWindow *_gameWindow;
+  static ConnectionPanel *_connectionPanel;
+  static MainGamePanel *_mainGamePanel;
+  static BetPanel *_betPanel;
+
+  static player *_me;
+  static game_state *_current_game_state;
+  static game_state *_previous_game_state;
 
 };
 
