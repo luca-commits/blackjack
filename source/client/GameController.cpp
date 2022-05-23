@@ -110,9 +110,9 @@ void GameController::makeBet() {
         return;
     }
 
-    if(_is_number(inputPlayerBet) && !inputPlayerBet.IsEmpty()){
+    if(bet_int != 0){
         std::string bet_string = inputPlayerBet.ToStdString();
-        int bet_int = std::stoi(bet_string);
+        bet_int = std::stoi(bet_string);
     }
 
     // check to make sure this in a logical integer + ADD RECOVERY (SHOW BET PANEL AGAIN)
