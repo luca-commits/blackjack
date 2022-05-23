@@ -87,17 +87,33 @@ void GameController::connectToServer() {
 
 }
 
+bool GameController::_is_number(const wxString s){
+    return !s.empty() && std::find_if(s.begin(), 
+        s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
+}
+
 void GameController::makeBet() {
+    int bet_int;
+
     wxString inputPlayerBet = GameController::_betPanel->getBetSize().Trim();
+
+    if (!GameController::_is_number(inputPlayerBet)) {
+      GameController::showError("Input error", "Please enter numeric");
+      bet_int = 0;
+      return;
+    }
 
     // recovery?
     if(inputPlayerBet.IsEmpty()) {
         GameController::showError("Input error", "Please enter your bet");
+        bet_int = 0;
         return;
     }
 
-    std::string bet_string = inputPlayerBet.ToStdString();
-    int bet_int = std::stoi(bet_string);
+    if(_is_number(inputPlayerBet) && !inputPlayerBet.IsEmpty()){
+        std::string bet_string = inputPlayerBet.ToStdString();
+        int bet_int = std::stoi(bet_string);
+    }
 
     // check to make sure this in a logical integer + ADD RECOVERY (SHOW BET PANEL AGAIN)
     if(bet_int < game_state::_min_bet && bet_int > 4096) {
@@ -177,7 +193,7 @@ void GameController::updateGameState(game_state* newGameState) {
     if (GameController::_previous_game_state != nullptr && (GameController::_previous_game_state->everyone_finished() && newGameState->round_begin())) {
         GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
         GameController::_mainGamePanel->buildGameState(GameController::_previous_game_state, GameController::_me);
-    } else if (_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
+    } else if (_me->get_bet_size() == 0 && GameController::_current_game_state->is_started() ) {
         GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
     } else {
