@@ -173,7 +173,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 
         int numberOfCards = otherPlayer->get_hand()->get_nof_cards();
         std::string cardImage;
-        wxSize weirdSize(70, 70);
+        wxSize weirdSize(80, 100);
         // weirdSize =  boundsOfRotatedHand;
         double cAngle = playerAngle + MainGamePanel::twoPi/4;
         int cDist = MainGamePanel::otherPlayerHandSize;

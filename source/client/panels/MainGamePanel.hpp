@@ -36,9 +36,9 @@ private:
     wxSize const cardSize = wxSize(80, 124);
 
 
-    double const otherPlayerHandSize = 160.0; // smaller?
+    double const otherPlayerHandSize = 140.0; // smaller?
 
-    double const otherPlayerBetDistanceFromCenter = 110.0;
+    double const otherPlayerBetDistanceFromCenter = 70.0;
     double const otherPlayerHandDistanceFromCenter = 180.0;
     double const otherPlayerLabelDistanceFromCenter = 260.0;
 
@@ -53,7 +53,7 @@ private:
     wxPoint const leftDealerCardOffset = wxPoint(-480, 200);
     wxPoint const rightDealerCardOffset = wxPoint(-400, 200);
 
-    wxPoint const dealerIndicatorOffset = wxPoint(0, -40);
+    wxPoint const dealerIndicatorOffset = wxPoint(-20, -40);
 
 
     double const twoPi = 6.28318530718;
