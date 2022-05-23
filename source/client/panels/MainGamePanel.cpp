@@ -135,7 +135,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
                     textAlignment
             );
         }
-        else if(gameState->get_current_player() == otherPlayer)
+        else if(gameState->get_current_player() == otherPlayer && !gameState->everyone_finished())
         {
             this->buildStaticText(
                     "Status: Playing",
@@ -147,7 +147,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         else
         {
             this->buildStaticText(
-                    "Status: Waiting for turn",
+                    "Status: Waiting",
                     labelPosition + wxSize(-100, -18),
                     wxSize(200, 18),
                     textAlignment
