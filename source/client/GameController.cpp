@@ -98,7 +98,7 @@ void GameController::makeBet() {
     wxString inputPlayerBet = GameController::_betPanel->getBetSize().Trim();
 
     if (!GameController::_is_number(inputPlayerBet)) {
-      GameController::showError("Input error", "Please enter numeric");
+      GameController::showError("Input error", "Please enter positive integer");
       bet_int = 0;
       return;
     }
