@@ -88,7 +88,7 @@ void GameController::connectToServer() {
 }
 
 bool GameController::_is_number(const wxString s){
-    return !s.empty() && std::find_if(s.begin(), 
+    return !s.empty() && std::find_if(s.begin(),
         s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
 }
 
@@ -133,8 +133,14 @@ void GameController::continue_to_bet_panel() {
     if(GameController::_current_game_state->is_finished()) {
         GameController::showGameOverMessage();
     }
-    GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
-    GameController::_gameWindow->showPanel(GameController::_betPanel);
+    else if(GameController::_me->get_money() == 0){
+        GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
+        GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
+    }
+    else{
+        GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
+        GameController::_gameWindow->showPanel(GameController::_betPanel);
+    }
 }
 
 // THIS HAS TO BE EDITTED FOR SURE
@@ -164,7 +170,7 @@ void GameController::updateGameState(game_state* newGameState) {
     if(GameController::_current_game_state->is_finished()) {
         GameController::showGameOverMessage();
     }
-    
+
     if(_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
         GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
@@ -189,11 +195,11 @@ void GameController::updateGameState(game_state* newGameState) {
     */
 
     // now
-
+    
     if (GameController::_previous_game_state != nullptr && (GameController::_previous_game_state->everyone_finished() && newGameState->round_begin())) {
         GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
         GameController::_mainGamePanel->buildGameState(GameController::_previous_game_state, GameController::_me);
-    } else if (_me->get_bet_size() == 0 && GameController::_current_game_state->is_started() ) {
+    } else if (_me->get_bet_size() == 0 && GameController::_current_game_state->is_started() && !(_me->is_broke())) {
         GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
     } else {
