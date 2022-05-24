@@ -36,7 +36,6 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 
     // show all other players
     for(int i = 1; i < numberOfPlayers; i++) {
-
         // get player at i-th position after myself
         player* otherPlayer = players.at((myPosition + i) % numberOfPlayers);
 
@@ -48,7 +47,9 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
     }
 
     // show our own player
-    this->buildThisPlayer(gameState, me);
+    if(!me->is_broke()){
+        this->buildThisPlayer(gameState, me);
+    }
 
     // show the number of rounds
     this->buildRoundCounter(gameState);
@@ -66,7 +67,7 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 // with open hands
 void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, int side) {
 
-      
+
     //IDONTKNOWMAN
     std::string err;//deugging helper...
     long textAlignment = wxALIGN_CENTER;
@@ -84,7 +85,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 
 
     // define the ellipse which represents the virtual player circle
-    double verticalRadius_hand = MainGamePanel::otherPlayerHandDistanceFromCenter; 
+    double verticalRadius_hand = MainGamePanel::otherPlayerHandDistanceFromCenter;
     double verticalRadius_label = MainGamePanel::otherPlayerLabelDistanceFromCenter;
     double verticalRadius_bet = MainGamePanel::otherPlayerBetDistanceFromCenter;
 
@@ -97,7 +98,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     labelPosition +=    this->getPointOnEllipse(verticalRadius_label*1.4, verticalRadius_label, playerAngle);
     betPosition   +=    this->getPointOnEllipse(verticalRadius_bet*1.9,   verticalRadius_bet,   playerAngle);
     labelPosition += wxSize(labelOffsetX, 0);
-  
+
 
     // NAME
     this->buildStaticText(
@@ -223,7 +224,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
             betPosition += bet_dist;
             bet -= 1;
         }
-    } 
+    }
 }
 
 
@@ -338,7 +339,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
             );
             innerLayout->Add(playerStatus, 0, wxALIGN_CENTER | wxBOTTOM, 8);
         }
-           
+
         // TODO It's our turn, display Hit and Stand button
         if (gameState->get_current_player() == me && !gameState->everyone_finished()) {
             wxButton *hitButton = new wxButton(this, wxID_ANY, "Hit", wxDefaultPosition, wxSize(80, 32));
@@ -460,7 +461,7 @@ void MainGamePanel::buildDealer(game_state* gameState){
                 true
         );
 
-        bool first_part = !gameState-> everyone_finished();
+        bool first_part = !gameState->everyone_finished();
         wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
         if(first_part){
             wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
