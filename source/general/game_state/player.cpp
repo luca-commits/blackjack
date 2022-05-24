@@ -82,6 +82,10 @@ void player::set_finished_turn() {
     this->_finished_turn->set_value(true);
 }
 
+bool player::is_broke() {
+    return _money->get_value() + _bet_size->get_value() <= 0;
+}
+
 #ifdef BLACKJACK_SERVER
 
 void player::setup_round(std::string& err) {
@@ -126,11 +130,6 @@ bool player::make_bet(int bet_size, std::string &err) {
     _bet_size->set_value(bet_size);
     _money->set_value(this->get_money() - bet_size);
     return true;
-}
-
-
-bool player::is_broke() {
-    return _money->get_value() + _bet_size->get_value() <= 0;
 }
 
 void player::won_round() {
