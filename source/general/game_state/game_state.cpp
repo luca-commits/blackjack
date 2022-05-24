@@ -122,16 +122,19 @@ hand* game_state::get_dealers_hand() const {
 bool game_state::everyone_finished() const {
     unsigned int s = _players.size();
     for(unsigned int i = 0; i < s; ++i) {
-        if(!(_players[i]->has_finished_turn()))
+        if(!(_players[i]->has_finished_turn()) && !(_players[i]->is_broke())){
+            std::cout << "Player " << i << " not finished!" << std::endl << std::flush;
             return false;
+        }
     }
+    std::cout << "Everyone finished" << std::endl << std::flush;
     return true;
 }
 
 bool game_state::round_begin() const {
     unsigned int s = _players.size();
     for(unsigned int i = 0; i < s; ++i) {
-        if(!(_players[i]->get_bet_size() == 0))
+        if(!(_players[i]->get_bet_size() == 0) && !(_players[i]->is_broke()))
             return false;
     }
     return true;
@@ -152,8 +155,10 @@ void game_state::setup_round(std::string& err) {
     //setup players
     for (auto player : _players) {
         player->setup_round(err);
-        _shoe->draw_card(player->get_hand(), err);
-        _shoe->draw_card(player->get_hand(), err);
+        if(!player->is_broke()){
+            _shoe->draw_card(player->get_hand(), err);
+            _shoe->draw_card(player->get_hand(), err);
+        }
     }
 
     //initialize the dealer
@@ -295,11 +300,14 @@ bool game_state::make_bet(player* player, int bet_size, std::string& err) {
 
 // functions from our SDS
 void game_state::update_current_player(std::string& err) {
-    int current_player_idx = _current_player_idx->get_value();
-    if(current_player_idx + 1 >= _players.size()) {
+    int current_player_idx = _current_player_idx->get_value() + 1;
+    //skip broke players
+    while(current_player_idx < _players.size() && _players[current_player_idx]->is_broke()){
+      current_player_idx++;
+    }
+    if(current_player_idx >= _players.size()) {
         wrap_up_round(err);
     } else {
-        ++current_player_idx;
         _current_player_idx->set_value(current_player_idx);
     }
 }
@@ -311,15 +319,17 @@ void game_state::wrap_up_round(std::string& err) {
     int dealer_points = _dealers_hand->get_points(err);
 
     for(auto player : _players) {
-        player->wrap_up_round(dealer_points, err);
+        if(!player->is_broke()){
+            player->wrap_up_round(dealer_points, err);
+        }
     }
 
     //Check if we end on too many broke players
     int num_broke_players = 0;
     for(auto player : _players){
-      if(player->is_broke()){
-        ++num_broke_players;
-      }
+        if(player->get_money() <= 0){
+            ++num_broke_players;
+        }
     }
     bool finish_on_broke = (num_broke_players > _players.size() - 2);
 
@@ -328,6 +338,10 @@ void game_state::wrap_up_round(std::string& err) {
     } else {
         // decide which player starts in the next round
         _starting_player_idx->set_value(0);
+        //don't start on a broke player
+        while(_starting_player_idx->get_value() < _players.size() && _players[_starting_player_idx->get_value()]->get_money() <= 0){
+            _starting_player_idx->set_value(_starting_player_idx->get_value()+1);
+        }
         //Flag that setup is required, so game_instance can perform it
         needs_setup = true;
     }
