@@ -131,32 +131,32 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     }
     else{
         // STATUS
-        if(otherPlayer->get_hand()->is_over_21(err)){
-            this->buildStaticText(
-                    "Status: LOST ROUND",
-                    labelPosition + wxSize(-100, -18),
-                    wxSize(200, 18),
-                    textAlignment
-            );
+        std::string status_message = "Status: ";
+
+        if(otherPlayer->get_hand()->is_over_21(err)) 
+            status_message += "LOST ROUND" ;
+        else if(gameState->everyone_finished()){
+            std::string err;
+            int pp = otherPlayer->get_hand()->get_points(err);
+            int dp = gameState->get_dealers_hand()->get_points(err);
+            if(pp < dp)         status_message += "LOST ROUND";
+            else if(pp > dp)    status_message += "WON ROUND";
+            else                status_message += "DRAW WITH DEALER";
+
         }
-        else if(gameState->get_current_player() == otherPlayer && !gameState->everyone_finished())
-        {
-            this->buildStaticText(
-                    "Status: Playing",
-                    labelPosition + wxSize(-100, -18),
-                    wxSize(200, 18),
-                    textAlignment
-            );
-        }
+        else if(gameState->get_current_player() == otherPlayer && !gameState->everyone_finished()) 
+            status_message += "PLAYING";
         else
-        {
-            this->buildStaticText(
-                    "Status: Waiting",
+            status_message += "WAITING";
+        
+        this->buildStaticText(
+                    status_message,
                     labelPosition + wxSize(-100, -18),
                     wxSize(200, 18),
                     textAlignment
             );
-        }
+
+
         // MONEY
         this->buildStaticText(
                 "Money:" + std::to_string(otherPlayer->get_money()) + "$",
@@ -330,7 +330,29 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
 
         // if our player already played, we display that as status
         // TODO from has_folded make has_played
-        if (me->has_finished_turn()) {
+
+        if(gameState->everyone_finished()){
+            std::string err;
+            std::string status_message;
+            int pp = me->get_hand()->get_points(err);
+            int dp = gameState->get_dealers_hand()->get_points(err);
+
+            if(me->get_hand()->is_over_21(err))
+                                status_message += "YOU LOST THIS ROUND";
+            else if(pp < dp)         status_message += "YOU LOST THIS ROUND";
+            else if(pp > dp)    status_message += "YOU WON THIS ROUND";
+            else                status_message += "YOU TIED WITH THE DEALER";
+
+            wxStaticText *playerStatus = buildStaticText(
+                    status_message,
+                    wxDefaultPosition,
+                    wxSize(200, 32),
+                    wxALIGN_CENTER
+            );
+            innerLayout->Add(playerStatus, 0, wxALIGN_CENTER | wxBOTTOM, 8);
+
+        }
+        else if (me->has_finished_turn()) {
             wxStaticText *playerStatus = buildStaticText(
                     "You finished your turn",
                     wxDefaultPosition,
