@@ -260,3 +260,60 @@ TEST_F(HandTest, SetupRoundManyCardsWithDuplicates) {
     std::vector<card*> expected_hand = {};
     EXPECT_EQ(expected_hand, player_hand.get_cards());
 }
+
+// An empty hand will not have a score of over 21
+TEST_F(HandTest, IsOver21NoCards) {
+    EXPECT_FALSE(player_hand.is_over_21(err));
+}
+
+// A hand with only one card will not have a score of over 21
+TEST_F(HandTest, IsOver21OneCard) {
+    EXPECT_FALSE(player_hand.is_over_21(err));
+}
+
+// A hand with less than 21 points will not have a score of over 21
+TEST_F(HandTest, IsOver21ManyCardsFalse) {
+    player_hand.add_card(cards[2][0], err);
+    player_hand.add_card(cards[7][0], err);
+    player_hand.add_card(cards[9][0], err);
+    EXPECT_FALSE(player_hand.is_over_21(err));
+}
+// A hand (including an ace) with less than 21 points will not have a score of over 21
+TEST_F(HandTest, IsOver21ManyCardsWithAceFalse) {
+    player_hand.add_card(cards[1][0], err);
+    player_hand.add_card(cards[7][0], err);
+    player_hand.add_card(cards[9][0], err);
+    EXPECT_FALSE(player_hand.is_over_21(err));
+}
+
+// A hand of 21 points will not have a score of over 21
+TEST_F(HandTest, IsOver21Exactly) {
+    player_hand.add_card(cards[4][0], err);
+    player_hand.add_card(cards[7][0], err);
+    player_hand.add_card(cards[10][0], err);
+    EXPECT_FALSE(player_hand.is_over_21(err));
+}
+
+// A hand of 21 points (one ace and a face card) will not have a score of over 21
+TEST_F(HandTest, IsOver21ExactlyWithAce) {
+    player_hand.add_card(cards[1][0], err);
+    player_hand.add_card(cards[13][0], err);
+    EXPECT_FALSE(player_hand.is_over_21(err));
+}
+
+// A hand of over 21 points will return true for is_over_21()
+TEST_F(HandTest, IsOver21ManyCardsTrue) {
+    player_hand.add_card(cards[10][0], err);
+    player_hand.add_card(cards[4][0], err);
+    player_hand.add_card(cards[13][0], err);
+    EXPECT_TRUE(player_hand.is_over_21(err));
+}
+
+// A hand of over 21 points (with ace) will return true for is_over_21()
+TEST_F(HandTest, IsOver21TrueWithAce) {
+    player_hand.add_card(cards[1][0], err);
+    player_hand.add_card(cards[7][0], err);
+    player_hand.add_card(cards[13][0], err);
+    player_hand.add_card(cards[5][0], err);
+    EXPECT_TRUE(player_hand.is_over_21(err));
+}
