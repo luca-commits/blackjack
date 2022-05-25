@@ -19,7 +19,8 @@ private:
     //void buildGameController();  //change this from sds
     void buildRoundCounter(game_state* gameState);
     void buildThisPlayer(game_state* gameState, player* me); //in sds this is build myself
-    void buildShoe(game_state* gameState);
+    void buildThisPlayerBroke();
+    void buildShoe(game_state *gameState);
     void buildDealer(game_state*);
     void buildCardPiles(game_state* gameState, player *me);
 
@@ -36,7 +37,7 @@ private:
     wxSize const cardSize = wxSize(80, 124);
 
 
-    double const otherPlayerHandSize = 140.0; // smaller?
+    double const otherPlayerHandSize = 130; // smaller?
 
     double const otherPlayerBetDistanceFromCenter = 80.0;
     double const otherPlayerHandDistanceFromCenter = 180.0;

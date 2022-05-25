@@ -61,6 +61,10 @@ int player::get_bet_size() const noexcept {
     return this->_bet_size->get_value();
 }
 
+bool player::is_broke() {
+    return _money->get_value() <= 0;
+}
+
 int player::get_money() const noexcept {
     return this->_money->get_value();
 }
@@ -129,9 +133,6 @@ bool player::make_bet(int bet_size, std::string &err) {
 }
 
 
-bool player::is_broke() {
-    return _money->get_value() <= 0;
-}
 
 void player::won_round() {
     int winnings = this->get_bet_size();

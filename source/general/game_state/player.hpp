@@ -55,6 +55,7 @@ public:
     hand* get_hand() const noexcept;
     std::string get_player_name() const noexcept;
     void set_finished_turn();
+    bool is_broke();
 
 #ifdef BLACKJACK_SERVER
     // state update functions
@@ -65,7 +66,6 @@ public:
     bool make_bet(int bet_size, std::string &err);
 
     // helper functions for game_state
-    bool is_broke();
     // helper functions to calculate winnings
     void won_round();
     void lost_round();
