@@ -46,9 +46,12 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
       //  this->buildOtherPlayerLabels(gameState, otherPlayer, playerAngle, side);
     }
 
-    // show our own player
-    if(!me->is_broke()){
-        this->buildThisPlayer(gameState, me);
+    bool am_broke = me->get_money() + me->get_bet_size() < gameState->_min_bet;
+    if (!am_broke) {
+      // show our own player
+      this->buildThisPlayer(gameState, me);
+    } else {
+      this->buildThisPlayerBroke();
     }
 
     // show the number of rounds
@@ -177,8 +180,8 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
 
         int numberOfCards = otherPlayer->get_hand()->get_nof_cards();
         std::string cardImage;
-        wxSize weirdSize(90, 90);
-        // weirdSize =  boundsOfRotatedHand;
+        wxSize weirdSize(76, 90);
+        //weirdSize =  boundsOfRotatedHand;
         double cAngle = playerAngle + MainGamePanel::twoPi/4;
         int cDist = MainGamePanel::otherPlayerHandSize;
         wxSize card_dist((int)(sin(cAngle)*cDist), (int)(cos(cAngle) * cDist));
@@ -394,6 +397,17 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
             }
         }
     }
+}
+
+void MainGamePanel::buildThisPlayerBroke(){
+    wxBoxSizer* outerLayout = new wxBoxSizer(wxHORIZONTAL);
+    this->SetSizer(outerLayout);
+    //Display text to tell player he has lost
+    wxPoint Offset(-100, 200);
+    wxPoint textPosition = MainGamePanel::tableCenter + Offset;
+    wxStaticText *playerName =
+        buildStaticText("You are broke :(", textPosition, wxSize(400, 36),
+                        wxALIGN_CENTER, true);
 }
 
 
