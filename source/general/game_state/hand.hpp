@@ -31,7 +31,7 @@ public:
     bool add_card(card* card, std::string& err); //checked
 
     int get_points(std::string &err); //checked
-    bool is_over_21(std::string &err); //TODO
+    bool is_over_21(std::string &err); //checked
     std::vector<card*>::iterator get_card_iterator();
 };
 
