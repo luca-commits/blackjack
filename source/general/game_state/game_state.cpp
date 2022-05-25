@@ -4,6 +4,8 @@
 
 #include "game_state.hpp"
 
+#include <utility>
+
 #include "../exceptions/BlackjackException.hpp"
 #include "../serialization/vector_utils.h"
 
@@ -19,7 +21,7 @@ game_state::game_state() : unique_serializable() {
     this->_starting_player_idx = new serializable_value<int>(0);
 }
 
-game_state::game_state(std::string id) : unique_serializable(id) {
+game_state::game_state(std::string id) : unique_serializable(std::move(id)) {
     this->_players = std::vector<player*>();
     this->_shoe = new shoe();
     this->_dealers_hand = new hand();
@@ -34,7 +36,7 @@ game_state::game_state(std::string id, std::vector<player*>& players, shoe* shoe
                        hand* dealers_hand, serializable_value<bool>* is_started,
                        serializable_value<bool>* is_finished, serializable_value<int>* round_number,
                        serializable_value<int>* current_player_idx, serializable_value<int>* starting_player_idx)
-        : unique_serializable(id),
+        : unique_serializable(std::move(id)),
           _players(players),
           _shoe(shoe),
           _dealers_hand(dealers_hand),
@@ -109,7 +111,7 @@ shoe* game_state::get_shoe() const {
 }
 
 player* game_state::get_current_player() const {
-    if(_current_player_idx == nullptr || _players.size() == 0) {
+    if(_current_player_idx == nullptr || _players.empty()) {
         return nullptr;
     }
     return _players[_current_player_idx->get_value()];

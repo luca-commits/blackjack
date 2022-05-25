@@ -1,11 +1,13 @@
 #include "card.hpp"
 
+#include <utility>
+
 #include "../exceptions/BlackjackException.hpp"
 
-card::card(std::string id) : unique_serializable(id) { }
+card::card(std::string id) : unique_serializable(std::move(id)) { }
 
 card::card(std::string id, serializable_value<int> *val, serializable_value<int>* suit)
-        : unique_serializable(id), _value(val), _suit(suit)
+        : unique_serializable(std::move(id)), _value(val), _suit(suit)
 { }
 
 card::card(int val, int suit) :

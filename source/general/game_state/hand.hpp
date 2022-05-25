@@ -23,15 +23,15 @@ public:
     virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
 
 // accessors
-    int get_nof_cards() const;
-    const std::vector<card*> get_cards() const;
+    int get_nof_cards() const; //checked
+    const std::vector<card*> get_cards() const; //checked
 
 // state update functions
-    void setup_round(std::string& err);
-    bool add_card(card* card, std::string& err);
+    void setup_round(std::string& err); //TODO
+    bool add_card(card* card, std::string& err); //checked
 
-    int get_points(std::string &err);
-    bool is_over_21(std::string &err);
+    int get_points(std::string &err); //checked
+    bool is_over_21(std::string &err); //TODO
     std::vector<card*>::iterator get_card_iterator();
 };
 
