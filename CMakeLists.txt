@@ -117,8 +117,8 @@ else()
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads REQUIRED)
 
-    target_link_libraries(Blackjack-client ${CMAKE_SOURCE_DIR}/sockpp/cmake-build-debug/libsockpp.dylib Threads::Threads)
-    target_link_libraries(Blackjack-server ${CMAKE_SOURCE_DIR}/sockpp/cmake-build-debug/libsockpp.dylib Threads::Threads)
+    target_link_libraries(Blackjack-client ${CMAKE_SOURCE_DIR}/sockpp/cmake-build-debug/libsockpp.so Threads::Threads)
+    target_link_libraries(Blackjack-server ${CMAKE_SOURCE_DIR}/sockpp/cmake-build-debug/libsockpp.so Threads::Threads)
 endif()
 
 # copy assets (images) to binary directory

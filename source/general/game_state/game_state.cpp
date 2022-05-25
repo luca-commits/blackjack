@@ -136,7 +136,7 @@ bool game_state::everyone_finished() const {
 bool game_state::round_begin() const {
     unsigned int s = _players.size();
     for(unsigned int i = 0; i < s; ++i) {
-        if(!(_players[i]->get_bet_size() == 0) && !(_players[i]->is_broke()))
+        if(_players[i]->get_bet_size() != 0 && !(_players[i]->is_broke()))
             return false;
     }
     return true;

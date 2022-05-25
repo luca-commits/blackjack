@@ -27,7 +27,7 @@ public:
     const std::vector<card*> get_cards() const; //checked
 
 // state update functions
-    void setup_round(std::string& err); //TODO
+    void setup_round(std::string& err); //checked
     bool add_card(card* card, std::string& err); //checked
 
     int get_points(std::string &err); //checked

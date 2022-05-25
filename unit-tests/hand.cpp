@@ -223,12 +223,40 @@ TEST_F(HandTest, CountManyCardsWithDuplicates) {
     EXPECT_EQ(6, player_hand.get_nof_cards());
 }
 
+// The setup function has to remove the card in a hand if here is only one
+TEST_F(HandTest, SetupRoundOneCard) {
+    player_hand.add_card(cards[1][0], err);
+    player_hand.setup_round(err);
+    std::vector<card*> expected_hand = {};
+    EXPECT_EQ(expected_hand, player_hand.get_cards());
+}
+
+// Adding no cards and calling the setup function should also result in an empty hand
+TEST_F(HandTest, SetupRoundNoCards) {
+    player_hand.setup_round(err);
+    std::vector<card*> expected_hand = {};
+    EXPECT_EQ(expected_hand, player_hand.get_cards());
+}
+
 // The setup function has to remove all cards in a hand
-TEST_F(HandTest, SetupRound) {
+TEST_F(HandTest, SetupRoundManyCards) {
     player_hand.add_card(cards[1][0], err);
     player_hand.add_card(cards[7][0], err);
     player_hand.add_card(cards[9][0], err);
     player_hand.setup_round(err);
     std::vector<card*> expected_hand = {};
-    EXPECT_EQ(expected_hand, player_hand);
+    EXPECT_EQ(expected_hand, player_hand.get_cards());
+}
+
+// Adding no cards and calling the setup function should also result in an empty hand
+TEST_F(HandTest, SetupRoundManyCardsWithDuplicates) {
+    player_hand.add_card(cards[1][0], err);
+    player_hand.add_card(cards[1][1], err);
+    player_hand.add_card(cards[1][2], err);
+    player_hand.add_card(cards[7][0], err);
+    player_hand.add_card(cards[7][0], err);
+    player_hand.add_card(cards[9][0], err);
+    player_hand.setup_round(err);
+    std::vector<card*> expected_hand = {};
+    EXPECT_EQ(expected_hand, player_hand.get_cards());
 }
