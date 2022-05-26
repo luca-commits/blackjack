@@ -137,14 +137,12 @@ void player::won_round() {
     int winnings = this->get_bet_size();
     int holdings = this->get_money();
     _money->set_value(holdings + 2 * winnings);
-    //_bet_size->set_value(0);
 }
 
 void player::draw_round() {
     int winnings = this->get_bet_size();
     int holdings = this->get_money();
     _money->set_value(holdings + winnings);
-    //_bet_size->set_value(0);
 }
 
 #endif

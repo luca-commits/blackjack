@@ -254,7 +254,7 @@ TEST_F(HandTest, SetupRoundManyCardsWithDuplicates) {
     player_hand.add_card(cards[1][1], err);
     player_hand.add_card(cards[1][2], err);
     player_hand.add_card(cards[7][0], err);
-    player_hand.add_card(cards[7][0], err);
+    player_hand.add_card(cards[7][1], err);
     player_hand.add_card(cards[9][0], err);
     player_hand.setup_round(err);
     std::vector<card*> expected_hand = {};
