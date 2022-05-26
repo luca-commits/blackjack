@@ -43,7 +43,7 @@ protected:
     int bet_size = 0;
     int money = 100;
     bool finished_turn = false;
-    hand* player_hand;
+    hand player_hand;
     std::string err;
 };
 
@@ -62,11 +62,11 @@ TEST_F(PlayerTest, IsBrokeFalse) {
 // A player with no money should be broke
 // TODO how to set the money of a player to 0 so that I can check this
 TEST_F(PlayerTest, IsBrokeTrue) {
-    EXPECT_TRUE(player_hand->add_card(cards[1][0], err));
-    EXPECT_TRUE(player_hand->add_card(cards[3][0], err));
-    EXPECT_TRUE(player_hand->add_card(cards[13][0], err));
+    player_hand.add_card(cards[1][0], err);
+    player_hand.add_card(cards[3][0], err);
+    player_hand.add_card(cards[13][0], err);
     std::vector<card*> expected_hand = {cards[1][0], cards[3][0], cards[13][0]};
-    EXPECT_EQ(expected_hand, player_hand->get_cards());
+    EXPECT_EQ(expected_hand, player_hand.get_cards());
 }
 
 // TODO one of these for a broke player
@@ -74,11 +74,11 @@ TEST_F(PlayerTest, IsBrokeTrue) {
 TEST_F(PlayerTest, SetupRound) {
     player_name = player_->get_player_name();
     money = player_->get_money();
-    player_hand->setup_round(err);
+    player_hand.setup_round(err);
     player_->setup_round(err);
     EXPECT_EQ(bet_size, player_->get_bet_size());
     EXPECT_EQ(money, player_->get_money());
-    EXPECT_EQ(player_hand, player_->get_hand());
+    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
     EXPECT_FALSE(player_->has_finished_turn());
 }
@@ -94,7 +94,7 @@ TEST_F(PlayerTest, WonRound) {
     player_->won_round();
     EXPECT_EQ(bet_size, player_->get_bet_size());
     EXPECT_EQ(money_new, player_->get_money());
-    EXPECT_EQ(player_hand, player_->get_hand());
+    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
 }
 
@@ -108,52 +108,53 @@ TEST_F(PlayerTest, DrawRound) {
     player_->draw_round();
     EXPECT_EQ(bet_size, player_->get_bet_size());
     EXPECT_EQ(money_new, player_->get_money());
-    EXPECT_EQ(player_hand, player_->get_hand());
+    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
-// todo
-// After a draw round, the bet is returned to the player and nothing else changes
+// When making a bet with half the money, only the bet_size and the money of the player are adjusted
 TEST_F(PlayerTest, MakeBetHalf) {
     player_name = player_->get_player_name();
     EXPECT_TRUE(player_->make_bet(50, err));
     EXPECT_EQ(50, player_->get_bet_size());
     EXPECT_EQ(50, player_->get_money());
-    EXPECT_EQ(player_hand, player_->get_hand());
+    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
-// After a draw round, the bet is returned to the player and nothing else changes
-TEST_F(PlayerTest, MakeBetAllMoney) {
+// Making an all in bet should be possible
+TEST_F(PlayerTest, MakeBetAllIn) {
     player_name = player_->get_player_name();
     EXPECT_TRUE(player_->make_bet(100, err));
     EXPECT_EQ(100, player_->get_bet_size());
     EXPECT_EQ(0, player_->get_money());
-    EXPECT_EQ(player_hand, player_->get_hand());
+    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
-// After a draw round, the bet is returned to the player and nothing else changes
+// todo look into if it's throwing an exception
+// A bet with more money than the player has is illegal
 TEST_F(PlayerTest, MakeBetMoneyOver) {
     player_name = player_->get_player_name();
     EXPECT_FALSE(player_->make_bet(200, err));
     EXPECT_EQ(0, player_->get_bet_size());
     EXPECT_EQ(100, player_->get_money());
-    EXPECT_EQ(player_hand, player_->get_hand());
+    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
-// After a draw round, the bet is returned to the player and nothing else changes
+// todo look into if it's throwing an exception
+// A negative bet is illegal
 TEST_F(PlayerTest, MakeBetNegative) {
     player_name = player_->get_player_name();
     EXPECT_FALSE(player_->make_bet(-2, err));
     EXPECT_EQ(0, player_->get_bet_size());
     EXPECT_EQ(100, player_->get_money());
-    EXPECT_EQ(player_hand, player_->get_hand());
+    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
     EXPECT_FALSE(player_->has_finished_turn());
 }
@@ -163,11 +164,11 @@ TEST_F(PlayerTest, MakeBetNegative) {
 TEST_F(PlayerTest, WrapupRound) {
     player_name = player_->get_player_name();
     money = player_->get_money();
-    player_hand->setup_round(err);
+    player_hand.setup_round(err);
     player_->setup_round(err);
     EXPECT_EQ(bet_size, player_->get_bet_size());
     EXPECT_EQ(money, player_->get_money());
-    EXPECT_EQ(player_hand, player_->get_hand());
+    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
     EXPECT_FALSE(player_->has_finished_turn());
 }*/
