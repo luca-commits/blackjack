@@ -23,6 +23,8 @@ game_state* GameController::_previous_game_state = nullptr;
 void GameController::init(GameWindow* gameWindow) {
 
     GameController::_gameWindow = gameWindow;
+    // resizing after start makes panels appear without manual resizing
+    GameController::_gameWindow->SetSize(wxSize(1250, 900));
 
     // Set up main panels
     GameController::_connectionPanel = new ConnectionPanel(gameWindow);
@@ -87,11 +89,13 @@ void GameController::connectToServer() {
 
 }
 
+// checks if input of player is a valid bet
 bool GameController::_is_number(const wxString s){
     return !s.empty() && std::find_if(s.begin(),
         s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
 }
 
+// sends bet request to server after making bet by player
 void GameController::makeBet() {
     int bet_int;
 
@@ -103,7 +107,6 @@ void GameController::makeBet() {
       return;
     }
 
-    // recovery?
     if(inputPlayerBet.IsEmpty()) {
         GameController::showError("Input error", "Please enter your bet");
         bet_int = 0;
@@ -115,7 +118,7 @@ void GameController::makeBet() {
         bet_int = std::stoi(bet_string);
     }
 
-    // check to make sure this in a logical integer + ADD RECOVERY (SHOW BET PANEL AGAIN)
+    // check to make sure this in a logical integer
     if(bet_int < game_state::_min_bet && bet_int > 4096) {
         GameController::showError("Input error", "Invalid value given as bet");
         return;
@@ -129,7 +132,6 @@ void GameController::makeBet() {
 }
 
 void GameController::continue_to_bet_panel() {
-    //GameController::showNewRoundMessage(GameController::_previous_game_state, GameController::_current_game_state);
     if(GameController::_current_game_state->is_finished()) {
         GameController::showGameOverMessage();
     }
@@ -143,10 +145,9 @@ void GameController::continue_to_bet_panel() {
     }
 }
 
-// THIS HAS TO BE EDITTED FOR SURE
 void GameController::updateGameState(game_state* newGameState) {
 
-    // the existing game state is now old
+    // the existing game state is saved as previous
     GameController::_previous_game_state = GameController::_current_game_state;
 
     // save the new game state as our current game state
@@ -163,45 +164,16 @@ void GameController::updateGameState(game_state* newGameState) {
         GameController::showError("Game state error", "Could not find this player among players of server game.");
         return;
     }
-
-    //previously
-    /*
-    // edit this to trigger when player is bankrupt
-    if(GameController::_current_game_state->is_finished()) {
-        GameController::showGameOverMessage();
-    }
-
-    if(_me->get_bet_size() == 0 && GameController::_current_game_state->is_started()) {
-        GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
-        GameController::_gameWindow->showPanel(GameController::_betPanel);
-    } else {
-        GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
-    // command the main game panel to rebuild itself, based on the new game state
-        GameController::_mainGamePanel->buildGameState(GameController::_current_game_state, GameController::_me);
-    }
-
-    if(oldGameState != nullptr) {
-
-        // check if a new round started, and display message accordingly
-        if(oldGameState->get_round_number() > 0 && oldGameState->get_round_number() < newGameState->get_round_number()) {
-            //std::this_thread::sleep_for(std::chrono::seconds{10});
-            GameController::showNewRoundMessage(oldGameState, newGameState);
-            //std::this_thread::sleep_for(std::chrono::seconds{10});
-        }
-
-        // delete the old game state, we don't need it anymore
-        delete oldGameState;
-    }
-    */
-
-    // now
     
+    // if game just started, show bet panel
     if (GameController::_previous_game_state != nullptr && (GameController::_previous_game_state->everyone_finished() && newGameState->round_begin())) {
         GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
         GameController::_mainGamePanel->buildGameState(GameController::_previous_game_state, GameController::_me);
+    // if you clicked continue, also show bet panel
     } else if (_me->get_bet_size() == 0 && GameController::_current_game_state->is_started() && !(_me->is_broke())) {
         GameController::_betPanel = new BetPanel(_gameWindow, GameController::_current_game_state, GameController::_me);
         GameController::_gameWindow->showPanel(GameController::_betPanel);
+    // otherwise, show main panel
     } else {
         GameController::_gameWindow->showPanel(GameController::_mainGamePanel);
         // command the main game panel to rebuild itself, based on the new game state
@@ -240,39 +212,6 @@ void GameController::showError(const std::string& title, const std::string& mess
 
 void GameController::showStatus(const std::string& message) {
     GameController::_gameWindow->setStatus(message);
-}
-
-
-void GameController::showNewRoundMessage(game_state* oldGameState, game_state* newGameState) {
-    std::string title = "Round Completed";
-    std::string message = "The players have won following amounts of money:\n";
-    std::string buttonLabel = "Start next round";
-
-    // add the point differences of all players to the messages
-    for(int i = 0; i < oldGameState->get_players().size(); i++) {
-
-        player* oldPlayerState = oldGameState->get_players().at(i);
-        player* newPlayerState = newGameState->get_players().at(i);
-
-        int money_difference = newPlayerState->get_money() - oldPlayerState->get_money();
-        std::string moneyText = std::to_string(money_difference);
-        if(money_difference > 0) {
-            moneyText = "+" + moneyText;
-        }
-
-        std::string playerName = newPlayerState->get_player_name();
-        if(newPlayerState->get_id() == GameController::_me->get_id()) {
-            playerName = "You";
-        }
-        message += "\n" + playerName + ":     " + moneyText;
-    }
-    //std::this_thread::sleep_for(std::chrono::seconds{10});
-    wxMessageDialog dialogBox = wxMessageDialog(nullptr, message, title, wxICON_NONE);
-    //std::this_thread::sleep_for(std::chrono::seconds{10});
-    dialogBox.SetOKLabel(wxMessageDialog::ButtonLabel(buttonLabel));
-    //std::this_thread::sleep_for(std::chrono::seconds{10});
-    dialogBox.ShowModal();
-    //std::this_thread::sleep_for(std::chrono::seconds{10});
 }
 
 
