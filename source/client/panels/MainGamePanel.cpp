@@ -141,8 +141,8 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
             std::string err;
             int pp = otherPlayer->get_hand()->get_points(err);
             int dp = gameState->get_dealers_hand()->get_points(err);
-            if(pp < dp)         status_message += "LOST ROUND";
-            else if(pp > dp)    status_message += "WON ROUND";
+            if(dp>21 || pp > dp )   status_message += "WON ROUND";
+            else if(pp < dp)             status_message += "LOST ROUND";
             else                status_message += "DRAW WITH DEALER";
 
         }
@@ -336,11 +336,12 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
             int dp = gameState->get_dealers_hand()->get_points(err);
 
             if(me->get_hand()->is_over_21(err))
-                                status_message += "YOU LOST THIS ROUND";
-            else if(pp < dp)         status_message += "YOU LOST THIS ROUND";
-            else if(pp > dp)    status_message += "YOU WON THIS ROUND";
-            else                status_message += "YOU TIED WITH THE DEALER";
+                                            status_message += "YOU LOST THIS ROUND";
+            else if(dp>21 || pp > dp)       status_message += "YOU WON THIS ROUND";
+            else if(pp < dp)                status_message += "YOU LOST THIS ROUND";
+            else                            status_message += "YOU TIED WITH THE DEALER";
 
+        
             wxStaticText *playerStatus = buildStaticText(
                     status_message,
                     wxDefaultPosition,
