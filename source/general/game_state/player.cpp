@@ -94,11 +94,12 @@ void player::setup_round(std::string& err) {
     _player_hand->setup_round(err);
 }
 
-// based on how many points the dealer has, chooses to call won_round, lost_round or draw round
+// Based on how many points the dealer has, chooses to call won_round or draw_round.
+// We do not need lose_round since the bet will just not be returned to the player
+// and it is set to 0 in setup_round().
 void player::wrap_up_round(int dealer_points, std::string& err) {
     int player_points = _player_hand->get_points(err);
     if(player_points > 21 || (player_points < dealer_points && dealer_points <= 21)){
-        this->lost_round();
         return;
     }
     if(player_points > dealer_points || dealer_points > 21) {
@@ -136,10 +137,6 @@ void player::won_round() {
     int winnings = this->get_bet_size();
     int holdings = this->get_money();
     _money->set_value(holdings + 2 * winnings);
-    //_bet_size->set_value(0);
-}
-
-void player::lost_round() {
     //_bet_size->set_value(0);
 }
 

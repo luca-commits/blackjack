@@ -2,12 +2,13 @@
 // Created by Flavia Taras on 20.05.22.
 //
 
-//TODO: check the get_points function in many different ways with different amounts of aces and stuff
 //TODO try to get extra cards when you already have over 21 points
 //TODO: adding the same card more than the number of decks in a shoe should not work
 
 #include "gtest/gtest.h"
 #include "../source/general/game_state/hand.hpp"
+#include "../source/general/exceptions/BlackjackException.hpp"
+#include "../source/general/serialization/json_utils.h"
 
 
 /* A test fixture allows to reuse the same configuration of objects for all
@@ -25,7 +26,7 @@ class HandTest : public ::testing::Test {
 
 protected:
     virtual void SetUp() {
-        cards.resize(8); //TODO: do we need this... rather just declare a shoe...
+        cards.resize(14);
         for (int i = 1; i < 14; ++i) {
             for (int j = 0; j < 5; ++j) {
                 cards[i].push_back(new card(i, j));
@@ -94,7 +95,6 @@ TEST_F(HandTest, ScoreOneFaceCard) {
     EXPECT_EQ(10, player_hand.get_points(err));
 }
 
-//TODO: do we even test for this?
 // The score of an empty hand must be zero
 TEST_F(HandTest, ScoreNoCards) {
     EXPECT_EQ(0, player_hand.get_points(err));
@@ -316,4 +316,33 @@ TEST_F(HandTest, IsOver21TrueWithAce) {
     player_hand.add_card(cards[13][0], err);
     player_hand.add_card(cards[5][0], err);
     EXPECT_TRUE(player_hand.is_over_21(err));
+}
+
+// Serialization and subsequent deserialization must yield the same object
+TEST_F(HandTest, SerializationEquality) {
+    //std::vector<card*> hand_cards = {cards[1][0], cards[2][0], cards[9][0]};
+    //hand hand_send();
+    player_hand.add_card(cards[2][0], err);
+    player_hand.add_card(cards[7][0], err);
+    player_hand.add_card(cards[9][0], err);
+    rapidjson::Document* json_send = player_hand.to_json();
+    std::string message = json_utils::to_string(json_send);
+    delete json_send;
+
+    rapidjson::Document json_received = rapidjson::Document(rapidjson::kObjectType);
+    json_received.Parse(message.c_str());
+    hand* hand_received = hand::from_json(json_received);
+    EXPECT_EQ(player_hand.get_id(), hand_received->get_id());
+    for (int i = 0; i < player_hand.get_cards().size(); ++i) {
+        EXPECT_EQ(player_hand.get_cards()[i]->get_value(), hand_received->get_cards()[i]->get_value());
+        EXPECT_EQ(player_hand.get_cards()[i]->get_suit(), hand_received->get_cards()[i]->get_suit());
+    }
+    delete hand_received;
+}
+
+// Deserializing an invalid string must throw a BlackjackException
+TEST_F(HandTest, SerializationException) {
+    rapidjson::Document json = rapidjson::Document(rapidjson::kObjectType);
+    json.Parse("not json");
+    EXPECT_THROW(hand::from_json(json), BlackjackException);
 }
