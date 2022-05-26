@@ -43,7 +43,6 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
         int side = (2 * i) - numberOfPlayers; // side < 0 => right, side == 0 => center, side > 0 => left
 
         this->buildOthers(gameState, otherPlayer, playerAngle, side);
-      //  this->buildOtherPlayerLabels(gameState, otherPlayer, playerAngle, side);
     }
 
     bool am_broke = me->get_money() + me->get_bet_size() < gameState->_min_bet;
@@ -71,7 +70,6 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, int side) {
 
 
-    //IDONTKNOWMAN
     std::string err;//deugging helper...
     long textAlignment = wxALIGN_CENTER;
     int labelOffsetX = 0;
@@ -452,20 +450,9 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
 }
 
 
-//void buildShoe(){
-//  shoeFile = "assets/misc/shoe";
-//  wxPoint shoePosition =  MainGamePanel::tableCenter + MainGamePanel::shoeOffset;
-//  ImagePanel *shoe = new ImagePanel(this, shoeFile, wxBITMAP_TYPE_ANY,
-//                                    shoePosition, scaledCardSize, MainGamePanel::cardSize);
-//}
-
 void MainGamePanel::buildDealer(game_state* gameState){
     if(gameState->is_started()) {
-        // Setup two nested box sizers, in order to align our player's UI to the bottom center
-        // wxBoxSizer* outerLayout = new wxBoxSizer(wxHORIZONTAL);
-        // this->SetSizer(outerLayout);
         wxBoxSizer* handLayout = new wxBoxSizer(wxVERTICAL);
-        // outerLayout->Add(innerLayout, 1, wxALIGN_CENTER);
 
         wxPoint offset(80, 0);
 
@@ -497,6 +484,9 @@ void MainGamePanel::buildDealer(game_state* gameState){
                 true
         );
 
+
+        // A round has two parts: in the first part the dealer has two cards, one of which is flipped, and in the second part 
+        // he gets more cards according to the hard coded rules
         bool first_part = !gameState->everyone_finished();
         wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
         if(first_part){
