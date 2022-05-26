@@ -6,7 +6,6 @@
 #include <unordered_map>
 #include <shared_mutex>
 
-// these includes cause problems to compiler
 #include "sockpp/tcp_socket.h"
 #include "sockpp/tcp_connector.h"
 #include "sockpp/tcp_acceptor.h"

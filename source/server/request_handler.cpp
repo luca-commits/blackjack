@@ -77,10 +77,12 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
         case RequestType::start_game: {
             if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
                 if (game_instance_ptr->start_game(player, err)) {
+                    // if successful, send all clients the new game state
                     return new answer_rqst_response(game_instance_ptr->get_id(), req_id, true,
                                                 game_instance_ptr->get_game_state()->to_json(), err);
                 }
             }
+            // otherwise, send all clients an error message
             return new answer_rqst_response("", req_id, false, nullptr, err);
         }
 
@@ -90,10 +92,12 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
             if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
                 int bet_size = ((make_bet_request *) req)->get_bet();
                 if (game_instance_ptr->make_bet(player, bet_size, err)) {
+                    // if successful, send all clients the new game state
                     return new answer_rqst_response(game_instance_ptr->get_id(), req_id, true,
                                                 game_instance_ptr->get_game_state()->to_json(), err);
                 }
             }
+            // otherwise, send all clients an error message
             return new answer_rqst_response("", req_id, false, nullptr, err);
         }
 
@@ -102,12 +106,13 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
         case RequestType::hit: {
             if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
                 if (game_instance_ptr->hit(player, err)) {
+                    // if successful, send all clients the new game state
                     return new answer_rqst_response(game_instance_ptr->get_id(), req_id, true,
                                                 game_instance_ptr->get_game_state()->to_json(), err);
                 }
             }
+            // otherwise, send all clients an error message
             return new answer_rqst_response("", req_id, false, nullptr, err);
-
         }
 
 
@@ -115,10 +120,12 @@ answer_rqst_response* request_handler::handle_request(const client_request* cons
         case RequestType::stand: {
              if (game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err)) {
                 if (game_instance_ptr->stand(player, err)) {
+                    // if successful, send all clients the new game state
                     return new answer_rqst_response(game_instance_ptr->get_id(), req_id, true,
                                                 game_instance_ptr->get_game_state()->to_json(), err);
                 }
             }
+            // otherwise, send all clients an error message
             return new answer_rqst_response("", req_id, false, nullptr, err);
         }
 
@@ -136,7 +143,6 @@ bool request_handler::perform_setup_if_needed(const client_request* const req){
     std::string player_id = req->get_player_id();
     std::string err;
 
-    //TODO: This should probably be error-checked
     game_instance_manager::try_get_player_and_game_instance(player_id, player, game_instance_ptr, err);
 
     return game_instance_ptr->perform_setup_if_needed(err);
