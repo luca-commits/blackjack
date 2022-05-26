@@ -451,6 +451,7 @@ void MainGamePanel::buildDealer(game_state* gameState){
     if(gameState->is_started()) {
    
         wxBoxSizer* handLayout = new wxBoxSizer(wxVERTICAL);
+
         wxPoint offset(80, 0);
 
         hand* dealers_hand = gameState->get_dealers_hand();
@@ -481,6 +482,8 @@ void MainGamePanel::buildDealer(game_state* gameState){
         );
 
         // display DEALER CARDS
+        // A round has two parts: in the first part the dealer has two cards, one of which is flipped, and in the second part 
+        // he gets more cards according to the hard coded rules
         bool first_part = !gameState->everyone_finished();
         wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
         // during round
