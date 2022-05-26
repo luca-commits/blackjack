@@ -16,6 +16,9 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
     // remove any existing UI
     this->DestroyChildren();
 
+    wxColor green = wxColor(50, 168, 54);
+    this->SetBackgroundColour(green);
+
     std::vector<player*> players = gameState->get_players();
     int numberOfPlayers = players.size();
 
@@ -43,7 +46,6 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
         int side = (2 * i) - numberOfPlayers; // side < 0 => right, side == 0 => center, side > 0 => left
 
         this->buildOthers(gameState, otherPlayer, playerAngle, side);
-      //  this->buildOtherPlayerLabels(gameState, otherPlayer, playerAngle, side);
     }
 
     bool am_broke = me->get_money() + me->get_bet_size() < gameState->_min_bet;
@@ -67,15 +69,14 @@ void MainGamePanel::buildGameState(game_state* gameState, player* me) {
 
 
 
-// with open hands
+// Places labels and images of all opposed players onto the GUI.
 void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, double playerAngle, int side) {
 
-
-    //IDONTKNOWMAN
-    std::string err;//deugging helper...
+    std::string err;
     long textAlignment = wxALIGN_CENTER;
     int labelOffsetX = 0;
     int betOffsetX = 0;
+
     if (side < 0) { // right side
         textAlignment = wxALIGN_LEFT;
         labelOffsetX = 70;
@@ -92,7 +93,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     double verticalRadius_label = MainGamePanel::otherPlayerLabelDistanceFromCenter;
     double verticalRadius_bet = MainGamePanel::otherPlayerBetDistanceFromCenter;
 
-    // get this player's position on that ellipse
+    // get player's position on that ellipse
     wxPoint handPosition = MainGamePanel::tableCenter;
     wxPoint labelPosition = MainGamePanel::tableCenter;
     wxPoint betPosition = MainGamePanel::tableCenter;
@@ -103,7 +104,7 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
     labelPosition += wxSize(labelOffsetX, 0);
 
 
-    // NAME
+    // LABEL(name)
     this->buildStaticText(
             otherPlayer->get_player_name(),
             labelPosition + wxSize(-100, -36),
@@ -112,10 +113,10 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
             true
     );
 
-
+    // LABEL(status)
     bool player_is_broke = otherPlayer->get_money()+otherPlayer->get_bet_size() < gameState->_min_bet;
     if(!gameState->is_started()) {
-        // STATUS
+        
         this->buildStaticText(
                 "waiting for game to start...",
                 labelPosition + wxSize(-100, -18),
@@ -124,7 +125,6 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         );
     }
     else if(player_is_broke){
-        // STATUS
         this->buildStaticText(
                 "Status: LOST GAME",
                 labelPosition + wxSize(-100, -18),
@@ -133,7 +133,6 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         );
     }
     else{
-        // STATUS
         std::string status_message = "Status: ";
 
         if(otherPlayer->get_hand()->is_over_21(err)) 
@@ -160,14 +159,14 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
             );
 
 
-        // MONEY
+        // LABEL(money)
         this->buildStaticText(
                 "Money:" + std::to_string(otherPlayer->get_money()) + "$",
                 labelPosition + wxSize(-100, 0),
                 wxSize(200, 18),
                 textAlignment
         );
-        // BET
+        // LABEL(bet)
         this->buildStaticText(
                 "Bet:" + std::to_string(otherPlayer->get_bet_size()) + "$",
                 labelPosition + wxSize(-100, 18),
@@ -176,31 +175,27 @@ void MainGamePanel::buildOthers(game_state* gameState, player* otherPlayer, doub
         );
 
 
-        // ========= add player's HAND IMAGE=================================
-
+        //HAND(cards) IMAGE
         int numberOfCards = otherPlayer->get_hand()->get_nof_cards();
         std::string cardImage;
         wxSize weirdSize(76, 90);
-        //weirdSize =  boundsOfRotatedHand;
         double cAngle = playerAngle + MainGamePanel::twoPi/4;
         int cDist = MainGamePanel::otherPlayerHandSize;
         wxSize card_dist((int)(sin(cAngle)*cDist), (int)(cos(cAngle) * cDist));
-        wxSize bet_dist = 0.15*card_dist;
         handPosition -= 0.5*card_dist + 1.5*wxSize(betOffsetX, 0);
-        betPosition -= 4* bet_dist + wxSize(betOffsetX, 0);
-
 
         for(int i = 0; i<numberOfCards;++i){
-        // wxSize boundsOfRotatedHand =  this->getBoundsOfRotatedSquare(MainGamePanel::otherPlayerHandSize, playerAngle);
             card *handCard = otherPlayer->get_hand()->get_cards().at(i);
             cardImage = getPngFileName(handCard->get_value(), handCard->get_suit());
             new ImagePanel(this, cardImage, wxBITMAP_TYPE_ANY, handPosition, weirdSize, playerAngle);
             handPosition += card_dist*0.65;
         }
 
-        // add player's BET IMAGE================================= refine??
+        //BET(chips) IMAGE
         int bet=otherPlayer->get_bet_size();
         wxSize chipSize(25, 25);
+        wxSize bet_dist = 0.15*card_dist;
+        betPosition -= 4* bet_dist + wxSize(betOffsetX, 0);
 
         while(bet>=100){
             new ImagePanel(this, "assets/png-chips/gold.png", wxBITMAP_TYPE_ANY, betPosition, chipSize, playerAngle);
@@ -365,7 +360,7 @@ void MainGamePanel::buildThisPlayer(game_state* gameState, player* me) {
             innerLayout->Add(playerStatus, 0, wxALIGN_CENTER | wxBOTTOM, 8);
         }
 
-        // TODO It's our turn, display Hit and Stand button
+        // if it's our turn, display Hit and Stand button
         if (gameState->get_current_player() == me && !gameState->everyone_finished()) {
             wxButton *hitButton = new wxButton(this, wxID_ANY, "Hit", wxDefaultPosition, wxSize(80, 32));
             hitButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
@@ -452,21 +447,10 @@ void MainGamePanel::buildRoundCounter(game_state* gameState){
 }
 
 
-//void buildShoe(){
-//  shoeFile = "assets/misc/shoe";
-//  wxPoint shoePosition =  MainGamePanel::tableCenter + MainGamePanel::shoeOffset;
-//  ImagePanel *shoe = new ImagePanel(this, shoeFile, wxBITMAP_TYPE_ANY,
-//                                    shoePosition, scaledCardSize, MainGamePanel::cardSize);
-//}
-
 void MainGamePanel::buildDealer(game_state* gameState){
     if(gameState->is_started()) {
-        // Setup two nested box sizers, in order to align our player's UI to the bottom center
-        // wxBoxSizer* outerLayout = new wxBoxSizer(wxHORIZONTAL);
-        // this->SetSizer(outerLayout);
+   
         wxBoxSizer* handLayout = new wxBoxSizer(wxVERTICAL);
-        // outerLayout->Add(innerLayout, 1, wxALIGN_CENTER);
-
         wxPoint offset(80, 0);
 
         hand* dealers_hand = gameState->get_dealers_hand();
@@ -485,10 +469,9 @@ void MainGamePanel::buildDealer(game_state* gameState){
                         return this->getPngFileName(c->get_value(), c->get_suit());
                         });
 
+        // display DEALER LABEL
         std::string dealerindicator = "Dealer";
-
         wxPoint dealerIndicatorPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset + MainGamePanel::dealerIndicatorOffset;
-
         this->buildStaticText(
                 dealerindicator,
                 dealerIndicatorPosition,
@@ -497,17 +480,22 @@ void MainGamePanel::buildDealer(game_state* gameState){
                 true
         );
 
+        // display DEALER CARDS
         bool first_part = !gameState->everyone_finished();
         wxPoint leftCardPosition = MainGamePanel::tableCenter + MainGamePanel::leftDealerCardOffset;
+        // during round
         if(first_part){
             wxPoint rightCardPosition = MainGamePanel::tableCenter + MainGamePanel::rightDealerCardOffset;
             ImagePanel* rightDealerCard = new ImagePanel(this, backside, wxBITMAP_TYPE_ANY, rightCardPosition, MainGamePanel::cardSize);
             ImagePanel* leftDealerCard = new ImagePanel(this, getPngFileName(dealers_cards[0]->get_value(), dealers_cards[0]->get_suit()), wxBITMAP_TYPE_ANY, leftCardPosition, MainGamePanel::cardSize);
-        } else {
+        }
+        // end of round
+        else {
             for(unsigned i = 0; i < dealers_cards.size(); ++i){
                 ImagePanel *image_panel = new ImagePanel(this, dealer_cards_file_names[i], wxBITMAP_TYPE_ANY, leftCardPosition + offsets[i], MainGamePanel::cardSize);
                 handLayout->Add(image_panel, 0, wxLEFT | wxRIGHT, 4);
             }
+            // halt game till displayed continue button is pressed
             wxButton* continueButton = new wxButton(this, wxID_ANY, "Continue", wxDefaultPosition, wxSize(100, 40));
             continueButton->Bind(wxEVT_BUTTON, [](wxCommandEvent& event) {
                 GameController::continue_to_bet_panel();
@@ -543,7 +531,7 @@ wxPoint MainGamePanel::getPointOnEllipse(double horizontalRadius, double vertica
     return wxPoint((int) (sin(angle) * horizontalRadius), (int) (cos(angle) * verticalRadius));
 }
 
-
+// Returns file path to the correct corresponding card
 std::string MainGamePanel::getPngFileName(int value, int suit){
 
     std::map<int, std::string> value_map {{11, "jack"}, {12, "queen"}, {1, "ace"}, {13, "king"}};

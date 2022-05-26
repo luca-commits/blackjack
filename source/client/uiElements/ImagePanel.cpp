@@ -14,6 +14,9 @@ ImagePanel::ImagePanel(wxWindow* parent, wxString file, wxBitmapType format, wxP
         return;
     }
 
+    wxColor green = wxColor(50, 168, 54);
+    this->SetBackgroundColour(green);
+
     this->_rotation = rotation;
 
     this->_width = -1;
