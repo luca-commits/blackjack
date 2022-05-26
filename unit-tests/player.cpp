@@ -43,10 +43,10 @@ protected:
     int bet_size = 0;
     int money = 100;
     bool finished_turn = false;
-    hand player_hand;
+    hand* player_hand;
     std::string err;
 };
-/*
+
 // If the player has finished their turn, the corresponding flag attribute has to be set
 TEST_F(PlayerTest, SetFinishedTurn) {
     player_->set_finished_turn();
@@ -62,11 +62,11 @@ TEST_F(PlayerTest, IsBrokeFalse) {
 // A player with no money should be broke
 // TODO how to set the money of a player to 0 so that I can check this
 TEST_F(PlayerTest, IsBrokeTrue) {
-    EXPECT_TRUE(player_hand.add_card(cards[1][0], err));
-    EXPECT_TRUE(player_hand.add_card(cards[3][0], err));
-    EXPECT_TRUE(player_hand.add_card(cards[13][0], err));
+    EXPECT_TRUE(player_hand->add_card(cards[1][0], err));
+    EXPECT_TRUE(player_hand->add_card(cards[3][0], err));
+    EXPECT_TRUE(player_hand->add_card(cards[13][0], err));
     std::vector<card*> expected_hand = {cards[1][0], cards[3][0], cards[13][0]};
-    EXPECT_EQ(expected_hand, player_hand.get_cards());
+    EXPECT_EQ(expected_hand, player_hand->get_cards());
 }
 
 // TODO one of these for a broke player
@@ -74,7 +74,7 @@ TEST_F(PlayerTest, IsBrokeTrue) {
 TEST_F(PlayerTest, SetupRound) {
     player_name = player_->get_player_name();
     money = player_->get_money();
-    player_hand.setup_round(err);
+    player_hand->setup_round(err);
     player_->setup_round(err);
     EXPECT_EQ(bet_size, player_->get_bet_size());
     EXPECT_EQ(money, player_->get_money());
@@ -163,7 +163,7 @@ TEST_F(PlayerTest, MakeBetNegative) {
 TEST_F(PlayerTest, WrapupRound) {
     player_name = player_->get_player_name();
     money = player_->get_money();
-    player_hand.setup_round(err);
+    player_hand->setup_round(err);
     player_->setup_round(err);
     EXPECT_EQ(bet_size, player_->get_bet_size());
     EXPECT_EQ(money, player_->get_money());
