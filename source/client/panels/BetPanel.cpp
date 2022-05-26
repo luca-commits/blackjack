@@ -3,7 +3,7 @@
 BetPanel::BetPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY) {}
 
 BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) : wxPanel(parent, wxID_ANY) {
-    // update myself ? (maybe not needed)
+    // update myself
     std::vector<player*> players = gameState->get_players();
     std::vector<player*>::iterator it = std::find_if(players.begin(), players.end(), [me](const player* x) {
         return x->get_id() == me->get_id();
@@ -16,7 +16,7 @@ BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) : wxPane
     }
 
     // color of background
-    wxColor lightGreen = wxColor(50, 205, 50);
+    wxColor lightGreen = wxColor(210, 210, 210);
     this->SetBackgroundColour(lightGreen);
 
     wxBoxSizer* verticalLayout = new wxBoxSizer(wxVERTICAL);
@@ -37,7 +37,7 @@ BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) : wxPane
         this,
         "Your bet:",
         100,
-        wxString::Format("%i", game_state::_min_bet),//TODO does this not take our input as minimal bet?
+        wxString::Format("%i", game_state::_min_bet),
         240
     );
     verticalLayout->Add(this->_betSizeField, 0, wxTOP | wxLEFT | wxRIGHT, 10);
@@ -52,10 +52,12 @@ BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) : wxPane
     this->SetSizerAndFit(verticalLayout);
 }
 
+// get value from input field
 wxString BetPanel::getBetSize() {
     return this->_betSizeField->getValue();
 }
 
+// build text on screen
 wxStaticText* BetPanel::buildStaticText(std::string content, wxPoint position, wxSize size, long textAlignment, bool bold) {
     wxStaticText* staticText = new wxStaticText(this, wxID_ANY, content, position, size, textAlignment);
     if(bold) {
