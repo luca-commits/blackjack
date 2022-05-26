@@ -10,7 +10,6 @@
 #include "../serialization/unique_serializable.h"
 #include "../serialization/serializable_value.h"
 
-//TODO: flag access function for finished turn
 //TODO: hit implemented in game_state, also set flag if over 21
 
 class player : public unique_serializable {
@@ -54,22 +53,21 @@ public:
     bool has_finished_turn() const noexcept;
     hand* get_hand() const noexcept;
     std::string get_player_name() const noexcept;
-    void set_finished_turn();
-    bool is_broke();
+    void set_finished_turn(); //TODO
+    bool is_broke(); //TODO
 
 #ifdef BLACKJACK_SERVER
     // state update functions
-    void wrap_up_round(int dealer_points, std::string& err);
-    void setup_round(std::string& err);
+    void wrap_up_round(int dealer_points, std::string& err); //TODO
+    void setup_round(std::string& err); //TODO
 
     // player actions (probably not needed)
-    bool make_bet(int bet_size, std::string &err);
+    bool make_bet(int bet_size, std::string &err); //TODO
 
     // helper functions for game_state
     // helper functions to calculate winnings
-    void won_round();
-    void lost_round();
-    void draw_round();
+    void won_round(); //TODO
+    void draw_round(); //TODO
 
 #endif
 
