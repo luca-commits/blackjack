@@ -15,11 +15,11 @@ GameWindow::GameWindow(const wxString& title, const wxPoint& pos, const wxSize& 
     this->_statusBar = this->CreateStatusBar(1);
 
     // Set background
-    wxColor lightGreen = wxColor(50, 205, 50);
-    this->SetBackgroundColour(lightGreen);
+    wxColor green = wxColor(50, 168, 54);
+    this->SetBackgroundColour(green);
 
     // Set the minimum size of the window. The user won't be able to resize the window to a size smaller than this
-    this->SetMinSize(wxSize(1200, 850));
+    this->SetMinSize(wxSize(1000, 720));
 
 }
 

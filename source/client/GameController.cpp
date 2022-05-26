@@ -24,7 +24,7 @@ void GameController::init(GameWindow* gameWindow) {
 
     GameController::_gameWindow = gameWindow;
     // resizing after start makes panels appear without manual resizing
-    GameController::_gameWindow->SetSize(wxSize(1250, 900));
+    GameController::_gameWindow->SetSize(wxSize(1010, 730));
 
     // Set up main panels
     GameController::_connectionPanel = new ConnectionPanel(gameWindow);

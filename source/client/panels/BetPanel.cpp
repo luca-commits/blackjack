@@ -16,8 +16,8 @@ BetPanel::BetPanel(wxWindow* parent, game_state* gameState, player* me) : wxPane
     }
 
     // color of background
-    wxColor green = wxColor(50, 168, 54);
-    this->SetBackgroundColour(green);
+    wxColor lightGreen = wxColor(50, 205, 50);
+    this->SetBackgroundColour(lightGreen);
 
     wxBoxSizer* verticalLayout = new wxBoxSizer(wxVERTICAL);
 
