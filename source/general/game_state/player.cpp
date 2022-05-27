@@ -77,7 +77,6 @@ std::string player::get_player_name() const noexcept {
     return this->_player_name->get_value();
 }
 
-//are we sure we need those
 void player::set_finished_turn() {
     this->_finished_turn->set_value(true);
 }
@@ -115,7 +114,6 @@ void player::wrap_up_round(int dealer_points, std::string& err) {
 }
 
 
-// TODO: add check if player already has a bet to throw error?
 bool player::make_bet(int bet_size, std::string &err) {
     if(bet_size > this->get_money()) {
         err = "bet_size is bigger than amount of money the player " + this->_player_name->get_value() + " has.";

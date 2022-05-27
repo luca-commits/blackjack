@@ -125,11 +125,9 @@ bool game_state::everyone_finished() const {
     unsigned int s = _players.size();
     for(unsigned int i = 0; i < s; ++i) {
         if(!(_players[i]->has_finished_turn()) && !(_players[i]->is_broke())){
-            std::cout << "Player " << i << " not finished!" << std::endl << std::flush;
             return false;
         }
     }
-    std::cout << "Everyone finished" << std::endl << std::flush;
     return true;
 }
 
@@ -288,8 +286,6 @@ bool game_state::stand(player* player, std::string& err) {
     }
 }
 
-//TODO: makes bets for everyone before the people actually start the round
-//TODO: other cases to take into account?
 bool game_state::make_bet(player* player, int bet_size, std::string& err) {
     if(!player->is_broke()) {
         player->make_bet(bet_size, err);
@@ -316,8 +312,6 @@ void game_state::update_current_player(std::string& err) {
 
 // end of round functions
 void game_state::wrap_up_round(std::string& err) {
-    //hardcoded dealer action
-
     int dealer_points = _dealers_hand->get_points(err);
 
     for(auto player : _players) {
@@ -347,13 +341,6 @@ void game_state::wrap_up_round(std::string& err) {
         //Flag that setup is required, so game_instance can perform it
         needs_setup = true;
     }
-// void game_state::compute_dealers_hand() {
-//     std::string err = "Problems drawing cards for dealer in the end";
-//     while(this->get_dealers_hand()->get_points(err)<= 16){
-//         this->get_shoe()->draw_card(this->get_dealers_hand(), err);
-//     }
-// }
-
 
 }
 #endif
