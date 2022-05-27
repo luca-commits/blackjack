@@ -49,7 +49,6 @@ protected:
 
     std::vector<std::vector<card*>> cards;
     player* player_ = nullptr;
-    player* player_broke = nullptr;
     std::string player_name;
     int bet_size = 0;
     int money = 100;
@@ -184,6 +183,7 @@ TEST_F(PlayerTest, WrapUpRoundWon) {
     player_->get_hand()->add_card(cards[9][0], err);
     player_->get_hand()->add_card(cards[8][0], err);
     player_name = player_->get_player_name();
+    finished_turn = player_->has_finished_turn();
     std::vector<card*> expected_hand = {cards[2][0], cards[9][0], cards[8][0]};
     set_bet_size(*player_, 50);
     player_->wrap_up_round(18, err);
@@ -191,6 +191,7 @@ TEST_F(PlayerTest, WrapUpRoundWon) {
     EXPECT_EQ(150, player_->get_money());
     EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
+    EXPECT_EQ(finished_turn, player_->has_finished_turn());
 }
 
 // Wrapping up a round for a player who won should call won_round()
@@ -201,6 +202,7 @@ TEST_F(PlayerTest, WrapUpRoundWonDealerLost) {
     player_->get_hand()->add_card(cards[9][0], err);
     player_->get_hand()->add_card(cards[8][0], err);
     player_name = player_->get_player_name();
+    finished_turn = player_->has_finished_turn();
     std::vector<card*> expected_hand = {cards[2][0], cards[9][0], cards[8][0]};
     set_bet_size(*player_, 50);
     player_->wrap_up_round(23, err);
@@ -208,6 +210,7 @@ TEST_F(PlayerTest, WrapUpRoundWonDealerLost) {
     EXPECT_EQ(150, player_->get_money());
     EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
+    EXPECT_EQ(finished_turn, player_->has_finished_turn());
 }
 
 // Wrapping up a round for a player who make a draw should call draw_round()
@@ -218,6 +221,7 @@ TEST_F(PlayerTest, WrapUpRoundDraw) {
     player_->get_hand()->add_card(cards[9][0], err);
     player_->get_hand()->add_card(cards[8][0], err);
     player_name = player_->get_player_name();
+    finished_turn = player_->has_finished_turn();
     std::vector<card*> expected_hand = {cards[2][0], cards[9][0], cards[8][0]};
     set_bet_size(*player_, 50);
     player_->wrap_up_round(19, err);
@@ -225,6 +229,7 @@ TEST_F(PlayerTest, WrapUpRoundDraw) {
     EXPECT_EQ(100, player_->get_money());
     EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
+    EXPECT_EQ(finished_turn, player_->has_finished_turn());
 }
 
 // Wrapping up a round for a player who won should call won_round()
@@ -235,6 +240,7 @@ TEST_F(PlayerTest, WrapUpRoundBlackjackWon) {
     player_->get_hand()->add_card(cards[9][0], err);
     player_->get_hand()->add_card(cards[8][0], err);
     player_name = player_->get_player_name();
+    finished_turn = player_->has_finished_turn();
     std::vector<card*> expected_hand = {cards[4][0], cards[9][0], cards[8][0]};
     set_bet_size(*player_, 50);
     player_->wrap_up_round(20, err);
@@ -242,6 +248,7 @@ TEST_F(PlayerTest, WrapUpRoundBlackjackWon) {
     EXPECT_EQ(150, player_->get_money());
     EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
+    EXPECT_EQ(finished_turn, player_->has_finished_turn());
 }
 
 // Wrapping up a round for a player who make a draw should call draw_round()
@@ -252,6 +259,7 @@ TEST_F(PlayerTest, WrapUpRoundBlackjackDraw) {
     player_->get_hand()->add_card(cards[9][0], err);
     player_->get_hand()->add_card(cards[8][0], err);
     player_name = player_->get_player_name();
+    finished_turn = player_->has_finished_turn();
     std::vector<card*> expected_hand = {cards[4][0], cards[9][0], cards[8][0]};
     set_bet_size(*player_, 50);
     player_->wrap_up_round(21, err);
@@ -259,6 +267,7 @@ TEST_F(PlayerTest, WrapUpRoundBlackjackDraw) {
     EXPECT_EQ(100, player_->get_money());
     EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
+    EXPECT_EQ(finished_turn, player_->has_finished_turn());
 }
 
 // Wrapping up a round for a player who make a draw should call draw_round()
@@ -269,6 +278,7 @@ TEST_F(PlayerTest, WrapUpRoundBlackjackLost) {
     player_->get_hand()->add_card(cards[9][0], err);
     player_->get_hand()->add_card(cards[8][0], err);
     player_name = player_->get_player_name();
+    finished_turn = player_->has_finished_turn();
     std::vector<card*> expected_hand = {cards[6][0], cards[9][0], cards[8][0]};
     set_bet_size(*player_, 50);
     player_->wrap_up_round(21, err);
@@ -276,4 +286,38 @@ TEST_F(PlayerTest, WrapUpRoundBlackjackLost) {
     EXPECT_EQ(50, player_->get_money());
     EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
+    EXPECT_EQ(finished_turn, player_->has_finished_turn());
 }
+
+// Serialization and subsequent deserialization must yield the same object
+TEST_F(PlayerTest, SerializationEquality) {
+    player_->get_hand()->add_card(cards[2][0], err);
+    player_->get_hand()->add_card(cards[7][0], err);
+    player_->get_hand()->add_card(cards[9][0], err);
+    std::vector<card*> expected_hand = {cards[2][0], cards[7][0], cards[9][0]};
+    rapidjson::Document* json_send = player_->to_json();
+    std::string message = json_utils::to_string(json_send);
+    delete json_send;
+
+    rapidjson::Document json_received = rapidjson::Document(rapidjson::kObjectType);
+    json_received.Parse(message.c_str());
+    player* player_received = player::from_json(json_received);
+    EXPECT_EQ(player_->get_id(), player_received->get_id());
+    EXPECT_EQ(player_->get_player_name(), player_received->get_player_name());
+    EXPECT_EQ(player_->get_bet_size(), player_received->get_bet_size());
+    EXPECT_EQ(player_->get_money(), player_received->get_money());
+    EXPECT_EQ(player_->has_finished_turn(), player_received->has_finished_turn());
+    for (int i = 0; i < player_->get_hand()->get_cards().size(); ++i) {
+        EXPECT_EQ(expected_hand[i]->get_value(), player_->get_hand()->get_cards()[i]->get_value());
+        EXPECT_EQ(expected_hand[i]->get_suit(), player_->get_hand()->get_cards()[i]->get_suit());
+    }
+    delete player_received;
+}
+
+// Deserializing an invalid string must throw a BlackjackException
+TEST_F(PlayerTest, SerializationException) {
+    rapidjson::Document json = rapidjson::Document(rapidjson::kObjectType);
+    json.Parse("not json");
+    EXPECT_THROW(player::from_json(json), BlackjackException);
+}
+

@@ -320,8 +320,6 @@ TEST_F(HandTest, IsOver21TrueWithAce) {
 
 // Serialization and subsequent deserialization must yield the same object
 TEST_F(HandTest, SerializationEquality) {
-    //std::vector<card*> hand_cards = {cards[1][0], cards[2][0], cards[9][0]};
-    //hand hand_send();
     player_hand.add_card(cards[2][0], err);
     player_hand.add_card(cards[7][0], err);
     player_hand.add_card(cards[9][0], err);
