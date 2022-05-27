@@ -2,9 +2,6 @@
 // Created by Flavia Taras on 20.05.22.
 //
 
-//TODO try to get extra cards when you already have over 21 points
-//TODO: adding the same card more than the number of decks in a shoe should not work
-
 #include "gtest/gtest.h"
 #include "../source/general/game_state/hand.hpp"
 #include "../source/general/exceptions/BlackjackException.hpp"

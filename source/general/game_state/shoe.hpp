@@ -32,13 +32,15 @@ public:
 
     // pile functions
     void shuffle();
-    bool is_empty() const noexcept;
     void setup_round(std::string &err);
     card* draw_card(hand* h, std::string& err);
 
     // serialization
     virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
     static shoe* from_json(const rapidjson::Value& json);
+
+    //friend function used for testing
+    friend std::vector<card*> get_cards(const shoe& shoe);
 };
 
 

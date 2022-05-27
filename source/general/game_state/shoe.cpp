@@ -32,10 +32,6 @@ void shoe::shuffle() {
     std::shuffle(_cards.begin(), _cards.end(), std::mt19937(std::random_device()()));
 }
 
-bool shoe::is_empty() const noexcept  {
-    return _cards.empty();
-}
-
 void shoe::setup_round(std::string &err) {
     // remove all cards
     for (int i = 0; i < _cards.size(); i++) {
