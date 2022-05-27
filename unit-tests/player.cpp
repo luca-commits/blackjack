@@ -20,6 +20,16 @@
  * tests. Any changes one test makes to the fixture do not affect other tests.
  */
 
+// friend functions of player class
+void set_money(player& player_test, const int& money) {
+    player_test._money->set_value(money);
+}
+
+void set_bet_size(player& player_test, const int& bet_size) {
+    int current_money = player_test.get_money();
+    player_test._bet_size->set_value(bet_size);
+    player_test._money->set_value(current_money - bet_size);
+}
 
 class PlayerTest : public ::testing::Test {
 
@@ -39,6 +49,7 @@ protected:
 
     std::vector<std::vector<card*>> cards;
     player* player_ = nullptr;
+    player* player_broke = nullptr;
     std::string player_name;
     int bet_size = 0;
     int money = 100;
@@ -60,18 +71,19 @@ TEST_F(PlayerTest, IsBrokeFalse) {
 }
 
 // A player with no money should be broke
-// TODO how to set the money of a player to 0 so that I can check this
 TEST_F(PlayerTest, IsBrokeTrue) {
-    player_hand.add_card(cards[1][0], err);
-    player_hand.add_card(cards[3][0], err);
-    player_hand.add_card(cards[13][0], err);
-    std::vector<card*> expected_hand = {cards[1][0], cards[3][0], cards[13][0]};
-    EXPECT_EQ(expected_hand, player_hand.get_cards());
+    set_money(*player_, 0);
+    EXPECT_TRUE(player_->is_broke());
 }
 
-// TODO one of these for a broke player
+// A player with negative money should also be broke
+TEST_F(PlayerTest, IsBrokeTrueNegativeMoney) {
+    set_money(*player_, -1);
+    EXPECT_TRUE(player_->is_broke());
+}
+
 // When starting a new round only the finished_round flag and the bet_size have to be reset
-TEST_F(PlayerTest, SetupRound) {
+TEST_F(PlayerTest, SetUpRound) {
     player_name = player_->get_player_name();
     money = player_->get_money();
     player_hand.setup_round(err);
@@ -83,6 +95,13 @@ TEST_F(PlayerTest, SetupRound) {
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
+//todo
+// Setting up a new round for a broke player should not be possible
+TEST_F(PlayerTest, SetUpRoundBroke) {
+    set_money(*player_, 0);
+    EXPECT_THROW(player_->setup_round(err), BlackjackException);
+}
+
 // After winning a round, the new amount of money has to be computed
 // and nothing else changes
 TEST_F(PlayerTest, WonRound) {
@@ -90,7 +109,6 @@ TEST_F(PlayerTest, WonRound) {
     money = player_->get_money();
     player_name = player_->get_player_name();
     int money_new = bet_size * 2 + money;
-    ASSERT_TRUE(player_->has_finished_turn());
     player_->won_round();
     EXPECT_EQ(bet_size, player_->get_bet_size());
     EXPECT_EQ(money_new, player_->get_money());
@@ -104,7 +122,6 @@ TEST_F(PlayerTest, DrawRound) {
     money = player_->get_money();
     player_name = player_->get_player_name();
     int money_new = bet_size + money;
-    ASSERT_TRUE(player_->has_finished_turn());
     player_->draw_round();
     EXPECT_EQ(bet_size, player_->get_bet_size());
     EXPECT_EQ(money_new, player_->get_money());
@@ -159,16 +176,104 @@ TEST_F(PlayerTest, MakeBetNegative) {
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
-/*
-// When starting a new round only the finished_round flag and the bet_size have to be reset
-TEST_F(PlayerTest, WrapupRound) {
+// Wrapping up a round for a player who won should call won_round()
+// Since we cannot check for the function call directly, we will look for
+// the side effects it creates (increasing the player's money by the bet_size)
+TEST_F(PlayerTest, WrapUpRoundWon) {
+    player_->get_hand()->add_card(cards[2][0], err);
+    player_->get_hand()->add_card(cards[9][0], err);
+    player_->get_hand()->add_card(cards[8][0], err);
     player_name = player_->get_player_name();
-    money = player_->get_money();
-    player_hand.setup_round(err);
-    player_->setup_round(err);
-    EXPECT_EQ(bet_size, player_->get_bet_size());
-    EXPECT_EQ(money, player_->get_money());
-    EXPECT_EQ(player_hand.get_cards(), player_->get_hand()->get_cards());
+    std::vector<card*> expected_hand = {cards[2][0], cards[9][0], cards[8][0]};
+    set_bet_size(*player_, 50);
+    player_->wrap_up_round(18, err);
+    EXPECT_EQ(50, player_->get_bet_size());
+    EXPECT_EQ(150, player_->get_money());
+    EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
     EXPECT_EQ(player_name, player_->get_player_name());
-    EXPECT_FALSE(player_->has_finished_turn());
-}*/
+}
+
+// Wrapping up a round for a player who won should call won_round()
+// Since we cannot check for the function call directly, we will look for
+// the side effects it creates (increasing the player's money by the bet_size)
+TEST_F(PlayerTest, WrapUpRoundWonDealerLost) {
+    player_->get_hand()->add_card(cards[2][0], err);
+    player_->get_hand()->add_card(cards[9][0], err);
+    player_->get_hand()->add_card(cards[8][0], err);
+    player_name = player_->get_player_name();
+    std::vector<card*> expected_hand = {cards[2][0], cards[9][0], cards[8][0]};
+    set_bet_size(*player_, 50);
+    player_->wrap_up_round(23, err);
+    EXPECT_EQ(50, player_->get_bet_size());
+    EXPECT_EQ(150, player_->get_money());
+    EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
+    EXPECT_EQ(player_name, player_->get_player_name());
+}
+
+// Wrapping up a round for a player who make a draw should call draw_round()
+// Since we cannot check for the function call directly, we will look for
+// the side effects it creates (returning the bet_size to the player's money)
+TEST_F(PlayerTest, WrapUpRoundDraw) {
+    player_->get_hand()->add_card(cards[2][0], err);
+    player_->get_hand()->add_card(cards[9][0], err);
+    player_->get_hand()->add_card(cards[8][0], err);
+    player_name = player_->get_player_name();
+    std::vector<card*> expected_hand = {cards[2][0], cards[9][0], cards[8][0]};
+    set_bet_size(*player_, 50);
+    player_->wrap_up_round(19, err);
+    EXPECT_EQ(50, player_->get_bet_size());
+    EXPECT_EQ(100, player_->get_money());
+    EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
+    EXPECT_EQ(player_name, player_->get_player_name());
+}
+
+// Wrapping up a round for a player who won should call won_round()
+// Since we cannot check for the function call directly, we will look for
+// the side effects it creates (increasing the player's money by the bet_size)
+TEST_F(PlayerTest, WrapUpRoundBlackjackWon) {
+    player_->get_hand()->add_card(cards[4][0], err);
+    player_->get_hand()->add_card(cards[9][0], err);
+    player_->get_hand()->add_card(cards[8][0], err);
+    player_name = player_->get_player_name();
+    std::vector<card*> expected_hand = {cards[4][0], cards[9][0], cards[8][0]};
+    set_bet_size(*player_, 50);
+    player_->wrap_up_round(20, err);
+    EXPECT_EQ(50, player_->get_bet_size());
+    EXPECT_EQ(150, player_->get_money());
+    EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
+    EXPECT_EQ(player_name, player_->get_player_name());
+}
+
+// Wrapping up a round for a player who make a draw should call draw_round()
+// Since we cannot check for the function call directly, we will look for
+// the side effects it creates (returning the bet_size to the player's money)
+TEST_F(PlayerTest, WrapUpRoundBlackjackDraw) {
+    player_->get_hand()->add_card(cards[4][0], err);
+    player_->get_hand()->add_card(cards[9][0], err);
+    player_->get_hand()->add_card(cards[8][0], err);
+    player_name = player_->get_player_name();
+    std::vector<card*> expected_hand = {cards[4][0], cards[9][0], cards[8][0]};
+    set_bet_size(*player_, 50);
+    player_->wrap_up_round(21, err);
+    EXPECT_EQ(50, player_->get_bet_size());
+    EXPECT_EQ(100, player_->get_money());
+    EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
+    EXPECT_EQ(player_name, player_->get_player_name());
+}
+
+// Wrapping up a round for a player who make a draw should call draw_round()
+// Since we cannot check for the function call directly, we will look for
+// the side effects it creates (returning the bet_size to the player's money)
+TEST_F(PlayerTest, WrapUpRoundBlackjackLost) {
+    player_->get_hand()->add_card(cards[6][0], err);
+    player_->get_hand()->add_card(cards[9][0], err);
+    player_->get_hand()->add_card(cards[8][0], err);
+    player_name = player_->get_player_name();
+    std::vector<card*> expected_hand = {cards[6][0], cards[9][0], cards[8][0]};
+    set_bet_size(*player_, 50);
+    player_->wrap_up_round(21, err);
+    EXPECT_EQ(50, player_->get_bet_size());
+    EXPECT_EQ(50, player_->get_money());
+    EXPECT_EQ(expected_hand, player_->get_hand()->get_cards());
+    EXPECT_EQ(player_name, player_->get_player_name());
+}

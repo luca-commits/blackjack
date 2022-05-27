@@ -53,27 +53,31 @@ public:
     bool has_finished_turn() const noexcept;
     hand* get_hand() const noexcept;
     std::string get_player_name() const noexcept;
-    void set_finished_turn(); //TODO
-    bool is_broke(); //TODO
+    void set_finished_turn();
+    bool is_broke();
 
 #ifdef BLACKJACK_SERVER
     // state update functions
     void wrap_up_round(int dealer_points, std::string& err); //TODO
-    void setup_round(std::string& err); //TODO
+    void setup_round(std::string& err);
 
     // player actions (probably not needed)
-    bool make_bet(int bet_size, std::string &err); //TODO
+    bool make_bet(int bet_size, std::string &err);
 
     // helper functions for game_state
     // helper functions to calculate winnings
-    void won_round(); //TODO
-    void draw_round(); //TODO
+    void won_round();
+    void draw_round();
 
 #endif
 
     // serialization
     static player* from_json(const rapidjson::Value& json);
     virtual void write_into_json(rapidjson::Value& json, rapidjson::Document::AllocatorType& allocator) const override;
+
+    // friend functions used for testing purposes
+    friend void set_money(player& player_test, const int& money);
+    friend void set_bet_size(player& player_test, const int& bet_size);
 };
 
 #endif

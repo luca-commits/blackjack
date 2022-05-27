@@ -29,10 +29,6 @@ const std::vector<card*> hand::get_cards() const {
     return _cards;
 }
 
-std::vector<card*>::iterator hand::get_card_iterator() {
-    return _cards.begin();
-}
-
 void hand::setup_round(std::string &err) {
     // remove all cards (if any) and clear it
     for (int i = 0; i < _cards.size(); i++) {
