@@ -94,13 +94,6 @@ TEST_F(PlayerTest, SetUpRound) {
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
-//todo
-// Setting up a new round for a broke player should not be possible
-TEST_F(PlayerTest, SetUpRoundBroke) {
-    set_money(*player_, 0);
-    EXPECT_THROW(player_->setup_round(err), BlackjackException);
-}
-
 // After winning a round, the new amount of money has to be computed
 // and nothing else changes
 TEST_F(PlayerTest, WonRound) {
@@ -151,7 +144,6 @@ TEST_F(PlayerTest, MakeBetAllIn) {
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
-// todo look into if it's throwing an exception
 // A bet with more money than the player has is illegal
 TEST_F(PlayerTest, MakeBetMoneyOver) {
     player_name = player_->get_player_name();
@@ -163,7 +155,6 @@ TEST_F(PlayerTest, MakeBetMoneyOver) {
     EXPECT_FALSE(player_->has_finished_turn());
 }
 
-// todo look into if it's throwing an exception
 // A negative bet is illegal
 TEST_F(PlayerTest, MakeBetNegative) {
     player_name = player_->get_player_name();
