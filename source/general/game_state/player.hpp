@@ -10,7 +10,6 @@
 #include "../serialization/unique_serializable.h"
 #include "../serialization/serializable_value.h"
 
-//TODO: hit implemented in game_state, also set flag if over 21
 
 class player : public unique_serializable {
 private:
@@ -21,7 +20,7 @@ private:
     hand* _player_hand;
 
 
-#ifdef BLACKJACK_SERVER                  // is this macro needed?
+#ifdef BLACKJACK_SERVER                 
     std::string _game_id;
 #endif
 
@@ -58,13 +57,12 @@ public:
 
 #ifdef BLACKJACK_SERVER
     // state update functions
-    void wrap_up_round(int dealer_points, std::string& err); //TODO
+    void wrap_up_round(int dealer_points, std::string& err);
     void setup_round(std::string& err);
 
-    // player actions (probably not needed)
+    // player action
     bool make_bet(int bet_size, std::string &err);
 
-    // helper functions for game_state
     // helper functions to calculate winnings
     void won_round();
     void draw_round();

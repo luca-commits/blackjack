@@ -36,7 +36,7 @@ card *card::from_json(const rapidjson::Value &json) {
     }
 }
 
-// is this even correct ?
+
 void card::write_into_json(rapidjson::Value &json, rapidjson::Document::AllocatorType& allocator) const {
     unique_serializable::write_into_json(json, allocator);
 

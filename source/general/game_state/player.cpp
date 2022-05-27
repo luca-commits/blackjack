@@ -113,7 +113,7 @@ void player::wrap_up_round(int dealer_points, std::string& err) {
     }
 }
 
-
+// hit and stand are implemented directly in game_state
 bool player::make_bet(int bet_size, std::string &err) {
     if(bet_size > this->get_money()) {
         err = "bet_size is bigger than amount of money the player " + this->_player_name->get_value() + " has.";

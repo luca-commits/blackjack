@@ -4,7 +4,7 @@
 #include "../../serialization/json_utils.h"
 
 #ifdef BLACKJACK_CLIENT
-#include "../../../client/GameController.hpp"       //adapt if necessary
+#include "../../../client/GameController.hpp"
 #endif
 
 change_gamestate_msg::change_gamestate_msg(server_response::base_class_properties props, rapidjson::Value* state_json) :
@@ -50,7 +50,7 @@ rapidjson::Value* change_gamestate_msg::get_state_json() const {
 void change_gamestate_msg::Process() const {
     try {
         game_state* state = game_state::from_json(*_state_json);
-        GameController::updateGameState(state);                     //do we have this function?
+        GameController::updateGameState(state);
 
     } catch(std::exception& e) {
         std::cerr << "Failed to extract game_state from change_gamestate_msg" << std::endl

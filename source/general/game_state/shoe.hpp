@@ -11,8 +11,7 @@
 #include "../serialization/serializable_value.h"
 #include "../../../rapidjson/include/rapidjson/document.h"
 
-//TODO: get rid of player in draw card, you just draw a card from the shoe, then you add it to a
-//player's hand through fct like hit, stand etc
+
 class shoe : public unique_serializable {
 private:
     std::vector<card*> _cards;

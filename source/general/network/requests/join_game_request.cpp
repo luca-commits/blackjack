@@ -15,7 +15,6 @@ join_game_request::join_game_request(std::string player_id, std::string name)
           _player_name(name)
 { }
 
-// do we even want to request joining specific games?
 join_game_request::join_game_request(std::string game_id, std::string player_id, std::string name)
         : client_request( client_request::create_base_class_properties(RequestType::join_game, uuid_generator::generate_uuid_v4(), player_id, game_id) ),
           _player_name(name)

@@ -1,7 +1,7 @@
 #include "start_game_request.hpp"
 
 #ifdef BLACKJACK_SERVER
-#include "../../../server/game_instance_manager.hpp" //not planned for now ?
+#include "../../../server/game_instance_manager.hpp"
 #include "../../../server/game_instance.hpp"
 #endif
 

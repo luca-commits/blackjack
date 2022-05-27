@@ -10,9 +10,6 @@
 #include "../serialization/serializable_value.h"
 #include "../serialization/unique_serializable.h"
 
-//TODO: check if legal turn for standing and everything
-//TODO: make bets before ppl play
-
 
 class game_state : public unique_serializable {
 public:
@@ -30,7 +27,7 @@ private:
     serializable_value<bool>* _is_finished;
     serializable_value<int>* _round_number;
     serializable_value<int>* _current_player_idx;
-    serializable_value<int>* _starting_player_idx; // very possible this variable is NOT needed
+    serializable_value<int>* _starting_player_idx;
 
     // from_diff constructor
     game_state(std::string id);
@@ -84,9 +81,6 @@ public:
 
     // end of round functions
     void wrap_up_round(std::string& err);
-
-    // functions from our SDS
-    // void compute_dealers_hand(); // does hardcoded actions for dealer
 
     //Flag that setup needs to be called
     bool needs_setup = false;

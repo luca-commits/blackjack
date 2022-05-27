@@ -12,7 +12,7 @@ private:
     serializable_value<int>* _suit;         // '0' for spades, '1' for clubs, '2' for diamonds, '3' for hearts
 
     // from_diff constructor
-    card(std::string id);                   // what is this exactly ?
+    card(std::string id);                   
     // deserialization constructor
     card(std::string id, serializable_value<int>* val, serializable_value<int>* suit);
 public:

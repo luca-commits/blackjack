@@ -9,7 +9,7 @@ class answer_rqst_response : public server_response {
 private:
     bool _success;
     std::string _err;
-    std::string _req_id;                        //not mentioned in SDS!
+    std::string _req_id;                        
     rapidjson::Value* _state_json = nullptr;
 
     answer_rqst_response(base_class_properties props, std::string req_id, bool success, rapidjson::Value* state_json, std::string& err);

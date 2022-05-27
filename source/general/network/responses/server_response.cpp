@@ -7,7 +7,7 @@
 // for deserialization
 const std::unordered_map<std::string, ResponseType> server_response::_string_to_response_type = {
         {"req_response", ResponseType::req_response},
-        {"state_diff_msg", ResponseType::state_diff_msg}, //is this even needed ? not in SDS !
+        {"state_diff_msg", ResponseType::state_diff_msg},
         {"change_gamestate", ResponseType::change_gamestate}
 };
 // for serialization
@@ -61,12 +61,12 @@ server_response *server_response::from_json(const rapidjson::Value& json) {
         ResponseType response_type = server_response::_string_to_response_type.at(type);
 
         if (response_type == ResponseType::req_response) {
-            return answer_rqst_response::from_json(json);                   //not sure if correct
+            return answer_rqst_response::from_json(json);
         }
         else if (response_type == ResponseType::change_gamestate) {
-            return change_gamestate_msg::from_json(json);                   //not sure if correct
+            return change_gamestate_msg::from_json(json);
         } else {
-            throw BlackjackException("Encountered unknown ServerResponse type " + type);   //should response_type not be string?
+            throw BlackjackException("Encountered unknown ServerResponse type " + type);
         }
     }
     throw BlackjackException("Could not determine type of ClientRequest");

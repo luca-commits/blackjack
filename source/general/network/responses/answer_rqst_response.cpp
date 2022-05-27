@@ -4,7 +4,7 @@
 #include "../../game_state/game_state.hpp"
 
 #ifdef BLACKJACK_CLIENT
-#include "../../../client/GameController.hpp"     //adapt this if needed!
+#include "../../../client/GameController.hpp"
 #endif
 
 
