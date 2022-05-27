@@ -27,7 +27,7 @@ shoe::~shoe() {
     _cards.clear();
 }
 
-// implement this correctly
+// shuffle the shoe
 void shoe::shuffle() {
     std::shuffle(_cards.begin(), _cards.end(), std::mt19937(std::random_device()()));
 }
@@ -43,7 +43,7 @@ void shoe::setup_round(std::string &err) {
     }
     _cards.clear();
 
-    // add a fresh set of cards
+    // add a fresh set of cards (4 decks)
     for(int deck = 0; deck < 4; ++deck) {
         for(int suit = 0; suit < 4; ++suit) {
             for(int value = 1; value <= 13; ++value) {
@@ -56,6 +56,7 @@ void shoe::setup_round(std::string &err) {
     this->shuffle();
 }
 
+// draw a card from shoe to given hand
 card* shoe::draw_card(hand* h, std::string& err)  {
     if (!_cards.empty()) {
         card* drawn_card = _cards.back();

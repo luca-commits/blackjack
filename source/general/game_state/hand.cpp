@@ -46,10 +46,12 @@ bool hand::add_card(card* new_card, std::string &err) {
     return true;
 }
 
+// return how many points a hand is worth
 int hand::get_points(std::string &err) {
     int point_sum = 0;
     int ace_counter = 0;
 
+    // find sum of cards + number of aces
     for (auto card : _cards) {
         int value = card->get_value();
         if (value == 1) {
@@ -64,12 +66,15 @@ int hand::get_points(std::string &err) {
     }
 
     int result = 0;
-    //This assumes either all aces count 11 or all aces count 1
-    if (point_sum + 11*ace_counter <= 21){
-      result = point_sum + 11*ace_counter;
-    }
-    else{
-      result = point_sum + ace_counter;
+    // deal with the aces
+    if(ace_counter != 0) {
+        if (point_sum + 11 + ace_counter - 1 <= 21){
+            result = point_sum + 11 + ace_counter - 1;
+        } else {
+            result = point_sum + ace_counter;
+        }
+    } else {
+        result = point_sum;
     }
 
     return result;
